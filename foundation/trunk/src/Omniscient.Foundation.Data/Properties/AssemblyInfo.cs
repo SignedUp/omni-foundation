@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Omniscient.Framework.Data")]
+[assembly: AssemblyTitle("Omniscient.Foundation.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hewlett-Packard")]
-[assembly: AssemblyProduct("Omniscient.Framework.Data")]
+[assembly: AssemblyProduct("Omniscient.Foundation.Data")]
 [assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

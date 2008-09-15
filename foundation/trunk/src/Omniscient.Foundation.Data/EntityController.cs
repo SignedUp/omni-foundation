@@ -151,7 +151,7 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         /// <param name="query">The object query to filter the entities.</param>
         /// <returns>A set of entities (may be empty)</returns>
-        public TEntity[] Fetch(Omniscient.Framework.Data.ObjectQuery.OQuery<TEntity> query)
+        public TEntity[] Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<TEntity> query)
         {
             throw new NotImplementedException();
         }
