@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Framework.Data", "Omniscient.Framework.Data\Omniscient.Framework.Data.csproj", "{55AF3468-EE23-426D-A321-44FC866A7D8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Framework.Data.Test", "Omniscient.Framework.Data.Test\Omniscient.Framework.Data.Test.csproj", "{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55AF3468-EE23-426D-A321-44FC866A7D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AF3468-EE23-426D-A321-44FC866A7D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AF3468-EE23-426D-A321-44FC866A7D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AF3468-EE23-426D-A321-44FC866A7D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
