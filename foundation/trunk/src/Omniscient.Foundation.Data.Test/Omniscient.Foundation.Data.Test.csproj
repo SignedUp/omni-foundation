@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Omniscient.Framework.Data\Omniscient.Framework.Data.csproj">
+    <ProjectReference Include="..\Omniscient.Foundation.Data\Omniscient.Foundation.Data.csproj">
       <Project>{55AF3468-EE23-426D-A321-44FC866A7D8A}</Project>
       <Name>Omniscient.Framework.Data</Name>
     </ProjectReference>

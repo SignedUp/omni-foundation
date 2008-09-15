@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace Omniscient.Framework.Data
+namespace Omniscient.Foundation.Data
 {
     /// <summary>
     /// Base class for entities.

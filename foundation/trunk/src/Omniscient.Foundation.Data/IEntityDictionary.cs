@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Omniscient.Framework.Data
+namespace Omniscient.Foundation.Data
 {
     /// <summary>
     /// Defines a generic dictionary of entities.  See <see cref="EntityDictionaries"/> for generic implementation.

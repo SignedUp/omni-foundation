@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Framework.Data.ObjectQuery
+﻿namespace Omniscient.Foundation.Data.ObjectQuery
 {
     /// <summary>
     /// Logical <see cref="WhereGroup"/> composer.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace Omniscient.Framework.Data.ObjectQuery
+namespace Omniscient.Foundation.Data.ObjectQuery
 {
     [TestFixture()]
     public class OQueryTest

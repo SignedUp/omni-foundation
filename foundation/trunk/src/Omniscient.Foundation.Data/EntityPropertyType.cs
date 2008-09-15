@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Framework.Data
+﻿namespace Omniscient.Foundation.Data
 {
     /// <summary>
     /// An entity's property type.

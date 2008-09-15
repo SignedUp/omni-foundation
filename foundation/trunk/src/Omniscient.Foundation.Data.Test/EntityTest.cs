@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace Omniscient.Framework.Data
+namespace Omniscient.Foundation.Data
 {
     [TestFixture()]
     public class EntityTest

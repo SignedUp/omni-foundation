@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Omniscient.Framework.Data.ObjectQuery
+namespace Omniscient.Foundation.Data.ObjectQuery
 {
     /// <summary>
     /// This predicate compares a column to a scalar value (e.g. an integer)

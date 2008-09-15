@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Omniscient.Framework.Data.ObjectQuery
+namespace Omniscient.Foundation.Data.ObjectQuery
 {
     /// <summary>
     /// Defines an object query that acts on an entity of type <typeparamref name="TEntity"/>.
