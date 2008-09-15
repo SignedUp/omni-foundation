@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Framework.Data", "Omniscient.Framework.Data\Omniscient.Framework.Data.csproj", "{55AF3468-EE23-426D-A321-44FC866A7D8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Data", "Omniscient.Foundation.Data\Omniscient.Foundation.Data.csproj", "{55AF3468-EE23-426D-A321-44FC866A7D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Framework.Data.Test", "Omniscient.Framework.Data.Test\Omniscient.Framework.Data.Test.csproj", "{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Data.Test", "Omniscient.Foundation.Data.Test\Omniscient.Foundation.Data.Test.csproj", "{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
