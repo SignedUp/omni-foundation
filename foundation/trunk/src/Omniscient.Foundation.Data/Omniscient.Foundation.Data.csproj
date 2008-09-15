@@ -59,8 +59,10 @@
     <Compile Include="IEntityList.cs" />
     <Compile Include="IEntityDictionary.cs" />
     <Compile Include="ILookup.cs" />
+    <Compile Include="ILookupAdapter.cs" />
     <Compile Include="ILookupController.cs" />
     <Compile Include="InvalidOperationForStatusException.cs" />
+    <Compile Include="LookupController.cs" />
     <Compile Include="ObjectQuery\LogicalGroupComposition.cs" />
     <Compile Include="ObjectQuery\OQuery.cs" />
     <Compile Include="ObjectQuery\PathPredicate.cs" />
