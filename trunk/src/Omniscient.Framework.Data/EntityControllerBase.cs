@@ -79,7 +79,21 @@ namespace Omniscient.Framework.Data
         /// <param name="entity">The entity to save.</param>
         public void AcceptChanges(TEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity.Status != EntityStatus.New && entity.Status != EntityStatus.Dirty && entity.Status != EntityStatus.ToBeDeleted) return;
+            if (this.Adapter == null) throw new InvalidOperationException("Adapter is null.");
+            Adapter.Save(entity);
+            switch (entity.Status)
+            {
+                case EntityStatus.New:
+                case EntityStatus.Dirty:
+                    entity.Status = EntityStatus.Clean;
+                    break;
+                case EntityStatus.ToBeDeleted:
+                    entity.Status = EntityStatus.NonExistent;
+                    break;
+                default:
+                    throw new InvalidOperationForStatusException(entity.Status);
+            }
         }
 
         /// <summary>
