@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityControllerBaseTest.cs" />
+    <Compile Include="EntityControllerTest.cs" />
     <Compile Include="EntityMock.cs" />
     <Compile Include="EntityTest.cs" />
     <Compile Include="ObjectQuery\OQueryTest.cs" />

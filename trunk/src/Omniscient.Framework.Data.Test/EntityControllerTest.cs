@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Omniscient.Framework.Data
 {
     [TestFixture()]
-    public class EntityControllerBaseTest
+    public class EntityControllerTest
     {
         private EntityMock _entityNew;
         private EntityMock _entityClean;
