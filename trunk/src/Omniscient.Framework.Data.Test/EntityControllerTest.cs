@@ -24,6 +24,7 @@ namespace Omniscient.Framework.Data
         public void Setup()
         {
             _controller = new EntityController<EntityMock>();
+            _controller.Adapter = new EntityAdapterMock();
             _entityNew = new EntityMock() { Name = "I'm new", Age = 1 };
             _entityClean = new EntityMock(_cleanId) { Name = "I'm clean", Age = 2 };
         }
@@ -222,5 +223,33 @@ namespace Omniscient.Framework.Data
         }
 
 #endregion
+
+#region Tests on AcceptChanges operation
+        
+        [Test()]
+        public void TestAcceptChangesOnNew()
+        {
+            _controller.AcceptChanges(_entityNew);
+            Assert.AreEqual(EntityStatus.Clean, _entityNew.Status);
+        }
+
+        [Test()]
+        public void TestAcceptChangesOnDirty()
+        {
+            _controller.BeginChanges(_entityClean);
+            _controller.AcceptChanges(_entityClean);
+            Assert.AreEqual(EntityStatus.Clean, _entityClean.Status);
+        }
+
+        [Test()]
+        public void TestAcceptChangesOnDeleted()
+        {
+            _controller.MarkAsDeleted(_entityClean);
+            _controller.AcceptChanges(_entityClean);
+            Assert.AreEqual(EntityStatus.NonExistent, _entityClean.Status);
+        }
+
+#endregion
+
     }
 }
