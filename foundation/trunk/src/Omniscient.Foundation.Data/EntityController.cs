@@ -143,7 +143,8 @@ namespace Omniscient.Foundation.Data
         /// <returns>The entity having this Id, or null if no entity is found.</returns>
         public TEntity Fetch(Guid id)
         {
-            throw new NotImplementedException();
+            if (Adapter == null) throw new InvalidOperationException("Adapter is null");
+            return Adapter.Fetch(id);
         }
 
         /// <summary>
@@ -153,7 +154,8 @@ namespace Omniscient.Foundation.Data
         /// <returns>A set of entities (may be empty)</returns>
         public TEntity[] Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<TEntity> query)
         {
-            throw new NotImplementedException();
+            if (Adapter == null) throw new InvalidOperationException("Adapter is null");
+            return Adapter.Fetch(query);
         }
 
         /// <summary>
