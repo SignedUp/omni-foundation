@@ -6,10 +6,10 @@ using System.Text;
 namespace Omniscient.Framework.Data
 {
     /// <summary>
-    /// Base class for entity controllers.
+    /// Generic entity controller.
     /// </summary>
     /// <typeparam name="TEntity">The type of entities being managed by this controller.</typeparam>
-    public class EntityControllerBase<TEntity>: IEntityController<TEntity>
+    public class EntityController<TEntity>: IEntityController<TEntity>
         where TEntity: IEntity, new()
     {
         private Dictionary<Guid, TEntity> _clones;
@@ -17,7 +17,7 @@ namespace Omniscient.Framework.Data
         /// <summary>
         /// Ctor.
         /// </summary>
-        public EntityControllerBase()
+        public EntityController()
         {
             _clones = new Dictionary<Guid, TEntity>();
         }

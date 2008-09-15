@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityBase.cs" />
-    <Compile Include="EntityControllerBase.cs" />
+    <Compile Include="EntityController.cs" />
     <Compile Include="EntityDictionary.cs" />
     <Compile Include="EntityList.cs" />
     <Compile Include="EntityPropertyAttribute.cs" />
