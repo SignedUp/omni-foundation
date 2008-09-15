@@ -8,8 +8,8 @@
     <ProjectGuid>{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Omniscient.Framework.Data</RootNamespace>
-    <AssemblyName>Omniscient.Framework.Data.Test</AssemblyName>
+    <RootNamespace>Omniscient.Foundation.Data</RootNamespace>
+    <AssemblyName>Omniscient.Foundation.Data.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

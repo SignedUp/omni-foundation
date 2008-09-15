@@ -6,7 +6,7 @@ using System.Text;
 namespace Omniscient.Foundation.Data
 {
     /// <summary>
-    /// Defines a generic dictionary of entities.  See <see cref="EntityDictionaries"/> for generic implementation.
+    /// Defines a generic dictionary of entities.  See <see cref="EntityDictionary{TKey, TEntity}"/> for generic implementation.
     /// </summary>
     /// <typeparam name="TKey">The key to use.</typeparam>
     /// <typeparam name="TEntity">The entity type.</typeparam>

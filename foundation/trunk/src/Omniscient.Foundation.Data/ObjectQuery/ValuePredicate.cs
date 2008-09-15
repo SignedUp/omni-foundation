@@ -11,6 +11,10 @@ namespace Omniscient.Foundation.Data.ObjectQuery
     /// <typeparam name="T">The type of the value.</typeparam>
     public class ValuePredicate<T> : Predicate
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="path"></param>
         public ValuePredicate(string path)
             : base(path)
         { }

@@ -13,6 +13,9 @@ namespace Omniscient.Foundation.Data
     {
         private Guid _id;
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public EntityBase() : this(EntityStatus.New) { }
 
         /// <summary>

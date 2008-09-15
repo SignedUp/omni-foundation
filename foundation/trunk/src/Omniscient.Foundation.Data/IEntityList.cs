@@ -6,7 +6,7 @@ using System.Text;
 namespace Omniscient.Foundation.Data
 {
     /// <summary>
-    /// Defines a generic list of entities.  See <see cref="EntityList"/> for generic implementation.
+    /// Defines a generic list of entities.  See <see cref="EntityList{TEntity}"/> for generic implementation.
     /// </summary>
     /// <typeparam name="TEntity">The entity type.</typeparam>
     public interface IEntityList<TEntity>: IList<TEntity>

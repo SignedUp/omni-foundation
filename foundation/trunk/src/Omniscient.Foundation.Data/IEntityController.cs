@@ -62,7 +62,7 @@ namespace Omniscient.Foundation.Data
         void MarkAsDeleted(TEntity entity);
 
         /// <summary>
-        /// Gets or sets the <see cref="IEntityAdapter"/> used to interact with the database.
+        /// Gets or sets the <see cref="IEntityAdapter{TEntity}"/> used to interact with the database.
         /// </summary>
         IEntityAdapter<TEntity> Adapter { get; set; }
     }

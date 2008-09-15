@@ -5,6 +5,14 @@
     /// </summary>
     public enum LogicalGroupComposition
     {
-        And, Or
+        /// <summary>
+        /// Logical AND.
+        /// </summary>
+        And, 
+        
+        /// <summary>
+        /// Logical OR.
+        /// </summary>
+        Or
     }
 }

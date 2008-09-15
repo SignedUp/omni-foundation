@@ -173,7 +173,7 @@ namespace Omniscient.Foundation.Data
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="IEntityAdapter"/> used to interact with the database.
+        /// Gets or sets the <see cref="IEntityAdapter{Tentity}"/> used to interact with the database.
         /// </summary>
         public IEntityAdapter<TEntity> Adapter
         {
