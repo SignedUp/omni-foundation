@@ -16,10 +16,10 @@ namespace Omniscient.Foundation.ServiceModel
         /// <summary>
         /// Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
         /// </summary>
-        /// <param name="config">The deserialized configuration.</param>
+        /// <param name="config">The xml configuration.</param>
         /// <remarks>
-        /// See the configuration schema for more details.
+        /// See the ApplicationModel configuration schema for more details.
         /// </remarks>
-        void Configure(object config);
+        void Configure(System.Xml.XmlElement config);
     }
 }

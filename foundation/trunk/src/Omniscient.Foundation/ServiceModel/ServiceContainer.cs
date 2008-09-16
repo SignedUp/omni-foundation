@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Omniscient.Foundation.ServiceModel
     public class ServiceContainer: IServiceContainer
     {
         private Dictionary<Type, object> _services;
+        private ArrayList _sequentialServices;
 
         /// <summary>
         /// Ctor
@@ -19,6 +21,7 @@ namespace Omniscient.Foundation.ServiceModel
         public ServiceContainer()
         {
             _services = new Dictionary<Type, object>();
+            _sequentialServices = new ArrayList();
         }
 
         /// <summary>
@@ -36,6 +39,14 @@ namespace Omniscient.Foundation.ServiceModel
         }
 
         /// <summary>
+        /// Gets all services, in the order they have been registered.
+        /// </summary>
+        public IEnumerable<object> AllServices
+        {
+            get { return _sequentialServices.ToArray(); }
+        }
+
+        /// <summary>
         /// Registers a service at run-time.
         /// </summary>
         /// <typeparam name="TContract">The contract type.</typeparam>
@@ -43,6 +54,7 @@ namespace Omniscient.Foundation.ServiceModel
         public void RegisterService<TContract>(IService<TContract> service)
         {
             _services.Add(typeof(TContract), service);
+            _sequentialServices.Add(service);
         }
 
         /// <summary>
@@ -60,6 +72,11 @@ namespace Omniscient.Foundation.ServiceModel
                     throw new InvalidCastException(string.Format("Type {0} does not implement type {1}.", serviceType, generic));
                 object service = Activator.CreateInstance(serviceType);
                 _services.Add(contractType, service);
+                _sequentialServices.Add(service);
+
+                //configure any IConfigurable service.
+                if (typeof(IConfigurable).IsAssignableFrom(serviceType) && srvDef.Config != null) 
+                    ((IConfigurable)service).Configure(srvDef.Config);
             }
         }
     }

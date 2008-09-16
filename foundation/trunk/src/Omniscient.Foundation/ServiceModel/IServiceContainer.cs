@@ -29,5 +29,10 @@ namespace Omniscient.Foundation.ServiceModel
         /// </summary>
         /// <param name="config">Current Application's configuration.</param>
         void Configure(ApplicationModel.ApplicationConfiguration config);
+
+        /// <summary>
+        /// Gets all services, in the order they have been registered.
+        /// </summary>
+        IEnumerable<object> AllServices { get; }
     }
 }

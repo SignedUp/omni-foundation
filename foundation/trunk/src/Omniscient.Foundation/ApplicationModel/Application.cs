@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,11 @@ namespace Omniscient.Foundation.ApplicationModel
         /// </summary>
         public ApplicationConfiguration Config
         {
-            get { return _config; }
+            get 
+            {
+                if (!this.IsStarted) throw new InvalidOperationException("Please start current Application first.");
+                return _config; 
+            }
         }
 
         /// <summary>
@@ -79,6 +84,9 @@ namespace Omniscient.Foundation.ApplicationModel
         /// Starts the application, providing it with a configuration.  
         /// That method should be one of the first being called when the program starts.
         /// </summary>
+        /// <remarks>
+        /// All services that implement <see cref="IStartable"/> are started here.
+        /// </remarks>
         public void StartApplication(ApplicationConfiguration config)
         {
             if (ServiceContainer == null) ServiceContainer = new ServiceContainer();
@@ -89,14 +97,32 @@ namespace Omniscient.Foundation.ApplicationModel
                 ServiceContainer.Configure(config);
             }
 
+            foreach (object service in ServiceContainer.AllServices)
+            {
+                IStartable startable;
+                startable = service as IStartable;
+                if (startable != null) startable.Start();
+            }
+
             _started = true;
         }
 
         /// <summary>
         /// Closes the application.  Generally, that should lead to the process being terminated.
         /// </summary>
+        /// <remarks>
+        /// All services that implement <see cref="IStartable"/> are stopped here, in reverse order that they 
+        /// have been started.
+        /// </remarks>
         public virtual void CloseApplication()
         {
+            foreach (object service in ServiceContainer.AllServices.Reverse<object>())
+            {
+                IStartable startable;
+                startable = service as IStartable;
+                if (startable != null) startable.Stop();
+            }
+
             _started = false;
         }
     }
