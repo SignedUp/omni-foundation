@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,22 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationModel\Application.cs" />
-    <Compile Include="ApplicationModel\ApplicationConfiguration.cs" />
-    <Compile Include="ApplicationModel\ApplicationConfigurationSectionHandler.cs" />
-    <Compile Include="ApplicationModel\ServiceDefinition.cs" />
-    <Compile Include="ApplicationModel\ServicesConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModel\IConfigurable.cs" />
     <Compile Include="ServiceModel\IService.cs" />
     <Compile Include="ServiceModel\IServiceContainer.cs" />
     <Compile Include="ServiceModel\IStartable.cs" />
     <Compile Include="ServiceModel\ServiceContainer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ApplicationModel\ApplicationConfiguration.xsd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

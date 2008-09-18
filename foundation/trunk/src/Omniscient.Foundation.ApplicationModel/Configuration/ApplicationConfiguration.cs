@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Omniscient.Foundation.ApplicationModel
+namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
     /// <summary>
     /// Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file

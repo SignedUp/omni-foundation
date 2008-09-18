@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Omniscient.Foundation.ServiceModel;
+using Omniscient.Foundation.ApplicationModel.Configuration;
+using Omniscient.Foundation.ApplicationModel.Presentation;
 
 namespace Omniscient.Foundation.ApplicationModel
 {
     /// <summary>
-    /// Base class that abstracts the concept of an application.  Serves as the bootstrapper of any application
+    /// Abstracts the concept of an application.  Serves as the bootstrapper of any application
     /// that uses the Foundation.
     /// </summary>
     public class Application
@@ -52,6 +54,15 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
+        /// Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="PresentationController"/>.
+        /// </summary>
+        public IPresentationController PresentationController
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the deserialized configuration.
         /// </summary>
         public ApplicationConfiguration Config
@@ -75,29 +86,17 @@ namespace Omniscient.Foundation.ApplicationModel
         public void StartApplication()
         {
             //Get configuration from default config file.
-            ApplicationConfiguration config;
-            config = System.Configuration.ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
-            StartApplication(config);
-        }
+            _config = System.Configuration.ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
 
-        /// <summary>
-        /// Starts the application, providing it with a configuration.  
-        /// That method should be one of the first being called when the program starts.
-        /// </summary>
-        /// <remarks>
-        /// All services that implement <see cref="IStartable"/> are started here.
-        /// </remarks>
-        public void StartApplication(ApplicationConfiguration config)
-        {
             if (ServiceContainer == null) ServiceContainer = new ServiceContainer();
+            if (PresentationController == null) PresentationController = new PresentationController();
 
-            _config = config;
-            if (_config.ServicesConfiguration != null)
+            if (_config != null)
             {
-                ServiceContainer.Configure(config);
+                ConfigManager.ConfigureServices(ServiceContainer, _config);
             }
 
-            foreach (object service in ServiceContainer.AllServices)
+            foreach (IService service in ServiceContainer.AllServices)
             {
                 IStartable startable;
                 startable = service as IStartable;
@@ -116,7 +115,7 @@ namespace Omniscient.Foundation.ApplicationModel
         /// </remarks>
         public virtual void CloseApplication()
         {
-            foreach (object service in ServiceContainer.AllServices.Reverse<object>())
+            foreach (IService service in ServiceContainer.AllServices.Reverse<IService>())
             {
                 IStartable startable;
                 startable = service as IStartable;

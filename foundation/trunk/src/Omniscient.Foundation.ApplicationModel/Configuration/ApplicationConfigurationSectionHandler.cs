@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Omniscient.Foundation.ApplicationModel
+namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
     /// <summary>
     /// Section handler for "foundation.application" configuration section.

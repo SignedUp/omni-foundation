@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Omniscient.Foundation.ApplicationModel;
 
 namespace Omniscient.Foundation.ServiceModel
 {
@@ -12,16 +11,16 @@ namespace Omniscient.Foundation.ServiceModel
     /// </summary>
     public class ServiceContainer: IServiceContainer
     {
-        private Dictionary<Type, object> _services;
-        private ArrayList _sequentialServices;
+        private Dictionary<Type, IService> _services;
+        private List<IService> _sequentialServices;
 
         /// <summary>
         /// Ctor
         /// </summary>
         public ServiceContainer()
         {
-            _services = new Dictionary<Type, object>();
-            _sequentialServices = new ArrayList();
+            _services = new Dictionary<Type, IService>();
+            _sequentialServices = new List<IService>();
         }
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace Omniscient.Foundation.ServiceModel
         /// <summary>
         /// Gets all services, in the order they have been registered.
         /// </summary>
-        public IEnumerable<object> AllServices
+        public IEnumerable<IService> AllServices
         {
             get { return _sequentialServices.ToArray(); }
         }
@@ -57,27 +56,11 @@ namespace Omniscient.Foundation.ServiceModel
             _sequentialServices.Add(service);
         }
 
-        /// <summary>
-        /// Method called when it's time to configure the application.
-        /// </summary>
-        /// <param name="config">Current Application's configuration.</param>
-        public void Configure(ApplicationConfiguration config)
+        public void RegisterService(Type contractType, IService service)
         {
-            foreach (ServiceDefinition srvDef in config.ServicesConfiguration.ServiceDefinitions)
-            {
-                Type contractType = Type.GetType(srvDef.Contract, true, true);
-                Type serviceType = Type.GetType(srvDef.Service, true, true);
-                Type generic = typeof(IService<>).MakeGenericType(contractType);
-                if (!generic.IsAssignableFrom(serviceType))
-                    throw new InvalidCastException(string.Format("Type {0} does not implement type {1}.", serviceType, generic));
-                object service = Activator.CreateInstance(serviceType);
-                _services.Add(contractType, service);
-                _sequentialServices.Add(service);
-
-                //configure any IConfigurable service.
-                if (typeof(IConfigurable).IsAssignableFrom(serviceType) && srvDef.Config != null) 
-                    ((IConfigurable)service).Configure(srvDef.Config);
-            }
+            _services.Add(contractType, service);
+            _sequentialServices.Add(service);
         }
+
     }
 }

@@ -18,21 +18,17 @@ namespace Omniscient.Foundation.ServiceModel
         TContract GetService<TContract>();
 
         /// <summary>
-        /// Adds a pre-existing service to the container.
+        /// Adds a service to the container.
         /// </summary>
         /// <typeparam name="TContract">The type of contract that service implements.</typeparam>
         /// <param name="service">A service implementation.</param>
         void RegisterService<TContract>(IService<TContract> service);
 
-        /// <summary>
-        /// Method called when it's time to configure the application.
-        /// </summary>
-        /// <param name="config">Current Application's configuration.</param>
-        void Configure(ApplicationModel.ApplicationConfiguration config);
+        void RegisterService(Type contract, IService service);
 
         /// <summary>
         /// Gets all services, in the order they have been registered.
         /// </summary>
-        IEnumerable<object> AllServices { get; }
+        IEnumerable<IService> AllServices { get; }
     }
 }

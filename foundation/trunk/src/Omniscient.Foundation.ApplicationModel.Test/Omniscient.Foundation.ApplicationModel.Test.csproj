@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CC104492-83F1-429D-8417-394916CE456D}</ProjectGuid>
+    <ProjectGuid>{BC75CF22-ACEE-4291-8A1F-D77A3144D130}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Omniscient.Foundation</RootNamespace>
-    <AssemblyName>Omniscient.Foundation.Test</AssemblyName>
+    <RootNamespace>Omniscient.Foundation.ApplicationModel</RootNamespace>
+    <AssemblyName>Omniscient.Foundation.ApplicationModel.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,16 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationTest.cs" />
+    <Compile Include="Configuration\ApplicationConfigurationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation.csproj">
-      <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
-      <Name>Omniscient.Foundation</Name>
+    <ProjectReference Include="..\Omniscient.Foundation.ApplicationModel\Omniscient.Foundation.ApplicationModel.csproj">
+      <Project>{796F6AEB-DB90-4748-B9E5-00BB19D98966}</Project>
+      <Name>Omniscient.Foundation.ApplicationModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ServiceModel\" />
+    <Folder Include="Presentation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

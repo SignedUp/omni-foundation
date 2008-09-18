@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation", "Om
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Test", "Omniscient.Foundation.Test\Omniscient.Foundation.Test.csproj", "{CC104492-83F1-429D-8417-394916CE456D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.ApplicationModel", "Omniscient.Foundation.ApplicationModel\Omniscient.Foundation.ApplicationModel.csproj", "{796F6AEB-DB90-4748-B9E5-00BB19D98966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.ApplicationModel.Test", "Omniscient.Foundation.ApplicationModel.Test\Omniscient.Foundation.ApplicationModel.Test.csproj", "{BC75CF22-ACEE-4291-8A1F-D77A3144D130}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{CC104492-83F1-429D-8417-394916CE456D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC104492-83F1-429D-8417-394916CE456D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC104492-83F1-429D-8417-394916CE456D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796F6AEB-DB90-4748-B9E5-00BB19D98966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796F6AEB-DB90-4748-B9E5-00BB19D98966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796F6AEB-DB90-4748-B9E5-00BB19D98966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796F6AEB-DB90-4748-B9E5-00BB19D98966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC75CF22-ACEE-4291-8A1F-D77A3144D130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC75CF22-ACEE-4291-8A1F-D77A3144D130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC75CF22-ACEE-4291-8A1F-D77A3144D130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC75CF22-ACEE-4291-8A1F-D77A3144D130}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

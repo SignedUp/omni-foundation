@@ -9,12 +9,12 @@ namespace Omniscient.Foundation.Data
     /// <summary>
     /// Base class for entities.
     /// </summary>
-    public abstract class EntityBase: IEntity
+    public class EntityBase: IEntity
     {
         private Guid _id;
 
         /// <summary>
-        /// Ctor
+        /// Creates an entity with the status <see cref="EntityStatus.New"/>, and a brand new Guid.
         /// </summary>
         public EntityBase() : this(EntityStatus.New) { }
 
@@ -24,7 +24,8 @@ namespace Omniscient.Foundation.Data
         /// then a new Guid is assigned to the Id.  Otherwise, an empty Guid is used.
         /// </summary>
         /// <param name="status">The status of the new entity.  Either <see cref="EntityStatus.New"/>, 
-        /// <see cref="EntityStatus.NotLoadedYet"/> or <see cref="EntityStatus.Clone"/>.</param>
+        /// <see cref="EntityStatus.NotLoadedYet"/> or <see cref="EntityStatus.Clone"/>.  If status is New,
+        /// then a new Guid is assigned to the Id.  Otherwise, an empty Guid is used.</param>
         public EntityBase(EntityStatus status)
         {
             if (status != EntityStatus.New && status != EntityStatus.NotLoadedYet && status != EntityStatus.Clone)
@@ -37,9 +38,9 @@ namespace Omniscient.Foundation.Data
 
         /// <summary>
         /// Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
-        /// Status is set to <see cref="EntityStatus.NotLoadedYet"/>.
+        /// Status is set to <see cref="EntityStatus.Clean"/>.
         /// </summary>
-        /// <param name="id">Id must correspond to what's in the database</param>
+        /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/>.</param>
         public EntityBase(Guid id)
         {
             this.Status = EntityStatus.Clean;
