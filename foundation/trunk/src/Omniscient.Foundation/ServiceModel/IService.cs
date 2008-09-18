@@ -8,7 +8,7 @@ namespace Omniscient.Foundation.ServiceModel
     public interface IService
     {
         string Name { get; }
-        TContract GetImplentation<TContract>();
+        Type ContractType { get; }
     }
     /// <summary>
     /// Defines a service.  The service instance will be kept in memory for the application's lifetime.

@@ -30,5 +30,7 @@ namespace Omniscient.Foundation.ServiceModel
         /// Gets all services, in the order they have been registered.
         /// </summary>
         IEnumerable<IService> AllServices { get; }
+
+        int ServiceCount { get; }
     }
 }

@@ -62,5 +62,10 @@ namespace Omniscient.Foundation.ServiceModel
             _sequentialServices.Add(service);
         }
 
+        public int ServiceCount
+        {
+            get { return _sequentialServices.Count; }
+        }
+
     }
 }
