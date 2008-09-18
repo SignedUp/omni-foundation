@@ -18,4 +18,15 @@ namespace Omniscient.Foundation.Data
         EntityStatus Status { get; set; }
     }
 
+    /// <summary>
+    /// Defines a generic list of entities.  See <see cref="EntityList"/> for generic implementation.
+    /// </summary>
+    public interface IEntityList : IList<IEntity>
+    {
+        /// <summary>
+        /// Gets or sets the status of that collection.  Useful for lazy loading with <see cref="EntityStatus.NotLoadedYet"/>.
+        /// </summary>
+        EntityStatus Status { get; set; }
+    }
+
 }

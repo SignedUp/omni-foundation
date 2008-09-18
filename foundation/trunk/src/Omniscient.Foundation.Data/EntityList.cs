@@ -30,4 +30,20 @@ namespace Omniscient.Foundation.Data
             set;
         }
     }
+
+    public class EntityList : List<IEntity>, IEntityList
+    {
+        public EntityList()
+            : base()
+        {
+            Status = EntityStatus.NotLoadedYet;
+        }
+
+        public EntityStatus Status
+        {
+            get;
+            set;
+        }
+    }
+
 }
