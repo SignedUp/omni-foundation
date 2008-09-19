@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
-    public interface IView
+    public class ViewControllerTest
     {
-        IModel Model { get; set; }
-        void UpdateView();
     }
 }

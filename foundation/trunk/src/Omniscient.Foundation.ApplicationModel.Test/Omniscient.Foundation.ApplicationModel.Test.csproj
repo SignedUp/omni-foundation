@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.mocks, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit\nunit.mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -51,6 +55,8 @@
   <ItemGroup>
     <Compile Include="ApplicationTest.cs" />
     <Compile Include="Configuration\ApplicationConfigurationTest.cs" />
+    <Compile Include="Presentation\ModelBaseTest.cs" />
+    <Compile Include="Presentation\ViewControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,13 +64,14 @@
       <Project>{796F6AEB-DB90-4748-B9E5-00BB19D98966}</Project>
       <Name>Omniscient.Foundation.ApplicationModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Omniscient.Foundation.Data\Omniscient.Foundation.Data.csproj">
+      <Project>{55AF3468-EE23-426D-A321-44FC866A7D8A}</Project>
+      <Name>Omniscient.Foundation.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation.csproj">
       <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
       <Name>Omniscient.Foundation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presentation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

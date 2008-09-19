@@ -53,6 +53,9 @@
     <Compile Include="Configuration\ApplicationConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
+    <Compile Include="Presentation\ModelBase.cs" />
+    <Compile Include="Presentation\ModelMultiEntitiesBase.cs" />
+    <Compile Include="Presentation\ModelSingleEntityBase.cs" />
     <Compile Include="Presentation\PresentationController.cs" />
     <Compile Include="Presentation\IPresentationController.cs" />
     <Compile Include="Presentation\IModel.cs" />

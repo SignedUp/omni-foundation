@@ -24,7 +24,7 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         /// <param name="query">The object query to filter the entities.</param>
         /// <returns>A set of entities (may be empty)</returns>
-        TEntity[] Fetch(ObjectQuery.OQuery<TEntity> query);
+        EntityList<TEntity> Fetch(ObjectQuery.OQuery<TEntity> query);
 
         /// <summary>
         /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.

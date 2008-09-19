@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModel\ContractImplementationMock.cs" />
+    <Compile Include="ServiceModel\GenericSingletonServiceTest.cs" />
     <Compile Include="ServiceModel\ServiceMock.cs" />
     <Compile Include="ServiceModel\IContract.cs" />
     <Compile Include="ServiceModel\ServiceContainerTest.cs" />

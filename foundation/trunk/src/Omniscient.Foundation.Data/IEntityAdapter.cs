@@ -25,7 +25,7 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         /// <param name="query">The object query to search entities.</param>
         /// <returns>An array of entities that are found using the given object query.</returns>
-        TEntity[] Fetch(ObjectQuery.OQuery<TEntity> query);
+        EntityList<TEntity> Fetch(ObjectQuery.OQuery<TEntity> query);
         
         /// <summary>
         /// Saves the entity.  Executes different queries based on the <see cref="EntityStatus"/> of the entity.

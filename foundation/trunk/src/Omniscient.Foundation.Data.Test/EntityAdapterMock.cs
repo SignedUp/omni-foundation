@@ -12,7 +12,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityMock[] Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<EntityMock> query)
+        public EntityList<EntityMock> Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<EntityMock> query)
         {
             throw new NotImplementedException();
         }

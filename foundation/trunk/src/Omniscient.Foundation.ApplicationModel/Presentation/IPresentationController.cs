@@ -12,17 +12,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     /// </summary>
     public interface IPresentationController
     {
-        /// <summary>
-        /// Creates a model for entity <typeparamref name="TEntity"/>
-        /// </summary>
-        /// <param name="modelName">The name of the model as defined in the metadata.</param>
-        /// <param name="entity">The root entity.</param>
-        /// <returns>An instance of a Model.</returns>
-        IModel CreateModel(string modelName, IEntity entity);
 
-        bool LockEntity(IEntity entity);
+        bool LockEntity(Guid entityId);
 
-        bool IsLocked(IEntity entity);
+        bool IsLocked(Guid entityId);
 
         List<IViewController> ViewControllers { get; set; }
 

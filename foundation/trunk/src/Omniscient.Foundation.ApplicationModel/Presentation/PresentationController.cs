@@ -22,19 +22,19 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             throw new NotImplementedException();
         }
 
-        public bool LockEntity(IEntity entity)
+        public bool LockEntity(Guid entityId)
         {
             lock (_lock)
             {
-                if (IsLocked(entity)) return false;
-                _locks.Add(entity.Id, null);
+                if (IsLocked(entityId)) return false;
+                _locks.Add(entityId, null);
                 return true;
             }                
         }
 
-        public bool IsLocked(IEntity entity)
+        public bool IsLocked(Guid entityId)
         {
-            return _locks.ContainsKey(entity.Id);
+            return _locks.ContainsKey(entityId);
         }
 
         public List<IViewController> ViewControllers
