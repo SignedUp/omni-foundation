@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Omniscient.Foundation.ApplicationModel</name>
+    </assembly>
+    <members>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Application">
+            <summary>
+            Abstracts the concept of an application.  Serves as the bootstrapper of any application
+            that uses the Foundation.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Application.StartApplication">
+            <summary>
+            Starts the application.  That method should be one of the first being called when the program starts.
+            </summary>
+            <remarks>
+            That method will look for application configuration.  In the configuration file, the config section must
+            be called "foundation.application", and must be in the namespace 
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
+            for the complete schema.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Application.CloseApplication">
+            <summary>
+            Closes the application.  Generally, that should lead to the process being terminated.
+            </summary>
+            <remarks>
+            All services that implement <see cref="T:Omniscient.Foundation.ServiceModel.IStartable"/> are stopped here, in reverse order that they 
+            have been started.
+            </remarks>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Application.Current">
+            <summary>
+            Gets the current Application object.  Each application using foundation has a single Current Application.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Application.IsStarted">
+            <summary>
+            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.Application.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.Application.StartApplication"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Application.ServiceContainer">
+            <summary>
+            Gets or sets the service container to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.Application.ServiceContainer"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Application.PresentationController">
+            <summary>
+            Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.Application.PresentationController"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Application.Config">
+            <summary>
+            Gets the deserialized configuration.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
+            <summary>
+            Placeholder for a service definition.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Service">
+            <summary>
+            The assembly-qualified name of the type that implements IService for that service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Contract">
+            <summary>
+            The assembly-qualified name of that service's contract.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
+            <summary>
+            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ServiceModel.IConfigurable"/>.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
+            <summary>
+            Section handler for "foundation.application" configuration section.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            Standard implementation (see <see cref="T:System.Configuration.IConfigurationSectionHandler"/>).
+            </summary>
+            <seealso cref="T:System.Xml.Serialization.XmlSerializer"/>
+            <param name="parent"></param>
+            <param name="configContext"></param>
+            <param name="section"></param>
+            <returns>A deserialized configuration.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
+            <summary>
+            Represents an application controller.  Responsible for managing locks on Entities and Models lifetime.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
+            <summary>
+            Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
+            ApplicationConfiguration.xsd.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ServicesConfiguration">
+            <summary>
+            Services section.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
+            <summary>
+            Placeholder for services configuration.  Contains a list of service definitions.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.#ctor">
+            <summary>
+            Ctor.  Creates an empty list of service definitions.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.ServiceDefinitions">
+            <summary>
+            Gets the list of service definitions.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IModel.HasEntity(System.Guid)">
+            <summary>
+            Returns true if the Model has an entity with given Id in its entity graph.
+            </summary>
+            <param name="id">Id of the entity sought.</param>
+            <returns>True if the Model has the entity in its entity graph.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1">
+            <summary>
+            Base class for models.
+            </summary>
+        </member>
+    </members>
+</doc>
