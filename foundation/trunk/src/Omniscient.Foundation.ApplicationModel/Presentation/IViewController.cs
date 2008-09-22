@@ -8,6 +8,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     public interface IViewController
     {
-        void OpenView(IModel model);
+        IView OpenView(IModel model);
+        IView CurrentView { get; set; }
+        event EventHandler CurrentViewChanged;
     }
 }

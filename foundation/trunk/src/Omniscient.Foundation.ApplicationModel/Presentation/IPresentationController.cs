@@ -13,12 +13,18 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     public interface IPresentationController
     {
 
-        bool LockEntity(Guid entityId);
-
-        bool IsLocked(Guid entityId);
-
-        List<IViewController> ViewControllers { get; set; }
-
         void OpenView(IModel model);
+
+        void ViewClosed(IView view);
+
+        void BeginEdit<TEntity>(IView view, TEntity entity) where TEntity: IEntity, new();
+
+        void EndEdit<TEntity>(IView view, TEntity entity) where TEntity: IEntity, new();
+
+        void CancelEdit<TEntity>(IView view, TEntity entity) where TEntity: IEntity, new();
+
+        List<IViewController> ViewControllers { get; }
+
+        IEntityControllerStore EntityControllerStore { get; set; }
     }
 }

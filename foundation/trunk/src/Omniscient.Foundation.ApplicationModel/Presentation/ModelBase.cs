@@ -13,13 +13,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         protected ModelBase()
         {
             _name = this.GetType().Name;
-            PresentationController = Application.Current.PresentationController;
-        }
-
-        public IPresentationController PresentationController
-        {
-            get;
-            set;
         }
 
         public virtual string Name
@@ -31,12 +24,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         public abstract bool ContainsEntitiesThatNeedToBeSaved();
 
-        public abstract void Save();
+        public abstract IEntity GetEntity(Guid id);
 
-        public virtual bool TryBeginEdit(Guid entityId)
-        {
-            if (!this.HasEntity(entityId)) return false;
-            return this.PresentationController.LockEntity(entityId);
-        }
     }
 }

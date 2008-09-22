@@ -1,4 +1,5 @@
 ﻿using System;
+using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -15,10 +16,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         bool ContainsEntitiesThatNeedToBeSaved();
 
-        bool TryBeginEdit(Guid entityId);
-
-        void Save();
-
-        IPresentationController PresentationController { get; set; }
+        IEntity GetEntity(Guid id);
     }
 }

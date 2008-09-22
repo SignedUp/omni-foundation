@@ -42,7 +42,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                 throw new NotImplementedException();
             }
 
-            public override void Save()
+            public override IEntity GetEntity(Guid id)
             {
                 throw new NotImplementedException();
             }

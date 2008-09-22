@@ -53,6 +53,7 @@
     <Compile Include="EntityControllerTest.cs" />
     <Compile Include="EntityMock.cs" />
     <Compile Include="EntityTest.cs" />
+    <Compile Include="Mocks.cs" />
     <Compile Include="ObjectQuery\OQueryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityListTest.cs" />
