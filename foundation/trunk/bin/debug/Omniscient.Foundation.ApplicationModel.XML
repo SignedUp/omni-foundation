@@ -95,6 +95,13 @@
             Represents an application controller.  Responsible for managing locks on Entities and Models lifetime.
             </summary>
         </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IModel.HasEntity(System.Guid)">
+            <summary>
+            Returns true if the Model has an entity with given Id in its entity graph.
+            </summary>
+            <param name="id">Id of the entity sought.</param>
+            <returns>True if the Model has the entity in its entity graph.</returns>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
             Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
@@ -120,13 +127,6 @@
             <summary>
             Gets the list of service definitions.
             </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IModel.HasEntity(System.Guid)">
-            <summary>
-            Returns true if the Model has an entity with given Id in its entity graph.
-            </summary>
-            <param name="id">Id of the entity sought.</param>
-            <returns>True if the Model has the entity in its entity graph.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1">
             <summary>
