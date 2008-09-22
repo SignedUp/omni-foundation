@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="EntityBase.cs" />
     <Compile Include="EntityController.cs" />
+    <Compile Include="EntityControllerStore.cs" />
     <Compile Include="EntityDictionary.cs" />
     <Compile Include="EntityList.cs" />
     <Compile Include="EntityPropertyAttribute.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityAdapter.cs" />
     <Compile Include="IEntityController.cs" />
+    <Compile Include="IEntityControllerStore.cs" />
     <Compile Include="IEntityList.cs" />
     <Compile Include="IEntityDictionary.cs" />
     <Compile Include="ILookup.cs" />
