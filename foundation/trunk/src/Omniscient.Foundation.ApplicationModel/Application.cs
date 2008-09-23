@@ -62,6 +62,12 @@ namespace Omniscient.Foundation.ApplicationModel
             set;
         }
 
+        public IObjectContainer ObjectContainer
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets the deserialized configuration.
         /// </summary>
@@ -90,6 +96,7 @@ namespace Omniscient.Foundation.ApplicationModel
 
             if (ServiceContainer == null) ServiceContainer = new ServiceContainer();
             if (PresentationController == null) PresentationController = new PresentationController();
+            if (ObjectContainer == null) ObjectContainer = new ObjectContainer();
 
             if (_config != null)
             {
