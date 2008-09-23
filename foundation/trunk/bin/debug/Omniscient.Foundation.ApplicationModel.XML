@@ -50,6 +50,11 @@
             Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.Application.PresentationController"/>.
             </summary>
         </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Application.ObjectContainer">
+            <summary>
+            Gets or sets an <see cref="T:Omniscient.Foundation.IObjectContainer"/> instance.  Defaults to <see cref="P:Omniscient.Foundation.ApplicationModel.Application.ObjectContainer"/>.
+            </summary>
+        </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.Application.Config">
             <summary>
             Gets the deserialized configuration.
