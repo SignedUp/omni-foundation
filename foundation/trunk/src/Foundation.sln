@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omnicient.Foundation.ApplicationModel.Presentation.Test", "Omnicient.Foundation.ApplicationModel.Presentation.Test\Omnicient.Foundation.ApplicationModel.Presentation.Test.csproj", "{4D56E9B8-088F-4955-A706-1C6B09826CBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E422B493-43CA-42BF-9A9C-648F59C1649E}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -62,5 +64,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D56E9B8-088F-4955-A706-1C6B09826CBB} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
+		{BC75CF22-ACEE-4291-8A1F-D77A3144D130} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
+		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
+		{CC104492-83F1-429D-8417-394916CE456D} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
 	EndGlobalSection
 EndGlobal
