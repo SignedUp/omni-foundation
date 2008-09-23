@@ -26,15 +26,15 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller.ViewControllers.Add(_mainController);
             _controller.ViewControllers.Add(_sideController);
 
-            Application.Current.ObjectContainer = new ObjectContainer();
+            ApplicationManager.Current.ObjectContainer = new ObjectContainer();
 
             _clientController = new EntityController<Client>();
             _clientController.Adapter = new ClientAdapter();
-            Application.Current.ObjectContainer.Register<IEntityController<Client>>(_clientController);
+            ApplicationManager.Current.ObjectContainer.Register<IEntityController<Client>>(_clientController);
 
             _invoiceController = new EntityController<Invoice>();
             _invoiceController.Adapter = new InvoiceAdapter();
-            Application.Current.ObjectContainer.Register<IEntityController<Invoice>>(_invoiceController);
+            ApplicationManager.Current.ObjectContainer.Register<IEntityController<Invoice>>(_invoiceController);
         }
 
         [Test()]

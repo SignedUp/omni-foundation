@@ -12,35 +12,35 @@ namespace Omniscient.Foundation.ApplicationModel
         [Test()]
         public void CheckCurrentApplication()
         {
-            Assert.IsNotNull(Application.Current);
+            Assert.IsNotNull(ApplicationManager.Current);
         }
 
         [Test()]
         public void CheckServiceContainer()
         {
-            Assert.IsNull(Application.Current.ServiceContainer);
+            Assert.IsNull(ApplicationManager.Current.ServiceContainer);
         }
 
         [Test()]
         public void CheckPresentationController()
         {
-            Assert.IsNull(Application.Current.PresentationController);
+            Assert.IsNull(ApplicationManager.Current.PresentationController);
         }
 
         [Test()]
         public void CheckStarted()
         {
-            Assert.IsFalse(Application.Current.IsStarted);
-            Application.Current.StartApplication();
-            Assert.IsTrue(Application.Current.IsStarted);
+            Assert.IsFalse(ApplicationManager.Current.IsStarted);
+            ApplicationManager.Current.StartApplication();
+            Assert.IsTrue(ApplicationManager.Current.IsStarted);
         }
 
         [Test()]
         public void CheckStoped()
         {
-            Application.Current.StartApplication();
-            Application.Current.CloseApplication();
-            Assert.IsFalse(Application.Current.IsStarted);
+            ApplicationManager.Current.StartApplication();
+            ApplicationManager.Current.CloseApplication();
+            Assert.IsFalse(ApplicationManager.Current.IsStarted);
         }
 
     }

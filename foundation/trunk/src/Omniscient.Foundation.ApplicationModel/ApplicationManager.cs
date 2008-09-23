@@ -14,25 +14,25 @@ namespace Omniscient.Foundation.ApplicationModel
     /// Abstracts the concept of an application.  Serves as the bootstrapper of any application
     /// that uses the Foundation.
     /// </summary>
-    public class Application
+    public class ApplicationManager
     {
-        private static Application _instance;
+        private static ApplicationManager _instance;
         private ApplicationConfiguration _config;
         private bool _started;
 
-        static Application()
+        static ApplicationManager()
         {
-            _instance = new Application();
+            _instance = new ApplicationManager();
         }
 
-        private Application()
+        private ApplicationManager()
         {
         }
 
         /// <summary>
         /// Gets the current Application object.  Each application using foundation has a single Current Application.
         /// </summary>
-        public static Application Current
+        public static ApplicationManager Current
         {
             get { return _instance; }
         }
