@@ -6,6 +6,9 @@ using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
+    /// <summary>
+    /// Default implementation for <see cref="IPresentationController"/>.  Generally, does not have to be derived for default behavior.
+    /// </summary>
     public class PresentationController: IPresentationController
     {
         private Dictionary<Guid, object> _locks;
@@ -13,6 +16,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private List<IViewController> _controllers;
         private List<IView> _openedViews;
 
+        /// <summary>
+        /// Ctor.
+        /// </summary>
         public PresentationController()
         {
             _locks = new Dictionary<Guid, object>();
@@ -21,6 +27,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _openedViews = new List<IView>();
         }
 
+        /// <summary>
+        /// Gets the list of view controllers.  Default use is to feed that list at application startup.
+        /// </summary>
         public List<IViewController> ViewControllers
         {
             get
@@ -29,6 +38,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             }
         }
 
+        /// <summary>
+        /// Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
+        /// and displaying it correctly.
+        /// </summary>
+        /// <param name="model">The model to open.</param>
         public void OpenView(IModel model)
         {
             IView view;
@@ -39,11 +53,22 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             }
         }
 
+        /// <summary>
+        /// Informs the controller that a view has been closed.
+        /// </summary>
+        /// <param name="view">The view that's been closed.</param>
         public void ViewClosed(IView view)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit"/> would be called.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type.</typeparam>
+        /// <param name="view">The view that wants to edit the entity.</param>
+        /// <param name="entity">The entity to edit</param>
+        /// <exception cref="InvalidOperationException">Thrown when the entity is already being edited elsewhere.</exception>
         public void BeginEdit<TEntity>(IView view, TEntity entity)
              where TEntity : IEntity, new()
         {            
@@ -61,6 +86,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             controller.BeginChanges(entity);
         }
 
+        /// <summary>
+        /// Cancels editing the entity.  The entity will be recopied against the clone, and the status set back to <see cref="EntityStatus.Clean"/>.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type.</typeparam>
+        /// <param name="view">The view that was editing the entity.</param>
+        /// <param name="entity">The entity that was edited.</param>
         public void CancelEdit<TEntity>(IView view, TEntity entity)
              where TEntity : IEntity, new()
         {
@@ -78,6 +109,13 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             controller.CancelChanges(entity);
         }
 
+        /// <summary>
+        /// Ends editing an entity - that is, accept changes.  The clone will be destroyed, and the entity will be permanently changed,
+        /// but not saved yet.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type.</typeparam>
+        /// <param name="view">The view that was editing the entity.</param>
+        /// <param name="entity">The entity that was edited.</param>
         public void EndEdit<TEntity>(IView view, TEntity entity)
              where TEntity : IEntity, new()
         {
