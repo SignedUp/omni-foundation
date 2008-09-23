@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Omniscient.Foundation.Data;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.ApplicationModel.Presentation;
@@ -62,6 +63,9 @@ namespace Omniscient.Foundation.ApplicationModel
             set;
         }
 
+        /// <summary>
+        /// Gets or sets an <see cref="IObjectContainer"/> instance.  Defaults to <see cref="ObjectContainer"/>.
+        /// </summary>
         public IObjectContainer ObjectContainer
         {
             get;

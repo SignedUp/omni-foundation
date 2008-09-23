@@ -24,7 +24,5 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         void CancelEdit<TEntity>(IView view, TEntity entity) where TEntity: IEntity, new();
 
         List<IViewController> ViewControllers { get; }
-
-        IEntityControllerStore EntityControllerStore { get; set; }
     }
 }

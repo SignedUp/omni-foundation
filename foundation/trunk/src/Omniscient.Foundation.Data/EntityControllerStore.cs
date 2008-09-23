@@ -8,6 +8,7 @@ namespace Omniscient.Foundation.Data
     /// <summary>
     /// Default implementation for <see cref="IEntityControllerStore"/>.
     /// </summary>
+    [Obsolete("Use ObjectContainer instead.")]
     public class EntityControllerStore: IEntityControllerStore
     {
         private Dictionary<Type, object> _controllers;

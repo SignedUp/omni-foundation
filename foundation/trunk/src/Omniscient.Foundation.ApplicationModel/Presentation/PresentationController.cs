@@ -46,11 +46,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         public void BeginEdit<TEntity>(IView view, TEntity entity)
              where TEntity : IEntity, new()
-        {
-            if (EntityControllerStore == null) throw new InvalidOperationException("EntityControllerStore is null.");
-            
+        {            
             IEntityController<TEntity> controller;
-            controller = EntityControllerStore.Get<TEntity>();
+            controller = Application.Current.ObjectContainer.Get<IEntityController<TEntity>>();
             if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
 
             lock (_lock)
@@ -66,10 +64,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void CancelEdit<TEntity>(IView view, TEntity entity)
              where TEntity : IEntity, new()
         {
-            if (EntityControllerStore == null) throw new InvalidOperationException("EntityControllerStore is null.");
-
             IEntityController<TEntity> controller;
-            controller = EntityControllerStore.Get<TEntity>();
+            controller = Application.Current.ObjectContainer.Get<IEntityController<TEntity>>();
             if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
 
             lock (_lock)
@@ -85,10 +81,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void EndEdit<TEntity>(IView view, TEntity entity)
              where TEntity : IEntity, new()
         {
-            if (EntityControllerStore == null) throw new InvalidOperationException("EntityControllerStore is null.");
-
             IEntityController<TEntity> controller;
-            controller = EntityControllerStore.Get<TEntity>();
+            controller = Application.Current.ObjectContainer.Get<IEntityController<TEntity>>();
             if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
 
             foreach (IView v in _openedViews)
@@ -100,12 +94,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                     v.UpdateView();
                 }
             }
-        }
-
-        public IEntityControllerStore EntityControllerStore
-        {
-            get;
-            set;
         }
     }
 }

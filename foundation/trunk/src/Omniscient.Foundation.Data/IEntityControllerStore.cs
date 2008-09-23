@@ -8,6 +8,7 @@ namespace Omniscient.Foundation.Data
     /// <summary>
     /// Defines a contract for an Entity Controller store.  Stores instances of entity controllers.
     /// </summary>
+    [Obsolete("Use ObjectContainer instead.")]
     public interface IEntityControllerStore
     {
         /// <summary>
