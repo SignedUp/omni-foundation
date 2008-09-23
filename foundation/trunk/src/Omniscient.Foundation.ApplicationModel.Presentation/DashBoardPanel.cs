@@ -16,7 +16,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     /// Initial Code from Martin Grayson, http://blogs.msdn.com/mgrayson
     /// Dashboard Panel
     /// </summary>
-    public class DashBoardPanel : AnimatedContentControl, IView
+    public class DashBoardPanel : AnimatedContentControl
     {
 
         private bool isDragging;
@@ -42,8 +42,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             ignoreUnCheckedEvent = false;
         }
 
-        public DashBoardPanel(IView myView)
-        {
+        public DashBoardPanel(IView myView) : this()
+        {   
             this.Content = myView;
         }
 
@@ -222,26 +222,5 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
             }
         }
-
-        #region IView Members
-
-        public IModel Model
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void UpdateView()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }
