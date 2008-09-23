@@ -26,6 +26,17 @@ namespace Omniscient.Foundation.ServiceModel
         }
 
         [Test()]
+        public void TestRegisterServiceNoGeneric()
+        {
+            ServiceMock s = new ServiceMock();
+            _container.RegisterService(s);
+            IContract c;
+            c = _container.GetService<IContract>();
+            Assert.IsNotNull(c);
+            Assert.AreEqual("dave", c.Echo("dave"));
+        }
+
+        [Test()]
         public void TestGetService()
         {
             _container.RegisterService(typeof(IContract), new ServiceMock());

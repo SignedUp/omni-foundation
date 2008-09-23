@@ -24,6 +24,11 @@ namespace Omniscient.Foundation.ServiceModel
         /// <param name="service">A service implementation.</param>
         void RegisterService<TContract>(IService<TContract> service);
 
+        /// <summary>
+        /// Adds a service to the container.
+        /// </summary>
+        /// <param name="contract">Service's contract type.</param>
+        /// <param name="service">Service implementation (must support contract's type)</param>
         void RegisterService(Type contract, IService service);
 
         /// <summary>
@@ -31,6 +36,9 @@ namespace Omniscient.Foundation.ServiceModel
         /// </summary>
         IEnumerable<IService> AllServices { get; }
 
+        /// <summary>
+        /// Gets the number of services that are registered.
+        /// </summary>
         int ServiceCount { get; }
     }
 }

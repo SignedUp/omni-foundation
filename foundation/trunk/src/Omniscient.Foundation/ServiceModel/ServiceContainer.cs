@@ -56,12 +56,20 @@ namespace Omniscient.Foundation.ServiceModel
             _sequentialServices.Add(service);
         }
 
+        /// <summary>
+        /// Adds a service to the container.
+        /// </summary>
+        /// <param name="contractType">Service's contract type.</param>
+        /// <param name="service">Service implementation (must support contract's type)</param>
         public void RegisterService(Type contractType, IService service)
         {
             _services.Add(contractType, service);
             _sequentialServices.Add(service);
         }
 
+        /// <summary>
+        /// Gets the number of services that are registered.
+        /// </summary>
         public int ServiceCount
         {
             get { return _sequentialServices.Count; }
