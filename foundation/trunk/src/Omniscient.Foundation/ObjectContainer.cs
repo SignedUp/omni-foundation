@@ -29,10 +29,18 @@ namespace Omniscient.Foundation
         /// <param name="instance">Instance of object to store for later use.</param>
         public void Register<TObject>(TObject instance)
         {
-            if (_store.ContainsKey(typeof(TObject)))
-                throw new ArgumentException(string.Format("Object of type {0} is already registered.", typeof(TObject)));
+            this.Register(typeof(TObject), instance);
+        }
 
-            _store.Add(typeof(TObject), instance);
+        public void Register(Type type, object instance)
+        {
+            if (_store.ContainsKey(type))
+                throw new ArgumentException(string.Format("Object of type {0} is already registered.", type));
+
+            if (!type.IsAssignableFrom(instance.GetType()))
+                throw new InvalidCastException(string.Format("Cannot cast object of type {0} to type {1}.", instance.GetType(), type));
+
+            _store.Add(type, instance);
         }
 
         /// <summary>
@@ -45,6 +53,14 @@ namespace Omniscient.Foundation
             if (!_store.ContainsKey(typeof(TObject))) return default(TObject);
 
             return (TObject)_store[typeof(TObject)];
+        }
+
+        /// <summary>
+        /// Gets all registered objects as a flat array of objects.
+        /// </summary>
+        public object[] AllObjects
+        {
+            get { return _store.Values.ToArray(); }
         }
 
         #endregion

@@ -11,9 +11,20 @@
     <xs:complexType name="ApplicationConfiguration">
         <xs:choice>
             <xs:element name="services" minOccurs="0" maxOccurs="1" type="ServicesConfiguration" />
+            <xs:element name="modules" minOccurs="0" maxOccurs="1" type="ModulesConfiguration" />
         </xs:choice>    
     </xs:complexType>
 
+    <xs:complexType name="ModulesConfiguration">
+        <xs:sequence>
+            <xs:element name="moduleDefinition" type="ModuleDefinition" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>    
+    </xs:complexType>
+    
+    <xs:complexType name="ModuleDefinition">
+        <xs:attribute name="type" type="xs:string" use="required" />
+    </xs:complexType>
+    
     <xs:complexType name="ServicesConfiguration">
         <xs:sequence>
             <xs:element name="serviceDefinition" type="ServiceDefinition" minOccurs="0" maxOccurs="unbounded" />

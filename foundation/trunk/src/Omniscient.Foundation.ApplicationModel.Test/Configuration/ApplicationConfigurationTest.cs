@@ -15,6 +15,10 @@ namespace Omniscient.Foundation.ApplicationModel
         {
             string xml =
                 @"<foundation.application xmlns='http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd'>
+                    <modules>
+                        <moduleDefinition type='namespace.contract, assembly' />
+                        <moduleDefinition type='namespace.contract2, assembly' />
+                    </modules>
                     <services>
                         <serviceDefinition contract='namespace.contract, assembly' service='namespace.service, assembly' />
                         <serviceDefinition contract='namespace.contract2, assembly' service='namespace.service2, assembly'>
@@ -34,6 +38,9 @@ namespace Omniscient.Foundation.ApplicationModel
             Assert.AreEqual("namespace.service2, assembly", config.ServicesConfiguration.ServiceDefinitions[1].Service);
             Assert.IsNotNull(config.ServicesConfiguration.ServiceDefinitions[1].Config);
             Assert.AreEqual("yes", config.ServicesConfiguration.ServiceDefinitions[1].Config.InnerText);
+
+            Assert.IsNotNull(config.ModulesConfiguration);
+            Assert.AreEqual(2, config.ModulesConfiguration.Modules.Count);
         }
     }
 }

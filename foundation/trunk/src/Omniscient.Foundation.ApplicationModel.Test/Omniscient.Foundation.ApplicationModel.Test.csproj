@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ApplicationTest.cs" />
     <Compile Include="Configuration\ApplicationConfigurationTest.cs" />
+    <Compile Include="Configuration\ConfigManagerTest.cs" />
     <Compile Include="Presentation\ModelBaseTest.cs" />
     <Compile Include="Presentation\PresentationControllerTest.cs" />
     <Compile Include="Presentation\Mocks.cs" />

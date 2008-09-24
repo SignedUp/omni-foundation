@@ -16,10 +16,26 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
     public class ApplicationConfiguration
     {
         /// <summary>
+        /// Ctor.  Creates empty childs for optional childs.
+        /// </summary>
+        public ApplicationConfiguration()
+        {
+            ServicesConfiguration = new ServicesConfiguration();
+            ModulesConfiguration = new ModulesConfiguration();
+        }
+
+        /// <summary>
         /// Services section.
         /// </summary>
         [XmlElement("services", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
         public ServicesConfiguration ServicesConfiguration
+        {
+            get;
+            set;
+        }
+
+        [XmlElement("modules", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
+        public ModulesConfiguration ModulesConfiguration
         {
             get;
             set;

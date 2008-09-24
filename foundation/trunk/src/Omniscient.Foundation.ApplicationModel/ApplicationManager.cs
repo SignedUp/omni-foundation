@@ -7,6 +7,7 @@ using Omniscient.Foundation.Data;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.ApplicationModel.Presentation;
+using Omniscient.Foundation.ApplicationModel.Modularity;
 
 namespace Omniscient.Foundation.ApplicationModel
 {
@@ -72,6 +73,12 @@ namespace Omniscient.Foundation.ApplicationModel
             set;
         }
 
+        public IShell Shell
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets the deserialized configuration.
         /// </summary>
@@ -105,6 +112,7 @@ namespace Omniscient.Foundation.ApplicationModel
             if (_config != null)
             {
                 ConfigManager.ConfigureServices(ServiceContainer, _config);
+                ConfigManager.ConfigureModules(ObjectContainer, _config);
             }
 
             foreach (IService service in ServiceContainer.AllServices)
@@ -112,6 +120,20 @@ namespace Omniscient.Foundation.ApplicationModel
                 IStartable startable;
                 startable = service as IStartable;
                 if (startable != null) startable.Start();
+            }
+
+            if (Shell != null) Shell.Show();
+
+            foreach (object obj in ObjectContainer.AllObjects)
+            {
+                IModule module = obj as IModule;
+                if (module != null)
+                {
+                    module.PresentationController = PresentationController;
+                    IStartable start;
+                    start = module as IStartable;
+                    if (start != null) start.Start();
+                }
             }
 
             _started = true;

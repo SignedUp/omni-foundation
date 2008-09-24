@@ -48,11 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationManager.cs" />
-    <Compile Include="ConfigManager.cs" />
+    <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ApplicationConfigurationSectionHandler.cs" />
+    <Compile Include="Configuration\ModuleDefinition.cs" />
+    <Compile Include="Configuration\ModulesConfiguration.cs" />
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
+    <Compile Include="Modularity\IModule.cs" />
+    <Compile Include="Presentation\IShell.cs" />
     <Compile Include="Presentation\ModelBase.cs" />
     <Compile Include="Presentation\ModelMultiEntitiesBase.cs" />
     <Compile Include="Presentation\ModelSingleEntityBase.cs" />
@@ -77,6 +81,9 @@
       <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
       <Name>Omniscient.Foundation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\ConfigSample.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
