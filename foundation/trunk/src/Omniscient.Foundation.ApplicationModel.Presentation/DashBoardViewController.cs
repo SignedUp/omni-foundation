@@ -22,7 +22,13 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         {
             IView view;
             view = GetView(model);
+            
+            if (view == null)
+                return null;
+
+            view.Model = model;
             _dash.OpenPanel(view);
+            
             return view;
         }
 
