@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <section name="foundation.application" 
+                 type="Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler, Omniscient.Foundation"/>
+    </configSections>
+    <foundation.application xmlns="http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd">
+        <services>
+            <serviceDefinition contract="IContract" service="ServiceClass" />
+            <serviceDefinition contract="IContract" service="ServiceClass">
+                <config>
+                    <someConfig>some string</someConfig>
+                </config>
+            </serviceDefinition>
+        </services>
+    </foundation.application>
+</configuration>
