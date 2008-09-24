@@ -9,7 +9,7 @@ using Omniscient.Foundation.ApplicationModel.Modularity;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
-    public class ConfigManager
+    class ConfigManager
     {
         public static void ConfigureServices(IServiceContainer container, ApplicationConfiguration config)
         {
