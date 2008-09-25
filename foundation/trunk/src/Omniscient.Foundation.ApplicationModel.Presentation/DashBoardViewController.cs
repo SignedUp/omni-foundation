@@ -16,7 +16,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         {
             _dash = dash;
             _extensionPort = new ExtensionPortBase<IDashBoardViewControllerExtenderContract>();
-            ApplicationManager.Current.ObjectContainer.Register(_extensionPort);
+            ApplicationManager.Current.ExtensionPortManager.RegisterExtensionPort(_extensionPort);
         }
 
 

@@ -122,6 +122,7 @@ namespace Omniscient.Foundation.ApplicationModel
                 ConfigManager.ConfigureModules(ObjectContainer, _config);
             }
 
+            //start services
             foreach (IService service in ServiceContainer.AllServices)
             {
                 IStartable startable;
@@ -129,8 +130,10 @@ namespace Omniscient.Foundation.ApplicationModel
                 if (startable != null) startable.Start();
             }
 
+            //Display the Shell
             if (Shell != null) Shell.Show();
 
+            //Start modules
             foreach (object obj in ObjectContainer.AllObjects)
             {
                 IModule module = obj as IModule;
