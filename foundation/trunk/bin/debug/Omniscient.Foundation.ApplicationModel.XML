@@ -28,6 +28,62 @@
             Raised when the current view is changed for a new view.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.ApplicationManager">
+            <summary>
+            Abstracts the concept of an application.  Serves as the bootstrapper of any application
+            that uses the Foundation.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
+            <summary>
+            Starts the application.  That method should be one of the first being called when the program starts.
+            </summary>
+            <remarks>
+            That method will look for application configuration.  In the configuration file, the config section must
+            be called "foundation.application", and must be in the namespace 
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
+            for the complete schema.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
+            <summary>
+            Closes the application.  Generally, that should lead to the process being terminated.
+            </summary>
+            <remarks>
+            All services that implement <see cref="T:Omniscient.Foundation.ServiceModel.IStartable"/> are stopped here, in reverse order that they 
+            have been started.
+            </remarks>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current">
+            <summary>
+            Gets the current Application object.  Each application using foundation has a single Current Application.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.IsStarted">
+            <summary>
+            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer">
+            <summary>
+            Gets or sets the service container to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
+            <summary>
+            Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer">
+            <summary>
+            Gets or sets an <see cref="T:Omniscient.Foundation.IObjectContainer"/> instance.  Defaults to <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
+            <summary>
+            Gets the deserialized configuration.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
             <summary>
             Placeholder for a service definition.
@@ -46,6 +102,11 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
             <summary>
             Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ServiceModel.IConfigurable"/>.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration">
+            <summary>
+            Placeholder for modules configuration.  Contains a list of service definitions.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
@@ -314,67 +375,6 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1.Entity">
             <summary>
             Gets the root entity.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.ApplicationManager">
-            <summary>
-            Abstracts the concept of an application.  Serves as the bootstrapper of any application
-            that uses the Foundation.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
-            <summary>
-            Starts the application.  That method should be one of the first being called when the program starts.
-            </summary>
-            <remarks>
-            That method will look for application configuration.  In the configuration file, the config section must
-            be called "foundation.application", and must be in the namespace 
-            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
-            for the complete schema.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
-            <summary>
-            Closes the application.  Generally, that should lead to the process being terminated.
-            </summary>
-            <remarks>
-            All services that implement <see cref="T:Omniscient.Foundation.ServiceModel.IStartable"/> are stopped here, in reverse order that they 
-            have been started.
-            </remarks>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current">
-            <summary>
-            Gets the current Application object.  Each application using foundation has a single Current Application.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.IsStarted">
-            <summary>
-            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer">
-            <summary>
-            Gets or sets the service container to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
-            <summary>
-            Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer">
-            <summary>
-            Gets or sets an <see cref="T:Omniscient.Foundation.IObjectContainer"/> instance.  Defaults to <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
-            <summary>
-            Gets the deserialized configuration.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration">
-            <summary>
-            Placeholder for modules configuration.  Contains a list of service definitions.
             </summary>
         </member>
     </members>
