@@ -56,8 +56,10 @@
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
     <Compile Include="Modularity\ExtensionPortBase.cs" />
+    <Compile Include="Modularity\ExtensionPortManager.cs" />
     <Compile Include="Modularity\IExtender.cs" />
     <Compile Include="Modularity\IExtensionPort.cs" />
+    <Compile Include="Modularity\IExtensionPortManager.cs" />
     <Compile Include="Modularity\IModule.cs" />
     <Compile Include="Presentation\IShell.cs" />
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
