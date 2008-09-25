@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.Data
     /// </summary>
     /// <typeparam name="TLookup">The type of entity to manage.</typeparam>
     public interface ILookupAdapter<TLookup>
-        where TLookup: ILookup, new()
+        where TLookup: ILookup
     {
         /// <summary>
         /// Returns all available lookups for that type.

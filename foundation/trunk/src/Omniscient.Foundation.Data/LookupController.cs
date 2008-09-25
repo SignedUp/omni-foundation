@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.Data
     /// </summary>
     /// <typeparam name="TLookup">Type of lookup to manage.</typeparam>
     public class LookupController<TLookup>: ILookupController<TLookup>
-        where TLookup: ILookup, new()
+        where TLookup: ILookup
     {
         /// <summary>
         /// Returns all available lookups of type <typeparamref name="TLookup"/>.

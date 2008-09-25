@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.Data
     /// </summary>
     /// <typeparam name="TEntity">The entity type.</typeparam>
     public interface IEntityList<TEntity>: IList<TEntity>
-        where TEntity: IEntity, new()
+        where TEntity: IEntity
     {
         /// <summary>
         /// Gets or sets the status of that collection.  Useful for lazy loading with <see cref="EntityStatus.NotLoadedYet"/>.

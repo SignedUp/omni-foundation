@@ -11,7 +11,7 @@ namespace Omniscient.Foundation.Data
     /// <typeparam name="TKey">The type to use as the key.</typeparam>
     /// <typeparam name="TEntity">The entity type.</typeparam>
     public class EntityDictionary<TKey, TEntity>: Dictionary<TKey, TEntity>, IEntityDictionary<TKey, TEntity>
-        where TEntity: IEntity, new()
+        where TEntity: IEntity
     {
         /// <summary>
         /// Ctor.  Sets Status to <see cref="EntityStatus.NotLoadedYet"/>

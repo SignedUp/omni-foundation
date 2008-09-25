@@ -11,7 +11,7 @@ namespace Omniscient.Foundation.Data
     /// Responsible for connecting to the database, and executing queries.
     /// </summary>
     /// <typeparam name="TEntity">The type of entities to manage.</typeparam>
-    public interface IEntityAdapter<TEntity> where TEntity: IEntity, new()
+    public interface IEntityAdapter<TEntity> where TEntity: IEntity
     {
         /// <summary>
         /// Retrieves an entity from the database by unique id.
