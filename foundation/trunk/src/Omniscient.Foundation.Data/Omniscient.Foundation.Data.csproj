@@ -74,6 +74,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ObjectQuery\WhereGroup.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation.csproj">
+      <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
+      <Name>Omniscient.Foundation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

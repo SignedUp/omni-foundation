@@ -14,36 +14,25 @@ namespace Omniscient.Foundation.Data
         private Guid _id;
 
         /// <summary>
-        /// Creates an entity with the status <see cref="EntityStatus.New"/>, and a brand new Guid.
+        /// Creates an entity with the status <see cref="EntityStatus.New"/>, and a brand new Id.
         /// </summary>
-        public EntityBase() : this(EntityStatus.New) { }
-
-        /// <summary>
-        /// Creates an entity with specific status.  Status may be either <see cref="EntityStatus.New"/>, 
-        /// <see cref="EntityStatus.NotLoadedYet"/> or <see cref="EntityStatus.Clone"/>.  If status is New,
-        /// then a new Guid is assigned to the Id.  Otherwise, an empty Guid is used.
-        /// </summary>
-        /// <param name="status">The status of the new entity.  Either <see cref="EntityStatus.New"/>, 
-        /// <see cref="EntityStatus.NotLoadedYet"/> or <see cref="EntityStatus.Clone"/>.  If status is New,
-        /// then a new Guid is assigned to the Id.  Otherwise, an empty Guid is used.</param>
-        public EntityBase(EntityStatus status)
+        public EntityBase()
         {
-            if (status != EntityStatus.New && status != EntityStatus.NotLoadedYet && status != EntityStatus.Clone)
-                throw new InvalidOperationForStatusException(status);
-
-            this.Status = status;
-            if (status == EntityStatus.New) _id = Guid.NewGuid();
-            else _id = Guid.Empty;
+            this.Status = EntityStatus.New;
+            _id = Guid.NewGuid();
         }
 
         /// <summary>
         /// Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
-        /// Status is set to <see cref="EntityStatus.Clean"/>.
+        /// Depending on the value of <paramref name="entityIsLoaded"/>, the status is either set to
+        /// <see cref="EntityStatus.Clean"/> (if the entity is being loaded with all its values), or 
+        /// <see cref="EntityStatus.NotLoadedYet"/> (if the entity is not being loaded with its values)
         /// </summary>
-        /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/>.</param>
-        public EntityBase(Guid id)
+        /// <param name="entityIsLoaded">Indicates whether the entity is being loaded with all its value, or is just assigned an Id for future load.</param>
+        /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/> or <see cref="EntityStatus.NotLoadedYet"/>.</param>
+        public EntityBase(Guid id, bool entityIsLoaded)
         {
-            this.Status = EntityStatus.Clean;
+            this.Status = entityIsLoaded? EntityStatus.Clean : EntityStatus.NotLoadedYet;
             _id = id;
         }
 
@@ -129,6 +118,19 @@ namespace Omniscient.Foundation.Data
         public override string ToString()
         {
             return string.Format("Entity type:{0} id:{1} status:{2}", this.Type, this.Id, this.Status);
-        }        
+        }
+
+        /// <summary>
+        /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.
+        /// </summary>
+        /// <returns>A clone, with the same id and values.</returns>
+        public IEntity Clone()
+        {
+            IEntity cl;
+            cl = (IEntity)Activator.CreateInstance(this.GetType(), new object[] { this.Id, true });
+            this.CopyValues(cl);
+            cl.Status = EntityStatus.Clone;
+            return cl;
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     /// Base class for models with multiple entities as the root.
     /// </summary>
     public abstract class ModelMultiEntitiesBase<TEntity> : ModelBase
-        where TEntity: IEntity, new()
+        where TEntity: IEntity
     {
         /// <summary>
         /// Ctor.

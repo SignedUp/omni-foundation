@@ -26,7 +26,7 @@ namespace Omniscient.Foundation.Data
             _controller = new EntityController<EntityMock>();
             _controller.Adapter = new EntityAdapterMock();
             _entityNew = new EntityMock() { Name = "I'm new", Age = 1 };
-            _entityClean = new EntityMock(_cleanId) { Name = "I'm clean", Age = 2 };
+            _entityClean = new EntityMock(_cleanId, true) { Name = "I'm clean", Age = 2 };
         }
 
 #region Tests on MarkAsDeleted
@@ -153,7 +153,7 @@ namespace Omniscient.Foundation.Data
         public void TestBeginChangesOnClone()
         {
             IEntity clone;
-            clone = _controller.Clone(_entityNew);
+            clone = _entityNew.Clone();
             Assert.AreEqual(_entityNew.Id, clone.Id);
             Assert.AreEqual(EntityStatus.Clone, clone.Status);
 
@@ -190,7 +190,7 @@ namespace Omniscient.Foundation.Data
         public void TestCancelChangesOnClone()
         {
             IEntity clone;
-            clone = _controller.Clone(_entityClean);
+            clone = _entityClean.Clone();
             _controller.CancelChanges(clone as EntityMock);
         }
 

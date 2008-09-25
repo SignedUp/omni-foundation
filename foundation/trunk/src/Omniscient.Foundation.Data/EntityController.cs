@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.Data
     /// </summary>
     /// <typeparam name="TEntity">The type of entities being managed by this controller.</typeparam>
     public class EntityController<TEntity>: IEntityController<TEntity>
-        where TEntity: IEntity, new()
+        where TEntity: IEntity
     {
         private Dictionary<Guid, TEntity> _clones;
 
@@ -46,7 +46,7 @@ namespace Omniscient.Foundation.Data
                     break;
             }
 
-            clone = this.Clone(entity);
+            clone = (TEntity)entity.Clone();
             _clones.Add(clone.Id, clone);
         }
 
@@ -131,7 +131,7 @@ namespace Omniscient.Foundation.Data
             _clones.Remove(entity.Id);
         }
 
-        private void ThrowInvalidStatus(EntityStatus status)
+        private static void ThrowInvalidStatus(EntityStatus status)
         {
             throw new InvalidOperationForStatusException(status);
         }
@@ -156,22 +156,6 @@ namespace Omniscient.Foundation.Data
         {
             if (Adapter == null) throw new InvalidOperationException("Adapter is null");
             return Adapter.Fetch(query);
-        }
-
-        /// <summary>
-        /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.
-        /// </summary>
-        /// <param name="entity">The entity to clone.</param>
-        /// <returns>A clone, with the same id and values.</returns>
-        public TEntity Clone(TEntity entity)
-        {
-            TEntity clone;
-            clone = new TEntity();
-            clone.Status = EntityStatus.Clone;
-            clone.Id = entity.Id;
-            entity.CopyValues(clone);
-
-            return clone;
         }
 
         /// <summary>

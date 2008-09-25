@@ -14,7 +14,7 @@ namespace Omniscient.Foundation.Data
             Invoices = new EntityList<Invoice>();
         }
 
-        public Client(Guid id) : base(id)
+        public Client(Guid id, bool isLoaded) : base(id, isLoaded)
         {
             Invoices = new EntityList<Invoice>();
         }
@@ -30,7 +30,7 @@ namespace Omniscient.Foundation.Data
     {
         public Invoice() : base() { }
 
-        public Invoice(Guid id) : base(id) { }
+        public Invoice(Guid id, bool isLoaded) : base(id, isLoaded) { }
 
         [EntityProperty(EntityPropertyType.Value)]
         public double Amount { get; set; }
@@ -47,9 +47,9 @@ namespace Omniscient.Foundation.Data
         public ClientAdapter()
         {
             _list = new EntityList<Client>();
-            _list.Add(new Client(Guid.NewGuid()) { Name = "dave" });
-            _list.Add(new Client(Guid.NewGuid()) { Name = "frank" });
-            _list.Add(new Client(Guid.NewGuid()) { Name = "steve" });
+            _list.Add(new Client(Guid.NewGuid(), true) { Name = "dave" });
+            _list.Add(new Client(Guid.NewGuid(), true) { Name = "frank" });
+            _list.Add(new Client(Guid.NewGuid(), true) { Name = "steve" });
             
         }
 
@@ -98,7 +98,7 @@ namespace Omniscient.Foundation.Data
             invoices = new EntityList<Invoice>();
             for (int i = 0; i < 9; i++)
             {
-                invoices.Add(new Invoice(_ids[i]) { Amount = i + 1});
+                invoices.Add(new Invoice(_ids[i], true) { Amount = i + 1});
             }
             return invoices;
         }

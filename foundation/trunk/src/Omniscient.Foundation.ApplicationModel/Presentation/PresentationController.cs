@@ -70,7 +70,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <param name="entity">The entity to edit</param>
         /// <exception cref="InvalidOperationException">Thrown when the entity is already being edited elsewhere.</exception>
         public void BeginEdit<TEntity>(IView view, TEntity entity)
-             where TEntity : IEntity, new()
+             where TEntity : IEntity
         {            
             IEntityController<TEntity> controller;
             controller = ApplicationManager.Current.ObjectContainer.Get<IEntityController<TEntity>>();
@@ -93,7 +93,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <param name="view">The view that was editing the entity.</param>
         /// <param name="entity">The entity that was edited.</param>
         public void CancelEdit<TEntity>(IView view, TEntity entity)
-             where TEntity : IEntity, new()
+             where TEntity : IEntity
         {
             IEntityController<TEntity> controller;
             controller = ApplicationManager.Current.ObjectContainer.Get<IEntityController<TEntity>>();
@@ -117,7 +117,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <param name="view">The view that was editing the entity.</param>
         /// <param name="entity">The entity that was edited.</param>
         public void EndEdit<TEntity>(IView view, TEntity entity)
-             where TEntity : IEntity, new()
+             where TEntity : IEntity
         {
             IEntityController<TEntity> controller;
             controller = ApplicationManager.Current.ObjectContainer.Get<IEntityController<TEntity>>();

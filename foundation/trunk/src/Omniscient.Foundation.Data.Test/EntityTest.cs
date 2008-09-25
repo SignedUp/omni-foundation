@@ -28,7 +28,7 @@ namespace Omniscient.Foundation.Data
             IEntity entity;
 
             id = Guid.NewGuid();
-            entity = new EntityMock(id);
+            entity = new EntityMock(id, true);
 
             Assert.AreEqual(id, entity.Id);
             Assert.AreEqual(EntityStatus.Clean, entity.Status);

@@ -9,7 +9,7 @@ namespace Omniscient.Foundation.Data
     /// Represents a class that manages a certain type of entities.
     /// </summary>
     /// <typeparam name="TEntity">The type of Entity to manage.</typeparam>
-    public interface IEntityController<TEntity> where TEntity: IEntity, new()
+    public interface IEntityController<TEntity> where TEntity: IEntity
     {
         /// <summary>
         /// Retrieves the entity with given Id.
@@ -25,13 +25,6 @@ namespace Omniscient.Foundation.Data
         /// <param name="query">The object query to filter the entities.</param>
         /// <returns>A set of entities (may be empty)</returns>
         EntityList<TEntity> Fetch(ObjectQuery.OQuery<TEntity> query);
-
-        /// <summary>
-        /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.
-        /// </summary>
-        /// <param name="entity">The entity to clone.</param>
-        /// <returns>A clone, with the same id and values.</returns>
-        TEntity Clone(TEntity entity);
 
         /// <summary>
         /// Starts editing the entity.  Sets the entity status to <see cref="EntityStatus.Dirty"/> 
