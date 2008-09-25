@@ -4,49 +4,6 @@
         <name>Omniscient.Foundation.Data</name>
     </assembly>
     <members>
-        <member name="T:Omniscient.Foundation.Data.EntityControllerStore">
-            <summary>
-            Default implementation for <see cref="T:Omniscient.Foundation.Data.IEntityControllerStore"/>.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.IEntityControllerStore">
-            <summary>
-            Defines a contract for an Entity Controller store.  Stores instances of entity controllers.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityControllerStore.Register``1(Omniscient.Foundation.Data.IEntityController{``0})">
-            <summary>
-            Registers an instance of an entity controller.
-            </summary>
-            <typeparam name="TEntity">The type of entity controlled by <paramref name="controller"/>.</typeparam>
-            <param name="controller">An instance of an entity controller.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityControllerStore.Get``1">
-            <summary>
-            Gets an instance of an entity controller.
-            </summary>
-            <typeparam name="TEntity">The type of entity to get a controller for.</typeparam>
-            <returns>An entity controller if one exists in the store; otherwise, returns null.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityControllerStore.#ctor">
-            <summary>
-            Ctor.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityControllerStore.Register``1(Omniscient.Foundation.Data.IEntityController{``0})">
-            <summary>
-            Registers an instance of an entity controller.
-            </summary>
-            <typeparam name="TEntity">The type of entity controlled by <paramref name="controller"/>.</typeparam>
-            <param name="controller">An instance of an entity controller.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityControllerStore.Get``1">
-            <summary>
-            Gets an instance of an entity controller.
-            </summary>
-            <typeparam name="TEntity">The type of entity to get a controller for.</typeparam>
-            <returns>An entity controller if one exists in the store; otherwise, returns null.</returns>
-        </member>
         <member name="T:Omniscient.Foundation.Data.IEntity">
             <summary>
             Represents an entity.
@@ -57,6 +14,12 @@
             Copies the values of the entity to another entity.
             </summary>
             <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntity.Clone">
+            <summary>
+            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
+            </summary>
+            <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="P:Omniscient.Foundation.Data.IEntity.Status">
             <summary>
@@ -173,13 +136,6 @@
             <param name="query">The object query to filter the entities.</param>
             <returns>A set of entities (may be empty)</returns>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityController`1.Clone(`0)">
-            <summary>
-            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
-            </summary>
-            <param name="entity">The entity to clone.</param>
-            <returns>A clone, with the same id and values.</returns>
-        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.BeginChanges(`0)">
             <summary>
             Starts editing the entity.  Sets the entity status to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/> 
@@ -259,13 +215,6 @@
             </summary>
             <param name="query">The object query to filter the entities.</param>
             <returns>A set of entities (may be empty)</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityController`1.Clone(`0)">
-            <summary>
-            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
-            </summary>
-            <param name="entity">The entity to clone.</param>
-            <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="P:Omniscient.Foundation.Data.EntityController`1.Adapter">
             <summary>
@@ -491,25 +440,18 @@
         </member>
         <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor">
             <summary>
-            Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, and a brand new Guid.
+            Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, and a brand new Id.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor(Omniscient.Foundation.Data.EntityStatus)">
-            <summary>
-            Creates an entity with specific status.  Status may be either <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, 
-            <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/> or <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.  If status is New,
-            then a new Guid is assigned to the Id.  Otherwise, an empty Guid is used.
-            </summary>
-            <param name="status">The status of the new entity.  Either <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, 
-            <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/> or <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.  If status is New,
-            then a new Guid is assigned to the Id.  Otherwise, an empty Guid is used.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor(System.Guid)">
+        <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor(System.Guid,System.Boolean)">
             <summary>
             Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
-            Status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            Depending on the value of <paramref name="entityIsLoaded"/>, the status is either set to
+            <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/> (if the entity is being loaded with all its values), or 
+            <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/> (if the entity is not being loaded with its values)
             </summary>
-            <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.</param>
+            <param name="entityIsLoaded">Indicates whether the entity is being loaded with all its value, or is just assigned an Id for future load.</param>
+            <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/> or <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/>.</param>
         </member>
         <member name="M:Omniscient.Foundation.Data.EntityBase.CopyValues(Omniscient.Foundation.Data.IEntity)">
             <summary>
@@ -536,6 +478,12 @@
             Returns a string representation of the Entity.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.Clone">
+            <summary>
+            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
+            </summary>
+            <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="P:Omniscient.Foundation.Data.EntityBase.Status">
             <summary>
