@@ -25,6 +25,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public IView OpenView(IModel model)
         {
             IView view;
+            view = null;
             foreach (IExtender<IDashBoardViewControllerExtenderContract> extender in _extensionPort.Extenders)
             {
                 view = extender.GetImplementation().GetView(model);
