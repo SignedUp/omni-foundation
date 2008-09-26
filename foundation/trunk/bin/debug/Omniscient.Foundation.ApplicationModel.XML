@@ -36,7 +36,8 @@
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
             <summary>
-            Starts the application.  That method should be one of the first being called when the program starts.
+            Starts the application.  That method should be one of the first being called when the program starts.  The method
+            loads the configuration from the AppDomain configuration file.
             </summary>
             <remarks>
             That method will look for application configuration.  In the configuration file, the config section must
@@ -44,6 +45,13 @@
             "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
             for the complete schema.
             </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication(Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration)">
+            <summary>
+            Starts the application.  That method should be one of the first being called when the program starts. The method
+            accepts an existing configuration object.  See <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/> for default configuration.
+            </summary>
+            <param name="config">Loaded application object.</param>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
             <summary>
