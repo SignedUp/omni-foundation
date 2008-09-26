@@ -40,5 +40,7 @@ namespace Omniscient.Foundation.ServiceModel
         /// Gets the number of services that are registered.
         /// </summary>
         int ServiceCount { get; }
+
+        void Clear();
     }
 }

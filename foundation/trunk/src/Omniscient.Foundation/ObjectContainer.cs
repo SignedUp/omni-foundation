@@ -63,6 +63,11 @@ namespace Omniscient.Foundation
             get { return _store.Values.ToArray(); }
         }
 
+        public void Clear()
+        {
+            _store.Clear();
+        }
+
         #endregion
     }
 }

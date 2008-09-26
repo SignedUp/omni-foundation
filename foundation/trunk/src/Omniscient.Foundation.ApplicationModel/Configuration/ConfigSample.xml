@@ -6,10 +6,10 @@
     </configSections>
     <foundation.application xmlns="http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd">
         <services>
-            <serviceDefinition contract="IContract" service="ServiceClass" />
-            <serviceDefinition contract="IContract" service="ServiceClass">
+            <serviceDefinition contract="Omniscient.Foundation.Data.MySql.IConnectivity, Omniscient.Foundation.Data" 
+                               service="Omniscient.Foundation.Data.MySql.ConnectivityService, Omniscient.Foundation.Data">
                 <config>
-                    <someConfig>some string</someConfig>
+                    <foundation.data.mysql connectionString="" />
                 </config>
             </serviceDefinition>
         </services>

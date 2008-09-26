@@ -98,7 +98,8 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Starts the application.  That method should be one of the first being called when the program starts.
+        /// Starts the application.  That method should be one of the first being called when the program starts.  The method
+        /// loads the configuration from the AppDomain configuration file.
         /// </summary>
         /// <remarks>
         /// That method will look for application configuration.  In the configuration file, the config section must
@@ -109,7 +110,19 @@ namespace Omniscient.Foundation.ApplicationModel
         public void StartApplication()
         {
             //Get configuration from default config file.
-            _config = System.Configuration.ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
+            ApplicationConfiguration config;
+            config = System.Configuration.ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
+            StartApplication(config);
+        }
+
+        /// <summary>
+        /// Starts the application.  That method should be one of the first being called when the program starts. The method
+        /// accepts an existing configuration object.  See <see cref="StartApplication()"/> for default configuration.
+        /// </summary>
+        /// <param name="config">Loaded application object.</param>
+        public void StartApplication(ApplicationConfiguration config)
+        {
+            _config = config;
 
             if (ServiceContainer == null) ServiceContainer = new ServiceContainer();
             if (PresentationController == null) PresentationController = new PresentationController();
@@ -164,6 +177,10 @@ namespace Omniscient.Foundation.ApplicationModel
                 startable = service as IStartable;
                 if (startable != null) startable.Stop();
             }
+
+            ServiceContainer.Clear();
+            PresentationController.ViewControllers.Clear();
+            ObjectContainer.Clear();
 
             _started = false;
         }

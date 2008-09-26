@@ -36,5 +36,7 @@ namespace Omniscient.Foundation
         /// Gets all registered objects as a flat array of objects.
         /// </summary>
         object[] AllObjects { get; }
+
+        void Clear();
     }
 }

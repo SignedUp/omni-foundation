@@ -75,5 +75,11 @@ namespace Omniscient.Foundation.ServiceModel
             get { return _sequentialServices.Count; }
         }
 
+        public void Clear()
+        {
+            _services.Clear();
+            _sequentialServices.Clear();
+        }
+
     }
 }
