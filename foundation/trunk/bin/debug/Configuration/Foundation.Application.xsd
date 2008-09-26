@@ -7,6 +7,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xs:element name="foundation.application" type="ApplicationConfiguration" />
+    <xs:element name="foundation.data.mysql" type="MysqlConnectivity" />
     
     <xs:complexType name="ApplicationConfiguration">
         <xs:choice>
@@ -43,5 +44,9 @@
         </xs:all>
         <xs:attribute name="contract" type="xs:string" use="required" />
         <xs:attribute name="service" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="MysqlConnectivity">
+        <xs:attribute name="connectionString" type="xs:string" use="required" />
     </xs:complexType>
 </xs:schema>
