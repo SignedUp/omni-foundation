@@ -13,7 +13,7 @@ namespace Omniscient.Foundation.Data.MySql
 
         public ConnectivityServiceImpl(Configuration.Connectivity config) 
         {
-            config = _config;
+            _config = config;
         }
 
         #region IConnectivity Members
