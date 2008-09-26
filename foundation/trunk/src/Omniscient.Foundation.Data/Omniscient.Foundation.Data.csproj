@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\mysql\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -63,6 +67,10 @@
     <Compile Include="ILookupController.cs" />
     <Compile Include="InvalidOperationForStatusException.cs" />
     <Compile Include="LookupController.cs" />
+    <Compile Include="MySql\Configuration\Connectivity.cs" />
+    <Compile Include="MySql\ConnectivityService.cs" />
+    <Compile Include="MySql\ConnectivityServiceImpl.cs" />
+    <Compile Include="MySql\IConnectivity.cs" />
     <Compile Include="ObjectQuery\LogicalGroupComposition.cs" />
     <Compile Include="ObjectQuery\OQuery.cs" />
     <Compile Include="ObjectQuery\PathPredicate.cs" />
