@@ -221,7 +221,14 @@
             <summary>
             Ctor
             </summary>
-            <param name="propertyType">Either a value type, a reference type, or a reference list.</param>
+            <param name="type">Either a value type, a reference type, or a reference list.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityPropertyAttribute.#ctor(Omniscient.Foundation.Data.EntityPropertyType,System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="type">Either a value type, a reference type, or a reference list.</param>
+            <param name="column">The column mapped to this property.  Can be null.</param>
         </member>
         <member name="P:Omniscient.Foundation.Data.EntityPropertyAttribute.Type">
             <summary>

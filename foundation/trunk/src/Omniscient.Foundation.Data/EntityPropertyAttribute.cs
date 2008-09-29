@@ -14,10 +14,21 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// Ctor
         /// </summary>
-        /// <param name="propertyType">Either a value type, a reference type, or a reference list.</param>
-        public EntityPropertyAttribute(EntityPropertyType propertyType)
+        /// <param name="type">Either a value type, a reference type, or a reference list.</param>
+        public EntityPropertyAttribute(EntityPropertyType type)
+            : this(type, string.Empty)
+        { }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="type">Either a value type, a reference type, or a reference list.</param>
+        /// <param name="column">The column mapped to this property.  Can be null.</param>
+        public EntityPropertyAttribute(EntityPropertyType type, string column)
         {
-            Type = propertyType;
+            Type = type;
+            if (column == null) ColumnName = string.Empty;
+            ColumnName = column;
         }
 
         /// <summary>
@@ -26,7 +37,13 @@ namespace Omniscient.Foundation.Data
         public EntityPropertyType Type
         {
             get;
-            private set;
+            set;
+        }
+
+        public string ColumnName
+        {
+            get;
+            set;
         }
     }
 
