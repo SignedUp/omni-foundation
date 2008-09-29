@@ -122,20 +122,6 @@
             </summary>
             <typeparam name="TEntity">The type of Entity to manage.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityController`1.Fetch(System.Guid)">
-            <summary>
-            Retrieves the entity with given Id.
-            </summary>
-            <param name="id">The Id to search for.</param>
-            <returns>The entity having this Id, or null if no entity is found.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityController`1.Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
-            <summary>
-            Retrieves a set of entities filtered by the given object query.
-            </summary>
-            <param name="query">The object query to filter the entities.</param>
-            <returns>A set of entities (may be empty)</returns>
-        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.BeginChanges(`0)">
             <summary>
             Starts editing the entity.  Sets the entity status to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/> 
@@ -164,12 +150,7 @@
             </summary>
             <param name="entity"></param>
         </member>
-        <member name="P:Omniscient.Foundation.Data.IEntityController`1.Adapter">
-            <summary>
-            Gets or sets the <see cref="T:Omniscient.Foundation.Data.IEntityAdapter`1"/> used to interact with the database.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityController`1.#ctor">
+        <member name="M:Omniscient.Foundation.Data.EntityController`1.#ctor(Omniscient.Foundation.Data.IEntityAdapter{`0})">
             <summary>
             Ctor.
             </summary>
@@ -201,25 +182,6 @@
             then the entity is reset with original values, so that there's no ambiguity when calling <see cref="M:Omniscient.Foundation.Data.EntityController`1.CancelChanges(`0)"/>.
             </summary>
             <param name="entity"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityController`1.Fetch(System.Guid)">
-            <summary>
-            Retrieves the entity with given Id.
-            </summary>
-            <param name="id">The Id to search for.</param>
-            <returns>The entity having this Id, or null if no entity is found.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityController`1.Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
-            <summary>
-            Retrieves a set of entities filtered by the given object query.
-            </summary>
-            <param name="query">The object query to filter the entities.</param>
-            <returns>A set of entities (may be empty)</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.EntityController`1.Adapter">
-            <summary>
-            Gets or sets the <see cref="T:Omniscient.Foundation.Data.IEntityAdapter`1"/> used to interact with the database.
-            </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.LookupController`1">
             <summary>
@@ -669,14 +631,14 @@
             </summary>
             <typeparam name="TEntity">The type of entities to manage.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Fetch(System.Guid)">
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByKey(System.Guid)">
             <summary>
             Retrieves an entity from the database by unique id.
             </summary>
             <param name="id">The unique id of the entity that is sought.</param>
             <returns>Returns the entity if found; Otherwise, returns Null.</returns>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
             <summary>
             Retrieves an entity from the database by an object query.
             </summary>
