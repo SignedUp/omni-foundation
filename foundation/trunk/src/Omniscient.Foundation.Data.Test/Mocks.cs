@@ -82,6 +82,11 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
+        public EntityList<Client> LoadAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public EntityList<Client> LoadByValueProperty(string propertyName, object value)
         {
             throw new NotImplementedException();
@@ -143,6 +148,11 @@ namespace Omniscient.Foundation.Data
         }
 
         public EntityList<Invoice> LoadByValueProperty(string propertyName, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntityList<Invoice> LoadAll()
         {
             throw new NotImplementedException();
         }

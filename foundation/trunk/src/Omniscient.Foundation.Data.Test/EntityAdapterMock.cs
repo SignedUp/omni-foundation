@@ -45,6 +45,11 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
+        public EntityList<EntityMock> LoadAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save(IEnumerable<EntityMock> entities)
         {
             throw new NotImplementedException();

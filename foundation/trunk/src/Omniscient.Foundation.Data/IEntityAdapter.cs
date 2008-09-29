@@ -32,7 +32,9 @@ namespace Omniscient.Foundation.Data
         EntityList<TEntity> LoadByQuery(ObjectQuery.OQuery<TEntity> query);
 
         EntityList<TEntity> LoadByValueProperty(string propertyName, object value);
-        
+
+        EntityList<TEntity> LoadAll();
+
         /// <summary>
         /// Saves the entity.  Executes different queries based on the <see cref="EntityStatus"/> of the entity.
         /// </summary>
