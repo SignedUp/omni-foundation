@@ -8,7 +8,6 @@ namespace Omniscient.Foundation.Data.MySql
 {
     internal class ConnectivityServiceImpl: IConnectivity
     {
-        private string _connectionStr;
         private Configuration.Connectivity _config;
 
         public ConnectivityServiceImpl(Configuration.Connectivity config) 
