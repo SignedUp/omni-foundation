@@ -53,14 +53,16 @@ namespace Omniscient.Foundation.Data
             
         }
 
-        public Client Fetch(Guid id)
+        #region IEntityAdapter<Client> Members
+
+        public Client LoadByKey(Guid id)
         {
             foreach (Client c in _list)
                 if (c.Id == id) return c;
             return null;
         }
 
-        public EntityList<Client> Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<Client> query)
+        public EntityList<Client> LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Client> query)
         {
             return _list;
         }
@@ -69,6 +71,28 @@ namespace Omniscient.Foundation.Data
         {
             throw new NotImplementedException();
         }
+
+        public EntityList<Client> LoadByForeignKey(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntityList<Client> LoadByQuery(string queryName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntityList<Client> LoadByValueProperty(string propertyName, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(IEnumerable<Client> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     public class InvoiceAdapter : IEntityAdapter<Invoice>
@@ -86,12 +110,12 @@ namespace Omniscient.Foundation.Data
 
         #region IEntityAdapter<Invoice> Members
 
-        public Invoice Fetch(Guid id)
+        public Invoice LoadByKey(Guid id)
         {
             return null;
         }
 
-        public EntityList<Invoice> Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<Invoice> query)
+        public EntityList<Invoice> LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Invoice> query)
         {
             EntityList<Invoice> invoices;
 
@@ -104,6 +128,26 @@ namespace Omniscient.Foundation.Data
         }
 
         public void Save(Invoice entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntityList<Invoice> LoadByForeignKey(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntityList<Invoice> LoadByQuery(string queryName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntityList<Invoice> LoadByValueProperty(string propertyName, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(IEnumerable<Invoice> entities)
         {
             throw new NotImplementedException();
         }

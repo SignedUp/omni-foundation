@@ -12,21 +12,6 @@ namespace Omniscient.Foundation.Data
     public interface IEntityController<TEntity> where TEntity: IEntity
     {
         /// <summary>
-        /// Retrieves the entity with given Id.
-        /// </summary>
-        /// <param name="id">The Id to search for.</param>
-        /// <returns>The entity having this Id, or null if no entity is found.</returns>
-        TEntity Fetch(Guid id);
-
-
-        /// <summary>
-        /// Retrieves a set of entities filtered by the given object query.
-        /// </summary>
-        /// <param name="query">The object query to filter the entities.</param>
-        /// <returns>A set of entities (may be empty)</returns>
-        EntityList<TEntity> Fetch(ObjectQuery.OQuery<TEntity> query);
-
-        /// <summary>
         /// Starts editing the entity.  Sets the entity status to <see cref="EntityStatus.Dirty"/> 
         /// and prepares a clone for an eventual roll-back.
         /// </summary>
@@ -54,9 +39,5 @@ namespace Omniscient.Foundation.Data
         /// <param name="entity"></param>
         void MarkAsDeleted(TEntity entity);
 
-        /// <summary>
-        /// Gets or sets the <see cref="IEntityAdapter{TEntity}"/> used to interact with the database.
-        /// </summary>
-        IEntityAdapter<TEntity> Adapter { get; set; }
     }
 }

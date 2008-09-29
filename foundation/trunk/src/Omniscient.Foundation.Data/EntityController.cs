@@ -13,13 +13,15 @@ namespace Omniscient.Foundation.Data
         where TEntity: IEntity
     {
         private Dictionary<Guid, TEntity> _clones;
+        private IEntityAdapter<TEntity> _adapter;
 
         /// <summary>
         /// Ctor.
         /// </summary>
-        public EntityController()
+        public EntityController(IEntityAdapter<TEntity> adapter)
         {
             _clones = new Dictionary<Guid, TEntity>();
+            _adapter = adapter;
         }
 
         /// <summary>
@@ -80,8 +82,8 @@ namespace Omniscient.Foundation.Data
         public void AcceptChanges(TEntity entity)
         {
             if (entity.Status != EntityStatus.New && entity.Status != EntityStatus.Dirty && entity.Status != EntityStatus.ToBeDeleted) return;
-            if (this.Adapter == null) throw new InvalidOperationException("Adapter is null.");
-            Adapter.Save(entity);
+            if (_adapter == null) throw new InvalidOperationException("Adapter is null.");
+            _adapter.Save(entity);
             switch (entity.Status)
             {
                 case EntityStatus.New:
@@ -136,35 +138,5 @@ namespace Omniscient.Foundation.Data
             throw new InvalidOperationForStatusException(status);
         }
 
-        /// <summary>
-        /// Retrieves the entity with given Id.
-        /// </summary>
-        /// <param name="id">The Id to search for.</param>
-        /// <returns>The entity having this Id, or null if no entity is found.</returns>
-        public TEntity Fetch(Guid id)
-        {
-            if (Adapter == null) throw new InvalidOperationException("Adapter is null");
-            return Adapter.Fetch(id);
-        }
-
-        /// <summary>
-        /// Retrieves a set of entities filtered by the given object query.
-        /// </summary>
-        /// <param name="query">The object query to filter the entities.</param>
-        /// <returns>A set of entities (may be empty)</returns>
-        public EntityList<TEntity> Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<TEntity> query)
-        {
-            if (Adapter == null) throw new InvalidOperationException("Adapter is null");
-            return Adapter.Fetch(query);
-        }
-
-        /// <summary>
-        /// Gets or sets the <see cref="IEntityAdapter{Tentity}"/> used to interact with the database.
-        /// </summary>
-        public IEntityAdapter<TEntity> Adapter
-        {
-            get;
-            set;
-        }
     }
 }

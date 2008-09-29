@@ -16,6 +16,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         MainViewControllerMock _mainController;
         EntityController<Client> _clientController;
         EntityController<Invoice> _invoiceController;
+        IEntityAdapter<Client> _clientAdapter;
+        IEntityAdapter<Invoice> _invoiceAdapter;
 
         [SetUp()]
         public void Init()
@@ -28,12 +30,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
             ApplicationManager.Current.ObjectContainer = new ObjectContainer();
 
-            _clientController = new EntityController<Client>();
-            _clientController.Adapter = new ClientAdapter();
+            _clientAdapter = new ClientAdapter();
+            _clientController = new EntityController<Client>(_clientAdapter);
             ApplicationManager.Current.ObjectContainer.Register<IEntityController<Client>>(_clientController);
 
-            _invoiceController = new EntityController<Invoice>();
-            _invoiceController.Adapter = new InvoiceAdapter();
+            _invoiceAdapter = new InvoiceAdapter();
+            _invoiceController = new EntityController<Invoice>(_invoiceAdapter);
             ApplicationManager.Current.ObjectContainer.Register<IEntityController<Invoice>>(_invoiceController);
         }
 
@@ -87,7 +89,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void TestEndEdit()
         {
             EntityList<Invoice> invoices;
-            invoices = _invoiceController.Fetch(new OQuery<Invoice>());
+            invoices = _invoiceAdapter.LoadByQuery(new OQuery<Invoice>());
             InvoicesModel invModel = new InvoicesModel(invoices);
             _controller.OpenView(invModel);
             Assert.IsNotNull(_sideController.CurrentView);
@@ -95,7 +97,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
             Client client;
             client = GetSomeClient();
-            client.Invoices.AddRange(_invoiceController.Fetch(new OQuery<Invoice>()));
+            client.Invoices.AddRange(_invoiceAdapter.LoadByQuery(new OQuery<Invoice>()));
             ClientInvoicesModel model = new ClientInvoicesModel(client);
             _controller.OpenView(model);
 
@@ -119,7 +121,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         private Client GetSomeClient()
         {
-            foreach (Client c in _clientController.Fetch(new OQuery<Client>()))
+            foreach (Client c in _clientAdapter.LoadByQuery(new OQuery<Client>()))
                 return c;
             return null;
         }

@@ -18,19 +18,28 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         /// <param name="id">The unique id of the entity that is sought.</param>
         /// <returns>Returns the entity if found; Otherwise, returns Null.</returns>
-        TEntity Fetch(Guid id);
-        
+        TEntity LoadByKey(Guid id);
+
+        EntityList<TEntity> LoadByForeignKey(Guid id);
+
+        EntityList<TEntity> LoadByQuery(string queryName);
+
         /// <summary>
         /// Retrieves an entity from the database by an object query.
         /// </summary>
         /// <param name="query">The object query to search entities.</param>
         /// <returns>An array of entities that are found using the given object query.</returns>
-        EntityList<TEntity> Fetch(ObjectQuery.OQuery<TEntity> query);
+        EntityList<TEntity> LoadByQuery(ObjectQuery.OQuery<TEntity> query);
+
+        EntityList<TEntity> LoadByValueProperty(string propertyName, object value);
         
         /// <summary>
         /// Saves the entity.  Executes different queries based on the <see cref="EntityStatus"/> of the entity.
         /// </summary>
         /// <param name="entity">The entity to save.</param>
         void Save(TEntity entity);
+
+        void Save(IEnumerable<TEntity> entities);
+
     }
 }

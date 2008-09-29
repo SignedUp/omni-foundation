@@ -23,8 +23,7 @@ namespace Omniscient.Foundation.Data
         [SetUp()]
         public void Setup()
         {
-            _controller = new EntityController<EntityMock>();
-            _controller.Adapter = new EntityAdapterMock();
+            _controller = new EntityController<EntityMock>(new EntityAdapterMock());
             _entityNew = new EntityMock() { Name = "I'm new", Age = 1 };
             _entityClean = new EntityMock(_cleanId, true) { Name = "I'm clean", Age = 2 };
         }
