@@ -72,7 +72,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<Client> LoadByForeignKey(Guid id)
+        public EntityList<Client> LoadByForeignKey(string propertyName, Guid id)
         {
             throw new NotImplementedException();
         }
@@ -137,7 +137,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<Invoice> LoadByForeignKey(Guid id)
+        public EntityList<Invoice> LoadByForeignKey(string propertyName, Guid id)
         {
             throw new NotImplementedException();
         }

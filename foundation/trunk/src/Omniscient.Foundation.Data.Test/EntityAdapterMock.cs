@@ -25,7 +25,7 @@ namespace Omniscient.Foundation.Data
         #region IEntityAdapter<EntityMock> Members
 
 
-        public EntityList<EntityMock> LoadByForeignKey(Guid id)
+        public EntityList<EntityMock> LoadByForeignKey(string propertyName, Guid id)
         {
             throw new NotImplementedException();
         }

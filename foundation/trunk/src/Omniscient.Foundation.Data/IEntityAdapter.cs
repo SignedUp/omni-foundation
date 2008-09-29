@@ -20,7 +20,7 @@ namespace Omniscient.Foundation.Data
         /// <returns>Returns the entity if found; Otherwise, returns Null.</returns>
         TEntity LoadByKey(Guid id);
 
-        EntityList<TEntity> LoadByForeignKey(Guid id);
+        EntityList<TEntity> LoadByForeignKey(string propertyName, Guid id);
 
         EntityList<TEntity> LoadByQuery(string queryName);
 
