@@ -31,12 +31,12 @@ namespace Omniscient.Foundation.Commanding
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object param)
+        public virtual bool CanExecute(object param)
         {
             return _handlers.Count > 0;
         }
 
-        public void Execute(object param)
+        public virtual void Execute(object param)
         {
             foreach (ICommandHandler handler in _handlers)
             {
