@@ -235,6 +235,11 @@
             Gets the property type of this property.
             </summary>
         </member>
+        <member name="P:Omniscient.Foundation.Data.EntityPropertyAttribute.ColumnName">
+            <summary>
+            Gets or sets the column name that this property saves to.  Can be null or empty.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1">
             <summary>
             A predicate that checks a property (column) compared to a set of values of the same type.
