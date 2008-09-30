@@ -40,6 +40,9 @@ namespace Omniscient.Foundation.Data
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the column name that this property saves to.  Can be null or empty.
+        /// </summary>
         public string ColumnName
         {
             get;
