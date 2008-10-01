@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commanding\DelegateCommandHandler.cs" />
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
