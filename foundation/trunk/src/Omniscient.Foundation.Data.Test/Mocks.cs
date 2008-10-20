@@ -62,7 +62,7 @@ namespace Omniscient.Foundation.Data
             return null;
         }
 
-        public EntityList<Client> LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Client> query)
+        public EntityList<Client> LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Client> query)
         {
             return _list;
         }
@@ -120,7 +120,7 @@ namespace Omniscient.Foundation.Data
             return null;
         }
 
-        public EntityList<Invoice> LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Invoice> query)
+        public EntityList<Invoice> LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Invoice> query)
         {
             EntityList<Invoice> invoices;
 

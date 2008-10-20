@@ -89,7 +89,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void TestEndEdit()
         {
             EntityList<Invoice> invoices;
-            invoices = _invoiceAdapter.LoadByQuery(new OQuery<Invoice>());
+            invoices = _invoiceAdapter.LoadByObjectQuery(new OQuery<Invoice>());
             InvoicesModel invModel = new InvoicesModel(invoices);
             _controller.OpenView(invModel);
             Assert.IsNotNull(_sideController.CurrentView);
@@ -97,7 +97,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
             Client client;
             client = GetSomeClient();
-            client.Invoices.AddRange(_invoiceAdapter.LoadByQuery(new OQuery<Invoice>()));
+            client.Invoices.AddRange(_invoiceAdapter.LoadByObjectQuery(new OQuery<Invoice>()));
             ClientInvoicesModel model = new ClientInvoicesModel(client);
             _controller.OpenView(model);
 
@@ -121,7 +121,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         private Client GetSomeClient()
         {
-            foreach (Client c in _clientAdapter.LoadByQuery(new OQuery<Client>()))
+            foreach (Client c in _clientAdapter.LoadByObjectQuery(new OQuery<Client>()))
                 return c;
             return null;
         }

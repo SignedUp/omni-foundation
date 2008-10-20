@@ -35,7 +35,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<EntityMock> query)
+        public EntityList<EntityMock> LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<EntityMock> query)
         {
             throw new NotImplementedException();
         }

@@ -51,9 +51,8 @@ namespace Omniscient.Foundation.Data
         public Guid Id
         {
             get { return _id; }
-            set
+            private set
             {
-                if (this.Status != EntityStatus.NotLoadedYet && this.Status != EntityStatus.Clone) throw new InvalidOperationForStatusException(this.Status);
                 _id = value;
             }
         }
