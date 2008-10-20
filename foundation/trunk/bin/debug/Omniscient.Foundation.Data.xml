@@ -641,6 +641,9 @@
             Represents an adapter that manages a certain type of entities.  
             Responsible for connecting to the database, and executing queries.
             </summary>
+            <remarks>
+            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
+            </remarks>
             <typeparam name="TEntity">The type of entities to manage.</typeparam>
         </member>
         <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByKey(System.Guid)">
@@ -650,7 +653,7 @@
             <param name="id">The unique id of the entity that is sought.</param>
             <returns>Returns the entity if found; Otherwise, returns Null.</returns>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
             <summary>
             Retrieves an entity from the database by an object query.
             </summary>
