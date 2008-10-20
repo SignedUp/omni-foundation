@@ -1,10 +1,5 @@
-#summary One-sentence summary of this page.
-
 = Introduction =
 
 That's the wiki for the Omniscient's Foundation application framework.
 
 Please go to http://omni-foundation.net for documentation and examples.
-
-
-= Details =
