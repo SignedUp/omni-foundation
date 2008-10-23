@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Omniscient.Foundation.Data
 {
     /// <summary>
     /// Base class for entities.
     /// </summary>
+    [DataContract()]
     public class EntityBase: IEntity
     {
         private Guid _id;
@@ -39,6 +41,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// Gets or sets the Status.
         /// </summary>
+        [DataMember()]
         public EntityStatus Status
         {
             get;
@@ -48,6 +51,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// Gets or sets the Id.  Setting the id is possible only when Status == <see cref="EntityStatus.NotLoadedYet" />.
         /// </summary>
+        [DataMember()]
         public Guid Id
         {
             get { return _id; }
@@ -66,22 +70,28 @@ namespace Omniscient.Foundation.Data
         }
 
         /// <summary>
-        /// Copies the value properties to a target entity.  By default, this is done automatically by assigning all properties
-        /// marked with attribute EntityProperty, if the type of this attribute is <see cref="EntityPropertyType.Value"/>.
+        /// Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
+        /// and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
+        /// all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
+        /// <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
+        /// the reference.
         /// </summary>
-        /// <param name="target">The Entity to copy values to.</param>
-        public virtual void CopyValues(IEntity target)
+        /// <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
+        /// <param name="target">The entity to copy values to.</param>
+        public virtual void CopyTo(IEntity target, bool copyReferences)
         {
-            this.CopyInternal(target);
+            this.CopyInternal(target, copyReferences);
         }
 
-        private void CopyInternal(IEntity target)
+        private void CopyInternal(IEntity target, bool copyReferences)
         {
             foreach (PropertyInfo p in this.GetType().GetProperties())
             {
-                object[] att;
-                att = p.GetCustomAttributes(typeof(EntityPropertyAttribute), true);
-                if (att.Length > 0 && ((EntityPropertyAttribute)att[0]).Type == EntityPropertyType.Value)
+                object[] attributes;
+                attributes = p.GetCustomAttributes(typeof(EntityPropertyAttribute), true);
+                if (attributes.Length == 0) continue;
+                EntityPropertyAttribute att = (EntityPropertyAttribute) attributes[0];
+                if (att.Type == EntityPropertyType.Value || copyReferences)
                 {
                     p.SetValue(target, p.GetValue(this, null), null);
                 }
@@ -117,19 +127,6 @@ namespace Omniscient.Foundation.Data
         public override string ToString()
         {
             return string.Format("Entity type:{0} id:{1} status:{2}", this.Type, this.Id, this.Status);
-        }
-
-        /// <summary>
-        /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.
-        /// </summary>
-        /// <returns>A clone, with the same id and values.</returns>
-        public IEntity Clone()
-        {
-            IEntity cl;
-            cl = (IEntity)Activator.CreateInstance(this.GetType(), new object[] { this.Id, true });
-            this.CopyValues(cl);
-            cl.Status = EntityStatus.Clone;
-            return cl;
         }
     }
 }

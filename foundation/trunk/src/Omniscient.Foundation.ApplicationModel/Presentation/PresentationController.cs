@@ -128,7 +128,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                 if (v != view && v.Model.HasEntity(entity.Id))
                 { 
                     //ensure that new values are transfered to this model.
-                    entity.CopyValues(v.Model.GetEntity(entity.Id));
+                    entity.CopyTo(v.Model.GetEntity(entity.Id), false);
                     v.UpdateView();
                 }
             }

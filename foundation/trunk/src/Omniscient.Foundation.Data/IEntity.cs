@@ -26,15 +26,14 @@ namespace Omniscient.Foundation.Data
         string Type { get; }
         
         /// <summary>
-        /// Copies the values of the entity to another entity.
+        /// Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
+        /// and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
+        /// all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
+        /// <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
+        /// the reference.
         /// </summary>
+        /// <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
         /// <param name="target">The entity to copy values to.</param>
-        void CopyValues(IEntity target);
-
-        /// <summary>
-        /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.
-        /// </summary>
-        /// <returns>A clone, with the same id and values.</returns>
-        IEntity Clone();
+        void CopyTo(IEntity target, bool copyReferences);
     }
 }
