@@ -11,17 +11,16 @@ namespace Omniscient.Foundation.Data
     /// Base class for entities.
     /// </summary>
     [DataContract()]
+    [Serializable()]
     public class EntityBase: IEntity
     {
-        private Guid _id;
-
         /// <summary>
         /// Creates an entity with the status <see cref="EntityStatus.New"/>, and a brand new Id.
         /// </summary>
         public EntityBase()
         {
             this.Status = EntityStatus.New;
-            _id = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Omniscient.Foundation.Data
         public EntityBase(Guid id, bool entityIsLoaded)
         {
             this.Status = entityIsLoaded? EntityStatus.Clean : EntityStatus.NotLoadedYet;
-            _id = id;
+            Id = id;
         }
 
         /// <summary>
@@ -54,11 +53,8 @@ namespace Omniscient.Foundation.Data
         [DataMember()]
         public Guid Id
         {
-            get { return _id; }
-            private set
-            {
-                _id = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
