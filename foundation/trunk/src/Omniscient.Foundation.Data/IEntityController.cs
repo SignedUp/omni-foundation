@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ServiceModel;
 
 namespace Omniscient.Foundation.Data
 {
@@ -9,6 +10,7 @@ namespace Omniscient.Foundation.Data
     /// Represents a class that manages a certain type of entities.
     /// </summary>
     /// <typeparam name="TEntity">The type of Entity to manage.</typeparam>
+    [ServiceContract()]
     public interface IEntityController<TEntity> where TEntity: IEntity
     {
         /// <summary>
@@ -16,6 +18,7 @@ namespace Omniscient.Foundation.Data
         /// and prepares a clone for an eventual roll-back.
         /// </summary>
         /// <param name="entity">The entity to edit.</param>
+        [OperationContract()]
         void BeginChanges(TEntity entity);
         
         /// <summary>
@@ -23,6 +26,7 @@ namespace Omniscient.Foundation.Data
         /// Also cancels the deletion of an entity.
         /// </summary>
         /// <param name="entity">The entity whose status is <see cref="EntityStatus.Dirty"/> or <see cref="EntityStatus.ToBeDeleted"/>.</param>
+        [OperationContract()]
         void CancelChanges(TEntity entity);
         
         /// <summary>
@@ -30,6 +34,7 @@ namespace Omniscient.Foundation.Data
         /// If the status is <see cref="EntityStatus.ToBeDeleted"/>, the status is set to <see cref="EntityStatus.NonExistent"/>.
         /// </summary>
         /// <param name="entity">The entity to save.</param>
+        [OperationContract()]
         void AcceptChanges(TEntity entity);
         
         /// <summary>
@@ -37,6 +42,7 @@ namespace Omniscient.Foundation.Data
         /// then the entity is reset with original values, so that there's no ambiguity when calling <see cref="CancelChanges"/>.
         /// </summary>
         /// <param name="entity"></param>
+        [OperationContract()]
         void MarkAsDeleted(TEntity entity);
 
         /// <summary>
@@ -46,6 +52,7 @@ namespace Omniscient.Foundation.Data
         /// <param name="original">The entity to clone</param>
         /// <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
         /// <returns>A clone, with the same id and values.</returns>
+        [OperationContract()]
         TEntity Clone(TEntity original, bool copyReferences);
 
     }
