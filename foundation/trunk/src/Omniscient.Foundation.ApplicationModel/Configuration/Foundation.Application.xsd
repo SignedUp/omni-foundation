@@ -13,9 +13,36 @@
         <xs:choice>
             <xs:element name="services" minOccurs="0" maxOccurs="1" type="ServicesConfiguration" />
             <xs:element name="modules" minOccurs="0" maxOccurs="1" type="ModulesConfiguration" />
+            <xs:element name="container" minOccurs="0" maxOccurs="1" type="ObjectContainer" />
         </xs:choice>    
     </xs:complexType>
 
+    <xs:complexType name="ObjectContainer">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="add">
+                <xs:complexType>
+                    <xs:attribute name="keyType" type="xs:string" use="required" />
+                    <xs:attribute name="objectType" type="xs:string" use="required" />
+                </xs:complexType>
+            </xs:element>
+            <!-- 
+            Not supported yet.
+            <xs:element name="remove">
+                <xs:complexType>
+                    <xs:attribute name="type" type="xs:string" use="required" />
+                </xs:complexType>
+            </xs:element>
+            -->
+            <xs:element name="clear">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="xs:anyType" />
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    
     <xs:complexType name="ModulesConfiguration">
         <xs:sequence>
             <xs:element name="moduleDefinition" type="ModuleDefinition" minOccurs="0" maxOccurs="unbounded" />

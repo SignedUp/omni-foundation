@@ -131,6 +131,7 @@ namespace Omniscient.Foundation.ApplicationModel
 
             if (_config != null)
             {
+                ConfigManager.ConfigureContainer(ObjectContainer, _config);
                 ConfigManager.ConfigureServices(ServiceContainer, _config);
                 ConfigManager.ConfigureModules(ObjectContainer, _config);
             }

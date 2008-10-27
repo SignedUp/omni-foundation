@@ -53,6 +53,7 @@
     <Compile Include="Configuration\ApplicationConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\ModuleDefinition.cs" />
     <Compile Include="Configuration\ModulesConfiguration.cs" />
+    <Compile Include="Configuration\ObjectContainerConfiguration.cs" />
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
     <Compile Include="Modularity\ExtensionPortBase.cs" />

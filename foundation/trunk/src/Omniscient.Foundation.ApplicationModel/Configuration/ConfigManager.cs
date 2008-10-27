@@ -52,5 +52,37 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
                 container.Register(moduleType, module);
             }
         }
+
+        public static void ConfigureContainer(IObjectContainer container, ApplicationConfiguration config)
+        {
+            if (config == null || config.ContainerConfiguration == null) return;
+            if (container == null) return;
+
+            foreach (object item in config.ContainerConfiguration.Items)
+            {
+                ObjectContainerAdd add = item as ObjectContainerAdd;
+                if (item != null)
+                {
+                    Type tKey = Type.GetType(add.KeyType, true, true);
+                    Type tObj = Type.GetType(add.ObjectType, true, true);
+
+                    container.Register(tKey, Activator.CreateInstance(tObj));
+                    continue;
+                }
+
+                ObjectContainerRemove remove = item as ObjectContainerRemove;
+                if (item != null)
+                {
+                    throw new NotImplementedException("Removing an object is not supported yet.");
+                }
+
+                ObjectContainerClear clear = item as ObjectContainerClear;
+                if (item != null)
+                {
+                    container.Clear();
+                    continue;
+                }
+            }
+        }
     }
 }
