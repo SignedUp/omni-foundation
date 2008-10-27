@@ -65,6 +65,7 @@
     <Compile Include="EntityStatus.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityAdapter.cs" />
+    <Compile Include="IEntityComposer.cs" />
     <Compile Include="IEntityController.cs" />
     <Compile Include="IEntityList.cs" />
     <Compile Include="IEntityDictionary.cs" />

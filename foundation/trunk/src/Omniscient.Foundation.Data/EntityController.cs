@@ -75,7 +75,7 @@ namespace Omniscient.Foundation.Data
         }
 
         /// <summary>
-        /// Saves the entity to the database.  If Status is <see cref="EntityStatus.Dirty"/>, then the status is set to <see cref="EntityStatus.Clean"/>.
+        /// Saves the entity to the database.  If Status is <see cref="EntityStatus.Dirty"/> or <see cref="EntityStatus.New"/>, then the status is set to <see cref="EntityStatus.Clean"/>.
         /// If the status is <see cref="EntityStatus.ToBeDeleted"/>, the status is set to <see cref="EntityStatus.NonExistent"/>.
         /// </summary>
         /// <param name="entity">The entity to save.</param>
