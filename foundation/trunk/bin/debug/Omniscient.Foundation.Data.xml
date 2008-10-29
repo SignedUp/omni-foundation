@@ -9,17 +9,16 @@
             Represents an entity.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntity.CopyValues(Omniscient.Foundation.Data.IEntity)">
+        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)">
             <summary>
-            Copies the values of the entity to another entity.
+            Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
+            and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
+            all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
+            <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
+            the reference.
             </summary>
+            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
             <param name="target">The entity to copy values to.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntity.Clone">
-            <summary>
-            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
-            </summary>
-            <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="P:Omniscient.Foundation.Data.IEntity.Status">
             <summary>
@@ -138,9 +137,12 @@
         </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.AcceptChanges(`0)">
             <summary>
-            Saves the entity to the database.  If Status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/>, then the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
-            If the status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.ToBeDeleted"/>, the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.NonExistent"/>.
+            Use this fonction to accept changes on an entity.  Use <see cref="!:IEntityAdapter"/> to save it to the database.
             </summary>
+            <remarks>
+            If Status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/>, then the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            If the status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.ToBeDeleted"/>, the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.NonExistent"/>.
+            </remarks>
             <param name="entity">The entity to save.</param>
         </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.MarkAsDeleted(`0)">
@@ -150,7 +152,16 @@
             </summary>
             <param name="entity"></param>
         </member>
-        <member name="M:Omniscient.Foundation.Data.EntityController`1.#ctor(Omniscient.Foundation.Data.IEntityAdapter{`0})">
+        <member name="M:Omniscient.Foundation.Data.IEntityController`1.Clone(`0,System.Boolean)">
+            <summary>
+            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
+            See <see cref="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)"/> for details about <paramref name="copyReferences"/>.
+            </summary>
+            <param name="original">The entity to clone</param>
+            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
+            <returns>A clone, with the same id and values.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityController`1.#ctor">
             <summary>
             Ctor.
             </summary>
@@ -171,7 +182,7 @@
         </member>
         <member name="M:Omniscient.Foundation.Data.EntityController`1.AcceptChanges(`0)">
             <summary>
-            Saves the entity to the database.  If Status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/>, then the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            Saves the entity to the database.  If Status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/> or <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, then the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
             If the status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.ToBeDeleted"/>, the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.NonExistent"/>.
             </summary>
             <param name="entity">The entity to save.</param>
@@ -182,6 +193,15 @@
             then the entity is reset with original values, so that there's no ambiguity when calling <see cref="M:Omniscient.Foundation.Data.EntityController`1.CancelChanges(`0)"/>.
             </summary>
             <param name="entity"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityController`1.Clone(`0,System.Boolean)">
+            <summary>
+            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
+            See <see cref="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)"/> for details about <paramref name="copyReferences"/>.
+            </summary>
+            <param name="original">The entity to clone</param>
+            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
+            <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="T:Omniscient.Foundation.Data.LookupController`1">
             <summary>
@@ -427,12 +447,16 @@
             <param name="entityIsLoaded">Indicates whether the entity is being loaded with all its value, or is just assigned an Id for future load.</param>
             <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/> or <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/>.</param>
         </member>
-        <member name="M:Omniscient.Foundation.Data.EntityBase.CopyValues(Omniscient.Foundation.Data.IEntity)">
+        <member name="M:Omniscient.Foundation.Data.EntityBase.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)">
             <summary>
-            Copies the value properties to a target entity.  By default, this is done automatically by assigning all properties
-            marked with attribute EntityProperty, if the type of this attribute is <see cref="F:Omniscient.Foundation.Data.EntityPropertyType.Value"/>.
+            Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
+            and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
+            all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
+            <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
+            the reference.
             </summary>
-            <param name="target">The Entity to copy values to.</param>
+            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
+            <param name="target">The entity to copy values to.</param>
         </member>
         <member name="M:Omniscient.Foundation.Data.EntityBase.Equals(System.Object)">
             <summary>
@@ -452,12 +476,6 @@
             Returns a string representation of the Entity.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityBase.Clone">
-            <summary>
-            Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
-            </summary>
-            <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="P:Omniscient.Foundation.Data.EntityBase.Status">
             <summary>
@@ -688,3 +706,4 @@
         </member>
     </members>
 </doc>
+
