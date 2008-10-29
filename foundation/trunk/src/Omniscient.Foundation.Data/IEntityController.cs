@@ -30,9 +30,12 @@ namespace Omniscient.Foundation.Data
         void CancelChanges(TEntity entity);
         
         /// <summary>
-        /// Saves the entity to the database.  If Status is <see cref="EntityStatus.Dirty"/>, then the status is set to <see cref="EntityStatus.Clean"/>.
-        /// If the status is <see cref="EntityStatus.ToBeDeleted"/>, the status is set to <see cref="EntityStatus.NonExistent"/>.
+        /// Use this fonction to accept changes on an entity.  Use <see cref="IEntityAdapter"/> to save it to the database.
         /// </summary>
+        /// <remarks>
+        /// If Status is <see cref="EntityStatus.Dirty"/>, then the status is set to <see cref="EntityStatus.Clean"/>.
+        /// If the status is <see cref="EntityStatus.ToBeDeleted"/>, the status is set to <see cref="EntityStatus.NonExistent"/>.
+        /// </remarks>
         /// <param name="entity">The entity to save.</param>
         [OperationContract()]
         void AcceptChanges(TEntity entity);

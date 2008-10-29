@@ -31,11 +31,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             ApplicationManager.Current.ObjectContainer = new ObjectContainer();
 
             _clientAdapter = new ClientAdapter();
-            _clientController = new EntityController<Client>(_clientAdapter);
+            _clientController = new EntityController<Client>();
             ApplicationManager.Current.ObjectContainer.Register<IEntityController<Client>>(_clientController);
 
             _invoiceAdapter = new InvoiceAdapter();
-            _invoiceController = new EntityController<Invoice>(_invoiceAdapter);
+            _invoiceController = new EntityController<Invoice>();
             ApplicationManager.Current.ObjectContainer.Register<IEntityController<Invoice>>(_invoiceController);
         }
 

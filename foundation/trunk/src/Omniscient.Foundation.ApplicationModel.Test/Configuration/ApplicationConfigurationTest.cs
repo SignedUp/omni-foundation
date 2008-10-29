@@ -48,7 +48,7 @@ namespace Omniscient.Foundation.ApplicationModel
 
             Assert.IsNotNull(config.ContainerConfiguration);
             Assert.IsNotNull(config.ContainerConfiguration.Items);
-            Assert.AreEqual(3, config.ContainerConfiguration.Items.Count);
+            Assert.AreEqual(2, config.ContainerConfiguration.Items.Count);
             Assert.AreEqual(typeof(ObjectContainerClear), config.ContainerConfiguration.Items[0].GetType());
             Assert.AreEqual(typeof(ObjectContainerAdd), config.ContainerConfiguration.Items[1].GetType());
             Assert.AreEqual("namespace.interface, assembly", ((ObjectContainerAdd)config.ContainerConfiguration.Items[1]).KeyType);

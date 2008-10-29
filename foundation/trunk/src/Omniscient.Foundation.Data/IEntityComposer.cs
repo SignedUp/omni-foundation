@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Omniscient.Foundation.Data
 {
-    interface IEntityComposer
+    interface IEntityComposer<TEntity> where TEntity: IEntity
     {
     }
 }

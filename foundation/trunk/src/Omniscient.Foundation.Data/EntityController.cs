@@ -13,15 +13,13 @@ namespace Omniscient.Foundation.Data
         where TEntity: IEntity
     {
         private Dictionary<Guid, TEntity> _clones;
-        private IEntityAdapter<TEntity> _adapter;
 
         /// <summary>
         /// Ctor.
         /// </summary>
-        public EntityController(IEntityAdapter<TEntity> adapter)
+        public EntityController()
         {
             _clones = new Dictionary<Guid, TEntity>();
-            _adapter = adapter;
         }
 
         /// <summary>
@@ -82,8 +80,6 @@ namespace Omniscient.Foundation.Data
         public void AcceptChanges(TEntity entity)
         {
             if (entity.Status != EntityStatus.New && entity.Status != EntityStatus.Dirty && entity.Status != EntityStatus.ToBeDeleted) return;
-            if (_adapter == null) throw new InvalidOperationException("Adapter is null.");
-            _adapter.Save(entity);
             switch (entity.Status)
             {
                 case EntityStatus.New:
@@ -96,6 +92,7 @@ namespace Omniscient.Foundation.Data
                 default:
                     throw new InvalidOperationForStatusException(entity.Status);
             }
+            if (_clones.ContainsKey(entity.Id)) _clones.Remove(entity.Id);
         }
 
         /// <summary>
