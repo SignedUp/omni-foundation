@@ -8,7 +8,7 @@ using Omniscient.Foundation.Data;
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     /// <summary>
-    /// Represents an application controller.  Responsible for managing entity state and clones for edit.
+    /// Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
     /// </summary>
     public interface IPresentationController
     {
