@@ -144,9 +144,6 @@ namespace Omniscient.Foundation.ApplicationModel
                 if (startable != null) startable.Start();
             }
 
-            //Display the Shell
-            if (Shell != null) Shell.Show();
-
             //Start modules
             foreach (object obj in ObjectContainer.AllObjects)
             {
@@ -159,6 +156,9 @@ namespace Omniscient.Foundation.ApplicationModel
                     if (start != null) start.Start();
                 }
             }
+
+            //Display the Shell
+            if (Shell != null) Shell.Show();
 
             _started = true;
         }
