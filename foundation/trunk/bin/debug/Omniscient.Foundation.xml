@@ -4,83 +4,6 @@
         <name>Omniscient.Foundation</name>
     </assembly>
     <members>
-        <member name="T:Omniscient.Foundation.ServiceModel.ServiceContainer">
-            <summary>
-            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceContainer"/>.  Reads services from the configuration file.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IServiceContainer">
-            <summary>
-            Defines a service container.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.GetService``1">
-            <summary>
-            Gets a service that implements the contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
-            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.RegisterService``1(Omniscient.Foundation.ServiceModel.IService{``0})">
-            <summary>
-            Adds a service to the container.
-            </summary>
-            <typeparam name="TContract">The type of contract that service implements.</typeparam>
-            <param name="service">A service implementation.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the container.
-            </summary>
-            <param name="contract">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IServiceContainer.AllServices">
-            <summary>
-            Gets all services, in the order they have been registered.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IServiceContainer.ServiceCount">
-            <summary>
-            Gets the number of services that are registered.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.#ctor">
-            <summary>
-            Ctor
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.GetService``1">
-            <summary>
-            Returns the contract implementation of a service, if any, that implements the contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">The contract type.</typeparam>
-            <returns>The contract's implementation, or null if no service found for that contract.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.RegisterService``1(Omniscient.Foundation.ServiceModel.IService{``0})">
-            <summary>
-            Registers a service at run-time.
-            </summary>
-            <typeparam name="TContract">The contract type.</typeparam>
-            <param name="service">An instance of a service class.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the container.
-            </summary>
-            <param name="contractType">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.ServiceContainer.AllServices">
-            <summary>
-            Gets all services, in the order they have been registered.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.ServiceContainer.ServiceCount">
-            <summary>
-            Gets the number of services that are registered.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.IConfigurable">
             <summary>
             Defines a configurable service.  Implement this interface when you need your service to receive configuration.
@@ -183,6 +106,132 @@
             Returns the contract type.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IServiceContainer">
+            <summary>
+            Defines a service container.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.GetService``1">
+            <summary>
+            Gets a service that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
+            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.RegisterService``1(Omniscient.Foundation.ServiceModel.IService{``0})">
+            <summary>
+            Adds a service to the container.
+            </summary>
+            <typeparam name="TContract">The type of contract that service implements.</typeparam>
+            <param name="service">A service implementation.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the container.
+            </summary>
+            <param name="contract">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceContainer.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceContainer.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.UserCredential">
+            <summary>
+            Defines the user credential that identifies a user in the application.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.UserCredential.#ctor">
+            <summary>
+            Constructor for UserCredential.
+            </summary>
+            <remarks>By default, the credentials are set to anonymous user.</remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.UserCredential.#ctor(System.String)">
+            <summary>
+            Constructor for UserCredential.
+            </summary>
+            <param name="name">User's login name.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.UserCredential.#ctor(System.String,System.Security.SecureString)">
+            <summary>
+            Constructor for UserCredential.
+            </summary>
+            <param name="name">User's login name.</param>
+            <param name="password">User's password.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.UserCredential.Password">
+            <summary>
+            Represents password of a user.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.UserCredential.Name">
+            <summary>
+            Represents name of a user.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.UserCredential.IsAuthenticated">
+            <summary>
+            Shows if user has been successfully authenticated.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.UserCredential.AuthenticationType">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtenderContract">
+            <summary>
+            Defines an Extender contract for prompting a user for his/her credential.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.ICredentialServiceExtenderContract.GetUserAuthentication">
+            <summary>
+            Prompts a user for his/her credential and returns it.
+            </summary>
+            <remarks>Should return </remarks>
+            <returns>Representation of the user identity.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.ICredentialService">
+            <summary>
+            Defines a service that will provide the application with user credentials.  
+            </summary>
+            <remarks>
+            This service must provide an "anonymous" credential if a user has not been successfully
+            authenticated.
+            </remarks>
+        </member>
+        <member name="T:Omniscient.Foundation.IStartable">
+            <summary>
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Start">
+            <summary>
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Stop">
+            <summary>
+            Called when the application shuts down.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.ICredentialService.EnsureUserIsLoggedIn">
+            <summary>
+            Called by an authentication module, if one exists.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.ICredentialService.GetUserCredential">
+            <summary>
+            Called on request from anywhere where the user credentials are required.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.IObjectContainer">
             <summary>
             Defines an object container where objects of certain types can be registered and later gathered.
@@ -215,6 +264,47 @@
             Gets all registered objects as a flat array of objects.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceContainer">
+            <summary>
+            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceContainer"/>.  Reads services from the configuration file.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.#ctor">
+            <summary>
+            Ctor
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.GetService``1">
+            <summary>
+            Returns the contract implementation of a service, if any, that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The contract type.</typeparam>
+            <returns>The contract's implementation, or null if no service found for that contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.RegisterService``1(Omniscient.Foundation.ServiceModel.IService{``0})">
+            <summary>
+            Registers a service at run-time.
+            </summary>
+            <typeparam name="TContract">The contract type.</typeparam>
+            <param name="service">An instance of a service class.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the container.
+            </summary>
+            <param name="contractType">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ServiceContainer.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ServiceContainer.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ObjectContainer">
             <summary>
             Default implementation for <see cref="T:Omniscient.Foundation.IObjectContainer"/>.
@@ -242,22 +332,6 @@
         <member name="P:Omniscient.Foundation.ObjectContainer.AllObjects">
             <summary>
             Gets all registered objects as a flat array of objects.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.IStartable">
-            <summary>
-            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IStartable.Start">
-            <summary>
-            Called when the application starts.  All services are loaded when this method is called.  Services are started
-            in the order they are defined in the configuration.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IStartable.Stop">
-            <summary>
-            Called when the application shuts down.
             </summary>
         </member>
     </members>
