@@ -114,7 +114,9 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetPath) $(SolutionDir)..\bin\debug\$(TargetFileName) /B
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetDir)$(TargetName).pdb $(SolutionDir)..\bin\debug\$(TargetName).pdb /B
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /A /Y $(TargetDir)$(TargetName).xml $(SolutionDir)..\bin\debug\$(TargetName).xml /A
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /A /Y $(TargetDir)Configuration\Foundation.Application.xsd $(SolutionDir)..\bin\debug\Configuration\Foundation.Application.xsd /A</PostBuildEvent>
   </PropertyGroup>
 </Project>
