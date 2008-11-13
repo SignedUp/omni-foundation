@@ -16,15 +16,18 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private List<IViewController> _controllers;
         private List<IView> _openedViews;
 
+        public PresentationController() : this(true) { }
+
         /// <summary>
         /// Ctor.
         /// </summary>
-        public PresentationController()
+        public PresentationController(bool supportsUserInput)
         {
             _locks = new Dictionary<Guid, object>();
             _lock = new object();
             _controllers = new List<IViewController>();
             _openedViews = new List<IView>();
+            SupportsUserInput = supportsUserInput;
         }
 
         /// <summary>
@@ -132,6 +135,27 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                     v.UpdateView();
                 }
             }
+        }
+
+        public void RegisterPresenter(IPresenter presenter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IPresenter GetPresenter(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PresenterType GetPresenter<PresenterType>() where PresenterType : IPresenter
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SupportsUserInput
+        {
+            get;
+            private set;
         }
     }
 }

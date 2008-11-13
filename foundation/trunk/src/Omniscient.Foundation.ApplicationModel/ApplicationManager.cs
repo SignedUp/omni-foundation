@@ -144,6 +144,20 @@ namespace Omniscient.Foundation.ApplicationModel
                 if (startable != null) startable.Start();
             }
 
+            //Display the Shell
+            if (Shell != null)
+            {
+                foreach (IViewController ctrl in Shell.CreateViewControllers())
+                {
+                    PresentationController.ViewControllers.Add(ctrl);
+                }
+                foreach (IPresenter presenter in Shell.CreatePresenters())
+                {
+                    PresentationController.RegisterPresenter(presenter);
+                }
+                Shell.Show();
+            }
+
             //Start modules
             foreach (object obj in ObjectContainer.AllObjects)
             {
@@ -156,9 +170,6 @@ namespace Omniscient.Foundation.ApplicationModel
                     if (start != null) start.Start();
                 }
             }
-
-            //Display the Shell
-            if (Shell != null) Shell.Show();
 
             _started = true;
         }
