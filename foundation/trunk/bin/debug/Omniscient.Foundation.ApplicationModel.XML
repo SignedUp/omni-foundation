@@ -58,7 +58,7 @@
             Closes the application.  Generally, that should lead to the process being terminated.
             </summary>
             <remarks>
-            All services that implement <see cref="T:Omniscient.Foundation.ServiceModel.IStartable"/> are stopped here, in reverse order that they 
+            All services that implement <see cref="T:Omniscient.Foundation.IStartable"/> are stopped here, in reverse order that they 
             have been started.
             </remarks>
         </member>
@@ -91,6 +91,36 @@
             <summary>
             Gets the deserialized configuration.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell">
+            <summary>
+            The shell is the main window in an application.  It defines placeholders for displaying <c>IModel</c> objects,
+            which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information, through the
+            use of <c>IPresenter</c> objects.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.Show">
+            <summary>
+            Tells the shell to display itself, when the application starts.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreateViewControllers">
+            <summary>
+            Asks the shell to create one <c>IViewController</c> object for each region where <c>IModel</c> objects
+            will be displayed, and return all created controllers.  The shell does not have to keep a reference to
+            those controllers.
+            </summary>
+            <remarks>
+            In most applications, the shell will have only one view controllers.
+            </remarks>
+            <returns>The list of created view controllers.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreatePresenters">
+            <summary>
+            Asks the shell to create all non-data presenters (e.g. Status Bar Presenter, or Message Console Presenter).
+            The shell does not have to keep a reference to those presenters.
+            </summary>
+            <returns>The list of created presenters.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
             <summary>
@@ -151,7 +181,7 @@
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
             <summary>
-            Represents an application controller.  Responsible for managing entity state and clones for edit.
+            Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
             </summary>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
@@ -193,9 +223,38 @@
             <param name="view">The view that was editing the entity.</param>
             <param name="entity">The entity that was edited.</param>
         </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)">
+            <summary>
+            Registers an <c>IPresenter</c>.
+            </summary>
+            <param name="presenter">An <c>IPresenter</c> to register.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the <c>IPresenter.RequiresUserInput</c> is
+            <c>True</c>, while the value of <c>SupportsUserInput</c> is <c>False</c>.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)">
+            <summary>
+            Gets an <c>IPresenter</c> using its name.
+            </summary>
+            <param name="name">The name of the presenter to look for.</param>
+            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1">
+            <summary>
+            Gets an <c>IPresenter</c> using its type.
+            </summary>
+            <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
+            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewControllers">
             <summary>
             Gets the list of view controllers.  Default use is to feed that list at application startup.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput">
+            <summary>
+            Gets a value indicating wheter this presentation controller supports user input.
+            If <c>False</c>, then calling <c>RegisterPresenter</c> with an <c>IPresenter</c>
+            that requires user input will fail.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelMultiEntitiesBase`1">
@@ -284,12 +343,38 @@
             Gets the list of root entities.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter">
+            <summary>
+            The IPresenter gives direct access to the UI.  Contrary to <c>IViewController</c>s, which are the entry door to the MVC,
+            IPresenter are there simply to display message windows, ask for user input, etc.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
+            <summary>
+            Writes a single message to the presentation medium.  Most presenters will add more complex functionality (through
+            a custom interface) than this simple function.
+            </summary>
+            <param name="message">A message to display.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.Name">
+            <summary>
+            Gets the name of that presenter.  Generally the name of the concrete class.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput">
+            <summary>
+            Gets a values indicating whether this presenter will require user input.  For example, if the presenter
+            is to display message windows with an Ok button, then it requires user input.  If it simply writes messages
+            to a console window, or to a status bar, for example, then it does not require user input.  According to the 
+            value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController">
             <summary>
             Default implementation for <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  Generally, does not have to be derived for default behavior.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor(System.Boolean)">
             <summary>
             Ctor.
             </summary>

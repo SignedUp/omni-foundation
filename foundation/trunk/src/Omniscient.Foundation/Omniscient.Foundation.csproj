@@ -70,7 +70,7 @@
     <Compile Include="ServiceModel\IConfigurable.cs" />
     <Compile Include="ServiceModel\IService.cs" />
     <Compile Include="ServiceModel\IServiceContainer.cs" />
-    <Compile Include="ServiceModel\IStartable.cs" />
+    <Compile Include="IStartable.cs" />
     <Compile Include="ServiceModel\ServiceBase.cs" />
     <Compile Include="ServiceModel\ServiceContainer.cs" />
   </ItemGroup>
