@@ -3,7 +3,7 @@ using Omniscient.Foundation.ApplicationModel.Modularity;
 
 namespace Omniscient.Foundation.ApplicationModel.Security
 {
-    public abstract class CredentialServiceBase : ServiceModel.ServiceBase<ICredentialService>, ICredentialService
+    public class CredentialServiceBase : ServiceModel.ServiceBase<ICredentialService>, ICredentialService
     {
         public UserCredential UserCredential { get; protected set; }
 
@@ -23,8 +23,13 @@ namespace Omniscient.Foundation.ApplicationModel.Security
                     UserCredential = extender.GetImplementation().GetUserAuthentication();
                     return;
                 }
-                UserCredential = new UserCredential();
+                UserCredential = GetAnonymousUserCredential();
             }
+        }
+
+        protected virtual UserCredential GetAnonymousUserCredential()
+        { 
+            return new UserCredential();
         }
 
         public virtual UserCredential GetUserCredential()
