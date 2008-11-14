@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace Omniscient.Foundation.Security
+namespace Omniscient.Foundation.ApplicationModel.Security
 {
     /// <summary>
     /// Defines the user credential that identifies a user in the application.

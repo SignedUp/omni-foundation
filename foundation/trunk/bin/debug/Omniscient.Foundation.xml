@@ -142,96 +142,6 @@
             Gets the number of services that are registered.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Security.UserCredential">
-            <summary>
-            Defines the user credential that identifies a user in the application.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.UserCredential.#ctor">
-            <summary>
-            Constructor for UserCredential.
-            </summary>
-            <remarks>By default, the credentials are set to anonymous user.</remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.UserCredential.#ctor(System.String)">
-            <summary>
-            Constructor for UserCredential.
-            </summary>
-            <param name="name">User's login name.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.UserCredential.#ctor(System.String,System.Security.SecureString)">
-            <summary>
-            Constructor for UserCredential.
-            </summary>
-            <param name="name">User's login name.</param>
-            <param name="password">User's password.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.UserCredential.Password">
-            <summary>
-            Represents password of a user.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.UserCredential.Name">
-            <summary>
-            Represents name of a user.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.UserCredential.IsAuthenticated">
-            <summary>
-            Shows if user has been successfully authenticated.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.UserCredential.AuthenticationType">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtenderContract">
-            <summary>
-            Defines an Extender contract for prompting a user for his/her credential.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.ICredentialServiceExtenderContract.GetUserAuthentication">
-            <summary>
-            Prompts a user for his/her credential and returns it.
-            </summary>
-            <remarks>Should return </remarks>
-            <returns>Representation of the user identity.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.ICredentialService">
-            <summary>
-            Defines a service that will provide the application with user credentials.  
-            </summary>
-            <remarks>
-            This service must provide an "anonymous" credential if a user has not been successfully
-            authenticated.
-            </remarks>
-        </member>
-        <member name="T:Omniscient.Foundation.IStartable">
-            <summary>
-            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IStartable.Start">
-            <summary>
-            Called when the application starts.  All services are loaded when this method is called.  Services are started
-            in the order they are defined in the configuration.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IStartable.Stop">
-            <summary>
-            Called when the application shuts down.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.ICredentialService.EnsureUserIsLoggedIn">
-            <summary>
-            Called by an authentication module, if one exists.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.ICredentialService.GetUserCredential">
-            <summary>
-            Called on request from anywhere where the user credentials are required.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.IObjectContainer">
             <summary>
             Defines an object container where objects of certain types can be registered and later gathered.
@@ -262,6 +172,22 @@
         <member name="P:Omniscient.Foundation.IObjectContainer.AllObjects">
             <summary>
             Gets all registered objects as a flat array of objects.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.IStartable">
+            <summary>
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Start">
+            <summary>
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Stop">
+            <summary>
+            Called when the application shuts down.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceContainer">

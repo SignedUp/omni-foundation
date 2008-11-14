@@ -1,6 +1,6 @@
 ﻿using Omniscient.Foundation.ServiceModel;
 
-namespace Omniscient.Foundation.Security
+namespace Omniscient.Foundation.ApplicationModel.Security
 {
     /// <summary>
     /// Defines a service that will provide the application with user credentials.  

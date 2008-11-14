@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Foundation.Security
+﻿namespace Omniscient.Foundation.ApplicationModel.Security
 {
     /// <summary>
     /// Defines an Extender contract for prompting a user for his/her credential.
