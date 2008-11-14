@@ -16,7 +16,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
 
         public virtual void EnsureUserIsLoggedIn()
         {
-            if (UserCredential == null || !UserCredential.IsAnonymous)
+            if (UserCredential == null || UserCredential.IsAnonymous)
             {
                 foreach (IExtender<ICredentialServiceExtenderContract> extender in ApplicationManager.Current.ExtensionPortManager.GetExtensionPort<ICredentialServiceExtenderContract>().Extenders)
                 {

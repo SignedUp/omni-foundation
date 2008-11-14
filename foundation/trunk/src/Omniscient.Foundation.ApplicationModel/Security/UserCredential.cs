@@ -24,7 +24,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
         /// <summary>
         /// Shows if the user did not provide cridential information.
         /// </summary>
-        public bool IsAnonymous { get { return Name != ANONYMOUS_USER; } }
+        public bool IsAnonymous { get { return Name == ANONYMOUS_USER; } }
 
         /// <summary>
         /// Shows if the user has been successfully authenticated.
