@@ -22,9 +22,14 @@ namespace Omniscient.Foundation.ApplicationModel.Security
         public string Name { get; private set; }
 
         /// <summary>
-        /// Shows if user has been successfully authenticated.
+        /// Shows if the user did not provide cridential information.
         /// </summary>
-        public bool IsAuthenticated { get { return Name != ANONYMOUS_USER; } }
+        public bool IsAnonymous { get { return Name != ANONYMOUS_USER; } }
+
+        /// <summary>
+        /// Shows if the user has been successfully authenticated.
+        /// </summary>
+        public bool IsAuthenticated { get; private set; }
 
         /// <summary>
         /// Constructor for UserCredential.
