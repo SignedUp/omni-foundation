@@ -405,6 +405,52 @@
             value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase">
+            <summary>
+            Defines a base implementation class for ICredentialService
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.GetImplementation">
+            <summary>
+            Retrieves implementation for ICredentialService.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.EnsureUserIsLoggedIn">
+            <summary>
+            Ensures the user has entered login information.
+            </summary>
+            <remarks>
+            If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.GetAnonymousUserCredential">
+            <summary>
+            Returns an "anonymous" UserCredential.
+            </summary>
+            <returns>UserCredential with "anonymous" status.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.GetUserCredential">
+            <summary>
+            Returns the current user's credential.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.Start">
+            <summary>
+            Starts the current service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.Stop">
+            <summary>
+            Stops the current service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.UserCredential">
+            <summary>
+            Holds current user's credential.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
             Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
