@@ -6,7 +6,7 @@ using Omniscient.Foundation.Data.ObjectQuery;
 
 namespace Omniscient.Foundation.Data
 {
-    interface IEntityComposer<TEntity> where TEntity: IEntity
+    public interface IEntityComposer<TEntity> where TEntity: IEntity
     {
         IEntityList<TEntity> Load(IEntityComposer<IEntity> composer, OQuery<TEntity> query);
     }
