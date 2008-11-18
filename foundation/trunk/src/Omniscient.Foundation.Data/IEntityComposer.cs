@@ -8,6 +8,6 @@ namespace Omniscient.Foundation.Data
 {
     public interface IEntityComposer<TEntity> where TEntity: IEntity
     {
-        IEntityList<TEntity> Compose(OQuery<TEntity> query);
+        IEntityList<TEntity> Compose();
     }
 }
