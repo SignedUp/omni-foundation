@@ -8,7 +8,6 @@
         /// <summary>
         /// Prompts a user for his/her credential and returns it.
         /// </summary>
-        /// <remarks>Should return </remarks>
         /// <returns>Representation of the user identity.</returns>
         UserCredential GetUserAuthentication();
     }
