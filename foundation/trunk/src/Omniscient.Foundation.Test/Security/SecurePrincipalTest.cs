@@ -8,18 +8,18 @@ using System.Security.Principal;
 namespace Omniscient.Foundation.Security
 {
     [TestFixture()]
-    public class SecureUserTest
+    public class SecurePrincipalTest
     {
         [Test()]
         public void TestCreate()
         {
-            SecureUser u = new SecureUser(new GenericIdentity("test"), new string[]{});
+            SecurePrincipal u = new SecurePrincipal(new GenericIdentity("test"), new string[]{});
         }
 
         [Test()]
         public void TestIsInRole()
         {
-            SecureUser u = new SecureUser(new GenericIdentity("test"), new string[] { "role1", "role2" });
+            SecurePrincipal u = new SecurePrincipal(new GenericIdentity("test"), new string[] { "role1", "role2" });
             Assert.IsTrue(u.IsInRole("role1"));
             Assert.IsTrue(u.IsInRole("role2"));
             Assert.IsFalse(u.IsInRole("role3"));
