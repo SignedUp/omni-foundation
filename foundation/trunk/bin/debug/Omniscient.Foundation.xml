@@ -4,6 +4,52 @@
         <name>Omniscient.Foundation</name>
     </assembly>
     <members>
+        <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
+            <summary>
+            Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor">
+            <summary>
+            Creates an instance of SecurePrincipal with an anonymous (unauthenticated) <c>SecureIdentity</c>, and an empty collection
+            of roles.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])">
+            <summary>
+            Creates an instance of SecurePrincipal with an existing <c>SecureIdentity</c>, and an initial collection of roles.
+            </summary>
+            <param name="identity"></param>
+            <param name="roles"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
+            <summary>
+            Adds specified roles to the collection of roles.
+            </summary>
+            <param name="roles">Roles to add to the roles collection.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
+            <summary>
+            Returns true if that principal is granted with given role.  Otherwise, false.
+            </summary>
+            <param name="role">The role to test.</param>
+            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
+            <summary>
+            Gets a string array of all roles this principal is granted.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity">
+            <summary>
+            Gets the <c>IIdentity</c> of that principal.  Concrete type is <c>SecureIdentity</c>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.Identity">
+            <summary>
+            Gets the <c>SecureIdentity</c> of that principal.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceContainer">
             <summary>
             Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceContainer"/>.  Reads services from the configuration file.
@@ -113,6 +159,69 @@
             <remarks>
             See the ApplicationModel configuration schema for more details.
             </remarks>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.SecureIdentity">
+            <summary>
+            Implementation of <c>IIdentity</c> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
+            to authenticated with a name, password and an authentication type.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor">
+            <summary>
+            Creates an anonymous (unauthenticated) user.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString)">
+            <summary>
+            Creates an authenticated user with given name and password.
+            </summary>
+            <param name="name">The name of the authenticated user.</param>
+            <param name="password">The password used to authenticate the user.</param>
+            <remarks>The password is allowed to be null.</remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString,System.String)">
+            <summary>
+            Creates an authenticated user with given name, password and authentication machanism.
+            </summary>
+            <param name="name">The name of the authenticated user.</param>
+            <param name="password">The password used to authenticate the user.</param>
+            <param name="authenticationType">The authentication mechanism used to authenticate the user.</param>
+            <remarks>The password is allowed to be null.</remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString)">
+            <summary>
+            Promotes the identity with a username and password.  The identity is then considered authenticated.
+            </summary>
+            <remarks>The password is allowed to be null.</remarks>
+            <param name="name">The username used to authenticate.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString,System.String)">
+            <summary>
+            Promotes the identity with a username.  The identity is then considered authenticated.
+            </summary>
+            <param name="name">The username used to authenticate.</param>
+            <param name="authenticationType">The authentication type used to authenticate.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.Password">
+            <summary>
+            Gets the password used to promote (authenticate) this Identity, or null if no password was supplied or if the 
+            identity is anonymous (unauthenticated).
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.AuthenticationType">
+            <summary>
+            Gets the authentication mechanism used to authenticate the user.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.IsAuthenticated">
+            <summary>
+            Gets a boolean that indicates whether the user has been authenticated.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.Name">
+            <summary>
+            Gets the name of the user represented by this Identity.
+            </summary>
         </member>
         <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
             <summary>
@@ -258,115 +367,6 @@
         <member name="P:Omniscient.Foundation.ObjectContainer.AllObjects">
             <summary>
             Gets all registered objects as a flat array of objects.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
-            <summary>
-            Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor">
-            <summary>
-            Creates an instance of SecurePrincipal with an anonymous (unauthenticated) <c>SecureIdentity</c>, and an empty collection
-            of roles.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])">
-            <summary>
-            Creates an instance of SecurePrincipal with an existing <c>SecureIdentity</c>, and an initial collection of roles.
-            </summary>
-            <param name="identity"></param>
-            <param name="roles"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
-            <summary>
-            Adds specified roles to the collection of roles.
-            </summary>
-            <param name="roles">Roles to add to the roles collection.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
-            <summary>
-            Returns true if that principal is granted with given role.  Otherwise, false.
-            </summary>
-            <param name="role">The role to test.</param>
-            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
-            <summary>
-            Gets a string array of all roles this principal is granted.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity">
-            <summary>
-            Gets the <c>IIdentity</c> of that principal.  Concrete type is <c>SecureIdentity</c>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.Identity">
-            <summary>
-            Gets the <c>SecureIdentity</c> of that principal.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.SecureIdentity">
-            <summary>
-            Implementation of <c>IIdentity</c> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
-            to authenticated with a name, password and an authentication type.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor">
-            <summary>
-            Creates an anonymous (unauthenticated) user.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString)">
-            <summary>
-            Creates an authenticated user with given name and password.
-            </summary>
-            <param name="name">The name of the authenticated user.</param>
-            <param name="password">The password used to authenticate the user.</param>
-            <remarks>The password is allowed to be null.</remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString,System.String)">
-            <summary>
-            Creates an authenticated user with given name, password and authentication machanism.
-            </summary>
-            <param name="name">The name of the authenticated user.</param>
-            <param name="password">The password used to authenticate the user.</param>
-            <param name="authenticationType">The authentication mechanism used to authenticate the user.</param>
-            <remarks>The password is allowed to be null.</remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString)">
-            <summary>
-            Promotes the identity with a username and password.  The identity is then considered authenticated.
-            </summary>
-            <remarks>The password is allowed to be null.</remarks>
-            <param name="name">The username used to authenticate.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString,System.String)">
-            <summary>
-            Promotes the identity with a username.  The identity is then considered authenticated.
-            </summary>
-            <param name="name">The username used to authenticate.</param>
-            <param name="authenticationType">The authentication type used to authenticate.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecureIdentity.Password">
-            <summary>
-            Gets the password used to promote (authenticate) this Identity, or null if no password was supplied or if the 
-            identity is anonymous (unauthenticated).
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecureIdentity.AuthenticationType">
-            <summary>
-            Gets the authentication mechanism used to authenticate the user.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecureIdentity.IsAuthenticated">
-            <summary>
-            Gets a boolean that indicates whether the user has been authenticated.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecureIdentity.Name">
-            <summary>
-            Gets the name of the user represented by this Identity.
             </summary>
         </member>
     </members>
