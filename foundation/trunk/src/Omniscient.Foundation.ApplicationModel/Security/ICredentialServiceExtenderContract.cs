@@ -1,4 +1,5 @@
-﻿namespace Omniscient.Foundation.ApplicationModel.Security
+﻿using Omniscient.Foundation.Security;
+namespace Omniscient.Foundation.ApplicationModel.Security
 {
     /// <summary>
     /// Defines an Extender contract for prompting a user for his/her credential.
@@ -8,7 +9,7 @@
         /// <summary>
         /// Prompts a user for his/her credential and returns it.
         /// </summary>
-        /// <returns>Representation of the user identity.</returns>
-        UserCredential GetUserAuthentication();
+        /// <returns>User credentials.</returns>
+        void NegociateAuthentication(SecurePrincipal principal);
     }
 }
