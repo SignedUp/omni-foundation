@@ -28,6 +28,70 @@
             Raised when the current view is changed for a new view.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.ApplicationManager">
+            <summary>
+            Abstracts the concept of an application.  Serves as the bootstrapper of any application
+            that uses the Foundation.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
+            <summary>
+            Starts the application.  That method should be one of the first being called when the program starts.  The method
+            loads the configuration from the AppDomain configuration file.
+            </summary>
+            <remarks>
+            That method will look for application configuration.  In the configuration file, the config section must
+            be called "foundation.application", and must be in the namespace 
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
+            for the complete schema.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication(Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration)">
+            <summary>
+            Starts the application.  That method should be one of the first being called when the program starts. The method
+            accepts an existing configuration object.  See <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/> for default configuration.
+            </summary>
+            <param name="config">Loaded application object.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
+            <summary>
+            Closes the application.  Generally, that should lead to the process being terminated.
+            </summary>
+            <remarks>
+            All services that implement <see cref="T:Omniscient.Foundation.IStartable"/> are stopped here, in reverse order that they 
+            have been started.
+            </remarks>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current">
+            <summary>
+            Gets the current Application object.  Each application using foundation has a single Current Application.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.IsStarted">
+            <summary>
+            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer">
+            <summary>
+            Gets or sets the service container to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
+            <summary>
+            Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer">
+            <summary>
+            Gets or sets an <see cref="T:Omniscient.Foundation.IObjectContainer"/> instance.  Defaults to <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer"/>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
+            <summary>
+            Gets the deserialized configuration.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell">
             <summary>
             The shell is the main window in an application.  It defines placeholders for displaying <c>IModel</c> objects,
@@ -58,10 +122,178 @@
             </summary>
             <returns>The list of created presenters.</returns>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
+            <summary>
+            Placeholder for a service definition.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Service">
+            <summary>
+            The assembly-qualified name of the type that implements IService for that service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Contract">
+            <summary>
+            The assembly-qualified name of that service's contract.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
+            <summary>
+            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ServiceModel.IConfigurable"/>.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration">
             <summary>
             Placeholder for modules configuration.  Contains a list of service definitions.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort">
+            <summary>
+            Defines a general extension port
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort.ContractType">
+            <summary>
+            Contract type that extenders must implement when connecting into that extension port.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort`1">
+            <summary>
+            Defines an extension port for contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">Contract type that extenders must implement when connecting into that extension port.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort`1.Register(Omniscient.Foundation.ApplicationModel.Modularity.IExtender{`0})">
+            <summary>
+            Registers an extender into the extension port.  The extender must implement contract <typeparamref name="TContract"/>.
+            </summary>
+            <param name="extender"></param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort`1.Extenders">
+            <summary>
+            Gets the list of plugged-in extenders
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
+            <summary>
+            Section handler for "foundation.application" configuration section.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            Standard implementation (see <see cref="T:System.Configuration.IConfigurationSectionHandler"/>).
+            </summary>
+            <seealso cref="T:System.Xml.Serialization.XmlSerializer"/>
+            <param name="parent"></param>
+            <param name="configContext"></param>
+            <param name="section"></param>
+            <returns>A deserialized configuration.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
+            <summary>
+            Represents a view.
+            
+            Views are responsible for displaying <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel"/> objects to the UI.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IView.UpdateView">
+            <summary>
+            Called when the Model is modified from the outside of the View (probably in another view).
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Model">
+            <summary>
+            Gets or sets the Model.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
+            <summary>
+            Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="model">The model to open.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
+            <summary>
+            Informs the controller that a view has been closed.
+            </summary>
+            <param name="view">The view that's been closed.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.BeginEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)">
+            <summary>
+            Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CancelEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)"/> would be called.
+            </summary>
+            <typeparam name="TEntity">The entity type.</typeparam>
+            <param name="view">The view that wants to edit the entity.</param>
+            <param name="entity">The entity to edit</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when the entity is already being edited elsewhere.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.EndEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)">
+            <summary>
+            Ends editing an entity - that is, accept changes.  The clone will be destroyed, and the entity will be permanently changed,
+            but not saved yet.
+            </summary>
+            <typeparam name="TEntity">The entity type.</typeparam>
+            <param name="view">The view that was editing the entity.</param>
+            <param name="entity">The entity that was edited.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CancelEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)">
+            <summary>
+            Cancels editing the entity.  The entity will be recopied against the clone, and the status set back to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            </summary>
+            <typeparam name="TEntity">The entity type.</typeparam>
+            <param name="view">The view that was editing the entity.</param>
+            <param name="entity">The entity that was edited.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)">
+            <summary>
+            Registers an <c>IPresenter</c>.
+            </summary>
+            <param name="presenter">An <c>IPresenter</c> to register.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the <c>IPresenter.RequiresUserInput</c> is
+            <c>True</c>, while the value of <c>SupportsUserInput</c> is <c>False</c>.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)">
+            <summary>
+            Gets an <c>IPresenter</c> using its name.
+            </summary>
+            <param name="name">The name of the presenter to look for.</param>
+            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1">
+            <summary>
+            Gets an <c>IPresenter</c> using its type.
+            </summary>
+            <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
+            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewControllers">
+            <summary>
+            Gets the list of view controllers.  Default use is to feed that list at application startup.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput">
+            <summary>
+            Gets a value indicating wheter this presentation controller supports user input.
+            If <c>False</c>, then calling <c>RegisterPresenter</c> with an <c>IPresenter</c>
+            that requires user input will fail.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtenderContract">
+            <summary>
+            Defines an Extender contract for prompting a user for his/her credential.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtenderContract.NegociateAuthentication(Omniscient.Foundation.Security.SecurePrincipal)">
+            <summary>
+            Prompts a user for his/her credential and returns it.
+            </summary>
+            <returns>User credentials.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelMultiEntitiesBase`1">
             <summary>
@@ -149,106 +381,35 @@
             Gets the list of root entities.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialService">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter">
             <summary>
-            Defines a service that will provide the application with user credentials.  
-            </summary>
-            <remarks>
-            This service must provide an "anonymous" credential if a user has not been successfully
-            authenticated.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.EnsureUserIsLoggedIn">
-            <summary>
-            Called by an authentication module, if one exists.
+            The IPresenter gives direct access to the UI.  Contrary to <c>IViewController</c>s, which are the entry door to the MVC,
+            IPresenter are there simply to display message windows, ask for user input, etc.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.GetUserCredential">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
             <summary>
-            Called on request from anywhere where the user credentials are required.
+            Writes a single message to the presentation medium.  Most presenters will add more complex functionality (through
+            a custom interface) than this simple function.
+            </summary>
+            <param name="message">A message to display.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.Name">
+            <summary>
+            Gets the name of that presenter.  Generally the name of the concrete class.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput">
+            <summary>
+            Gets a values indicating whether this presenter will require user input.  For example, if the presenter
+            is to display message windows with an Ok button, then it requires user input.  If it simply writes messages
+            to a console window, or to a status bar, for example, then it does not require user input.  According to the 
+            value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController">
             <summary>
             Default implementation for <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  Generally, does not have to be derived for default behavior.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
-            <summary>
-            Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
-            <summary>
-            Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
-            and displaying it correctly.
-            </summary>
-            <param name="model">The model to open.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
-            <summary>
-            Informs the controller that a view has been closed.
-            </summary>
-            <param name="view">The view that's been closed.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.BeginEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)">
-            <summary>
-            Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CancelEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)"/> would be called.
-            </summary>
-            <typeparam name="TEntity">The entity type.</typeparam>
-            <param name="view">The view that wants to edit the entity.</param>
-            <param name="entity">The entity to edit</param>
-            <exception cref="T:System.InvalidOperationException">Thrown when the entity is already being edited elsewhere.</exception>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.EndEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)">
-            <summary>
-            Ends editing an entity - that is, accept changes.  The clone will be destroyed, and the entity will be permanently changed,
-            but not saved yet.
-            </summary>
-            <typeparam name="TEntity">The entity type.</typeparam>
-            <param name="view">The view that was editing the entity.</param>
-            <param name="entity">The entity that was edited.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CancelEdit``1(Omniscient.Foundation.ApplicationModel.Presentation.IView,``0)">
-            <summary>
-            Cancels editing the entity.  The entity will be recopied against the clone, and the status set back to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
-            </summary>
-            <typeparam name="TEntity">The entity type.</typeparam>
-            <param name="view">The view that was editing the entity.</param>
-            <param name="entity">The entity that was edited.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)">
-            <summary>
-            Registers an <c>IPresenter</c>.
-            </summary>
-            <param name="presenter">An <c>IPresenter</c> to register.</param>
-            <exception cref="T:System.InvalidOperationException">Thrown if the <c>IPresenter.RequiresUserInput</c> is
-            <c>True</c>, while the value of <c>SupportsUserInput</c> is <c>False</c>.</exception>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)">
-            <summary>
-            Gets an <c>IPresenter</c> using its name.
-            </summary>
-            <param name="name">The name of the presenter to look for.</param>
-            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1">
-            <summary>
-            Gets an <c>IPresenter</c> using its type.
-            </summary>
-            <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
-            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewControllers">
-            <summary>
-            Gets the list of view controllers.  Default use is to feed that list at application startup.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput">
-            <summary>
-            Gets a value indicating wheter this presentation controller supports user input.
-            If <c>False</c>, then calling <c>RegisterPresenter</c> with an <c>IPresenter</c>
-            that requires user input will fail.
             </summary>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor(System.Boolean)">
@@ -300,157 +461,6 @@
             Gets the list of view controllers.  Default use is to feed that list at application startup.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
-            <summary>
-            Placeholder for services configuration.  Contains a list of service definitions.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.#ctor">
-            <summary>
-            Ctor.  Creates an empty list of service definitions.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.ServiceDefinitions">
-            <summary>
-            Gets the list of service definitions.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.ApplicationManager">
-            <summary>
-            Abstracts the concept of an application.  Serves as the bootstrapper of any application
-            that uses the Foundation.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
-            <summary>
-            Starts the application.  That method should be one of the first being called when the program starts.  The method
-            loads the configuration from the AppDomain configuration file.
-            </summary>
-            <remarks>
-            That method will look for application configuration.  In the configuration file, the config section must
-            be called "foundation.application", and must be in the namespace 
-            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
-            for the complete schema.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication(Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration)">
-            <summary>
-            Starts the application.  That method should be one of the first being called when the program starts. The method
-            accepts an existing configuration object.  See <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/> for default configuration.
-            </summary>
-            <param name="config">Loaded application object.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
-            <summary>
-            Closes the application.  Generally, that should lead to the process being terminated.
-            </summary>
-            <remarks>
-            All services that implement <see cref="T:Omniscient.Foundation.IStartable"/> are stopped here, in reverse order that they 
-            have been started.
-            </remarks>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current">
-            <summary>
-            Gets the current Application object.  Each application using foundation has a single Current Application.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.IsStarted">
-            <summary>
-            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer">
-            <summary>
-            Gets or sets the service container to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceContainer"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
-            <summary>
-            Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer">
-            <summary>
-            Gets or sets an <see cref="T:Omniscient.Foundation.IObjectContainer"/> instance.  Defaults to <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
-            <summary>
-            Gets the deserialized configuration.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter">
-            <summary>
-            The IPresenter gives direct access to the UI.  Contrary to <c>IViewController</c>s, which are the entry door to the MVC,
-            IPresenter are there simply to display message windows, ask for user input, etc.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
-            <summary>
-            Writes a single message to the presentation medium.  Most presenters will add more complex functionality (through
-            a custom interface) than this simple function.
-            </summary>
-            <param name="message">A message to display.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.Name">
-            <summary>
-            Gets the name of that presenter.  Generally the name of the concrete class.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput">
-            <summary>
-            Gets a values indicating whether this presenter will require user input.  For example, if the presenter
-            is to display message windows with an Ok button, then it requires user input.  If it simply writes messages
-            to a console window, or to a status bar, for example, then it does not require user input.  According to the 
-            value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase">
-            <summary>
-            Defines a base implementation class for ICredentialService
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.GetImplementation">
-            <summary>
-            Retrieves implementation for ICredentialService.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.EnsureUserIsLoggedIn">
-            <summary>
-            Ensures the user has entered login information.
-            </summary>
-            <remarks>
-            If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.GetAnonymousUserCredential">
-            <summary>
-            Returns an "anonymous" UserCredential.
-            </summary>
-            <returns>UserCredential with "anonymous" status.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.GetUserCredential">
-            <summary>
-            Returns the current user's credential.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.Start">
-            <summary>
-            Starts the current service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.Stop">
-            <summary>
-            Stops the current service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.CredentialServiceBase.UserCredential">
-            <summary>
-            Holds current user's credential.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
             Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
@@ -467,69 +477,39 @@
             Services section.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialService">
             <summary>
-            Represents a view.
-            
-            Views are responsible for displaying <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel"/> objects to the UI.
+            Defines a service that will provide the application with user credentials.  The service places the current user
+            in the <c>System.Threading.Thread.CurrentPrincipal</c> value.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IView.UpdateView">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.EnsureUserIsAuthenticated">
             <summary>
-            Called when the Model is modified from the outside of the View (probably in another view).
+            Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
+            If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
+            </summary>
+            <exception cref="!:InvalidOperationException">The service must rely on extenders to ask for username and password;
+            therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.CurrentPrincipal">
+            <summary>
+            Called on request from anywhere where the user credentials are required.  Returns the same object as 
+            <c>System.Threading.Thread.CurrentPrincipal</c>.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Model">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
             <summary>
-            Gets or sets the Model.
+            Placeholder for services configuration.  Contains a list of service definitions.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.UserCredential">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.#ctor">
             <summary>
-            Defines the user credential that identifies a user in the application.
+            Ctor.  Creates an empty list of service definitions.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.UserCredential.#ctor">
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.ServiceDefinitions">
             <summary>
-            Constructor for UserCredential.
-            </summary>
-            <remarks>By default, the credentials are set to anonymous user.</remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.UserCredential.#ctor(System.String)">
-            <summary>
-            Constructor for UserCredential.
-            </summary>
-            <param name="name">User's login name.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.UserCredential.#ctor(System.String,System.Security.SecureString)">
-            <summary>
-            Constructor for UserCredential.
-            </summary>
-            <param name="name">User's login name.</param>
-            <param name="password">User's password.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.UserCredential.Password">
-            <summary>
-            Represents password of a user.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.UserCredential.Name">
-            <summary>
-            Represents name of a user.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.UserCredential.IsAnonymous">
-            <summary>
-            Shows if the user did not provide cridential information.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.UserCredential.IsAuthenticated">
-            <summary>
-            Shows if the user has been successfully authenticated.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.UserCredential.AuthenticationType">
-            <summary>
+            Gets the list of service definitions.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1">
@@ -548,52 +528,41 @@
             Gets the root entity.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Security.CredentialService">
             <summary>
-            Section handler for "foundation.application" configuration section.
+            Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
+            as the AppDomain's principal.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.GetImplementation">
             <summary>
-            Standard implementation (see <see cref="T:System.Configuration.IConfigurationSectionHandler"/>).
+            Retrieves implementation for ICredentialService.
             </summary>
-            <seealso cref="T:System.Xml.Serialization.XmlSerializer"/>
-            <param name="parent"></param>
-            <param name="configContext"></param>
-            <param name="section"></param>
-            <returns>A deserialized configuration.</returns>
+            <returns></returns>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtenderContract">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.EnsureUserIsAuthenticated">
             <summary>
-            Defines an Extender contract for prompting a user for his/her credential.
+            Ensures the user has entered login information.
             </summary>
+            <remarks>
+            If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
+            </remarks>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtenderContract.GetUserAuthentication">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.Start">
             <summary>
-            Prompts a user for his/her credential and returns it.
-            </summary>
-            <remarks>Should return </remarks>
-            <returns>Representation of the user identity.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
-            <summary>
-            Placeholder for a service definition.
+            Starts the current service.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Service">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.Stop">
             <summary>
-            The assembly-qualified name of the type that implements IService for that service.
+            Stops the current service.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Contract">
+        <member name="P:Omniscient.Foundation.ApplicationModel.Security.CredentialService.CurrentPrincipal">
             <summary>
-            The assembly-qualified name of that service's contract.
+            Returns the current user principal.  That user will not be logged in until a call is made to <c>EnsureUserIsLoggedIn</c>.
             </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
-            <summary>
-            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ServiceModel.IConfigurable"/>.
-            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>
