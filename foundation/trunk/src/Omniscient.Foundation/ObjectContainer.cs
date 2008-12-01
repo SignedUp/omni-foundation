@@ -32,6 +32,14 @@ namespace Omniscient.Foundation
             this.Register(typeof(TObject), instance);
         }
 
+        public void Register<TObject>(ContainerItem<TObject> item)
+        {
+            if (_store.ContainsKey(typeof(TObject)))
+                throw new ArgumentException(string.Format("Object of type {0} is already registered.", typeof(TObject)));
+
+            _store.Add(typeof(TObject), item);
+        }
+
         public void Register(Type type, object instance)
         {
             if (_store.ContainsKey(type))
@@ -51,6 +59,9 @@ namespace Omniscient.Foundation
         public TObject Get<TObject>() 
         {
             if (!_store.ContainsKey(typeof(TObject))) return default(TObject);
+
+            if (_store[typeof(TObject)] is ContainerItem<TObject>) 
+                return ((ContainerItem<TObject>)_store[typeof(TObject)]).GetInstance();
 
             return (TObject)_store[typeof(TObject)];
         }

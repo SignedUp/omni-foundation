@@ -65,6 +65,7 @@
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
+    <Compile Include="ContainerItem.cs" />
     <Compile Include="IObjectContainer.cs" />
     <Compile Include="ObjectContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

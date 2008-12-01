@@ -17,6 +17,8 @@ namespace Omniscient.Foundation
         /// <param name="instance">Instance of object to store for later use.</param>
         void Register<TObject>(TObject instance);
 
+        void Register<TObject>(ContainerItem<TObject> item);
+
         /// <summary>
         /// Registers an object with the object container.  Object must be of type <paramref name="type"/>.
         /// Type is used as the key.

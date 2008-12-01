@@ -41,10 +41,56 @@ namespace Omniscient.Foundation
             Assert.IsNotNull(obj);
         }
 
-        public interface IObject { }
+        [Test()]
+        public void RegisterContainerItemWithExistingItem()
+        {
+            ContainerItem<IObject> item;
+            item = new ContainerItem<IObject>(new Object1());
+            _container.Register(item);
 
-        public class Object1 : IObject { }
+            IObject obj;
+            obj = _container.Get<Object1>();
+            Assert.IsNull(obj);
+            obj = _container.Get<IObject>();
+            Assert.IsNotNull(obj);
+        }
 
-        public class Object2 : IObject { }
+        [Test()]
+        public void RegisterContainerItemForNewInstances()
+        {
+            NewObjectContainerItem item;
+            item = new NewObjectContainerItem();
+            _container.Register<IObject>(item);
+
+            IObject obj;
+            obj = _container.Get<Object1>();
+            Assert.IsNull(obj);
+            obj = _container.Get<IObject>();
+            Assert.IsNotNull(obj);
+            Assert.AreEqual("new from container item", obj.Name);
+        }
+
+        public interface IObject 
+        {
+            string Name { get; set; }
+        }
+
+        public class Object1 : IObject 
+        {
+            public string Name { get; set; }
+        }
+
+        public class Object2 : IObject
+        {
+            public string Name { get; set; }
+        }
+
+        public class NewObjectContainerItem : ContainerItem<IObject>
+        {
+            public override IObject GetInstance()
+            {
+                return new Object1() { Name = "new from container item"};
+            }
+        }
     }
 }
