@@ -75,6 +75,7 @@ namespace Omniscient.Foundation.Security
         public SecureIdentity Identity
         {
             get { return _identity; }
+            private set { }
         }
 
         /// <summary>
