@@ -34,7 +34,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
         /// </remarks>
         public virtual void EnsureUserIsAuthenticated()
         {
-            if (_current.Identity.IsAuthenticated) return;
+            if (_current != null && _current.Identity.IsAuthenticated) return;
 
             IExtensionPortManager manager = ApplicationManager.Current.ExtensionPortManager;
             IExtensionPort<ICredentialServiceExtenderContract> port;
