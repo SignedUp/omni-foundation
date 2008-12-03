@@ -26,9 +26,13 @@ namespace Omniscient.Foundation.Communication
             principal = (SecurePrincipal)Thread.CurrentPrincipal;
             factory = new ChannelFactory<TContract>(_endpoint);
 
-            IntPtr ptr = Marshal.SecureStringToBSTR(principal.Identity.Password);
-            string password = Marshal.PtrToStringBSTR(ptr);
-            Marshal.ZeroFreeBSTR(ptr);
+            string password = string.Empty;
+            if (principal.Identity.Password != null)
+            {
+                IntPtr ptr = Marshal.SecureStringToBSTR(principal.Identity.Password);
+                password = Marshal.PtrToStringBSTR(ptr);
+                Marshal.ZeroFreeBSTR(ptr);
+            }
 
             factory.Credentials.UserName.UserName = principal.Identity.Name;
             factory.Credentials.UserName.Password = password;
