@@ -92,6 +92,7 @@ namespace Omniscient.Foundation.Security
         public string AuthenticationType
         {
             get { return _authType; }
+            private set { _authType = value; }
         }
 
         /// <summary>
@@ -109,6 +110,7 @@ namespace Omniscient.Foundation.Security
         public string Name
         {
             get { return _name; }
+            private set { _name = value; }
         }
 
         #endregion

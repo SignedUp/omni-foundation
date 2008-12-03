@@ -50,21 +50,89 @@
             Gets the <c>SecureIdentity</c> of that principal.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.IStartable">
+        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
             <summary>
-            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
+            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
+            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
+            created because we don't believe that commands should be limited to environments with a user interface.
+            </summary>
+            <remarks>
+            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
+            the members signatures are identical, you don't need to replicate any code; each member's implementation
+            will handle the member from both interfaces automatically.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
+            <summary>
+            Retreives a value that indicates whether or not the command is in a state that allows execution.
+            </summary>
+            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
+            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
+            <summary>
+            Executes the command
+            </summary>
+            <param name="param">Any value needed for execution.</param>
+        </member>
+        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
+            <summary>
+            Raised when the command's availability changes.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.IStartable.Start">
+        <member name="T:Omniscient.Foundation.IConfigurable">
             <summary>
-            Called when the application starts.  All services are loaded when this method is called.  Services are started
-            in the order they are defined in the configuration.
+            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            </summary>
+            <remarks>
+            See the configuration schema for more details.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.IConfigurable.Configure(System.Xml.XmlElement)">
+            <summary>
+            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            </summary>
+            <param name="config">The xml configuration.</param>
+            <remarks>
+            See the ApplicationModel configuration schema for more details.
+            </remarks>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+            <summary>
+            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
+            and implementation type <typeparamref name="TImplementation"/>.
+            
+            This service's implementation will be instaciated each time the service is requested.
+            </summary>
+            <typeparam name="TContract">Service's contract type.</typeparam>
+            <typeparam name="TImplementation">Implementation type.</typeparam>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+            <summary>
+            Defines the base interface for a service.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.IStartable.Stop">
+        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
             <summary>
-            Called when the application shuts down.
+            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
             </summary>
+            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+            <summary>
+            Gets the name of the service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
+            <summary>
+            Gets the implementation's contract type of the service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
+            <summary>
+            Returns the implementation; instanciate a new one on each call.
+            </summary>
+            <returns>Service's implementation.</returns>
         </member>
         <member name="T:Omniscient.Foundation.Security.SecureIdentity">
             <summary>
@@ -129,73 +197,6 @@
             Gets the name of the user represented by this Identity.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
-            <summary>
-            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
-            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
-            created because we don't believe that commands should be limited to environments with a user interface.
-            </summary>
-            <remarks>
-            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
-            the members signatures are identical, you don't need to replicate any code; each member's implementation
-            will handle the member from both interfaces automatically.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
-            <summary>
-            Retreives a value that indicates whether or not the command is in a state that allows execution.
-            </summary>
-            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
-            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
-            <summary>
-            Executes the command
-            </summary>
-            <param name="param">Any value needed for execution.</param>
-        </member>
-        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
-            <summary>
-            Raised when the command's availability changes.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
-            <summary>
-            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
-            and implementation type <typeparamref name="TImplementation"/>.
-            
-            This service's implementation will be instaciated each time the service is requested.
-            </summary>
-            <typeparam name="TContract">Service's contract type.</typeparam>
-            <typeparam name="TImplementation">Implementation type.</typeparam>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IService">
-            <summary>
-            Defines the base interface for a service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
-            <summary>
-            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
-            </summary>
-            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
-            <summary>
-            Gets the name of the service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
-            <summary>
-            Gets the implementation's contract type of the service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
-            <summary>
-            Returns the implementation; instanciate a new one on each call.
-            </summary>
-            <returns>Service's implementation.</returns>
-        </member>
         <member name="T:Omniscient.Foundation.IObjectContainer">
             <summary>
             Defines an object container where objects of certain types can be registered and later gathered.
@@ -228,33 +229,9 @@
             Gets all registered objects as a flat array of objects.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ObjectContainer">
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
             <summary>
-            Default implementation for <see cref="T:Omniscient.Foundation.IObjectContainer"/>.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ObjectContainer.#ctor">
-            <summary>
-            Ctor.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ObjectContainer.Register``1(``0)">
-            <summary>
-            Registers an object with the object container.  The object's type is used as the key.
-            </summary>
-            <typeparam name="TObject">Type of the registered object.  Used as the key.</typeparam>
-            <param name="instance">Instance of object to store for later use.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ObjectContainer.Get``1">
-            <summary>
-            Gets an object previously registered in the container.  Returns null if no object is found.
-            </summary>
-            <typeparam name="TObject">The type of the object to store.</typeparam>
-            <returns>Registered object as a singleton.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ObjectContainer.AllObjects">
-            <summary>
-            Gets all registered objects as a flat array of objects.
+            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  Reads services from the configuration file.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.IServiceProvider">
@@ -293,11 +270,6 @@
             Gets the number of services that are registered.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
-            <summary>
-            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  Reads services from the configuration file.
-            </summary>
-        </member>
         <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.#ctor">
             <summary>
             Ctor
@@ -334,22 +306,50 @@
             Gets the number of services that are registered.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.IConfigurable">
+        <member name="T:Omniscient.Foundation.IStartable">
             <summary>
-            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
             </summary>
-            <remarks>
-            See the configuration schema for more details.
-            </remarks>
         </member>
-        <member name="M:Omniscient.Foundation.IConfigurable.Configure(System.Xml.XmlElement)">
+        <member name="M:Omniscient.Foundation.IStartable.Start">
             <summary>
-            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
             </summary>
-            <param name="config">The xml configuration.</param>
-            <remarks>
-            See the ApplicationModel configuration schema for more details.
-            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Stop">
+            <summary>
+            Called when the application shuts down.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ObjectContainer">
+            <summary>
+            Default implementation for <see cref="T:Omniscient.Foundation.IObjectContainer"/>.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ObjectContainer.#ctor">
+            <summary>
+            Ctor.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ObjectContainer.Register``1(``0)">
+            <summary>
+            Registers an object with the object container.  The object's type is used as the key.
+            </summary>
+            <typeparam name="TObject">Type of the registered object.  Used as the key.</typeparam>
+            <param name="instance">Instance of object to store for later use.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ObjectContainer.Get``1">
+            <summary>
+            Gets an object previously registered in the container.  Returns null if no object is found.
+            </summary>
+            <typeparam name="TObject">The type of the object to store.</typeparam>
+            <returns>Registered object as a singleton.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ObjectContainer.AllObjects">
+            <summary>
+            Gets all registered objects as a flat array of objects.
+            </summary>
         </member>
     </members>
 </doc>
