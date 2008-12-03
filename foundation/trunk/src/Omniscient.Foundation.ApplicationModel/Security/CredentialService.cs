@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 using Omniscient.Foundation.Security;
+using System.Diagnostics;
 
 namespace Omniscient.Foundation.ApplicationModel.Security
 {
@@ -34,7 +35,8 @@ namespace Omniscient.Foundation.ApplicationModel.Security
         /// </remarks>
         public virtual void EnsureUserIsAuthenticated()
         {
-            if (_current != null && _current.Identity.IsAuthenticated) return;
+            if (_current.Identity.IsAuthenticated) return;
+            Debug.Assert(CurrentPrincipal != null);
 
             IExtensionPortManager manager = ApplicationManager.Current.ExtensionPortManager;
             IExtensionPort<ICredentialServiceExtenderContract> port;
