@@ -12,7 +12,7 @@ namespace Omniscient.Foundation.ServiceModel
         [Test()]
         public void TestCreateGenericSingletonService()
         {
-            IService<IContract> srv;
+            ServiceBase<IContract> srv;
             srv = new GenericSingletonService<IContract, ContractImplementation>();
             Assert.AreEqual("salut", srv.GetImplementation().Echo("salut"));
         }
@@ -20,9 +20,9 @@ namespace Omniscient.Foundation.ServiceModel
         [Test()]
         public void TestDataPersistence()
         {
-            IService<IContract> srv;
+            IService srv;
             srv = new GenericSingletonService<IContract, ContractImplementation>();
-            ServiceContainer container = new ServiceContainer();
+            ServiceProvider container = new ServiceProvider();
             container.RegisterService<IContract>(srv);
 
             IContract imp;

@@ -6,9 +6,9 @@ using System.Text;
 namespace Omniscient.Foundation.ServiceModel
 {
     /// <summary>
-    /// Defines a service container.
+    /// Defines a service provider.
     /// </summary>
-    public interface IServiceContainer
+    public interface IServiceProvider: System.IServiceProvider
     {
         /// <summary>
         /// Gets a service that implements the contract <typeparamref name="TContract"/>.
@@ -18,14 +18,14 @@ namespace Omniscient.Foundation.ServiceModel
         TContract GetService<TContract>();
 
         /// <summary>
-        /// Adds a service to the container.
+        /// Adds a service to the provider.
         /// </summary>
         /// <typeparam name="TContract">The type of contract that service implements.</typeparam>
         /// <param name="service">A service implementation.</param>
-        void RegisterService<TContract>(IService<TContract> service);
+        void RegisterService<TContract>(IService service);
 
         /// <summary>
-        /// Adds a service to the container.
+        /// Adds a service to the provider.
         /// </summary>
         /// <param name="contract">Service's contract type.</param>
         /// <param name="service">Service implementation (must support contract's type)</param>

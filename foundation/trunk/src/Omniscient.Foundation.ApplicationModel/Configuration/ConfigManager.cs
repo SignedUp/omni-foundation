@@ -11,7 +11,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
     class ConfigManager
     {
-        public static void ConfigureServices(IServiceContainer container, ApplicationConfiguration config)
+        public static void ConfigureServices(Omniscient.Foundation.ServiceModel.IServiceProvider container, ApplicationConfiguration config)
         {
             if (config == null) return;
             if (container == null) return;
@@ -19,11 +19,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             foreach (ServiceDefinition srvDef in config.ServicesConfiguration.ServiceDefinitions)
             {
                 Type contractType = Type.GetType(srvDef.Contract, true, true);
-                Type serviceType = Type.GetType(srvDef.Service, true, true);
-                Type generic = typeof(IService<>).MakeGenericType(contractType);
-                if (!generic.IsAssignableFrom(serviceType))
-                    throw new InvalidCastException(string.Format("Type {0} does not implement type {1}.", serviceType, generic));
-                
+                Type serviceType = Type.GetType(srvDef.Service, true, true);                
                 IService service = (IService)Activator.CreateInstance(serviceType);
                 container.RegisterService(contractType, service);
 

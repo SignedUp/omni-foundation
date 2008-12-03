@@ -18,7 +18,7 @@ namespace Omniscient.Foundation.ApplicationModel
         [Test()]
         public void CheckServiceContainer()
         {
-            Assert.IsNull(ApplicationManager.Current.ServiceContainer);
+            Assert.IsNull(ApplicationManager.Current.ServiceProvider);
         }
 
         [Test()]

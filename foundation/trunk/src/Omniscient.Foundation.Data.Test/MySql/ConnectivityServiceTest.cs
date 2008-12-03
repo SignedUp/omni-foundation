@@ -34,7 +34,7 @@ namespace Omniscient.Foundation.Data.MySql
             config.ServicesConfiguration.ServiceDefinitions.Add(def);
 
             ApplicationManager.Current.StartApplication(config);
-            Assert.IsNotNull(ApplicationManager.Current.ServiceContainer.GetService<IConnectivity>());
+            Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectivity>());
         }
 
         [Test()]
@@ -54,7 +54,7 @@ namespace Omniscient.Foundation.Data.MySql
             def.Config = doc.DocumentElement;
 
             ApplicationManager.Current.StartApplication(config);
-            Assert.IsNotNull(ApplicationManager.Current.ServiceContainer.GetService<IConnectivity>());
+            Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectivity>());
         }
     }
 }

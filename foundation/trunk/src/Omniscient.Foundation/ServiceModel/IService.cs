@@ -16,23 +16,14 @@ namespace Omniscient.Foundation.ServiceModel
         string Name { get; }
         
         /// <summary>
-        /// Gets the contract type of the service.
+        /// Gets the implementation's contract type of the service.
         /// </summary>
-        Type ContractType { get; }
-    }
+        Type ImplementationType { get; }
 
-    /// <summary>
-    /// Defines a service.  The service instance will be kept in memory for the application's lifetime.
-    /// It is up to the service to decide to keep an instance of the implementation (singleton), or to provide a new
-    /// instance each time it's being asked for the implementation (singlecall).
-    /// </summary>
-    /// <typeparam name="TContract">The type of contract implemented by this service.</typeparam>
-    public interface IService<TContract>: IService
-    {
         /// <summary>
-        /// Returns the contract's implementation.
+        /// Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
         /// </summary>
-        /// <returns>Returns an instance of the contract's implementation.</returns>
-        TContract GetImplementation();
+        /// <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        object GetImplementation();
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Omniscient.Foundation.ServiceModel
 {
-    public class GenericSingletonService<TContract, TImplementation>: IService<TContract>
+    public class GenericSingletonService<TContract, TImplementation>: ServiceBase<TContract>
         where TImplementation: TContract, new()
     {
         private TImplementation _singleton;
@@ -15,19 +15,9 @@ namespace Omniscient.Foundation.ServiceModel
             _singleton = new TImplementation();
         }
 
-        public TContract GetImplementation()
+        public override TContract GetImplementation()
         {
             return _singleton;
-        }
-
-        public string Name
-        {
-            get { return typeof(TContract).Name; }
-        }
-
-        public Type ContractType
-        {
-            get { return typeof(TContract); }
         }
     }
 }

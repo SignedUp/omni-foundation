@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Omniscient.Foundation.ServiceModel
 {
-    public abstract class ServiceBase<TContract>: IService<TContract>
+    public abstract class ServiceBase<TContract>: IService
     {
         #region IService Members
 
@@ -14,9 +14,14 @@ namespace Omniscient.Foundation.ServiceModel
             get { return this.GetType().Name; }
         }
 
-        public Type ContractType
+        public Type ImplementationType
         {
             get { return typeof(TContract); }
+        }
+
+        object IService.GetImplementation()
+        {
+            return GetImplementation();
         }
 
         #endregion

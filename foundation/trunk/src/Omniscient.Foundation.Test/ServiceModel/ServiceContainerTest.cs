@@ -9,12 +9,12 @@ namespace Omniscient.Foundation.ServiceModel
     [TestFixture()]
     public class ServiceContainerTest
     {
-        IServiceContainer _container;
+        IServiceProvider _container;
 
         [SetUp()]
         public void Init()
         {
-            _container = new ServiceContainer();
+            _container = new ServiceProvider();
         }
 
         [Test()]
@@ -29,7 +29,7 @@ namespace Omniscient.Foundation.ServiceModel
         public void TestRegisterServiceNoGeneric()
         {
             ServiceMock s = new ServiceMock();
-            _container.RegisterService(s);
+            _container.RegisterService(typeof(IContract), s);
             IContract c;
             c = _container.GetService<IContract>();
             Assert.IsNotNull(c);

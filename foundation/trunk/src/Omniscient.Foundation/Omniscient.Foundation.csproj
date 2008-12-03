@@ -74,12 +74,12 @@
     <Compile Include="Security\SecurePrincipal.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />
     <Compile Include="ServiceModel\GenericSingletonService.cs" />
-    <Compile Include="ServiceModel\IConfigurable.cs" />
+    <Compile Include="IConfigurable.cs" />
     <Compile Include="ServiceModel\IService.cs" />
-    <Compile Include="ServiceModel\IServiceContainer.cs" />
+    <Compile Include="ServiceModel\IServiceProvider.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="ServiceModel\ServiceBase.cs" />
-    <Compile Include="ServiceModel\ServiceContainer.cs" />
+    <Compile Include="ServiceModel\ServiceProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

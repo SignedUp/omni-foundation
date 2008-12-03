@@ -47,9 +47,9 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Gets or sets the service container to be used.  Generally an instance of <see cref="ServiceContainer"/>.
+        /// Gets or sets the service provider to be used.  Generally an instance of <see cref="ServiceProvider"/>.
         /// </summary>
-        public IServiceContainer ServiceContainer
+        public Omniscient.Foundation.ServiceModel.IServiceProvider ServiceProvider
         {
             get;
             set;
@@ -124,7 +124,7 @@ namespace Omniscient.Foundation.ApplicationModel
         {
             _config = config;
 
-            if (ServiceContainer == null) ServiceContainer = new ServiceContainer();
+            if (ServiceProvider == null) ServiceProvider = new ServiceProvider();
             if (PresentationController == null) PresentationController = new PresentationController();
             if (ObjectContainer == null) ObjectContainer = new ObjectContainer();
             if (ExtensionPortManager == null) ExtensionPortManager = new ExtensionPortManager(ObjectContainer);
@@ -132,12 +132,12 @@ namespace Omniscient.Foundation.ApplicationModel
             if (_config != null)
             {
                 ConfigManager.ConfigureContainer(ObjectContainer, _config);
-                ConfigManager.ConfigureServices(ServiceContainer, _config);
+                ConfigManager.ConfigureServices(ServiceProvider, _config);
                 ConfigManager.ConfigureModules(ObjectContainer, _config);
             }
 
             //start services
-            foreach (IService service in ServiceContainer.AllServices)
+            foreach (IService service in ServiceProvider.AllServices)
             {
                 IStartable startable;
                 startable = service as IStartable;
@@ -183,14 +183,14 @@ namespace Omniscient.Foundation.ApplicationModel
         /// </remarks>
         public virtual void CloseApplication()
         {
-            foreach (IService service in ServiceContainer.AllServices.Reverse<IService>())
+            foreach (IService service in ServiceProvider.AllServices.Reverse<IService>())
             {
                 IStartable startable;
                 startable = service as IStartable;
                 if (startable != null) startable.Stop();
             }
 
-            ServiceContainer.Clear();
+            ServiceProvider.Clear();
             PresentationController.ViewControllers.Clear();
             ObjectContainer.Clear();
 
