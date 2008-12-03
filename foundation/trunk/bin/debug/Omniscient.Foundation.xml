@@ -50,106 +50,20 @@
             Gets the <c>SecureIdentity</c> of that principal.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IConfigurable">
+        <member name="T:Omniscient.Foundation.IStartable">
             <summary>
-            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
-            </summary>
-            <remarks>
-            See the configuration schema for more details.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IConfigurable.Configure(System.Xml.XmlElement)">
-            <summary>
-            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
-            </summary>
-            <param name="config">The xml configuration.</param>
-            <remarks>
-            See the ApplicationModel configuration schema for more details.
-            </remarks>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
-            <summary>
-            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
-            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
-            created because we don't believe that commands should be limited to environments with a user interface.
-            </summary>
-            <remarks>
-            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
-            the members signatures are identical, you don't need to replicate any code; each member's implementation
-            will handle the member from both interfaces automatically.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
-            <summary>
-            Retreives a value that indicates whether or not the command is in a state that allows execution.
-            </summary>
-            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
-            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
-            <summary>
-            Executes the command
-            </summary>
-            <param name="param">Any value needed for execution.</param>
-        </member>
-        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
-            <summary>
-            Raised when the command's availability changes.
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+        <member name="M:Omniscient.Foundation.IStartable.Start">
             <summary>
-            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
-            and implementation type <typeparamref name="TImplementation"/>.
-            
-            This service's implementation will be instaciated each time the service is requested.
-            </summary>
-            <typeparam name="TContract">Service's contract type.</typeparam>
-            <typeparam name="TImplementation">Implementation type.</typeparam>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IService`1">
-            <summary>
-            Defines a service.  The service instance will be kept in memory for the application's lifetime.
-            It is up to the service to decide to keep an instance of the implementation (singleton), or to provide a new
-            instance each time it's being asked for the implementation (singlecall).
-            </summary>
-            <typeparam name="TContract">The type of contract implemented by this service.</typeparam>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IService">
-            <summary>
-            Defines the base interface for a service.
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+        <member name="M:Omniscient.Foundation.IStartable.Stop">
             <summary>
-            Gets the name of the service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.ContractType">
-            <summary>
-            Gets the contract type of the service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IService`1.GetImplementation">
-            <summary>
-            Returns the contract's implementation.
-            </summary>
-            <returns>Returns an instance of the contract's implementation.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
-            <summary>
-            Returns the implementation; instanciate a new one on each call.
-            </summary>
-            <returns>Service's implementation.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.Name">
-            <summary>
-            Gets the name of the service, which is the type name of the contract.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.ContractType">
-            <summary>
-            Returns the contract type.
+            Called when the application shuts down.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Security.SecureIdentity">
@@ -215,41 +129,72 @@
             Gets the name of the user represented by this Identity.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IServiceContainer">
+        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
             <summary>
-            Defines a service container.
+            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
+            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
+            created because we don't believe that commands should be limited to environments with a user interface.
+            </summary>
+            <remarks>
+            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
+            the members signatures are identical, you don't need to replicate any code; each member's implementation
+            will handle the member from both interfaces automatically.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
+            <summary>
+            Retreives a value that indicates whether or not the command is in a state that allows execution.
+            </summary>
+            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
+            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
+            <summary>
+            Executes the command
+            </summary>
+            <param name="param">Any value needed for execution.</param>
+        </member>
+        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
+            <summary>
+            Raised when the command's availability changes.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.GetService``1">
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
             <summary>
-            Gets a service that implements the contract <typeparamref name="TContract"/>.
+            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
+            and implementation type <typeparamref name="TImplementation"/>.
+            
+            This service's implementation will be instaciated each time the service is requested.
             </summary>
-            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
-            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
+            <typeparam name="TContract">Service's contract type.</typeparam>
+            <typeparam name="TImplementation">Implementation type.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.RegisterService``1(Omniscient.Foundation.ServiceModel.IService{``0})">
+        <member name="T:Omniscient.Foundation.ServiceModel.IService">
             <summary>
-            Adds a service to the container.
-            </summary>
-            <typeparam name="TContract">The type of contract that service implements.</typeparam>
-            <param name="service">A service implementation.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceContainer.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the container.
-            </summary>
-            <param name="contract">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IServiceContainer.AllServices">
-            <summary>
-            Gets all services, in the order they have been registered.
+            Defines the base interface for a service.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IServiceContainer.ServiceCount">
+        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
             <summary>
-            Gets the number of services that are registered.
+            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
             </summary>
+            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+            <summary>
+            Gets the name of the service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
+            <summary>
+            Gets the implementation's contract type of the service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
+            <summary>
+            Returns the implementation; instanciate a new one on each call.
+            </summary>
+            <returns>Service's implementation.</returns>
         </member>
         <member name="T:Omniscient.Foundation.IObjectContainer">
             <summary>
@@ -283,63 +228,6 @@
             Gets all registered objects as a flat array of objects.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.IStartable">
-            <summary>
-            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IStartable.Start">
-            <summary>
-            Called when the application starts.  All services are loaded when this method is called.  Services are started
-            in the order they are defined in the configuration.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IStartable.Stop">
-            <summary>
-            Called when the application shuts down.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.ServiceContainer">
-            <summary>
-            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceContainer"/>.  Reads services from the configuration file.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.#ctor">
-            <summary>
-            Ctor
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.GetService``1">
-            <summary>
-            Returns the contract implementation of a service, if any, that implements the contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">The contract type.</typeparam>
-            <returns>The contract's implementation, or null if no service found for that contract.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.RegisterService``1(Omniscient.Foundation.ServiceModel.IService{``0})">
-            <summary>
-            Registers a service at run-time.
-            </summary>
-            <typeparam name="TContract">The contract type.</typeparam>
-            <param name="service">An instance of a service class.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceContainer.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the container.
-            </summary>
-            <param name="contractType">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.ServiceContainer.AllServices">
-            <summary>
-            Gets all services, in the order they have been registered.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.ServiceContainer.ServiceCount">
-            <summary>
-            Gets the number of services that are registered.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ObjectContainer">
             <summary>
             Default implementation for <see cref="T:Omniscient.Foundation.IObjectContainer"/>.
@@ -368,6 +256,100 @@
             <summary>
             Gets all registered objects as a flat array of objects.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IServiceProvider">
+            <summary>
+            Defines a service provider.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.GetService``1">
+            <summary>
+            Gets a service that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
+            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService``1(Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <typeparam name="TContract">The type of contract that service implements.</typeparam>
+            <param name="service">A service implementation.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <param name="contract">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
+            <summary>
+            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  Reads services from the configuration file.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.#ctor">
+            <summary>
+            Ctor
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.GetService``1">
+            <summary>
+            Returns the contract implementation of a service, if any, that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The contract type.</typeparam>
+            <returns>The contract's implementation, or null if no service found for that contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.RegisterService``1(Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Registers a service at run-time.
+            </summary>
+            <typeparam name="TContract">The contract type.</typeparam>
+            <param name="service">An instance of a service class.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <param name="contractType">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ServiceProvider.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ServiceProvider.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.IConfigurable">
+            <summary>
+            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            </summary>
+            <remarks>
+            See the configuration schema for more details.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.IConfigurable.Configure(System.Xml.XmlElement)">
+            <summary>
+            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            </summary>
+            <param name="config">The xml configuration.</param>
+            <remarks>
+            See the ApplicationModel configuration schema for more details.
+            </remarks>
         </member>
     </members>
 </doc>
