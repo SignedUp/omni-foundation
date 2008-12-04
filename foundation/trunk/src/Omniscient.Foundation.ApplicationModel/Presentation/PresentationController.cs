@@ -14,8 +14,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private Dictionary<Guid, object> _locks;
         private object _lock;
         private List<IViewController> _controllers;
-        private List<IPresenter> _presenters;
         private List<IView> _openedViews;
+        private Dictionary<string, IPresenter> _presenters;
 
         public PresentationController() : this(true) { }
 
@@ -27,9 +27,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _locks = new Dictionary<Guid, object>();
             _lock = new object();
             _controllers = new List<IViewController>();
-            _presenters = new List<IPresenter>();
             _openedViews = new List<IView>();
             SupportsUserInput = supportsUserInput;
+            _presenters = new Dictionary<string, IPresenter>();
         }
 
         /// <summary>
@@ -141,31 +141,31 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         public void RegisterPresenter(IPresenter presenter)
         {
-            _presenters.Add(presenter);
+            if (presenter == null) throw new ArgumentNullException("presenter");
+            if (_presenters.ContainsKey(presenter.Name))
+                throw new InvalidOperationException(string.Format("A presenter with name {0} is already registered.  Choose another name for your presenter.", presenter.Name));
+            if (presenter.RequiresUserInput && !this.SupportsUserInput)
+                throw new InvalidOperationException("The presentation controller does not support user inputs.");
+
+            _presenters.Add(presenter.Name, presenter);
         }
 
         public IPresenter GetPresenter(string name)
         {
-            foreach (IPresenter presenter in _presenters)
-            {
-                if (presenter.GetType().Name == name)
-                {
-                    return presenter;
-                }
-            }
-            return null;
+            if (!_presenters.ContainsKey(name)) return null;
+            return _presenters[name];
+
+
+
         }
 
         public PresenterType GetPresenter<PresenterType>() where PresenterType : IPresenter
-        {
-            foreach (IPresenter presenter in _presenters)
-            {
-                if (typeof(PresenterType) == presenter.GetType())
-                {
-                    return (PresenterType)presenter;
-                }
-            }
+        {                  
+            foreach (object presenter in _presenters.Values)
+                if (typeof(PresenterType).IsAssignableFrom(presenter.GetType())) return (PresenterType)presenter;
             return default(PresenterType);
+
+
         }
 
         public bool SupportsUserInput
