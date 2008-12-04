@@ -14,6 +14,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private Dictionary<Guid, object> _locks;
         private object _lock;
         private List<IViewController> _controllers;
+        private List<IPresenter> _presenters;
         private List<IView> _openedViews;
 
         public PresentationController() : this(true) { }
@@ -139,17 +140,31 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         public void RegisterPresenter(IPresenter presenter)
         {
-            throw new NotImplementedException();
+            _presenters.Add(presenter);
         }
 
         public IPresenter GetPresenter(string name)
         {
-            throw new NotImplementedException();
+            foreach (IPresenter presenter in _presenters)
+            {
+                if (presenter.GetType().Name == name)
+                {
+                    return presenter;
+                }
+            }
+            return null;
         }
 
         public PresenterType GetPresenter<PresenterType>() where PresenterType : IPresenter
         {
-            throw new NotImplementedException();
+            foreach (IPresenter presenter in _presenters)
+            {
+                if (typeof(PresenterType) == presenter.GetType())
+                {
+                    return (PresenterType)presenter;
+                }
+            }
+            return default(PresenterType);
         }
 
         public bool SupportsUserInput
