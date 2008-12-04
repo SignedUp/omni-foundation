@@ -27,6 +27,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _locks = new Dictionary<Guid, object>();
             _lock = new object();
             _controllers = new List<IViewController>();
+            _presenters = new List<IPresenter>();
             _openedViews = new List<IView>();
             SupportsUserInput = supportsUserInput;
         }
