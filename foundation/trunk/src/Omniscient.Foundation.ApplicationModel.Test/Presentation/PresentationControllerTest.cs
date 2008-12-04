@@ -22,7 +22,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         [SetUp()]
         public void Init()
         {
-            _controller = new PresentationController();
+            _controller = new PresentationController(false);
             _sideController = new SidePanelViewControllerMock();
             _mainController = new MainViewControllerMock();
             _controller.ViewControllers.Add(_mainController);
@@ -119,6 +119,79 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         }
 
+        [Test()]
+        public void GetNoPresenter()
+        {
+            IPresenter presenter;
+            presenter = _controller.GetPresenter("no");
+            Assert.IsNull(presenter);
+        }
+
+        [Test()]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RegisterNullPresenter()
+        {
+            _controller.RegisterPresenter(null);
+        }
+
+        [Test()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RegisterDoublePresenter()
+        {
+            IPresenter p;
+            p = new Presenter("double", false);
+            _controller.RegisterPresenter(p);
+            _controller.RegisterPresenter(p);
+        }
+
+        [Test()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RegisterInteractive()
+        {
+            IPresenter p;
+            p = new Presenter("interactive", true);
+            _controller.RegisterPresenter(p);
+        }
+
+        [Test()]
+        public void GetRegisteredByName()
+        {
+            IPresenter p;
+
+            p = new Presenter("a", false);
+            _controller.RegisterPresenter(p);
+
+            p = new Presenter("b", false);
+            _controller.RegisterPresenter(p);
+
+            p = new Presenter("c", false);
+            _controller.RegisterPresenter(p);
+
+            p = _controller.GetPresenter("b");
+            Assert.IsNotNull(p);
+            Assert.AreEqual("b", p.Name);
+        }
+
+        [Test()]
+        public void GetRegisteredByContract()
+        {
+            IPresenter p;
+
+            p = new PresenterA("a", false);
+            _controller.RegisterPresenter(p);
+
+            p = new PresenterB("b", false);
+            _controller.RegisterPresenter(p);
+
+            p = new PresenterC("c", false);
+            _controller.RegisterPresenter(p);
+
+            p = _controller.GetPresenter<PresenterB>();
+            Assert.IsNotNull(p);
+            Assert.AreEqual("b", p.Name);
+
+        }
+
         private Client GetSomeClient()
         {
             foreach (Client c in _clientAdapter.LoadByObjectQuery(new OQuery<Client>()))
@@ -126,5 +199,43 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             return null;
         }
 
+        private class Presenter : IPresenter
+        {
+            public Presenter(string name, bool requiresUserInput)
+            {
+                Name = name;
+                RequiresUserInput = requiresUserInput;
+            }
+
+            public string Name
+            {
+                get;
+                private set;
+            }
+
+            public bool RequiresUserInput
+            {
+                get;
+                private set;
+            }
+
+            public void WriteMessage(object message)
+            {
+                Console.WriteLine(message);
+            }
+        }
+
+        private class PresenterA : Presenter
+        {
+            public PresenterA(string name, bool requiresUserInput) : base(name, requiresUserInput) { }
+        }
+        private class PresenterB : Presenter
+        {
+            public PresenterB(string name, bool requiresUserInput) : base(name, requiresUserInput) { }
+        }
+        private class PresenterC : Presenter
+        {
+            public PresenterC(string name, bool requiresUserInput) : base(name, requiresUserInput) { }
+        }
     }
 }
