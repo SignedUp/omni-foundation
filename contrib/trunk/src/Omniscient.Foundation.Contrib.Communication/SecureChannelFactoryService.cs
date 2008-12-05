@@ -45,10 +45,16 @@ namespace Omniscient.Foundation.Communication
         public void Configure(System.Xml.XmlElement config)
         {
             //todo: add a complex type to contrib's schema file. 
+            if (config == null) throw new ArgumentNullException("config");
+
             XmlNode endpointNode;
-            endpointNode = config.SelectSingleNode(".//endpointName");
-            if (endpointNode == null)
-                throw new ConfigurationErrorsException("Can't find element endpointName under configuration of service SecureChannelFactoryService.");
+            endpointNode = config;
+            if (config.Name != "endpointName")
+            {
+                endpointNode = config.SelectSingleNode(".//endpointName");
+                if (endpointNode == null)
+                    throw new ConfigurationErrorsException("Can't find element endpointName under configuration of service SecureChannelFactoryService.");
+            }
             _endpoint = endpointNode.Value;
         }
 
