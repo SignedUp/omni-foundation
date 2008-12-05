@@ -55,7 +55,7 @@ namespace Omniscient.Foundation.Communication
                 if (endpointNode == null)
                     throw new ConfigurationErrorsException("Can't find element endpointName under configuration of service SecureChannelFactoryService.");
             }
-            _endpoint = endpointNode.Value;
+            _endpoint = endpointNode.InnerText;
         }
 
         #endregion
