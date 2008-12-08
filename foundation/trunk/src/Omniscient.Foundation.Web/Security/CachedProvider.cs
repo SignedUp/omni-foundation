@@ -6,7 +6,7 @@ using Omniscient.Foundation.Security;
 
 namespace Omniscient.Foundation.Web.Security
 {
-    public class CachedRoleProvider<Type> : RoleProvider where Type : new()
+    public class CachedRoleProvider<Type> : IRoleProvider, RoleProvider where Type : new()
     {
         private RoleProvider _provider;
         private Hashtable _cache;
@@ -160,15 +160,12 @@ namespace Omniscient.Foundation.Web.Security
 
             return result;
         }
-    }
 
-    public class RoleProviderImplementation : IRoleProvider
-    {
         #region IRoleProvider Members
 
         string[] IRoleProvider.GetRolesForUser(string username)
         {
-            return Roles.Provider.GetRolesForUser(username);
+            return GetRolesForUser(username);
         }
 
         #endregion
