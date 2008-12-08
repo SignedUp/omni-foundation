@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Omniscient.Foundation.Data;
+using System.Diagnostics;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -130,6 +131,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
             foreach (IView v in _openedViews)
             {
+                if (entity.Status == EntityStatus.New)
+                {
+                    Debug.Assert(false, "Implement capability to add new entities and update views");
+                }
+
                 if (v != view && v.Model.HasEntity(entity.Id))
                 { 
                     //ensure that new values are transfered to this model.
