@@ -80,6 +80,7 @@
     <Compile Include="Security\IRoleProvider.cs" />
     <Compile Include="Security\SecureIdentity.cs" />
     <Compile Include="Security\SecurePrincipal.cs" />
+    <Compile Include="Security\SecureStringConverter.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />
     <Compile Include="ServiceModel\GenericSingletonService.cs" />
     <Compile Include="IConfigurable.cs" />
