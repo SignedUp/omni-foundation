@@ -61,6 +61,10 @@
       <Project>{796F6AEB-DB90-4748-B9E5-00BB19D98966}</Project>
       <Name>Omniscient.Foundation.ApplicationModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Omniscient.Foundation.Data\Omniscient.Foundation.Data.csproj">
+      <Project>{55AF3468-EE23-426D-A321-44FC866A7D8A}</Project>
+      <Name>Omniscient.Foundation.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation.csproj">
       <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
       <Name>Omniscient.Foundation</Name>
