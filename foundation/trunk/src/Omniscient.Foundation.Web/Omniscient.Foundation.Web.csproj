@@ -12,6 +12,7 @@
     <AssemblyName>Omniscient.Foundation.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,4 +79,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetPath) $(SolutionDir)..\bin\debug\$(TargetFileName) /B
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetDir)$(TargetName).pdb $(SolutionDir)..\bin\debug\$(TargetName).pdb /B
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /A /Y $(TargetDir)$(TargetName).xml $(SolutionDir)..\bin\debug\$(TargetName).xml /A</PostBuildEvent>
+  </PropertyGroup>
 </Project>
