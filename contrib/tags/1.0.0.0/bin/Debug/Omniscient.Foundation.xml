@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Omniscient.Foundation</name>
+    </assembly>
+    <members>
+        <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
+            <summary>
+            Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor">
+            <summary>
+            Creates an instance of SecurePrincipal with an anonymous (unauthenticated) <c>SecureIdentity</c>, and an empty collection
+            of roles.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])">
+            <summary>
+            Creates an instance of SecurePrincipal with an existing <c>SecureIdentity</c>, and an initial collection of roles.
+            </summary>
+            <param name="identity"></param>
+            <param name="roles"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
+            <summary>
+            Adds specified roles to the collection of roles.
+            </summary>
+            <param name="roles">Roles to add to the roles collection.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
+            <summary>
+            Returns true if that principal is granted with given role.  Otherwise, false.
+            </summary>
+            <param name="role">The role to test.</param>
+            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
+            <summary>
+            Gets a string array of all roles this principal is granted.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity">
+            <summary>
+            Gets the <c>IIdentity</c> of that principal.  Concrete type is <c>SecureIdentity</c>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.Identity">
+            <summary>
+            Gets the <c>SecureIdentity</c> of that principal.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.IStartable">
+            <summary>
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Start">
+            <summary>
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IStartable.Stop">
+            <summary>
+            Called when the application shuts down.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.SecureIdentity">
+            <summary>
+            Implementation of <c>IIdentity</c> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
+            to authenticated with a name, password and an authentication type.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor">
+            <summary>
+            Creates an anonymous (unauthenticated) user.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString)">
+            <summary>
+            Creates an authenticated user with given name and password.
+            </summary>
+            <param name="name">The name of the authenticated user.</param>
+            <param name="password">The password used to authenticate the user.</param>
+            <remarks>The password is allowed to be null.</remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString,System.String)">
+            <summary>
+            Creates an authenticated user with given name, password and authentication machanism.
+            </summary>
+            <param name="name">The name of the authenticated user.</param>
+            <param name="password">The password used to authenticate the user.</param>
+            <param name="authenticationType">The authentication mechanism used to authenticate the user.</param>
+            <remarks>The password is allowed to be null.</remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString)">
+            <summary>
+            Promotes the identity with a username and password.  The identity is then considered authenticated.
+            </summary>
+            <remarks>The password is allowed to be null.</remarks>
+            <param name="name">The username used to authenticate.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString,System.String)">
+            <summary>
+            Promotes the identity with a username.  The identity is then considered authenticated.
+            </summary>
+            <param name="name">The username used to authenticate.</param>
+            <param name="authenticationType">The authentication type used to authenticate.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.Password">
+            <summary>
+            Gets the password used to promote (authenticate) this Identity, or null if no password was supplied or if the 
+            identity is anonymous (unauthenticated).
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.AuthenticationType">
+            <summary>
+            Gets the authentication mechanism used to authenticate the user.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.IsAuthenticated">
+            <summary>
+            Gets a boolean that indicates whether the user has been authenticated.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecureIdentity.Name">
+            <summary>
+            Gets the name of the user represented by this Identity.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
+            <summary>
+            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
+            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
+            created because we don't believe that commands should be limited to environments with a user interface.
+            </summary>
+            <remarks>
+            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
+            the members signatures are identical, you don't need to replicate any code; each member's implementation
+            will handle the member from both interfaces automatically.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
+            <summary>
+            Retreives a value that indicates whether or not the command is in a state that allows execution.
+            </summary>
+            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
+            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
+            <summary>
+            Executes the command
+            </summary>
+            <param name="param">Any value needed for execution.</param>
+        </member>
+        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
+            <summary>
+            Raised when the command's availability changes.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+            <summary>
+            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
+            and implementation type <typeparamref name="TImplementation"/>.
+            
+            This service's implementation will be instaciated each time the service is requested.
+            </summary>
+            <typeparam name="TContract">Service's contract type.</typeparam>
+            <typeparam name="TImplementation">Implementation type.</typeparam>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+            <summary>
+            Defines the base interface for a service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
+            <summary>
+            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
+            </summary>
+            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+            <summary>
+            Gets the name of the service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
+            <summary>
+            Gets the implementation's contract type of the service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
+            <summary>
+            Returns the implementation; instanciate a new one on each call.
+            </summary>
+            <returns>Service's implementation.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.IObjectContainer">
+            <summary>
+            Defines an object container where objects of certain types can be registered and later gathered.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.IObjectContainer.Register``1(``0)">
+            <summary>
+            Registers an object with the object container.  The object's type is used as the key.
+            </summary>
+            <typeparam name="TObject">Type of the registered object.  Used as the key.</typeparam>
+            <param name="instance">Instance of object to store for later use.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.IObjectContainer.Register(System.Type,System.Object)">
+            <summary>
+            Registers an object with the object container.  Object must be of type <paramref name="type"/>.
+            Type is used as the key.
+            </summary>
+            <param name="type">Type of the registered object.  Used as the key.</param>
+            <param name="instance">Instance of object to store for later use.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.IObjectContainer.Get``1">
+            <summary>
+            Gets an object previously registered in the container.  Returns null if no object is found.
+            </summary>
+            <typeparam name="TObject">The type of the object to store.</typeparam>
+            <returns>Registered object as a singleton.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.IObjectContainer.AllObjects">
+            <summary>
+            Gets all registered objects as a flat array of objects.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ObjectContainer">
+            <summary>
+            Default implementation for <see cref="T:Omniscient.Foundation.IObjectContainer"/>.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ObjectContainer.#ctor">
+            <summary>
+            Ctor.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ObjectContainer.Register``1(``0)">
+            <summary>
+            Registers an object with the object container.  The object's type is used as the key.
+            </summary>
+            <typeparam name="TObject">Type of the registered object.  Used as the key.</typeparam>
+            <param name="instance">Instance of object to store for later use.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ObjectContainer.Get``1">
+            <summary>
+            Gets an object previously registered in the container.  Returns null if no object is found.
+            </summary>
+            <typeparam name="TObject">The type of the object to store.</typeparam>
+            <returns>Registered object as a singleton.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ObjectContainer.AllObjects">
+            <summary>
+            Gets all registered objects as a flat array of objects.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IServiceProvider">
+            <summary>
+            Defines a service provider.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.GetService``1">
+            <summary>
+            Gets a service that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
+            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService``1(Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <typeparam name="TContract">The type of contract that service implements.</typeparam>
+            <param name="service">A service implementation.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <param name="contract">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
+            <summary>
+            Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  Reads services from the configuration file.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.#ctor">
+            <summary>
+            Ctor
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.GetService``1">
+            <summary>
+            Returns the contract implementation of a service, if any, that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The contract type.</typeparam>
+            <returns>The contract's implementation, or null if no service found for that contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.RegisterService``1(Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Registers a service at run-time.
+            </summary>
+            <typeparam name="TContract">The contract type.</typeparam>
+            <param name="service">An instance of a service class.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <param name="contractType">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ServiceProvider.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ServiceProvider.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.IConfigurable">
+            <summary>
+            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            </summary>
+            <remarks>
+            See the configuration schema for more details.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.IConfigurable.Configure(System.Xml.XmlElement)">
+            <summary>
+            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            </summary>
+            <param name="config">The xml configuration.</param>
+            <remarks>
+            See the ApplicationModel configuration schema for more details.
+            </remarks>
+        </member>
+    </members>
+</doc>
+
