@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Configuration;
 using System.Web.Security;
 using MySql.Data.MySqlClient;
 using Omniscient.Foundation.ApplicationModel;
-using Omniscient.Foundation.Data.MySql;
+using Omniscient.Foundation.Contrib.Data.MySql;
+using Omniscient.Foundation.Web.Security;
 
-namespace Omniscient.Foundation.Web.Security.MySql
+namespace Omniscient.Foundation.Contrib.Web.Security.MySql
 {
     public class CachedMySqlMembershipProvider<Type> : CachedMembershipProvider<Type> where Type : new()
     {
@@ -31,9 +31,9 @@ namespace Omniscient.Foundation.Web.Security.MySql
                 connection.Open();
                 string sql =
                     @"SELECT Password, PasswordKey " +
-                     "FROM User u " +
-                     "JOIN Membership m ON m.userId=u.id " +
-                     "WHERE u.Name=@name";
+                    "FROM User u " +
+                    "JOIN Membership m ON m.userId=u.id " +
+                    "WHERE u.Name=@name";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@name", username);
                 MySqlDataReader reader = command.ExecuteReader();

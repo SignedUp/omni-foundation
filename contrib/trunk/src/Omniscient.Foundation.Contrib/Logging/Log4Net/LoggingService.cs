@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml;
+using Omniscient.Foundation.Logging;
 using Omniscient.Foundation.ServiceModel;
 
-namespace Omniscient.Foundation.Logging.Log4Net
+namespace Omniscient.Foundation.Contrib.Logging.Log4Net
 {
     class LoggingService: ServiceBase<ILoggingService>, ILoggingService, IConfigurable
     {

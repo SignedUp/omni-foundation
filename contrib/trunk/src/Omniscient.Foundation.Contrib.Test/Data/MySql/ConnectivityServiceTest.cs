@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using NUnit.Framework;
-using Omniscient.Foundation;
 using Omniscient.Foundation.ApplicationModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
+using Omniscient.Foundation.Contrib.Data.MySql;
 
-namespace Omniscient.Foundation.Data.MySql
+namespace Omniscient.Foundation.Contrib.Test.Data.MySql
 {
     [TestFixture()]
     public class ConnectivityServiceTest

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Omniscient.Foundation.Logging;
 
-namespace Omniscient.Foundation.Logging.Log4Net
+namespace Omniscient.Foundation.Contrib.Logging.Log4Net
 {
     class Logger: ILogger
     {

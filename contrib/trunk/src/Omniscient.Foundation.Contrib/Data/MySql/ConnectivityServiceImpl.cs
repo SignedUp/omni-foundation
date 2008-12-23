@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using Omniscient.Foundation.Contrib.Data.MySql.Configuration;
 
-namespace Omniscient.Foundation.Data.MySql
+namespace Omniscient.Foundation.Contrib.Data.MySql
 {
     internal class ConnectivityServiceImpl: IConnectivity
     {
-        private Configuration.Connectivity _config;
+        private Connectivity _config;
 
-        public ConnectivityServiceImpl(Configuration.Connectivity config) 
+        public ConnectivityServiceImpl(Connectivity config) 
         {
             _config = config;
         }
