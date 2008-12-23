@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6B28B53E-A193-4DC7-8374-22C34CDF5D7B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -64,7 +64,6 @@
     <Compile Include="EntityMock.cs" />
     <Compile Include="EntityTest.cs" />
     <Compile Include="Mocks.cs" />
-    <Compile Include="MySql\ConnectivityServiceTest.cs" />
     <Compile Include="ObjectQuery\OQueryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityListTest.cs" />

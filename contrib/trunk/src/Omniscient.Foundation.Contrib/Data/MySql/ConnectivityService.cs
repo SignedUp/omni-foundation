@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using Omniscient.Foundation.Contrib.Data.MySql.Configuration;
 using Omniscient.Foundation.ServiceModel;
 
-namespace Omniscient.Foundation.Data.MySql
+namespace Omniscient.Foundation.Contrib.Data.MySql
 {
     internal class ConnectivityService: ServiceBase<IConnectivity>, IConfigurable
     {
@@ -14,12 +12,12 @@ namespace Omniscient.Foundation.Data.MySql
 
         #region IConfigurable Members
 
-        public void Configure(System.Xml.XmlElement config)
+        public void Configure(XmlElement config)
         {
-            Configuration.Connectivity mysqlConfig;
+            Connectivity mysqlConfig;
             XmlSerializer ser;
-            ser = new XmlSerializer(typeof(Configuration.Connectivity));
-            mysqlConfig = (Configuration.Connectivity)ser.Deserialize(new XmlNodeReader(config));
+            ser = new XmlSerializer(typeof(Connectivity));
+            mysqlConfig = (Connectivity)ser.Deserialize(new XmlNodeReader(config));
             _implementation = new ConnectivityServiceImpl(mysqlConfig);
         }
 

@@ -73,8 +73,6 @@
     <Compile Include="IObjectContainer.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
-    <Compile Include="Logging\Log4Net\Logger.cs" />
-    <Compile Include="Logging\Log4Net\LoggingService.cs" />
     <Compile Include="ObjectContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\IRoleProvider.cs" />
