@@ -7,16 +7,16 @@ using Omniscient.Foundation.Contrib.Data.MySql;
 
 namespace Omniscient.Foundation.Contrib.Test.Data.MySql
 {
-    [TestFixture()]
+    [TestFixture]
     public class ConnectivityServiceTest
     {
-        [TearDown()]
+        [TearDown]
         public void TearDown()
         {
             ApplicationManager.Current.CloseApplication();
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void ConfigureFromConfigObjectNoSubConfig()
         {
@@ -25,8 +25,8 @@ namespace Omniscient.Foundation.Contrib.Test.Data.MySql
 
             ServiceDefinition def;
             def = new ServiceDefinition();
-            def.Contract = "Omniscient.Foundation.Data.MySql.IConnectivity, Omniscient.Foundation.Data";
-            def.Service = "Omniscient.Foundation.Data.MySql.ConnectivityService, Omniscient.Foundation.Data";
+            def.Contract = "Omniscient.Foundation.Contrib.Data.MySql.IConnectivity, Omniscient.Foundation.Contrib";
+            def.Service = "Omniscient.Foundation.Contrib.Data.MySql.ConnectivityService, Omniscient.Foundation.Contrib";
 
             config.ServicesConfiguration.ServiceDefinitions.Add(def);
 
@@ -34,7 +34,7 @@ namespace Omniscient.Foundation.Contrib.Test.Data.MySql
             Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectivity>());
         }
 
-        [Test()]
+        [Test]
         public void ConfigureFromConfigObject()
         {
             ApplicationConfiguration config;
@@ -42,8 +42,8 @@ namespace Omniscient.Foundation.Contrib.Test.Data.MySql
 
             ServiceDefinition def;
             def = new ServiceDefinition();
-            def.Contract = "Omniscient.Foundation.Data.MySql.IConnectivity, Omniscient.Foundation.Data";
-            def.Service = "Omniscient.Foundation.Data.MySql.ConnectivityService, Omniscient.Foundation.Data";
+            def.Contract = "Omniscient.Foundation.Contrib.Data.MySql.IConnectivity, Omniscient.Foundation.Contrib";
+            def.Service = "Omniscient.Foundation.Contrib.Data.MySql.ConnectivityService, Omniscient.Foundation.Contrib";
             config.ServicesConfiguration.ServiceDefinitions.Add(def);
 
             XmlDocument doc = new XmlDocument();
