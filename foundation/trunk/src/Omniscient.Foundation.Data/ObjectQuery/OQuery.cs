@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.Data.ObjectQuery
+﻿namespace Omniscient.Foundation.Data.ObjectQuery
 {
     /// <summary>
     /// Defines an object query that acts on an entity of type <typeparamref name="TEntity"/>.
@@ -16,7 +11,7 @@ namespace Omniscient.Foundation.Data.ObjectQuery
         /// </summary>
         public OQuery()
         {
-            this.Where = new WhereGroup(LogicalGroupComposition.And);
+            Where = new WhereGroup(LogicalGroupComposition.And);
         }
 
         /// <summary>

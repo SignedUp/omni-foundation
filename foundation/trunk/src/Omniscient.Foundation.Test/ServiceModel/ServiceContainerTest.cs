@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Omniscient.Foundation.ServiceModel
 {
-    [TestFixture()]
+    [TestFixture]
     public class ServiceContainerTest
     {
         IServiceProvider _container;
 
-        [SetUp()]
+        [SetUp]
         public void Init()
         {
             _container = new ServiceProvider();
         }
 
-        [Test()]
+        [Test]
         public void TestRegisterService()
         {
             Assert.AreEqual(0, _container.ServiceCount);
@@ -25,7 +21,7 @@ namespace Omniscient.Foundation.ServiceModel
             Assert.AreEqual(1, _container.ServiceCount);
         }
 
-        [Test()]
+        [Test]
         public void TestRegisterServiceNoGeneric()
         {
             ServiceMock s = new ServiceMock();
@@ -36,7 +32,7 @@ namespace Omniscient.Foundation.ServiceModel
             Assert.AreEqual("dave", c.Echo("dave"));
         }
 
-        [Test()]
+        [Test]
         public void TestGetService()
         {
             _container.RegisterService(typeof(IContract), new ServiceMock());

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Omniscient.Foundation.Data;
+﻿using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -16,7 +12,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// Ctor.
         /// </summary>
         /// <param name="entity">The root entity.</param>
-        protected ModelSingleEntityBase(TEntity entity): base()
+        protected ModelSingleEntityBase(TEntity entity)
         {
             Entity = entity;
         }

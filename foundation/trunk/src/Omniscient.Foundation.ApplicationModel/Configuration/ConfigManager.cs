@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Omniscient.Foundation;
 using Omniscient.Foundation.ServiceModel;
-using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
     class ConfigManager
     {
-        public static void ConfigureServices(Omniscient.Foundation.ServiceModel.IServiceProvider container, ApplicationConfiguration config)
+        public static void ConfigureServices(ServiceModel.IServiceProvider container, ApplicationConfiguration config)
         {
             if (config == null) return;
             if (container == null) return;
@@ -57,7 +52,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             foreach (object item in config.ContainerConfiguration.Items)
             {
                 ObjectContainerAdd add = item as ObjectContainerAdd;
-                if (item != null)
+                if (add != null)
                 {
                     Type tKey = Type.GetType(add.KeyType, true, true);
                     Type tObj = Type.GetType(add.ObjectType, true, true);
@@ -67,13 +62,13 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
                 }
 
                 ObjectContainerRemove remove = item as ObjectContainerRemove;
-                if (item != null)
+                if (remove != null)
                 {
                     throw new NotImplementedException("Removing an object is not supported yet.");
                 }
 
                 ObjectContainerClear clear = item as ObjectContainerClear;
-                if (item != null)
+                if (clear != null)
                 {
                     container.Clear();
                     continue;

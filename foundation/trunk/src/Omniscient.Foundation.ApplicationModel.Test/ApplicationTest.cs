@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Omniscient.Foundation.ApplicationModel
 {
-    [TestFixture()]
+    [TestFixture]
     public class ApplicationTest
     {
-        [Test()]
+        [Test]
         public void CheckCurrentApplication()
         {
             Assert.IsNotNull(ApplicationManager.Current);
         }
 
-        [Test()]
+        [Test]
         public void CheckServiceContainer()
         {
             Assert.IsNull(ApplicationManager.Current.ServiceProvider);
         }
 
-        [Test()]
+        [Test]
         public void CheckPresentationController()
         {
             Assert.IsNull(ApplicationManager.Current.PresentationController);
         }
 
-        [Test()]
+        [Test]
         public void CheckStarted()
         {
             Assert.IsFalse(ApplicationManager.Current.IsStarted);
@@ -35,7 +31,7 @@ namespace Omniscient.Foundation.ApplicationModel
             Assert.IsTrue(ApplicationManager.Current.IsStarted);
         }
 
-        [Test()]
+        [Test]
         public void CheckStoped()
         {
             ApplicationManager.Current.StartApplication();

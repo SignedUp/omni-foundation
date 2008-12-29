@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Serialization;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
@@ -26,7 +22,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         public string Contract { get; set; }
 
         /// <summary>
-        /// Optional.  Any configuration needed by a service that implements <see cref="Omniscient.Foundation.ServiceModel.IConfigurable"/>.
+        /// Optional.  Any configuration needed by a service that implements <see cref="IConfigurable"/>.
         /// </summary>
         [XmlElement("config", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
         public XmlElement Config { get; set; }

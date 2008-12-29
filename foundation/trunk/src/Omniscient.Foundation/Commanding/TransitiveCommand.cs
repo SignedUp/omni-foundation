@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.Commanding
 {
     
+    ///<summary>
+    ///</summary>
     public class TransitiveCommand: ICommandCore
     {
         private List<ICommandHandler> _handlers;
 
+        ///<summary>
+        ///</summary>
         public TransitiveCommand()
         {
             _handlers = new List<ICommandHandler>();
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="handler"></param>
         public void RegisterHandler(ICommandHandler handler)
         {
             _handlers.Add(handler);
             if (_handlers.Count == 1 && CanExecuteChanged != null) CanExecuteChanged(this, EventArgs.Empty);
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="handler"></param>
         public void UnregisterHandler(ICommandHandler handler)
         {
             _handlers.Remove(handler);

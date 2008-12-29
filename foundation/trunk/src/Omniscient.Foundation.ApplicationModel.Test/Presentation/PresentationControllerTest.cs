@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Omniscient.Foundation.Data;
 using Omniscient.Foundation.Data.ObjectQuery;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
-    [TestFixture()]
+    [TestFixture]
     public class PresentationControllerTest
     {
         IPresentationController _controller;
@@ -19,7 +16,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         IEntityAdapter<Client> _clientAdapter;
         IEntityAdapter<Invoice> _invoiceAdapter;
 
-        [SetUp()]
+        [SetUp]
         public void Init()
         {
             _controller = new PresentationController(false);
@@ -39,7 +36,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             ApplicationManager.Current.ObjectContainer.Register<IEntityController<Invoice>>(_invoiceController);
         }
 
-        [Test()]
+        [Test]
         public void TestCreateController()
         {
             Client client;
@@ -52,7 +49,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Assert.AreEqual(client, ((ModelSingleEntityBase<Client>)_mainController.CurrentView.Model).Entity);
         }
 
-        [Test()]
+        [Test]
         public void TestBeginEdit()
         {
             Client client;
@@ -66,7 +63,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Assert.AreEqual(EntityStatus.Dirty, client.Status);
         }
 
-        [Test()]
+        [Test]
         public void TestCancelEdit()
         {
             Client client;
@@ -85,7 +82,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Assert.AreEqual(EntityStatus.Clean, client.Status);
         }
 
-        [Test()]
+        [Test]
         public void TestEndEdit()
         {
             EntityList<Invoice> invoices;
@@ -106,7 +103,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Assert.IsTrue(model.HasEntity(inv.Id));
 
             _controller.BeginEdit(_sideController.CurrentView, inv);
-            double originalAmount = inv.Amount;
             inv.Amount = 99.0;
 
             _controller.EndEdit(_sideController.CurrentView, inv);
@@ -119,7 +115,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         }
 
-        [Test()]
+        [Test]
         public void GetNoPresenter()
         {
             IPresenter presenter;
@@ -127,14 +123,14 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Assert.IsNull(presenter);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void RegisterNullPresenter()
         {
             _controller.RegisterPresenter(null);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void RegisterDoublePresenter()
         {
@@ -144,7 +140,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller.RegisterPresenter(p);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void RegisterInteractive()
         {
@@ -153,7 +149,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller.RegisterPresenter(p);
         }
 
-        [Test()]
+        [Test]
         public void GetRegisteredByName()
         {
             IPresenter p;
@@ -172,7 +168,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Assert.AreEqual("b", p.Name);
         }
 
-        [Test()]
+        [Test]
         public void GetRegisteredByContract()
         {
             IPresenter p;

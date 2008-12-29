@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
-using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 using Omniscient.Foundation.Security;
 using System.Diagnostics;
@@ -72,12 +70,12 @@ namespace Omniscient.Foundation.ApplicationModel.Security
             IExtensionPortManager manager = ApplicationManager.Current.ExtensionPortManager;
             if (manager.GetExtensionPort<ICredentialServiceExtenderContract>() == null)
             {
-                manager.RegisterExtensionPort<ICredentialServiceExtenderContract>(new ExtensionPortBase<ICredentialServiceExtenderContract>());
+                manager.RegisterExtensionPort(new ExtensionPortBase<ICredentialServiceExtenderContract>());
             }
 
             //Create an anonymous user on service startup.
             _current = new SecurePrincipal();
-            System.AppDomain.CurrentDomain.SetThreadPrincipal(_current);
+            AppDomain.CurrentDomain.SetThreadPrincipal(_current);
         }
 
         /// <summary>

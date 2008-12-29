@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
@@ -18,7 +15,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         protected ModelBase()
         {
-            _name = this.GetType().Name;
+            _name = GetType().Name;
         }
 
         /// <summary>

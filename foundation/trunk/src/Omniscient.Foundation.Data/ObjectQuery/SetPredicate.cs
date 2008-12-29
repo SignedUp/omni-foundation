@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.Data.ObjectQuery
+﻿namespace Omniscient.Foundation.Data.ObjectQuery
 {
     /// <summary>
     /// A predicate that checks a property (column) compared to a set of values of the same type.

@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
-    [TestFixture()]
+    [TestFixture]
     public class ConfigManagerTest
     {
-        [Test()]
+        [Test]
         public void ConfigureModulesWith2Modules()
         {
             ApplicationConfiguration config = new ApplicationConfiguration();
-            config.ModulesConfiguration.Modules.Add(new ModuleDefinition() { Type = GetTypeFullname("Module1") });
-            config.ModulesConfiguration.Modules.Add(new ModuleDefinition() { Type = GetTypeFullname("Module2") });
+            config.ModulesConfiguration.Modules.Add(new ModuleDefinition { Type = GetTypeFullname("Module1") });
+            config.ModulesConfiguration.Modules.Add(new ModuleDefinition { Type = GetTypeFullname("Module2") });
 
             ObjectContainer container = new ObjectContainer();
             ConfigManager.ConfigureModules(container, config);
@@ -23,12 +19,12 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             Assert.AreEqual(2, container.AllObjects.Length);
         }
 
-        [Test()]
+        [Test]
         public void ConfigureContainer()
         {
             ApplicationConfiguration config = new ApplicationConfiguration();
-            config.ContainerConfiguration.Items.Add(new ObjectContainerAdd() { KeyType = GetTypeFullname("IA"), ObjectType = GetTypeFullname("A") });
-            config.ContainerConfiguration.Items.Add(new ObjectContainerAdd() { KeyType = GetTypeFullname("IB"), ObjectType = GetTypeFullname("B") });
+            config.ContainerConfiguration.Items.Add(new ObjectContainerAdd { KeyType = GetTypeFullname("IA"), ObjectType = GetTypeFullname("A") });
+            config.ContainerConfiguration.Items.Add(new ObjectContainerAdd { KeyType = GetTypeFullname("IB"), ObjectType = GetTypeFullname("B") });
 
             ObjectContainer container = new ObjectContainer();
             ConfigManager.ConfigureContainer(container, config);
@@ -51,12 +47,12 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
 
         public class Module1 : IModule
         {
-            public Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController PresentationController { get; set; }
+            public Presentation.IPresentationController PresentationController { get; set; }
         }
 
         public class Module2 : IModule
         {
-            public Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController PresentationController { get; set; }
+            public Presentation.IPresentationController PresentationController { get; set; }
         }
     }       
 }

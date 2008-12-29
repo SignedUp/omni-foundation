@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 
 namespace Omniscient.Foundation.Data
 {
-    [TestFixture()]
+    [TestFixture]
     public class EntityControllerTest
     {
         private EntityMock _entityNew;
@@ -14,36 +11,36 @@ namespace Omniscient.Foundation.Data
         private Guid _cleanId;
         private IEntityController<EntityMock> _controller;
 
-        [TestFixtureSetUp()]
+        [TestFixtureSetUp]
         public void Prepare()
         {
             _cleanId = Guid.NewGuid();
         }
 
-        [SetUp()]
+        [SetUp]
         public void Setup()
         {
             _controller = new EntityController<EntityMock>();
-            _entityNew = new EntityMock() { Name = "I'm new", Age = 1 };
+            _entityNew = new EntityMock { Name = "I'm new", Age = 1 };
             _entityClean = new EntityMock(_cleanId, true) { Name = "I'm clean", Age = 2 };
         }
 
 #region Tests on MarkAsDeleted
-        [Test()]
+        [Test]
         public void TestMarkDeletedOnNew()
         {
             _controller.MarkAsDeleted(_entityNew);
             Assert.AreEqual(EntityStatus.NonExistent, _entityNew.Status);
         }
 
-        [Test()]
+        [Test]
         public void TestMarkDeletedOnClean()
         {
             _controller.MarkAsDeleted(_entityClean);
             Assert.AreEqual(EntityStatus.ToBeDeleted, _entityClean.Status);
         }
 
-        [Test()]
+        [Test]
         public void TestMarkDeletedOnDirty()
         {
             _controller.BeginChanges(_entityClean);
@@ -61,7 +58,7 @@ namespace Omniscient.Foundation.Data
             Assert.AreEqual(2, _entityClean.Age);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestMarkDeletedOnDeleted()
         {
@@ -69,7 +66,7 @@ namespace Omniscient.Foundation.Data
             _controller.MarkAsDeleted(_entityClean);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestMarkDeletedOnNonExistent()
         {
@@ -77,7 +74,7 @@ namespace Omniscient.Foundation.Data
             _controller.MarkAsDeleted(_entityNew);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestMarkDeletedOnClone()
         {
@@ -92,7 +89,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// A New entity is always New, even if we start modifying it.
         /// </summary>
-        [Test()]
+        [Test]
         public void TestBeginChangesOnNew()
         {
             _controller.BeginChanges(_entityNew);
@@ -102,7 +99,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// A Clean entity will become Dirty when we start modifying it.
         /// </summary>
-        [Test()]
+        [Test]
         public void TestBeginChangesOnClean()
         {
             _controller.BeginChanges(_entityClean);
@@ -113,7 +110,7 @@ namespace Omniscient.Foundation.Data
         /// We don't allow starting new changes on a Dirty entity, since that would change the original clone
         /// and prevent a clean rollback.
         /// </summary>
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestBeginChangesOnDirty()
         {
@@ -125,7 +122,7 @@ namespace Omniscient.Foundation.Data
         /// We don't allow starting new changes on a Deleted entity.  Start by calling CancelChanges to
         /// return the entity to the Clean state.
         /// </summary>
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestBeginChangesOnDeleted()
         {
@@ -136,7 +133,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// We don't allow changes on a non-existent entity, since it's considered dead.
         /// </summary>
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestBeginChangesOnNonExistent()
         {
@@ -147,7 +144,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// We don't allow changes on an entity clone, since the purpose of a clone is to stay unchanged.
         /// </summary>
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestBeginChangesOnClone()
         {
@@ -162,21 +159,21 @@ namespace Omniscient.Foundation.Data
 
 #region Tests on CancelChanges operation
         
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestCancelChangesOnNew()
         {
             _controller.CancelChanges(_entityNew);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestCancelChangesOnClean()
         {
             _controller.CancelChanges(_entityClean);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestCancelChangesOnNonExistent()
         {
@@ -184,7 +181,7 @@ namespace Omniscient.Foundation.Data
             _controller.CancelChanges(_entityNew);
         }
 
-        [Test()]
+        [Test]
         [ExpectedException(typeof(InvalidOperationForStatusException))]
         public void TestCancelChangesOnClone()
         {
@@ -193,7 +190,7 @@ namespace Omniscient.Foundation.Data
             _controller.CancelChanges(clone as EntityMock);
         }
 
-        [Test()]
+        [Test]
         public void TestCancelChangesOnDirty()
         {
             _controller.BeginChanges(_entityClean);
@@ -212,7 +209,7 @@ namespace Omniscient.Foundation.Data
 
         }
 
-        [Test()]
+        [Test]
         public void TestCancelChangesOnDeleted()
         {
             _controller.MarkAsDeleted(_entityClean);
@@ -225,14 +222,14 @@ namespace Omniscient.Foundation.Data
 
 #region Tests on AcceptChanges operation
         
-        [Test()]
+        [Test]
         public void TestAcceptChangesOnNew()
         {
             _controller.AcceptChanges(_entityNew);
             Assert.AreEqual(EntityStatus.Clean, _entityNew.Status);
         }
 
-        [Test()]
+        [Test]
         public void TestAcceptChangesOnDirty()
         {
             _controller.BeginChanges(_entityClean);
@@ -242,7 +239,7 @@ namespace Omniscient.Foundation.Data
             _controller.CancelChanges(_entityClean);
         }
 
-        [Test()]
+        [Test]
         public void TestAcceptChangesOnDeleted()
         {
             _controller.MarkAsDeleted(_entityClean);

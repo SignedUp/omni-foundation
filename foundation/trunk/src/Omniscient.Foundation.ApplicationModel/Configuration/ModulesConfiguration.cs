@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
@@ -15,11 +11,15 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
     {
         private List<ModuleDefinition> _modules;
 
+        ///<summary>
+        ///</summary>
         public ModulesConfiguration()
         {
             _modules = new List<ModuleDefinition>();
         }
 
+        ///<summary>
+        ///</summary>
         [XmlElement("moduleDefinition", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
         public List<ModuleDefinition> Modules
         {

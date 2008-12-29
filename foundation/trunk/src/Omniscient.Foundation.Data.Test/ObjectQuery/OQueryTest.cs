@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Omniscient.Foundation.Data.ObjectQuery
 {
-    [TestFixture()]
+    [TestFixture]
     public class OQueryTest
     {
-        [Test()]
+        [Test]
         public void TestSimpleQuery()
         {
-            OQuery<EntityMock> query;
-            query = new OQuery<EntityMock>();
+            OQuery<EntityMock> query = new OQuery<EntityMock>();
         }
     }
 }

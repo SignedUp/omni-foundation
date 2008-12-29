@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Omniscient.Foundation.Data;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.ApplicationModel.Presentation;
@@ -49,7 +45,7 @@ namespace Omniscient.Foundation.ApplicationModel
         /// <summary>
         /// Gets or sets the service provider to be used.  Generally an instance of <see cref="ServiceProvider"/>.
         /// </summary>
-        public Omniscient.Foundation.ServiceModel.IServiceProvider ServiceProvider
+        public ServiceModel.IServiceProvider ServiceProvider
         {
             get;
             set;
@@ -92,7 +88,7 @@ namespace Omniscient.Foundation.ApplicationModel
         {
             get 
             {
-                if (!this.IsStarted) throw new InvalidOperationException("Please start current Application first.");
+                if (!IsStarted) throw new InvalidOperationException("Please start current Application first.");
                 return _config; 
             }
         }
@@ -183,7 +179,7 @@ namespace Omniscient.Foundation.ApplicationModel
         /// </remarks>
         public virtual void CloseApplication()
         {
-            foreach (IService service in ServiceProvider.AllServices.Reverse<IService>())
+            foreach (IService service in ServiceProvider.AllServices.Reverse())
             {
                 IStartable startable;
                 startable = service as IStartable;

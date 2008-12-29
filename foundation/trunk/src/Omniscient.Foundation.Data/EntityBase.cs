@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Runtime.Serialization;
 
@@ -10,8 +7,8 @@ namespace Omniscient.Foundation.Data
     /// <summary>
     /// Base class for entities.
     /// </summary>
-    [DataContract()]
-    [Serializable()]
+    [DataContract]
+    [Serializable]
     public class EntityBase: IEntity
     {
         /// <summary>
@@ -19,7 +16,7 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         public EntityBase()
         {
-            this.Status = EntityStatus.New;
+            Status = EntityStatus.New;
             Id = Guid.NewGuid();
         }
 
@@ -33,14 +30,14 @@ namespace Omniscient.Foundation.Data
         /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/> or <see cref="EntityStatus.NotLoadedYet"/>.</param>
         public EntityBase(Guid id, bool entityIsLoaded)
         {
-            this.Status = entityIsLoaded? EntityStatus.Clean : EntityStatus.NotLoadedYet;
+            Status = entityIsLoaded? EntityStatus.Clean : EntityStatus.NotLoadedYet;
             Id = id;
         }
 
         /// <summary>
         /// Gets or sets the Status.
         /// </summary>
-        [DataMember()]
+        [DataMember]
         public EntityStatus Status
         {
             get;
@@ -50,7 +47,7 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// Gets or sets the Id.  Setting the id is possible only when Status == <see cref="EntityStatus.NotLoadedYet" />.
         /// </summary>
-        [DataMember()]
+        [DataMember]
         public Guid Id
         {
             get;
@@ -62,7 +59,7 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         public virtual string Type
         {
-            get { return this.GetType().Name; }
+            get { return GetType().Name; }
         }
 
         /// <summary>
@@ -76,12 +73,12 @@ namespace Omniscient.Foundation.Data
         /// <param name="target">The entity to copy values to.</param>
         public virtual void CopyTo(IEntity target, bool copyReferences)
         {
-            this.CopyInternal(target, copyReferences);
+            CopyInternal(target, copyReferences);
         }
 
         private void CopyInternal(IEntity target, bool copyReferences)
         {
-            foreach (PropertyInfo p in this.GetType().GetProperties())
+            foreach (PropertyInfo p in GetType().GetProperties())
             {
                 object[] attributes;
                 attributes = p.GetCustomAttributes(typeof(EntityPropertyAttribute), true);
@@ -104,7 +101,7 @@ namespace Omniscient.Foundation.Data
             EntityBase comp;
             comp = obj as EntityBase;
             if (comp == null) return false;
-            return this.Id.Equals(comp.Id);
+            return Id.Equals(comp.Id);
         }
 
         /// <summary>
@@ -113,7 +110,7 @@ namespace Omniscient.Foundation.Data
         /// <returns>An hash code that can be used in hashtables and dictionaries.</returns>
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return Id.GetHashCode();
         }
 
         /// <summary>
@@ -122,7 +119,7 @@ namespace Omniscient.Foundation.Data
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Entity type:{0} id:{1} status:{2}", this.Type, this.Id, this.Status);
+            return string.Format("Entity type:{0} id:{1} status:{2}", Type, Id, Status);
         }
     }
 }

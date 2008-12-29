@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation
+﻿namespace Omniscient.Foundation
 {
     /// <summary>
     /// Defines a configurable service.  Implement this interface when you need your service to receive configuration.
