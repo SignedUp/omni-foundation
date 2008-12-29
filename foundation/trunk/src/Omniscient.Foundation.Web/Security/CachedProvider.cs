@@ -189,7 +189,7 @@ namespace Omniscient.Foundation.Web.Security
 
         string[] IRoleProvider.GetRolesForUser(string username)
         {
-            LogDebug("Entering CachedProvider.GetRolesForUser");
+            LogDebug("Entering IRoleProvider.GetRolesForUser");
             return GetRolesForUser(username);
         }
 
