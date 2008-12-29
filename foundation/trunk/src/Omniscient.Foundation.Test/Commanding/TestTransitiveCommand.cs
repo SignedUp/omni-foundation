@@ -1,30 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using NUnit.Mocks;
 
 namespace Omniscient.Foundation.Commanding
 {
-    [TestFixture()]
+    [TestFixture]
     public class TestTransitiveCommand
     {
         private TransitiveCommand _cmd;
 
-        [SetUp()]
+        [SetUp]
         public void Setup()
         {
             _cmd = new TransitiveCommand();
         }
 
-        [Test()]
+        [Test]
         public void CheckCanExecute()
         {
             Assert.IsFalse(_cmd.CanExecute(null));
         }
 
-        [Test()]
+        [Test]
         public void CheckCanExecuteWithHandler()
         {
             Assert.IsFalse(_cmd.CanExecute(null));
@@ -37,7 +34,7 @@ namespace Omniscient.Foundation.Commanding
             Assert.IsFalse(_cmd.CanExecute(null));
         }
 
-        [Test()]
+        [Test]
         public void CheckCanExecuteChanged()
         {
             CommandLauncherMock mock;
@@ -59,7 +56,7 @@ namespace Omniscient.Foundation.Commanding
             mock.Verify();
         }
 
-        [Test()]
+        [Test]
         public void ExecuteTwoHandlers()
         {
             Handler handler1, handler2;

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Omniscient.Foundation.ServiceModel
 {
-    [TestFixture()]
+    [TestFixture]
     public class GenericSingletonServiceTest
     {
-        [Test()]
+        [Test]
         public void TestCreateGenericSingletonService()
         {
             ServiceBase<IContract> srv;
@@ -17,7 +13,7 @@ namespace Omniscient.Foundation.ServiceModel
             Assert.AreEqual("salut", srv.GetImplementation().Echo("salut"));
         }
 
-        [Test()]
+        [Test]
         public void TestDataPersistence()
         {
             IService srv;

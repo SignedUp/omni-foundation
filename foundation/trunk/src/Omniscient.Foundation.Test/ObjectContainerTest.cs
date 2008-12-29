@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Omniscient.Foundation
 {
-    [TestFixture()]
+    [TestFixture]
     public class ObjectContainerTest
     {
         private IObjectContainer _container;
 
-        [SetUp()]
+        [SetUp]
         public void Init()
         {
             _container = new ObjectContainer();
         }
 
-        [Test()]
+        [Test]
         public void RegisterObjectByInferingType()
         {
             _container.Register(new Object1());
@@ -29,7 +25,7 @@ namespace Omniscient.Foundation
             Assert.IsNull(obj);
         }
 
-        [Test()]
+        [Test]
         public void RegisterObjectByGivingType()
         {
             _container.Register<IObject>(new Object1());
@@ -41,7 +37,7 @@ namespace Omniscient.Foundation
             Assert.IsNotNull(obj);
         }
 
-        [Test()]
+        [Test]
         public void RegisterContainerItemWithExistingItem()
         {
             ContainerItem<IObject> item;
@@ -55,7 +51,7 @@ namespace Omniscient.Foundation
             Assert.IsNotNull(obj);
         }
 
-        [Test()]
+        [Test]
         public void RegisterContainerItemForNewInstances()
         {
             NewObjectContainerItem item;
@@ -89,7 +85,7 @@ namespace Omniscient.Foundation
         {
             public override IObject GetInstance()
             {
-                return new Object1() { Name = "new from container item"};
+                return new Object1 { Name = "new from container item"};
             }
         }
     }

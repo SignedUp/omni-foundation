@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.ApplicationModel.Modularity
 {
+    ///<summary>
+    ///</summary>
+    ///<typeparam name="TContract"></typeparam>
     public class ExtensionPortBase<TContract>: IExtensionPort<TContract>
     {
         private List<IExtender<TContract>> _extenders;
 
+        ///<summary>
+        ///</summary>
         public ExtensionPortBase()
         {
             _extenders = new List<IExtender<TContract>>();

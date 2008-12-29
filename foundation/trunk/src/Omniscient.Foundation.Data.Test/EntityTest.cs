@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 
 namespace Omniscient.Foundation.Data
 {
-    [TestFixture()]
+    [TestFixture]
     public class EntityTest
     {
-        [Test()]
+        [Test]
         public void TestCreateNew()
         {
             IEntity entity = new EntityMock();
@@ -21,7 +18,7 @@ namespace Omniscient.Foundation.Data
             Assert.AreEqual("EntityMock", entity.Type);
         }
 
-        [Test()]
+        [Test]
         public void TestCreateExisting()
         {
             Guid id;

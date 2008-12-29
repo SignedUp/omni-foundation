@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Omniscient.Foundation.Data
 {
@@ -16,7 +13,6 @@ namespace Omniscient.Foundation.Data
         /// Ctor.  Sets Status to <see cref="EntityStatus.NotLoadedYet"/>
         /// </summary>
         public EntityList()
-            : base()
         {
             Status = EntityStatus.NotLoadedYet;        
         }
@@ -34,7 +30,6 @@ namespace Omniscient.Foundation.Data
     public class EntityList : List<IEntity>, IEntityList
     {
         public EntityList()
-            : base()
         {
             Status = EntityStatus.NotLoadedYet;
         }

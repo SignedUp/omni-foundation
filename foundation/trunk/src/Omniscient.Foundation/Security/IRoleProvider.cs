@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.Security
+﻿namespace Omniscient.Foundation.Security
 {
+    ///<summary>
+    ///</summary>
     public interface IRoleProvider
     {
+        ///<summary>
+        ///</summary>
+        ///<param name="username"></param>
+        ///<returns></returns>
         string[] GetRolesForUser(string username);
     }
 }

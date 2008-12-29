@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ServiceModel;
 
 namespace Omniscient.Foundation.Data
@@ -15,7 +13,7 @@ namespace Omniscient.Foundation.Data
     /// The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
     /// </remarks>
     /// <typeparam name="TEntity">The type of entities to manage.</typeparam>
-    [ServiceContract()]
+    [ServiceContract]
     public interface IEntityAdapter<TEntity> where TEntity: IEntity
     {
         /// <summary>
@@ -23,13 +21,22 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         /// <param name="id">The unique id of the entity that is sought.</param>
         /// <returns>Returns the entity if found; Otherwise, returns Null.</returns>
-        [OperationContract()]
+        [OperationContract]
         TEntity LoadByKey(Guid id);
 
-        [OperationContract()]
+        ///<summary>
+        ///</summary>
+        ///<param name="propertyName"></param>
+        ///<param name="id"></param>
+        ///<returns></returns>
+        [OperationContract]
         EntityList<TEntity> LoadByForeignKey(string propertyName, Guid id);
 
-        [OperationContract()]
+        ///<summary>
+        ///</summary>
+        ///<param name="queryName"></param>
+        ///<returns></returns>
+        [OperationContract]
         EntityList<TEntity> LoadByQuery(string queryName);
 
         /// <summary>
@@ -37,22 +44,33 @@ namespace Omniscient.Foundation.Data
         /// </summary>
         /// <param name="query">The object query to search entities.</param>
         /// <returns>An array of entities that are found using the given object query.</returns>
-        [OperationContract()]
+        [OperationContract]
         EntityList<TEntity> LoadByObjectQuery(ObjectQuery.OQuery<TEntity> query);
 
-        [OperationContract()]
+        ///<summary>
+        ///</summary>
+        ///<param name="propertyName"></param>
+        ///<param name="value"></param>
+        ///<returns></returns>
+        [OperationContract]
         EntityList<TEntity> LoadByValueProperty(string propertyName, object value);
 
-        [OperationContract()]
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        [OperationContract]
         EntityList<TEntity> LoadAll();
 
         /// <summary>
         /// Saves the entity.  Executes different queries based on the <see cref="EntityStatus"/> of the entity.
         /// </summary>
         /// <param name="entity">The entity to save.</param>
-        [OperationContract()]
+        [OperationContract]
         void Save(TEntity entity);
 
+        ///<summary>
+        ///</summary>
+        ///<param name="entities"></param>
         [OperationContract(Name = "SaveList")]
         void Save(IEnumerable<TEntity> entities);
 

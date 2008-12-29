@@ -35,7 +35,7 @@ namespace Omniscient.Foundation.Web.Security
             ILoggingService service;
             service = ApplicationManager.Current.ServiceProvider.GetService<ILoggingService>();
             if (service == null) return;
-            _logger = service.GetLogger(this.GetType());
+            _logger = service.GetLogger(GetType());
         }
 
         protected void LogDebug(object message)
@@ -152,10 +152,6 @@ namespace Omniscient.Foundation.Web.Security
                 return result;
             }
             result = _provider.IsUserInRole(username, roleName);
-            if (result)
-            {
-                roles = new List<string>(GetRolesForUser(username));
-            }
             return result;
         }
 

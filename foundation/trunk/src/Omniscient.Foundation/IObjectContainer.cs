@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation
 {
@@ -17,6 +14,10 @@ namespace Omniscient.Foundation
         /// <param name="instance">Instance of object to store for later use.</param>
         void Register<TObject>(TObject instance);
 
+        ///<summary>
+        ///</summary>
+        ///<param name="item"></param>
+        ///<typeparam name="TObject"></typeparam>
         void Register<TObject>(ContainerItem<TObject> item);
 
         /// <summary>
@@ -39,6 +40,8 @@ namespace Omniscient.Foundation
         /// </summary>
         object[] AllObjects { get; }
 
+        ///<summary>
+        ///</summary>
         void Clear();
     }
 }

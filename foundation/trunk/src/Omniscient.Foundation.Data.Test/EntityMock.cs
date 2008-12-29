@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.Data
 {
     public class EntityMock: EntityBase
     {
-        public EntityMock() : base() { }
+        public EntityMock() { }
         public EntityMock(Guid id, bool isLoaded) : base(id, isLoaded) { }
 
         [EntityProperty(EntityPropertyType.Value)]

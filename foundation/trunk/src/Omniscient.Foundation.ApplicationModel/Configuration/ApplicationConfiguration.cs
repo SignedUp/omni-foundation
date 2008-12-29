@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
@@ -35,6 +30,8 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             set;
         }
 
+        ///<summary>
+        ///</summary>
         [XmlElement("modules", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
         public ModulesConfiguration ModulesConfiguration
         {
@@ -42,6 +39,8 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             set;
         }
 
+        ///<summary>
+        ///</summary>
         [XmlElement("container", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
         public ObjectContainerConfiguration ContainerConfiguration
         {

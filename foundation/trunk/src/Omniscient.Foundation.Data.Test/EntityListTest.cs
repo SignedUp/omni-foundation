@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Omniscient.Foundation.Data
 {
-    [TestFixture()]
+    [TestFixture]
     public class EntityListTest
     {
-        [Test()]
+        [Test]
         public void TestCreate()
         {
             EntityList<EntityMock> list;
@@ -17,7 +14,7 @@ namespace Omniscient.Foundation.Data
             Assert.AreEqual(0, list.Count);
         }
 
-        [Test()]
+        [Test]
         public void TestAddOne()
         {
             EntityList<EntityMock> list;
@@ -26,15 +23,14 @@ namespace Omniscient.Foundation.Data
             Assert.AreEqual(1, list.Count);            
         }
 
-        [Test()]
+        [Test]
         public void TestConvert()
         {
             EntityList list;
             list = new EntityList();
             list.Add(new EntityMock());
 
-            IList<IEntity> converted;
-            converted = (IList<IEntity>)list;
+            IList<IEntity> converted = list;
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
 namespace Omniscient.Foundation.Data
 {
@@ -10,7 +6,7 @@ namespace Omniscient.Foundation.Data
     /// Represents a class that manages a certain type of entities.
     /// </summary>
     /// <typeparam name="TEntity">The type of Entity to manage.</typeparam>
-    [ServiceContract()]
+    [ServiceContract]
     public interface IEntityController<TEntity> where TEntity: IEntity
     {
         /// <summary>
@@ -18,7 +14,7 @@ namespace Omniscient.Foundation.Data
         /// and prepares a clone for an eventual roll-back.
         /// </summary>
         /// <param name="entity">The entity to edit.</param>
-        [OperationContract()]
+        [OperationContract]
         void BeginChanges(TEntity entity);
         
         /// <summary>
@@ -26,18 +22,18 @@ namespace Omniscient.Foundation.Data
         /// Also cancels the deletion of an entity.
         /// </summary>
         /// <param name="entity">The entity whose status is <see cref="EntityStatus.Dirty"/> or <see cref="EntityStatus.ToBeDeleted"/>.</param>
-        [OperationContract()]
+        [OperationContract]
         void CancelChanges(TEntity entity);
         
         /// <summary>
-        /// Use this fonction to accept changes on an entity.  Use <see cref="IEntityAdapter"/> to save it to the database.
+        /// Use this fonction to accept changes on an entity.  Use <see cref="IEntityAdapter{TEntity}"/> to save it to the database.
         /// </summary>
         /// <remarks>
         /// If Status is <see cref="EntityStatus.Dirty"/>, then the status is set to <see cref="EntityStatus.Clean"/>.
         /// If the status is <see cref="EntityStatus.ToBeDeleted"/>, the status is set to <see cref="EntityStatus.NonExistent"/>.
         /// </remarks>
         /// <param name="entity">The entity to save.</param>
-        [OperationContract()]
+        [OperationContract]
         void AcceptChanges(TEntity entity);
         
         /// <summary>
@@ -45,7 +41,7 @@ namespace Omniscient.Foundation.Data
         /// then the entity is reset with original values, so that there's no ambiguity when calling <see cref="CancelChanges"/>.
         /// </summary>
         /// <param name="entity"></param>
-        [OperationContract()]
+        [OperationContract]
         void MarkAsDeleted(TEntity entity);
 
         /// <summary>
@@ -55,7 +51,7 @@ namespace Omniscient.Foundation.Data
         /// <param name="original">The entity to clone</param>
         /// <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
         /// <returns>A clone, with the same id and values.</returns>
-        [OperationContract()]
+        [OperationContract]
         TEntity Clone(TEntity original, bool copyReferences);
 
     }

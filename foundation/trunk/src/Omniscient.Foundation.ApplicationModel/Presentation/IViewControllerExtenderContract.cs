@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.ApplicationModel.Presentation
+﻿namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
+    ///<summary>
+    ///</summary>
     public interface IViewControllerExtenderContract
     {
+        ///<summary>
+        ///</summary>
+        ///<param name="model"></param>
+        ///<returns></returns>
         IView GetView(IModel model);
     }
 }

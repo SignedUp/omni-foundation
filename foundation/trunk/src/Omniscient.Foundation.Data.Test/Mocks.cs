@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.Data
 {
@@ -9,7 +7,7 @@ namespace Omniscient.Foundation.Data
 
     public class Client : EntityBase
     {
-        public Client() : base() 
+        public Client()
         {
             Invoices = new EntityList<Invoice>();
         }
@@ -28,7 +26,8 @@ namespace Omniscient.Foundation.Data
 
     public class Invoice : EntityBase
     {
-        public Invoice() : base() { }
+        public Invoice()
+        { }
 
         public Invoice(Guid id, bool isLoaded) : base(id, isLoaded) { }
 
@@ -62,7 +61,7 @@ namespace Omniscient.Foundation.Data
             return null;
         }
 
-        public EntityList<Client> LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Client> query)
+        public EntityList<Client> LoadByObjectQuery(ObjectQuery.OQuery<Client> query)
         {
             return _list;
         }
@@ -120,7 +119,7 @@ namespace Omniscient.Foundation.Data
             return null;
         }
 
-        public EntityList<Invoice> LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<Invoice> query)
+        public EntityList<Invoice> LoadByObjectQuery(ObjectQuery.OQuery<Invoice> query)
         {
             EntityList<Invoice> invoices;
 

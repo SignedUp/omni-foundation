@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation
 {
@@ -29,7 +28,7 @@ namespace Omniscient.Foundation
         /// <param name="instance">Instance of object to store for later use.</param>
         public void Register<TObject>(TObject instance)
         {
-            this.Register(typeof(TObject), instance);
+            Register(typeof(TObject), instance);
         }
 
         public void Register<TObject>(ContainerItem<TObject> item)

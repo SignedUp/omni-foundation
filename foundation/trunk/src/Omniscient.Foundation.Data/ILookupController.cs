@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Omniscient.Foundation.Data
+﻿namespace Omniscient.Foundation.Data
 {
     /// <summary>
     /// Defines a controller that manages a certain type of lookups.

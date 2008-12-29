@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Omniscient.Foundation;
 using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
@@ -26,7 +23,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         void ViewClosed(IView view);
 
         /// <summary>
-        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit"/> would be called.
+        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit{TEntity}"/> would be called.
         /// </summary>
         /// <typeparam name="TEntity">The entity type.</typeparam>
         /// <param name="view">The view that wants to edit the entity.</param>

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Omniscient.Foundation.Data;
 using System.Diagnostics;
 
@@ -18,6 +16,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private List<IView> _openedViews;
         private Dictionary<string, IPresenter> _presenters;
 
+        ///<summary>
+        ///</summary>
         public PresentationController() : this(true) { }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         /// <summary>
-        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit"/> would be called.
+        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit{TEntity}"/> would be called.
         /// </summary>
         /// <typeparam name="TEntity">The entity type.</typeparam>
         /// <param name="view">The view that wants to edit the entity.</param>
@@ -150,7 +150,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             if (presenter == null) throw new ArgumentNullException("presenter");
             if (_presenters.ContainsKey(presenter.Name))
                 throw new InvalidOperationException(string.Format("A presenter with name {0} is already registered.  Choose another name for your presenter.", presenter.Name));
-            if (presenter.RequiresUserInput && !this.SupportsUserInput)
+            if (presenter.RequiresUserInput && !SupportsUserInput)
                 throw new InvalidOperationException("The presentation controller does not support user inputs.");
 
             _presenters.Add(presenter.Name, presenter);

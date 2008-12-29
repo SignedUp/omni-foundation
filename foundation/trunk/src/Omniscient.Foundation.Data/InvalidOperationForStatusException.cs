@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.Data
 {
@@ -17,7 +14,7 @@ namespace Omniscient.Foundation.Data
         public InvalidOperationForStatusException(EntityStatus invalidStatus)
             :base(string.Format("Invalid status {0} for this operation.", invalidStatus))
         {
-            this.Status = invalidStatus;
+            Status = invalidStatus;
         }
 
         /// <summary>

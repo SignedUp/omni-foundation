@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.ApplicationModel.Presentation
+﻿namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     /// <summary>
     /// The IPresenter gives direct access to the UI.  Contrary to <c>IViewController</c>s, which are the entry door to the MVC,

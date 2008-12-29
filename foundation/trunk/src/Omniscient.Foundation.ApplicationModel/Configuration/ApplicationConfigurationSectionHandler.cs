@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
+﻿using System.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -21,7 +17,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         /// <param name="configContext"></param>
         /// <param name="section"></param>
         /// <returns>A deserialized configuration.</returns>
-        public object Create(object parent, object configContext, System.Xml.XmlNode section)
+        public object Create(object parent, object configContext, XmlNode section)
         {
             XmlSerializer ser;
             ser = new XmlSerializer(typeof(ApplicationConfiguration));

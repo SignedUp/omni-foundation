@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 
 namespace Omniscient.Foundation.ApplicationModel
 {
-    [TestFixture()]
+    [TestFixture]
     public class ApplicationConfigurationTest
     {
-        [Test()]
+        [Test]
         public void TestReadConfig()
         {
             string xml =

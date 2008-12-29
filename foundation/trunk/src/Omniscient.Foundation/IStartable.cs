@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation
+﻿namespace Omniscient.Foundation
 {
     /// <summary>
     /// Defines a "startable" service.  Those services are informed of the application startup and shutdown.

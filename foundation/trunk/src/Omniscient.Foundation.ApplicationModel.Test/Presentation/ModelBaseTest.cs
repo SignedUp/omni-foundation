@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
-    [TestFixture()]
+    [TestFixture]
     public class ModelBaseTest
     {
-        [Test()]
+        [Test]
         public void CreateModelBase()
         {
             Client c;
-            c = new Client() { Name = "dave" };
+            c = new Client { Name = "dave" };
             ClientModel cm;
             cm = new ClientModel(c);
 

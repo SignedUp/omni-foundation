@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.ServiceModel
 {
+    ///<summary>
+    ///</summary>
+    ///<typeparam name="TContract"></typeparam>
     public abstract class ServiceBase<TContract>: IService
     {
         #region IService Members
 
         public string Name
         {
-            get { return this.GetType().Name; }
+            get { return GetType().Name; }
         }
 
         public Type ImplementationType
@@ -28,6 +28,9 @@ namespace Omniscient.Foundation.ServiceModel
 
         #region IService<TContract> Members
 
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
         public abstract TContract GetImplementation();
 
         #endregion

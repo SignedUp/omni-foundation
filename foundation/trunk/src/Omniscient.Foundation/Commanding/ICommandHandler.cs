@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.Commanding
+﻿namespace Omniscient.Foundation.Commanding
 {
+    ///<summary>
+    ///</summary>
     public interface ICommandHandler
     {
+        ///<summary>
+        ///</summary>
+        ///<param name="param"></param>
         void Execute(object param);
     }
 }

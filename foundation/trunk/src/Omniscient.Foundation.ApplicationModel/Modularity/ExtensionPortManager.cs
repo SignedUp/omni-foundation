@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Omniscient.Foundation.ApplicationModel.Modularity
+﻿namespace Omniscient.Foundation.ApplicationModel.Modularity
 {
+    ///<summary>
+    ///</summary>
     public class ExtensionPortManager: IExtensionPortManager
     {
         private IObjectContainer _container;
 
+        ///<summary>
+        ///</summary>
+        ///<param name="container"></param>
         public ExtensionPortManager(IObjectContainer container)
         {
             _container = container;
@@ -16,11 +16,19 @@ namespace Omniscient.Foundation.ApplicationModel.Modularity
 
         #region IExtensionPortManager Members
 
+        ///<summary>
+        ///</summary>
+        ///<param name="port"></param>
+        ///<typeparam name="TContract"></typeparam>
         public void RegisterExtensionPort<TContract>(IExtensionPort<TContract> port)
         {
             _container.Register(port);
         }
 
+        ///<summary>
+        ///</summary>
+        ///<typeparam name="TContract"></typeparam>
+        ///<returns></returns>
         public IExtensionPort<TContract> GetExtensionPort<TContract>()
         {
             return _container.Get<IExtensionPort<TContract>>();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Configuration;
 using System.Configuration.Provider;
 using System.Security.Cryptography;
 using System.Text;
@@ -97,7 +96,7 @@ namespace Omniscient.Foundation.Web.Security
             ILoggingService service;
             service = ApplicationManager.Current.ServiceProvider.GetService<ILoggingService>();
             if (service == null) return;
-            _logger = service.GetLogger(this.GetType());
+            _logger = service.GetLogger(GetType());
         }
 
         protected void LogDebug(object message)
@@ -248,7 +247,7 @@ namespace Omniscient.Foundation.Web.Security
                         _cache[username] = RetrieveUserPassword(username);
                     }
                 }
-                LogDebug("Returning from cache.  Value: " + result.ToString());
+                LogDebug("Returning from cache.  Value: " + result);
                 return result;
             }
             result = _provider.ValidateUser(username, password);
@@ -256,7 +255,7 @@ namespace Omniscient.Foundation.Web.Security
             {
                 _cache[username] = RetrieveUserPassword(username);
             }
-            LogDebug("Returning non-cached.  Value: " + result.ToString());
+            LogDebug("Returning non-cached.  Value: " + result);
             return result;
         }
 

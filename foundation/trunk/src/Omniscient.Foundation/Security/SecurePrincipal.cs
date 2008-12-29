@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Principal;
-using System.Security;
 using System.Runtime.Serialization;
 
 namespace Omniscient.Foundation.Security
@@ -11,12 +8,12 @@ namespace Omniscient.Foundation.Security
     /// <summary>
     /// Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
     /// </summary>
-    [DataContract()]
-    [Serializable()]
+    [DataContract]
+    [Serializable]
     public class SecurePrincipal : IPrincipal
     {
         private SecureIdentity _identity;
-        [DataMember()]
+        [DataMember]
         private List<string> _roles;
         
         /// <summary>
@@ -71,7 +68,7 @@ namespace Omniscient.Foundation.Security
         /// <summary>
         /// Gets the <c>SecureIdentity</c> of that principal.
         /// </summary>
-        [DataMember()]
+        [DataMember]
         public SecureIdentity Identity
         {
             get { return _identity; }

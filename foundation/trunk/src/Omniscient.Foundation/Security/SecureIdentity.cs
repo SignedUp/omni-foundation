@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Principal;
 using System.Runtime.Serialization;
 using System.Security;
@@ -12,13 +9,13 @@ namespace Omniscient.Foundation.Security
     /// Implementation of <c>IIdentity</c> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
     /// to authenticated with a name, password and an authentication type.
     /// </summary>
-    [DataContract()]
-    [Serializable()]
+    [DataContract]
+    [Serializable]
     public class SecureIdentity: IIdentity
     {
         private string _name;
         private string _authType;
-        [NonSerialized()]
+        [NonSerialized]
         private SecureString _password;
 
         /// <summary>
@@ -55,15 +52,17 @@ namespace Omniscient.Foundation.Security
         /// </summary>
         /// <remarks>The password is allowed to be null.</remarks>
         /// <param name="name">The username used to authenticate.</param>
+        /// <param name="password">The password used to authenticate.</param>
         public void Promote(string name, SecureString password)
         {
-            this.Promote(name, password, string.Empty);
+            Promote(name, password, string.Empty);
         }
 
         /// <summary>
         /// Promotes the identity with a username.  The identity is then considered authenticated.
         /// </summary>
         /// <param name="name">The username used to authenticate.</param>
+        /// <param name="password">The password used to authenticate.</param>
         /// <param name="authenticationType">The authentication type used to authenticate.</param>
         public void Promote(string name, SecureString password, string authenticationType)
         {
@@ -88,7 +87,7 @@ namespace Omniscient.Foundation.Security
         /// <summary>
         /// Gets the authentication mechanism used to authenticate the user.
         /// </summary>
-        [DataMember()]
+        [DataMember]
         public string AuthenticationType
         {
             get { return _authType; }
@@ -106,7 +105,7 @@ namespace Omniscient.Foundation.Security
         /// <summary>
         /// Gets the name of the user represented by this Identity.
         /// </summary>
-        [DataMember()]
+        [DataMember]
         public string Name
         {
             get { return _name; }

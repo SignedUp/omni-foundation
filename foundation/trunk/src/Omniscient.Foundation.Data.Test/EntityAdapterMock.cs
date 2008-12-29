@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omniscient.Foundation.Data
 {
@@ -12,7 +10,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> Fetch(Omniscient.Foundation.Data.ObjectQuery.OQuery<EntityMock> query)
+        public EntityList<EntityMock> Fetch(ObjectQuery.OQuery<EntityMock> query)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +33,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery<EntityMock> query)
+        public EntityList<EntityMock> LoadByObjectQuery(ObjectQuery.OQuery<EntityMock> query)
         {
             throw new NotImplementedException();
         }

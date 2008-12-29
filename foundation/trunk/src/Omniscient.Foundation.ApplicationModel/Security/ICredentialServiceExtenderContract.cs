@@ -1,4 +1,5 @@
 ﻿using Omniscient.Foundation.Security;
+
 namespace Omniscient.Foundation.ApplicationModel.Security
 {
     /// <summary>

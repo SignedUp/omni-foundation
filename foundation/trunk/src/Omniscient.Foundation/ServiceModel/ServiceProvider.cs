@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
 
 namespace Omniscient.Foundation.ServiceModel
 {
@@ -64,7 +60,7 @@ namespace Omniscient.Foundation.ServiceModel
         /// <param name="service">An instance of a service class.</param>
         public void RegisterService<TContract>(IService service)
         {
-            this.RegisterService(typeof(TContract), service);
+            RegisterService(typeof(TContract), service);
         }
 
         /// <summary>
