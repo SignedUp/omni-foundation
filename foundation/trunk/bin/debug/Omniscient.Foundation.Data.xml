@@ -159,7 +159,7 @@
         </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.AcceptChanges(`0)">
             <summary>
-            Use this fonction to accept changes on an entity.  Use <see cref="!:IEntityAdapter"/> to save it to the database.
+            Use this fonction to accept changes on an entity.  Use <see cref="T:Omniscient.Foundation.Data.IEntityAdapter`1"/> to save it to the database.
             </summary>
             <remarks>
             If Status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/>, then the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
@@ -405,6 +405,19 @@
             <param name="id">The unique id of the entity that is sought.</param>
             <returns>Returns the entity if found; Otherwise, returns Null.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByForeignKey(System.String,System.Guid)">
+            <summary>
+            </summary>
+            <param name="propertyName"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByQuery(System.String)">
+            <summary>
+            </summary>
+            <param name="queryName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
             <summary>
             Retrieves an entity from the database by an object query.
@@ -412,11 +425,28 @@
             <param name="query">The object query to search entities.</param>
             <returns>An array of entities that are found using the given object query.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByValueProperty(System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="propertyName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadAll">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
             <summary>
             Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
             </summary>
             <param name="entity">The entity to save.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            </summary>
+            <param name="entities"></param>
         </member>
         <member name="T:Omniscient.Foundation.Data.ILookup">
             <summary>

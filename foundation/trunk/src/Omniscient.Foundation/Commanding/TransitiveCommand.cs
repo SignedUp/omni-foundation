@@ -9,12 +9,18 @@ namespace Omniscient.Foundation.Commanding
     public class TransitiveCommand: ICommandCore
     {
         private List<ICommandHandler> _handlers;
+        private List<ICommandHandler> _registeredHandlers;
+        private List<ICommandHandler> _unregisteredHandlers;
+        private bool _isExecuting;
 
         ///<summary>
         ///</summary>
         public TransitiveCommand()
         {
             _handlers = new List<ICommandHandler>();
+            _registeredHandlers = new List<ICommandHandler>();
+            _unregisteredHandlers = new List<ICommandHandler>();
+            _isExecuting = false;
         }
 
         ///<summary>
@@ -22,8 +28,15 @@ namespace Omniscient.Foundation.Commanding
         ///<param name="handler"></param>
         public void RegisterHandler(ICommandHandler handler)
         {
-            _handlers.Add(handler);
-            if (_handlers.Count == 1 && CanExecuteChanged != null) CanExecuteChanged(this, EventArgs.Empty);
+            if(_isExecuting)
+            {
+                _registeredHandlers.Add(handler);
+            }
+            else
+            {
+                _handlers.Add(handler);
+                if (_handlers.Count == 1 && CanExecuteChanged != null) CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
 
         ///<summary>
@@ -31,8 +44,15 @@ namespace Omniscient.Foundation.Commanding
         ///<param name="handler"></param>
         public void UnregisterHandler(ICommandHandler handler)
         {
-            _handlers.Remove(handler);
-            if (_handlers.Count == 0 && CanExecuteChanged != null) CanExecuteChanged(this, EventArgs.Empty);
+            if (_isExecuting)
+            {
+                _unregisteredHandlers.Add(handler);
+            }
+            else
+            {
+                _handlers.Remove(handler);
+                if (_handlers.Count == 0 && CanExecuteChanged != null) CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
 
         #region ICommandCore Members
@@ -46,9 +66,19 @@ namespace Omniscient.Foundation.Commanding
 
         public virtual void Execute(object param)
         {
+            _isExecuting = true;
             foreach (ICommandHandler handler in _handlers)
             {
                 handler.Execute(param);
+            }
+            _isExecuting = false;
+            foreach(ICommandHandler handler in _registeredHandlers)
+            {
+                RegisterHandler(handler);
+            }
+            foreach(ICommandHandler handler in _unregisteredHandlers)
+            {
+                UnregisterHandler(handler);
             }
         }
 
