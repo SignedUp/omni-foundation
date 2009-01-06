@@ -4,6 +4,14 @@
         <name>Omniscient.Foundation.ApplicationModel</name>
     </assembly>
     <members>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition.Type">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewController">
             <summary>
             Defines a view controller.
@@ -61,6 +69,14 @@
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration">
             <summary>
             Placeholder for modules configuration.  Contains a list of service definitions.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration.Modules">
+            <summary>
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelMultiEntitiesBase`1">
@@ -160,7 +176,7 @@
             Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
             If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
             </summary>
-            <exception cref="!:InvalidOperationException">The service must rely on extenders to ask for username and password;
+            <exception cref="T:System.InvalidOperationException">The service must rely on extenders to ask for username and password;
             therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.CurrentPrincipal">
@@ -252,6 +268,10 @@
             that requires user input will fail.
             </summary>
         </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor">
+            <summary>
+            </summary>
+        </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor(System.Boolean)">
             <summary>
             Ctor.
@@ -301,6 +321,43 @@
             Gets the list of view controllers.  Default use is to feed that list at application startup.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPortManager">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPortManager.RegisterExtensionPort``1(Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort{``0})">
+            <summary>
+            </summary>
+            <param name="port"></param>
+            <typeparam name="TContract"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPortManager.GetExtensionPort``1">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager.#ctor(Omniscient.Foundation.IObjectContainer)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager.RegisterExtensionPort``1(Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort{``0})">
+            <summary>
+            </summary>
+            <param name="port"></param>
+            <typeparam name="TContract"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager.GetExtensionPort``1">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort">
             <summary>
             Defines a general extension port
@@ -327,6 +384,16 @@
             <summary>
             Gets the list of plugged-in extenders
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtender`1">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtender`1.GetImplementation">
+            <summary>
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
             <summary>
@@ -433,6 +500,16 @@
             value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract.GetView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
             Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
@@ -447,6 +524,14 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ServicesConfiguration">
             <summary>
             Services section.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ModulesConfiguration">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ContainerConfiguration">
+            <summary>
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
@@ -466,6 +551,51 @@
             Gets or sets the Model.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerConfiguration">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerConfiguration.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerConfiguration.Items">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerAdd">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerAdd.KeyType">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerAdd.ObjectType">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerRemove">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerRemove.TypeName">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerClear">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortBase`1">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortBase`1.#ctor">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1">
             <summary>
             Base class for models with a single entity as the root.
@@ -480,6 +610,14 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1.Entity">
             <summary>
             Gets the root entity.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IModule">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IModule.PresentationController">
+            <summary>
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
@@ -561,7 +699,7 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
             <summary>
-            Optional.  Any configuration needed by a service that implements <see cref="!:Omniscient.Foundation.ServiceModel.IConfigurable"/>.
+            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.IConfigurable"/>.
             </summary>
         </member>
     </members>

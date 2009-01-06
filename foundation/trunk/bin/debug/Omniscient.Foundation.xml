@@ -50,6 +50,10 @@
             Gets the <c>SecureIdentity</c> of that principal.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Commanding.TransitiveCommand">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
             <summary>
             Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
@@ -80,6 +84,20 @@
             Raised when the command's availability changes.
             </summary>
         </member>
+        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.RegisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
+            <summary>
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.UnregisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
+            <summary>
+            </summary>
+            <param name="handler"></param>
+        </member>
         <member name="T:Omniscient.Foundation.IConfigurable">
             <summary>
             Defines a configurable service.  Implement this interface when you need your service to receive configuration.
@@ -107,6 +125,11 @@
             <typeparam name="TContract">Service's contract type.</typeparam>
             <typeparam name="TImplementation">Implementation type.</typeparam>
         </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.IService">
             <summary>
             Defines the base interface for a service.
@@ -127,6 +150,11 @@
             <summary>
             Gets the implementation's contract type of the service.
             </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
+            <summary>
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
             <summary>
@@ -168,12 +196,14 @@
             </summary>
             <remarks>The password is allowed to be null.</remarks>
             <param name="name">The username used to authenticate.</param>
+            <param name="password">The password used to authenticate.</param>
         </member>
         <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString,System.String)">
             <summary>
             Promotes the identity with a username.  The identity is then considered authenticated.
             </summary>
             <param name="name">The username used to authenticate.</param>
+            <param name="password">The password used to authenticate.</param>
             <param name="authenticationType">The authentication type used to authenticate.</param>
         </member>
         <member name="P:Omniscient.Foundation.Security.SecureIdentity.Password">
@@ -197,6 +227,22 @@
             Gets the name of the user represented by this Identity.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Logging.ILoggingService">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILoggingService.GetLogger(System.String)">
+            <summary>
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILoggingService.GetLogger(System.Type)">
+            <summary>
+            </summary>
+            <param name="logSource"></param>
+            <returns></returns>
+        </member>
         <member name="T:Omniscient.Foundation.IObjectContainer">
             <summary>
             Defines an object container where objects of certain types can be registered and later gathered.
@@ -208,6 +254,12 @@
             </summary>
             <typeparam name="TObject">Type of the registered object.  Used as the key.</typeparam>
             <param name="instance">Instance of object to store for later use.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.IObjectContainer.Register``1(Omniscient.Foundation.ContainerItem{``0})">
+            <summary>
+            </summary>
+            <param name="item"></param>
+            <typeparam name="TObject"></typeparam>
         </member>
         <member name="M:Omniscient.Foundation.IObjectContainer.Register(System.Type,System.Object)">
             <summary>
@@ -224,10 +276,78 @@
             <typeparam name="TObject">The type of the object to store.</typeparam>
             <returns>Registered object as a singleton.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.IObjectContainer.Clear">
+            <summary>
+            </summary>
+        </member>
         <member name="P:Omniscient.Foundation.IObjectContainer.AllObjects">
             <summary>
             Gets all registered objects as a flat array of objects.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.DelegateCommandHandler">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICommandHandler">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandHandler.Execute(System.Object)">
+            <summary>
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.#ctor(System.Action{System.Object})">
+            <summary>
+            </summary>
+            <param name="executeMethod"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.Execute(System.Object)">
+            <summary>
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.FromSecureString(System.Security.SecureString)">
+            <summary>
+            </summary>
+            <param name="secureString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.ToSecureString(System.String)">
+            <summary>
+            </summary>
+            <param name="regularString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Logging.ILogger">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Debug(System.Object)">
+            <summary>
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Info(System.Object)">
+            <summary>
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Error(System.Object)">
+            <summary>
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Fatal(System.Object)">
+            <summary>
+            </summary>
+            <param name="message"></param>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
             <summary>
@@ -259,6 +379,10 @@
             </summary>
             <param name="contract">Service's contract type.</param>
             <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.Clear">
+            <summary>
+            </summary>
         </member>
         <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.AllServices">
             <summary>
@@ -322,6 +446,31 @@
             Called when the application shuts down.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingletonService`2.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingletonService`2.GetImplementation">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.IRoleProvider">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IRoleProvider.GetRolesForUser(System.String)">
+            <summary>
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
         <member name="T:Omniscient.Foundation.ObjectContainer">
             <summary>
             Default implementation for <see cref="T:Omniscient.Foundation.IObjectContainer"/>.
@@ -350,6 +499,25 @@
             <summary>
             Gets all registered objects as a flat array of objects.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ContainerItem`1">
+            <summary>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ContainerItem`1.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ContainerItem`1.#ctor(`0)">
+            <summary>
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.ContainerItem`1.GetInstance">
+            <summary>
+            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>
