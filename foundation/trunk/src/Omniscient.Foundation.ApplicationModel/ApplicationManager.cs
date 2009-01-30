@@ -75,12 +75,6 @@ namespace Omniscient.Foundation.ApplicationModel
             set;
         }
 
-        public IExtensionPortManager ExtensionPortManager
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Gets the deserialized configuration.
         /// </summary>
@@ -123,7 +117,6 @@ namespace Omniscient.Foundation.ApplicationModel
             if (ServiceProvider == null) ServiceProvider = new ServiceProvider();
             if (PresentationController == null) PresentationController = new PresentationController();
             if (ObjectContainer == null) ObjectContainer = new ObjectContainer();
-            if (ExtensionPortManager == null) ExtensionPortManager = new ExtensionPortManager(ObjectContainer);
 
             if (_config != null)
             {
