@@ -3,6 +3,7 @@ using System.Linq;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 using Omniscient.Foundation.Security;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.ApplicationModel.Security
 {
@@ -10,9 +11,15 @@ namespace Omniscient.Foundation.ApplicationModel.Security
     /// Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
     /// as the AppDomain's principal.
     /// </summary>
-    public class CredentialService : ServiceModel.ServiceBase<ICredentialService>, ICredentialService
+    public class CredentialService : ServiceModel.ServiceBase<ICredentialService>, ICredentialService, IExpandable<ICredentialServiceExtender>
     {
         private SecurePrincipal _current;
+        private List<IExtender<ICredentialServiceExtender>> _extenders;
+
+        public CredentialService()
+        {
+            _extenders = new List<IExtender<ICredentialServiceExtender>>();
+        }
 
         /// <summary>
         /// Retrieves implementation for ICredentialService.
@@ -36,13 +43,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
             if (_current.Identity.IsAuthenticated) return;
             Debug.Assert(CurrentPrincipal != null);
 
-            IExtensionPortManager manager = ApplicationManager.Current.ExtensionPortManager;
-            IExtensionPort<ICredentialServiceExtenderContract> port;
-            port = manager.GetExtensionPort<ICredentialServiceExtenderContract>();
-            if (port.Extenders.Count() < 1) throw new InvalidOperationException
-                ("No extender found for extension port ICredentialServiceExtenderContract.  The service is unable to ensure that user is authenticated by itself.");
-
-            foreach (IExtender<ICredentialServiceExtenderContract> extender in port.Extenders)
+            foreach (IExtender<ICredentialServiceExtender> extender in this.Extenders)
             {
                 extender.GetImplementation().NegociateAuthentication(CurrentPrincipal);
                 if (CurrentPrincipal.Identity.IsAuthenticated) return;
@@ -67,12 +68,6 @@ namespace Omniscient.Foundation.ApplicationModel.Security
         /// </summary>
         public virtual void Start()
         {
-            IExtensionPortManager manager = ApplicationManager.Current.ExtensionPortManager;
-            if (manager.GetExtensionPort<ICredentialServiceExtenderContract>() == null)
-            {
-                manager.RegisterExtensionPort(new ExtensionPortBase<ICredentialServiceExtenderContract>());
-            }
-
             //Create an anonymous user on service startup.
             _current = new SecurePrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(_current);
@@ -82,6 +77,20 @@ namespace Omniscient.Foundation.ApplicationModel.Security
         /// Stops the current service.
         /// </summary>
         public virtual void Stop() { }
+
+        #endregion
+
+        #region IExpandable<ICredentialServiceExtender> Members
+
+        public void Register(IExtender<ICredentialServiceExtender> extender)
+        {
+            _extenders.Add(extender);
+        }
+
+        public System.Collections.Generic.IEnumerable<IExtender<ICredentialServiceExtender>> Extenders
+        {
+            get { return _extenders.ToArray(); ; }
+        }
 
         #endregion
     }

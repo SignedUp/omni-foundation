@@ -5,7 +5,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
     /// <summary>
     /// Defines an Extender contract for prompting a user for his/her credential.
     /// </summary>
-    public interface ICredentialServiceExtenderContract
+    public interface ICredentialServiceExtender
     {
         /// <summary>
         /// Prompts a user for his/her credential and returns it.
