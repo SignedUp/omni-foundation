@@ -11,6 +11,7 @@ namespace Omniscient.Foundation.Data
         where TEntity: IEntity
     {
         private Dictionary<Guid, TEntity> _clones;
+        private Dictionary<IEntityModificationObserver<TEntity>, EntityList<TEntity>> _observers;
 
         /// <summary>
         /// Ctor.
@@ -18,6 +19,7 @@ namespace Omniscient.Foundation.Data
         public EntityController()
         {
             _clones = new Dictionary<Guid, TEntity>();
+            _observers = new Dictionary<IEntityModificationObserver<TEntity>, EntityList<TEntity>>();
         }
 
         /// <summary>
@@ -91,6 +93,14 @@ namespace Omniscient.Foundation.Data
                     throw new InvalidOperationForStatusException(entity.Status);
             }
             if (_clones.ContainsKey(entity.Id)) _clones.Remove(entity.Id);
+
+            foreach(IEntityModificationObserver<TEntity> observer in _observers.Keys)
+            {
+                if(_observers[observer].Contains(entity))
+                {
+                    observer.Notify(entity);
+                }
+            }
         }
 
         /// <summary>
@@ -148,6 +158,15 @@ namespace Omniscient.Foundation.Data
             original.CopyTo(clone, copyReferences);
             clone.Status = EntityStatus.Clone;
             return clone;
+        }
+
+        public void RegisterObserver(IEntityModificationObserver<TEntity> observer, EntityList<TEntity> list)
+        {
+            if(_observers.ContainsKey(observer))
+            {
+                throw new ArgumentException("Observer is already registered.");
+            }
+            _observers.Add(observer, list);
         }
     }
 }

@@ -54,5 +54,9 @@ namespace Omniscient.Foundation.Data
         [OperationContract]
         TEntity Clone(TEntity original, bool copyReferences);
 
+        /// <summary>
+        /// </summary>
+        [OperationContract]
+        void RegisterObserver(IEntityModificationObserver<TEntity> observer, EntityList<TEntity> list); 
     }
 }
