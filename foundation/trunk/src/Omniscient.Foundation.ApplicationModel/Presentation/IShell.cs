@@ -4,7 +4,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     /// <summary>
     /// The shell is the main window in an application.  It defines placeholders for displaying <c>IModel</c> objects,
-    /// which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information, through the
+    /// which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information (like commands) through the
     /// use of <c>IPresenter</c> objects.
     /// </summary>
     public interface IShell

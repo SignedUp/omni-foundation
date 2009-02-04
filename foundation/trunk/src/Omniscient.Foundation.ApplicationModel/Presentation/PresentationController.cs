@@ -143,6 +143,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                     v.UpdateView();
                 }
             }
+            lock (_lock)
+            {
+                if (!_locks.ContainsKey(entity.Id))
+                    throw new InvalidOperationException(string.Format("Entity {0} is not being edited.", entity));
+                _locks.Remove(entity.Id);
+            }
         }
 
         public void RegisterPresenter(IPresenter presenter)
