@@ -6,24 +6,31 @@ using System.Text;
 namespace Omniscient.Foundation.Commanding
 {
     /// <summary>
+    /// Defines a composite command.  When executed, a composite command is executing all its children commands.  
+    /// See <see cref="CompositeCommand"/> for default implementation.
+    /// </summary>
+    public interface ICompositeCommand : ICommandCore
+    {
+        ICollection<ICommandCore> Commands { get; }
+    }
+
+    /// <summary>
     /// Base class for composite commands.  When executed, a composite command is executing all its children commands.
     /// </summary>
-    /// <typeparam name="TComposite">The type of the children commands.</typeparam>
-    public class CompositeCommand<TComposite>: ICommandCore
-        where TComposite: ICommandCore
+    public class CompositeCommand: ICompositeCommand
     {
         /// <summary>
         /// default constructor
         /// </summary>
         public CompositeCommand()
         {
-            Commands = new List<TComposite>();
+            Commands = new List<ICommandCore>();
         }
 
         /// <summary>
         /// Gets the list of children (composed) commands.  Upon execution, those children commands will be executed sequentially.
         /// </summary>
-        public List<TComposite> Commands
+        public virtual ICollection<ICommandCore> Commands
         {
             get;
             private set;
@@ -53,12 +60,16 @@ namespace Omniscient.Foundation.Commanding
         public virtual void Execute(object param) 
         {
             if (!CanExecute(param)) return;
-            foreach (TComposite child in Commands)
+            foreach (ICommandCore child in Commands)
             {
                 child.Execute(param);
             }
         }
 
+        /// <summary>
+        /// Gets the name of the command.
+        /// </summary>
+        public virtual string Name { get { return this.GetType().Name; } }
         #endregion
     }
 }

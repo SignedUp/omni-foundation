@@ -31,5 +31,10 @@ namespace Omniscient.Foundation.Commanding
         /// </summary>
         /// <param name="param">Any value needed for execution.</param>
         void Execute(object param);
+
+        /// <summary>
+        /// Gets the name of the command.
+        /// </summary>
+        string Name { get; }
     }
 }

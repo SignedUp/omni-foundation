@@ -59,6 +59,8 @@ namespace Omniscient.Foundation.Commanding
 
         public event EventHandler CanExecuteChanged;
 
+        public string Name { get { return this.GetType().Name; } }
+
         public virtual bool CanExecute(object param)
         {
             return _handlers.Count > 0;
