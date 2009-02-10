@@ -72,6 +72,9 @@
     <Compile Include="Modularity\IExtender.cs" />
     <Compile Include="Modularity\IExpandable.cs" />
     <Compile Include="Modularity\IModule.cs" />
+    <Compile Include="Presentation\IPresentableCommandObject.cs" />
+    <Compile Include="Presentation\IPresentableHierarchicalObject.cs" />
+    <Compile Include="Presentation\IPresentableObject.cs" />
     <Compile Include="Presentation\IPresenter.cs" />
     <Compile Include="Presentation\IShell.cs" />
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
