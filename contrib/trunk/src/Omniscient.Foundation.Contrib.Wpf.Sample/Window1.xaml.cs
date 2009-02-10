@@ -12,8 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using WpfPresenters;
 using Omniscient.Foundation.Commanding;
+using Omniscient.Foundation.Contrib.Wpf.Commands;
 
 namespace Omniscient.Foundation.Contrib.Wpf.Sample
 {
@@ -23,6 +23,7 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
     public partial class Window1 : Window
     {
         private NotifyIconPresenter _presenter;
+        private ObservableHierarchicalCommandObject _cmdItem;
 
         public Window1()
         {
@@ -32,6 +33,9 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _presenter.WriteMessage(TextBoxMessage.Text);
+            _cmdItem.Children[1].Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1.1" });
+            _cmdItem.Children[1].Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1.2" });
+            _cmdItem.Children[1].Text = "hahahahahahah";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -41,14 +45,23 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
             ImageSource icon = BitmapFrame.Create(ico);
             _presenter = new NotifyIconPresenter(icon);
 
+            //_cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left);
+            _cmdItem = new ObservableHierarchicalCommandObject();
+            _cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1" });
+            _cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2", Command = new MessageboxCommand("myItem 2 message") });
+            _cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.1", Command = new MessageboxCommand("myItem 1.1 message") });
+            _cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.2", Command = new MessageboxCommand("myItem 1.2 message") });
+            _cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.3" });
+            _cmdItem.Children[1].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1" });
+            _cmdItem.Children[1].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.2" });
+            this.ContextMenu.ItemsSource = _cmdItem.Children;
+
             ContextMenu menu;
             MenuItem item;
             ContextMenuCommand cmd;
 
             menu = new ContextMenu();
-            item = new MenuItem();
-            item.Header = "left click";
-            menu.Items.Add(item);
+
             menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
             cmd = new ContextMenuCommand(menu);
             _presenter.LeftClickCommand = cmd;
@@ -63,13 +76,13 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
         }
     }
 
-    public class ContextMenuCommand : ICommandCore
+    public class MessageboxCommand : ICommandCore, ICommand
     {
-        private ContextMenu _menu;
+        private string _msg;
 
-        public ContextMenuCommand(ContextMenu menu)
+        public MessageboxCommand(string msg)
         {
-            _menu = menu;
+            _msg = msg;
         }
 
         #region ICommandCore Members
@@ -83,11 +96,15 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
 
         public void Execute(object param)
         {
-            Application.Current.MainWindow.Activate();
-            if (_menu.IsOpen) _menu.IsOpen = false;
-            else _menu.IsOpen = true;
+            MessageBox.Show(_msg);
+        }
+
+        public string Name
+        {
+            get { return this.GetType().Name; }
         }
 
         #endregion
     }
+
 }

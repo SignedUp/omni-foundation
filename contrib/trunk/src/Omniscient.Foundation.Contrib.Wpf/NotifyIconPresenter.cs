@@ -12,8 +12,9 @@ using Omniscient.Foundation.Commanding;
 using System.Windows.Controls;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
-namespace WpfPresenters
+namespace Omniscient.Foundation.Contrib.Wpf
 {
     /// <summary>
     /// That presenter displays an icon in the notification area. Messages sent to the presenter are displayed in a balloon that floats
@@ -72,6 +73,20 @@ namespace WpfPresenters
             {
                 RightClickCommand.Execute(sender);
             }
+        }
+
+        /// <summary>
+        /// Creates a contextual menu and associates it to the left- or right-click command.
+        /// </summary>
+        /// <param name="mouseClickButton">Either <see cref="MouseButton.Left"/> or <see cref="MouseButton.Right"/>.  The contextual menu will
+        /// be associated with that button's click event.</param>
+        /// <exception cref="ArgumentException">Raised if <paramref name="mouseClickButton"/> is neither <see cref="MouseButton.Left"/> nor <see cref="MouseButton.Right"/>.</exception>
+        public ObservableHierarchicalCommandObject CreateHierarchicalMenu(MouseButton mouseClickButton)
+        {
+            if (mouseClickButton != MouseButton.Left && mouseClickButton != MouseButton.Right)
+                throw new ArgumentException(string.Format("Mouse button {0} not supported.", mouseClickButton.ToString()));
+
+            return null;
         }
 
         /// <summary>
