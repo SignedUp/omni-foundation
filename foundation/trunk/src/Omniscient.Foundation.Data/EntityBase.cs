@@ -8,7 +8,9 @@ namespace Omniscient.Foundation.Data
     /// Base class for entities.
     /// </summary>
     [DataContract]
+#if (!SILVERLIGHT)
     [Serializable]
+#endif
     public class EntityBase: IEntity
     {
         /// <summary>
