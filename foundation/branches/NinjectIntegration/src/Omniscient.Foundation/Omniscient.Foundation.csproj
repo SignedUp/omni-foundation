@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Omniscient.Foundation</RootNamespace>
+    <AssemblyName>Omniscient.Foundation</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Omniscient.Foundation.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugAndCopyBinaries|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugAndCopyBinaries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Omniscient.Foundation.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commanding\CompositeCommand.cs" />
+    <Compile Include="Commanding\DelegateCommandHandler.cs" />
+    <Compile Include="Commanding\ICommandCore.cs" />
+    <Compile Include="Commanding\ICommandHandler.cs" />
+    <Compile Include="Commanding\TransitiveCommand.cs" />
+    <Compile Include="ContainerItem.cs" />
+    <Compile Include="IObjectContainer.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggingService.cs" />
+    <Compile Include="ObjectContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\IRoleProvider.cs" />
+    <Compile Include="Security\SecureIdentity.cs" />
+    <Compile Include="Security\SecurePrincipal.cs" />
+    <Compile Include="Security\SecureStringConverter.cs" />
+    <Compile Include="ServiceModel\GenericSingleCallService.cs" />
+    <Compile Include="ServiceModel\GenericSingletonService.cs" />
+    <Compile Include="IConfigurable.cs" />
+    <Compile Include="ServiceModel\IService.cs" />
+    <Compile Include="ServiceModel\IServiceProvider.cs" />
+    <Compile Include="IStartable.cs" />
+    <Compile Include="ServiceModel\ServiceBase.cs" />
+    <Compile Include="ServiceModel\ServiceProvider.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetPath) $(SolutionDir)..\bin\debug\$(TargetFileName) /B
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetDir)$(TargetName).pdb $(SolutionDir)..\bin\debug\$(TargetName).pdb /B
+IF $(ConfigurationName) == DebugAndCopyBinaries copy /A /Y $(TargetDir)$(TargetName).xml $(SolutionDir)..\bin\debug\$(TargetName).xml /A</PostBuildEvent>
+  </PropertyGroup>
+</Project>
