@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Diagnostics;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using Omniscient.Foundation.Contrib.Wpf.Commands;
 
 namespace Omniscient.Foundation.Contrib.Wpf
 {
@@ -27,7 +28,8 @@ namespace Omniscient.Foundation.Contrib.Wpf
     public class NotifyIconPresenter: IPresenter
     {
         private NotifyIcon _icon;
-                                                                                               
+        private ObservableHierarchicalCommandObject _leftClickMenu, _rightClickMenu;
+                                                                                       
         /// <summary>
         /// Creates the presenter with a primary icon to display in the notification area.
         /// </summary>
@@ -44,6 +46,7 @@ namespace Omniscient.Foundation.Contrib.Wpf
             _icon.MouseClick += new System.Windows.Input.MouseButtonEventHandler(_icon_MouseClick);
             _icon.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(_icon_MouseDoubleClick);
             _icon.BalloonTipClick += new RoutedEventHandler(_icon_BalloonTipClick);
+
         }
 
         void _icon_BalloonTipClick(object sender, RoutedEventArgs e)
@@ -76,17 +79,78 @@ namespace Omniscient.Foundation.Contrib.Wpf
         }
 
         /// <summary>
-        /// Creates a contextual menu and associates it to the left- or right-click command.
+        /// Creates a contextual menu and associates it to the left- or right-click command.  Uses the <see cref="StandardCommandContextMenu"/>.
+        /// To use your own menu, with custom data template and style, call the overload that takes a menu.
         /// </summary>
         /// <param name="mouseClickButton">Either <see cref="MouseButton.Left"/> or <see cref="MouseButton.Right"/>.  The contextual menu will
         /// be associated with that button's click event.</param>
         /// <exception cref="ArgumentException">Raised if <paramref name="mouseClickButton"/> is neither <see cref="MouseButton.Left"/> nor <see cref="MouseButton.Right"/>.</exception>
         public ObservableHierarchicalCommandObject CreateHierarchicalMenu(MouseButton mouseClickButton)
         {
+            ContextMenu menu;
+            menu = new StandardCommandContextMenu();
+            return CreateHierarchicalMenu(mouseClickButton, menu);
+        }
+
+        /// <summary>
+        /// Creates a contextual menu and associates it to the left- or right-click command.  That method will bind a new
+        /// <see cref="ObservableHierarchicalCommandObject"/> to the menu; essentially, you call this overload only when you want
+        /// to provide you own template and style for the menu.  Otherwise, call the overload that takes a single argument, or pass
+        /// a <see cref="StandardCommandContextMenu"/> which has all the templates it needs to build the menu correctly.
+        /// </summary>
+        /// <param name="mouseClickButton">Either <see cref="MouseButton.Left"/> or <see cref="MouseButton.Right"/>.  The contextual menu will
+        /// be associated with that button's click event.</param>
+        /// <param name="menu">A context menu.  By default, you should use <see cref="StandardCommandContextMenu"/>.</param>
+        /// <exception cref="ArgumentException">Raised if <paramref name="mouseClickButton"/> is neither <see cref="MouseButton.Left"/> nor <see cref="MouseButton.Right"/>.</exception>
+        /// <exception cref="ArgumentNullException">Raised if <paramref name="menu"/> is null.</exception>
+        public ObservableHierarchicalCommandObject CreateHierarchicalMenu(MouseButton mouseClickButton, ContextMenu menu)
+        {
             if (mouseClickButton != MouseButton.Left && mouseClickButton != MouseButton.Right)
                 throw new ArgumentException(string.Format("Mouse button {0} not supported.", mouseClickButton.ToString()));
 
-            return null;
+            if (menu == null) throw new ArgumentNullException("menu");
+
+            ObservableHierarchicalCommandObject menuItems;
+            ContextMenuCommand cmd;
+
+            menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+            cmd = new ContextMenuCommand(menu);
+            menuItems = new ObservableHierarchicalCommandObject();
+            menu.ItemsSource = menuItems.Children;
+
+            if (mouseClickButton == MouseButton.Left)
+            {
+                _leftClickMenu = menuItems;
+                this.LeftClickCommand = cmd;
+            }
+            else
+            {
+                _rightClickMenu = menuItems;
+                this.RightClickCommand = cmd;
+            }
+            return menuItems;
+        }
+
+        public ObservableHierarchicalCommandObject LeftClickMenu
+        {
+            get { return _leftClickMenu; }
+        }
+
+        public ObservableHierarchicalCommandObject RightClickMenu
+        {
+            get { return _rightClickMenu; }
+        }
+
+        public HierarchicalDataTemplate MenuTemplate
+        {
+            get;
+            set;
+        }
+
+        public Style MenuStyle
+        {
+            get;
+            set;
         }
 
         /// <summary>
