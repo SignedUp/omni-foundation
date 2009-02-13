@@ -3,21 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:p="clr-namespace:Omniscient.Foundation.Contrib.Wpf;assembly=Omniscient.Foundation.Contrib.Wpf"
     Title="Window1" Height="121" Width="300" Loaded="Window_Loaded">
-    <Window.ContextMenu>
-        <ContextMenu>
-            <ContextMenu.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type TypeName=p:ObservableHierarchicalCommandObject}" ItemsSource="{Binding Path=Children}">
-                    <TextBlock Text="{Binding Path=Text}" />
-                </HierarchicalDataTemplate>
-            </ContextMenu.Resources>
-            <ContextMenu.ItemContainerStyle>
-                <Style TargetType="{x:Type MenuItem}">
-                    <Setter Property="Command" Value="{Binding Path=Command}" />
-                </Style>
-            </ContextMenu.ItemContainerStyle>
-        </ContextMenu>
-    </Window.ContextMenu>
-    
     <StackPanel>
         <DockPanel DockPanel.Dock="Top" Margin="6">
             <Label>Message :</Label>
