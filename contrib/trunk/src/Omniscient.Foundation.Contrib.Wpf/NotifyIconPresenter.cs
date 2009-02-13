@@ -141,18 +141,6 @@ namespace Omniscient.Foundation.Contrib.Wpf
             get { return _rightClickMenu; }
         }
 
-        public HierarchicalDataTemplate MenuTemplate
-        {
-            get;
-            set;
-        }
-
-        public Style MenuStyle
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Sets the icon to a new image.
         /// </summary>

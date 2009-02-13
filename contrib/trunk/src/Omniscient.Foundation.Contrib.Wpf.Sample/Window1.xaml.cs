@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using Omniscient.Foundation.Commanding;
 using Omniscient.Foundation.Contrib.Wpf.Commands;
+using Omniscient.Foundation.ApplicationModel.Presentation;
 
 namespace Omniscient.Foundation.Contrib.Wpf.Sample
 {
@@ -31,10 +32,11 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             _presenter.WriteMessage(TextBoxMessage.Text);
-            _presenter.LeftClickMenu.Children[1].Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1.1" });
-            _presenter.LeftClickMenu.Children[1].Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1.2" });
-            _presenter.LeftClickMenu.Children[1].Text = "hahahahahahah";
+            //_presenter.LeftClickMenu.Children[1].Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1.1" });
+            //_presenter.LeftClickMenu.Children[1].Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1.2" });
+            //_presenter.LeftClickMenu.Children[1].Text = "hahahahahahah";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -46,14 +48,17 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
             ImageSource icon = BitmapFrame.Create(ico);
             _presenter = new NotifyIconPresenter(icon);
 
-            cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left);
-            cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1" });
-            cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2", Command = new MessageboxCommand("myItem 2 message") });
-            cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.1", Command = new MessageboxCommand("myItem 1.1 message") });
-            cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.2", Command = new MessageboxCommand("myItem 1.2 message") });
-            cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.3" });
-            cmdItem.Children[1].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1" });
-            cmdItem.Children[1].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.2" });
+            cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left,);
+            cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "do something" });
+
+            //cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left);
+            //cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1" });
+            //cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2", Command = new MessageboxCommand("myItem 2 message") });
+            //cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.1", Command = new MessageboxCommand("myItem 1.1 message") });
+            //cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.2", Command = new MessageboxCommand("myItem 1.2 message") });
+            //cmdItem.Children[0].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 1.3" });
+            //cmdItem.Children[1].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.1" });
+            //cmdItem.Children[1].Children.Add(new ObservableHierarchicalCommandObject() { Text = "myItem 2.2" });
         }
     }
 
