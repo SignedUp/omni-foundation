@@ -66,11 +66,8 @@
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
-    <Compile Include="ContainerItem.cs" />
-    <Compile Include="IObjectContainer.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
-    <Compile Include="ObjectContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\IRoleProvider.cs" />
     <Compile Include="Security\SecureIdentity.cs" />
@@ -78,10 +75,10 @@
     <Compile Include="Security\SecureStringConverter.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />
     <Compile Include="ServiceModel\GenericSingletonService.cs" />
-    <Compile Include="IConfigurable.cs" />
+    <Compile Include="ApplicationModel\IConfigurable.cs" />
     <Compile Include="ServiceModel\IService.cs" />
     <Compile Include="ServiceModel\IServiceProvider.cs" />
-    <Compile Include="IStartable.cs" />
+    <Compile Include="ApplicationModel\IStartable.cs" />
     <Compile Include="ServiceModel\ServiceBase.cs" />
     <Compile Include="ServiceModel\ServiceProvider.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Foundation
+﻿namespace Omniscient.Foundation.ApplicationModel
 {
     /// <summary>
     /// Defines a "startable" service.  Those services are informed of the application startup and shutdown.
