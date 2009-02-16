@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Foundation
+﻿namespace Omniscient.Foundation.ApplicationModel
 {
     /// <summary>
     /// Defines a configurable service.  Implement this interface when you need your service to receive configuration.
