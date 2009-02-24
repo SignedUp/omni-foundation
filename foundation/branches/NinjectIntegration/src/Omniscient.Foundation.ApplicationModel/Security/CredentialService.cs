@@ -89,7 +89,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
 
         public System.Collections.Generic.IEnumerable<IExtender<ICredentialServiceExtender>> Extenders
         {
-            get { return _extenders.ToArray(); ; }
+            get { foreach (IExtender<ICredentialServiceExtender> ext in _extenders) yield return ext; }
         }
 
         #endregion
