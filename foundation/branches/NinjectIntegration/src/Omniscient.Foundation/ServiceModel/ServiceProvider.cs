@@ -25,12 +25,12 @@ namespace Omniscient.Foundation.ServiceModel
         /// </summary>
         /// <typeparam name="TContract">The contract type.</typeparam>
         /// <returns>The contract's implementation, or null if no service found for that contract.</returns>
-        public TContract GetService<TContract>()
+        public virtual TContract GetService<TContract>()
         {
             return (TContract)GetService(typeof(TContract));
         }
 
-        public object GetService(Type TContract)
+        public virtual object GetService(Type TContract)
         {
             IService srv;
 
@@ -58,7 +58,7 @@ namespace Omniscient.Foundation.ServiceModel
         /// </summary>
         /// <typeparam name="TContract">The contract type.</typeparam>
         /// <param name="service">An instance of a service class.</param>
-        public void RegisterService<TContract>(IService service)
+        public virtual void RegisterService<TContract>(IService service)
         {
             RegisterService(typeof(TContract), service);
         }
@@ -68,7 +68,7 @@ namespace Omniscient.Foundation.ServiceModel
         /// </summary>
         /// <param name="contractType">Service's contract type.</param>
         /// <param name="service">Service implementation (must support contract's type)</param>
-        public void RegisterService(Type contractType, IService service)
+        public virtual void RegisterService(Type contractType, IService service)
         {
             if (!contractType.IsAssignableFrom(service.ImplementationType))
                 throw new InvalidOperationException(string.Format("Cannot convert implementation type {0} to contract type {1}.", service.ImplementationType, contractType));
@@ -90,6 +90,5 @@ namespace Omniscient.Foundation.ServiceModel
             _services.Clear();
             _sequentialServices.Clear();
         }
-
     }
 }

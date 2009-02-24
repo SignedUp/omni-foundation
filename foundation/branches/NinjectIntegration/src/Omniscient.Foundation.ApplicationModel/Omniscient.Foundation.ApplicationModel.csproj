@@ -44,15 +44,13 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ninject\Ninject.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
@@ -65,13 +63,14 @@
     <Compile Include="Configuration\ApplicationConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\ModuleDefinition.cs" />
     <Compile Include="Configuration\ModulesConfiguration.cs" />
-    <Compile Include="Configuration\ObjectContainerConfiguration.cs" />
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
+    <Compile Include="Modularity\ApplicationModuleManager.cs" />
     <Compile Include="Modularity\ExpandableBase.cs" />
+    <Compile Include="Modularity\IApplicationModuleManager.cs" />
     <Compile Include="Modularity\IExtender.cs" />
     <Compile Include="Modularity\IExpandable.cs" />
-    <Compile Include="Modularity\IModule.cs" />
+    <Compile Include="Modularity\IApplicationModule.cs" />
     <Compile Include="Presentation\IPresentableCommandObject.cs" />
     <Compile Include="Presentation\IPresentableHierarchicalObject.cs" />
     <Compile Include="Presentation\IPresentableObject.cs" />
