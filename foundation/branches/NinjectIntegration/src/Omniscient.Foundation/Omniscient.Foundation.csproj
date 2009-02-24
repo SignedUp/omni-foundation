@@ -44,28 +44,28 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ninject\Ninject.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationModel\IStartable.cs" />
     <Compile Include="Commanding\CompositeCommand.cs" />
     <Compile Include="Commanding\DelegateCommandHandler.cs" />
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,12 +73,12 @@
     <Compile Include="Security\SecureIdentity.cs" />
     <Compile Include="Security\SecurePrincipal.cs" />
     <Compile Include="Security\SecureStringConverter.cs" />
+    <Compile Include="ServiceModel\DIServiceProvider.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />
     <Compile Include="ServiceModel\GenericSingletonService.cs" />
     <Compile Include="ApplicationModel\IConfigurable.cs" />
     <Compile Include="ServiceModel\IService.cs" />
     <Compile Include="ServiceModel\IServiceProvider.cs" />
-    <Compile Include="ApplicationModel\IStartable.cs" />
     <Compile Include="ServiceModel\ServiceBase.cs" />
     <Compile Include="ServiceModel\ServiceProvider.cs" />
   </ItemGroup>

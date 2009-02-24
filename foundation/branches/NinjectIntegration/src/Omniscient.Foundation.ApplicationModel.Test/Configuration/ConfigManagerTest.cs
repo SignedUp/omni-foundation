@@ -14,7 +14,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             config.ModulesConfiguration.Modules.Add(new ModuleDefinition { Type = GetTypeFullname("Module2") });
 
             ObjectContainer container = new ObjectContainer();
-            ConfigManager.ConfigureModules(container, config);
+            ConfigManager.LoadModules(container, config);
 
             Assert.AreEqual(2, container.AllObjects.Length);
         }
@@ -45,12 +45,49 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         public interface IB { }
         public class B : IB { }
 
-        public class Module1 : IModule
+        public class Module1 : IApplicationModule
         {
-            public Presentation.IPresentationController PresentationController { get; set; }
+            #region IApplicationModule Members
+
+            public string Name
+            {
+                get { throw new System.NotImplementedException(); }
+            }
+
+            public bool IsLoaded
+            {
+                get { throw new System.NotImplementedException(); }
+            }
+
+            public bool IsActivated
+            {
+                get { throw new System.NotImplementedException(); }
+            }
+
+            public void Load()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Activate(Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController presentation)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Deactivate()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Unload()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            #endregion
         }
 
-        public class Module2 : IModule
+        public class Module2 : IApplicationModule
         {
             public Presentation.IPresentationController PresentationController { get; set; }
         }

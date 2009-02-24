@@ -17,7 +17,6 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         {
             ServicesConfiguration = new ServicesConfiguration();
             ModulesConfiguration = new ModulesConfiguration();
-            ContainerConfiguration = new ObjectContainerConfiguration();
         }
 
         /// <summary>
@@ -39,13 +38,5 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
             set;
         }
 
-        ///<summary>
-        ///</summary>
-        [XmlElement("container", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
-        public ObjectContainerConfiguration ContainerConfiguration
-        {
-            get;
-            set;
-        }
     }
 }
