@@ -9,16 +9,34 @@ using Ninject.Core.Creation.Providers;
 namespace Omniscient.Foundation.ServiceModel
 {
     /// <summary>
-    /// Service provider that registers services against Ninject's dependency injection container.
+    /// Service provider that registers services against Ninject's dependency injection container.  Once registered, the service
+    /// is available from the Kernel, as well as from the service provider itself.  In all cases, a call to 
+    /// <see cref="IService.GetImplementation"/> will be made each time the service is accessed.
     /// </summary>
+    /// <example>
+    /// Let's have a validation service: IValidator and IValidatorService (derives from IService).  Let's also have a class named Validator that implements
+    /// IValidator and IValidatorService, and returns a reference to itself when GetImplementation is invoked.
+    /// You register that service with a call to DIServiceProvider.RegisterService&lt;IValidator&gt;(new Validator());
+    /// 
+    /// Once it's registered, you can access the service like this:
+    /// IValidator v = serviceProvider.GetService&lt;IValidator&gt;();
+    /// 
+    /// or like that:
+    /// IValidator v = kernel.Get&lt;IValidator&gt;();
+    /// 
+    /// In all cases, the framework will call GetImplementation on the service to return an instance of IValidator.
+    /// </example>
     public class DIServiceProvider: ServiceProvider
     {
+        private IKernel _kernel;
+
         /// <summary>
         /// Ctor
         /// </summary>
         /// <param name="kernel">a Ninject kernel</param>
         public DIServiceProvider(IKernel kernel)
         {
+            if (kernel == null) throw new ArgumentNullException("kernel");
             Kernel = kernel;
         }
 
@@ -28,8 +46,12 @@ namespace Omniscient.Foundation.ServiceModel
         /// </summary>
         public IKernel Kernel
         {
-            get;
-            set;
+            get { return _kernel; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _kernel = value;
+            }
         }
 
         /// <summary>
