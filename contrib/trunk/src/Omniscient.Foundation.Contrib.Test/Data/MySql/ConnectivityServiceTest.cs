@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Omniscient.Foundation.ApplicationModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.Contrib.Data.MySql;
+using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.Contrib.Test.Data.MySql
 {
@@ -31,7 +32,7 @@ namespace Omniscient.Foundation.Contrib.Test.Data.MySql
             config.ServicesConfiguration.ServiceDefinitions.Add(def);
 
             ApplicationManager.Current.StartApplication(config);
-            Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectivity>());
+            Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectionProvider>());
         }
 
         [Test]
@@ -51,7 +52,7 @@ namespace Omniscient.Foundation.Contrib.Test.Data.MySql
             def.Config = doc.DocumentElement;
 
             ApplicationManager.Current.StartApplication(config);
-            Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectivity>());
+            Assert.IsNotNull(ApplicationManager.Current.ServiceProvider.GetService<IConnectionProvider>());
         }
     }
 }

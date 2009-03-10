@@ -3,7 +3,7 @@ using System.Collections;
 using System.Web.Security;
 using MySql.Data.MySqlClient;
 using Omniscient.Foundation.ApplicationModel;
-using Omniscient.Foundation.Contrib.Data.MySql;
+using Omniscient.Foundation.Data;
 using Omniscient.Foundation.Web.Security;
 
 namespace Omniscient.Foundation.Contrib.Web.Security.MySql
@@ -20,13 +20,13 @@ namespace Omniscient.Foundation.Contrib.Web.Security.MySql
 
         protected override UserPassword RetrieveUserPassword(string username)
         {
-            IConnectivity connectivity = ApplicationManager.Current.ServiceProvider.GetService<IConnectivity>();
+            IConnectionProvider connectivity = ApplicationManager.Current.ServiceProvider.GetService<IConnectionProvider>();
 
             if (connectivity == null) throw new Exception("Connectivity service not found.");
 
             UserPassword userPass = new UserPassword();
 
-            using (MySqlConnection connection = connectivity.CreateConnection())
+            using (MySqlConnection connection = (MySqlConnection) connectivity.CreateConnection())
             {
                 connection.Open();
                 string sql =

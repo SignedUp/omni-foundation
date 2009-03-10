@@ -1,9 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 using Omniscient.Foundation.Contrib.Data.MySql.Configuration;
+using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.Contrib.Data.MySql
 {
-    internal class ConnectivityServiceImpl: IConnectivity
+    internal class ConnectivityServiceImpl: IConnectionProvider
     {
         private Connectivity _config;
 
@@ -14,7 +16,7 @@ namespace Omniscient.Foundation.Contrib.Data.MySql
 
         #region IConnectivity Members
 
-        public MySqlConnection CreateConnection()
+        public IDbConnection CreateConnection()
         {
             return new MySqlConnection(_config.ConnectionString);
         }
