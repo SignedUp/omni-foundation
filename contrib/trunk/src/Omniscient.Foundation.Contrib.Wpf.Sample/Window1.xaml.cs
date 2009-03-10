@@ -48,7 +48,7 @@ namespace Omniscient.Foundation.Contrib.Wpf.Sample
             ImageSource icon = BitmapFrame.Create(ico);
             _presenter = new NotifyIconPresenter(icon);
 
-            cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left,);
+            cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left);
             cmdItem.Children.Add(new ObservableHierarchicalCommandObject() { Text = "do something" });
 
             //cmdItem = _presenter.CreateHierarchicalMenu(MouseButton.Left);
