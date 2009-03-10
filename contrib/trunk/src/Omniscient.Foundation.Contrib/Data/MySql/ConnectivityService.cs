@@ -2,11 +2,12 @@
 using System.Xml;
 using System.Xml.Serialization;
 using Omniscient.Foundation.Contrib.Data.MySql.Configuration;
+using Omniscient.Foundation.Data;
 using Omniscient.Foundation.ServiceModel;
 
 namespace Omniscient.Foundation.Contrib.Data.MySql
 {
-    internal class ConnectivityService: ServiceBase<IConnectivity>, IConfigurable
+    internal class ConnectivityService: ServiceBase<IConnectionProvider>, IConfigurable
     {
         private ConnectivityServiceImpl _implementation;
 
@@ -24,7 +25,7 @@ namespace Omniscient.Foundation.Contrib.Data.MySql
         #endregion
 
 
-        public override IConnectivity GetImplementation()
+        public override IConnectionProvider GetImplementation()
         {
             if (_implementation == null) throw new InvalidOperationException("Service hasn't been configured.");
             return _implementation;

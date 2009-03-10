@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\foundation\Omniscient.Foundation.dll</HintPath>
     </Reference>
+    <Reference Include="Omniscient.Foundation.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\foundation\Omniscient.Foundation.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -56,7 +60,6 @@
     <Compile Include="Data\MySql\Configuration\Connectivity.cs" />
     <Compile Include="Data\MySql\ConnectivityService.cs" />
     <Compile Include="Data\MySql\ConnectivityServiceImpl.cs" />
-    <Compile Include="Data\MySql\IConnectivity.cs" />
     <Compile Include="Logging\Log4Net\Logger.cs" />
     <Compile Include="Logging\Log4Net\LoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
