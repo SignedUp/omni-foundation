@@ -48,6 +48,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -70,6 +71,7 @@
     <Compile Include="EntityPropertyAttribute.cs" />
     <Compile Include="EntityPropertyType.cs" />
     <Compile Include="EntityStatus.cs" />
+    <Compile Include="IConnectionProvider.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityAdapter.cs" />
     <Compile Include="IEntityComposer.cs" />

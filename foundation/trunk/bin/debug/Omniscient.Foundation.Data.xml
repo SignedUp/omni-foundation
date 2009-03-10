@@ -750,5 +750,16 @@
             The value to compare with.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
+            <summary>
+             Provides a database connection for DB access.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
+            <summary>
+             Creates a database connection.
+            </summary>
+            <returns>A database connection</returns>
+        </member>
     </members>
 </doc>
