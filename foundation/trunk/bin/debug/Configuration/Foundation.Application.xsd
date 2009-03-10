@@ -77,4 +77,3 @@
         <xs:attribute name="connectionString" type="xs:string" use="required" />
     </xs:complexType>
 </xs:schema>
-

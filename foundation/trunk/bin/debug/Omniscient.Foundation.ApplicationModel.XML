@@ -4,6 +4,16 @@
         <name>Omniscient.Foundation.ApplicationModel</name>
     </assembly>
     <members>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
+            <summary>
+            Represents an object that has a Text property to be displayed on the UI.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject.Text">
+            <summary>
+            Gets or sets the text displayed on the screen for that object.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition">
             <summary>
             </summary>
@@ -39,7 +49,7 @@
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell">
             <summary>
             The shell is the main window in an application.  It defines placeholders for displaying <c>IModel</c> objects,
-            which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information, through the
+            which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information (like commands) through the
             use of <c>IPresenter</c> objects.
             </summary>
         </member>
@@ -321,70 +331,6 @@
             Gets the list of view controllers.  Default use is to feed that list at application startup.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPortManager">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPortManager.RegisterExtensionPort``1(Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort{``0})">
-            <summary>
-            </summary>
-            <param name="port"></param>
-            <typeparam name="TContract"></typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPortManager.GetExtensionPort``1">
-            <summary>
-            </summary>
-            <typeparam name="TContract"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager.#ctor(Omniscient.Foundation.IObjectContainer)">
-            <summary>
-            </summary>
-            <param name="container"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager.RegisterExtensionPort``1(Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort{``0})">
-            <summary>
-            </summary>
-            <param name="port"></param>
-            <typeparam name="TContract"></typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortManager.GetExtensionPort``1">
-            <summary>
-            </summary>
-            <typeparam name="TContract"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort">
-            <summary>
-            Defines a general extension port
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort.ContractType">
-            <summary>
-            Contract type that extenders must implement when connecting into that extension port.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort`1">
-            <summary>
-            Defines an extension port for contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">Contract type that extenders must implement when connecting into that extension port.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort`1.Register(Omniscient.Foundation.ApplicationModel.Modularity.IExtender{`0})">
-            <summary>
-            Registers an extender into the extension port.  The extender must implement contract <typeparamref name="TContract"/>.
-            </summary>
-            <param name="extender"></param>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IExtensionPort`1.Extenders">
-            <summary>
-            Gets the list of plugged-in extenders
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtender`1">
             <summary>
             </summary>
@@ -500,6 +446,17 @@
             value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtender">
+            <summary>
+            Defines an Extender contract for prompting a user for his/her credential.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtender.NegociateAuthentication(Omniscient.Foundation.Security.SecurePrincipal)">
+            <summary>
+            Prompts a user for his/her credential and returns it.
+            </summary>
+            <returns>User credentials.</returns>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
             <summary>
             </summary>
@@ -587,13 +544,22 @@
             <summary>
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortBase`1">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExpandable`1">
             <summary>
+            Defines a component whose behavior can be expanded by means of other components
+            that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
             </summary>
-            <typeparam name="TContract"></typeparam>
+            <typeparam name="TContract">Contract type that extenders must implement when pluging into that expandable.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExtensionPortBase`1.#ctor">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExpandable`1.Register(Omniscient.Foundation.ApplicationModel.Modularity.IExtender{`0})">
             <summary>
+            Plugs an extender into the expandable.  The extender must implement contract <typeparamref name="TContract"/>.
+            </summary>
+            <param name="extender"></param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IExpandable`1.Extenders">
+            <summary>
+            Gets the list of plugged-in extenders
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1">
@@ -635,16 +601,14 @@
             <param name="section"></param>
             <returns>A deserialized configuration.</returns>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtenderContract">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.ExpandableBase`1">
             <summary>
-            Defines an Extender contract for prompting a user for his/her credential.
             </summary>
+            <typeparam name="TContract"></typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtenderContract.NegociateAuthentication(Omniscient.Foundation.Security.SecurePrincipal)">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExpandableBase`1.#ctor">
             <summary>
-            Prompts a user for his/her credential and returns it.
             </summary>
-            <returns>User credentials.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Security.CredentialService">
             <summary>
@@ -704,4 +668,3 @@
         </member>
     </members>
 </doc>
-

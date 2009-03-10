@@ -84,6 +84,11 @@
             Raised when the command's availability changes.
             </summary>
         </member>
+        <member name="P:Omniscient.Foundation.Commanding.ICommandCore.Name">
+            <summary>
+            Gets the name of the command.
+            </summary>
+        </member>
         <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.#ctor">
             <summary>
             </summary>
@@ -309,6 +314,50 @@
             </summary>
             <param name="param"></param>
         </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
+            <summary>
+            Defines a composite command.  When executed, a composite command is executing all its children commands.  
+            See <see cref="T:Omniscient.Foundation.Commanding.CompositeCommand"/> for default implementation.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.CompositeCommand">
+            <summary>
+            Base class for composite commands.  When executed, a composite command is executing all its children commands.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.CanExecute(System.Object)">
+            <summary>
+            Returns True if the command is in a state that allows execution.  Otherwise, False.
+            </summary>
+            <param name="param">The object that will be passed to <see cref="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)"/>.</param>
+            <returns>True if command allows execution.  Otherwise, False.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)">
+            <summary>
+            Executes all children commands sequentially.  Overrides may add behavior to the execution.
+            </summary>
+            <param name="param">Object passed to the command for the execution.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Commands">
+            <summary>
+            Gets the list of children (composed) commands.  Upon execution, those children commands will be executed sequentially.
+            </summary>
+        </member>
+        <member name="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged">
+            <summary>
+            Raised when <see cref="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged"/> will change its return value.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Name">
+            <summary>
+            Gets the name of the command.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
             <summary>
             </summary>
@@ -521,4 +570,3 @@
         </member>
     </members>
 </doc>
-
