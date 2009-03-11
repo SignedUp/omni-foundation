@@ -175,26 +175,6 @@
             Gets the list of root entities.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialService">
-            <summary>
-            Defines a service that will provide the application with user credentials.  The service places the current user
-            in the <c>System.Threading.Thread.CurrentPrincipal</c> value.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.EnsureUserIsAuthenticated">
-            <summary>
-            Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
-            If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">The service must rely on extenders to ask for username and password;
-            therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.ICredentialService.CurrentPrincipal">
-            <summary>
-            Called on request from anywhere where the user credentials are required.  Returns the same object as 
-            <c>System.Threading.Thread.CurrentPrincipal</c>.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController">
             <summary>
             Default implementation for <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  Generally, does not have to be derived for default behavior.
@@ -331,16 +311,6 @@
             Gets the list of view controllers.  Default use is to feed that list at application startup.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExtender`1">
-            <summary>
-            </summary>
-            <typeparam name="TContract"></typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExtender`1.GetImplementation">
-            <summary>
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
             <summary>
             Placeholder for services configuration.  Contains a list of service definitions.
@@ -386,7 +356,7 @@
             Closes the application.  Generally, that should lead to the process being terminated.
             </summary>
             <remarks>
-            All services that implement <see cref="T:Omniscient.Foundation.IStartable"/> are stopped here, in reverse order that they 
+            All services that implement <see cref="T:Omniscient.Foundation.ApplicationModel.IStartable"/> are stopped here, in reverse order that they 
             have been started.
             </remarks>
         </member>
@@ -402,18 +372,43 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider">
             <summary>
-            Gets or sets the service provider to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider"/>.
+            Gets or sets the <see cref="!:IServiceProvider"/>.  If not set, then it will automatically be created with an instance
+            of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider"/>.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
             </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
             <summary>
-            Gets or sets the Presentation Controller to be used.  Generally an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
+            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  If not set, then it will automatically be created with an 
+            instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
             </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer">
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Shell">
             <summary>
-            Gets or sets an <see cref="T:Omniscient.Foundation.IObjectContainer"/> instance.  Defaults to <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ObjectContainer"/>.
+            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell"/>, which is the main UI fabric of a desktop application.  If not set, then
+            the user will have to manually create presenters (<see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter"/>) and view controllers
+            (<see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewController"/>), and bind those to the UI.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
             </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Kernel">
+            <summary>
+            Gets or sets Ninject's Kernel.  If not set, then this application will run without dependency injection.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager">
+            <summary>
+            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager"/>.  If not set, then it will automatically be created with
+            an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager"/>.  
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
             <summary>
@@ -446,16 +441,10 @@
             value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtender">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule">
             <summary>
-            Defines an Extender contract for prompting a user for his/her credential.
+             An application module is 
             </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.ICredentialServiceExtender.NegociateAuthentication(Omniscient.Foundation.Security.SecurePrincipal)">
-            <summary>
-            Prompts a user for his/her credential and returns it.
-            </summary>
-            <returns>User credentials.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
             <summary>
@@ -466,6 +455,204 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Load(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Loads a module.  Loading a module through this interface is necessary to make the module part of the application's 
+            lifetime management.  If <see cref="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.ModuleManager"/> is provided and the module implements <see cref="T:Ninject.Core.IModule"/>, 
+            then the module will also be loaded in Ninject.
+            </summary>
+            <param name="module">The application module to load.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.IsLoaded(System.String)">
+            <summary>
+            Returns true if a module with that name is loaded.
+            </summary>
+            <param name="name">the name of the module to look fo.</param>
+            <returns>true if the module is loaded; otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Activate(System.String)">
+            <summary>
+            Activates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to activate a module that is not loaded yet.
+            </summary>
+            <param name="name">Name of the module to activate.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when activating a module that's not loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Activate(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Activates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to activate a module that is not loaded yet.
+            </summary>
+            <param name="module">A module that must be loaded.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when activating a module that's not loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.ActivateAll">
+            <summary>
+            Activates all currently loaded modules.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Deactivate(System.String)">
+            <summary>
+            Deactivates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to deactivated a module that not loaded and not activated.
+            </summary>
+            <param name="name">Name of the module to deactivate.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when deactivating a module that's not loaded and not activated.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Deactivate(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Deactivates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to deactivated a module that not loaded and not activated.
+            </summary>
+            <param name="module">A module to deactivate</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when deactivating a module that's not loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.DeactivateAll">
+            <summary>
+            Deactivates all activated modules in reverse order that they have been loaded.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Unload(System.String)">
+            <summary>
+            Unloads a module.  If <see cref="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.ModuleManager"/> is provided and the module implements <see cref="T:Ninject.Core.IModule"/>, 
+            then the module will also be unloaded from Ninject.  It is invalid to unload a module that's not been loaded.
+            </summary>
+            <param name="name">Name of a module to unload.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the module has not been loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Unload(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Unloads a module.  If <see cref="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.ModuleManager"/> is provided and the module implements <see cref="T:Ninject.Core.IModule"/>, 
+            then the module will also be unloaded from Ninject.  It is invalid to unload a module that's not been loaded.
+            </summary>
+            <param name="module">A module to unload.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the module has not been loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.UnloadAll">
+            <summary>
+            Unloads all loaded modules.  Automatically deactivates all modules before unloading them.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.PresentationController">
+            <summary>
+            Gets or sets the presentation controller used to activate modules.  Using the controller, modules and place themselves
+            in the UI loop.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.ModuleManager">
+            <summary>
+            Gets or sets Ninject's module manager.  If provided, then loading and unloading Ninject modules will affect Ninject as well.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.All">
+            <summary>
+            Returns a list of all loaded modules.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Count">
+            <summary>
+            Gets the total number of loaded modules.  Decreases when unloading modules.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Load(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Loads a module.  Loading a module through this interface is necessary to make the module part of the application's 
+            lifetime management.  If <see cref="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.ModuleManager"/> is provided and the module implements <see cref="T:Ninject.Core.IModule"/>, 
+            then the module will also be loaded in Ninject.
+            </summary>
+            <param name="module">The application module to load.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.IsLoaded(System.String)">
+            <summary>
+            Returns true if a module with that name is loaded.
+            </summary>
+            <param name="name">the name of the module to look fo.</param>
+            <returns>true if the module is loaded; otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Activate(System.String)">
+            <summary>
+            Activates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to activate a module that is not loaded yet.
+            </summary>
+            <param name="name">Name of the module to activate.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when activating a module that's not loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Activate(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Activates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to activate a module that is not loaded yet.
+            </summary>
+            <param name="module">A module that must be loaded.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when activating a module that's not loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.ActivateAll">
+            <summary>
+            Activates all currently loaded modules.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Deactivate(System.String)">
+            <summary>
+            Deactivates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to deactivated a module that not loaded and not activated.
+            </summary>
+            <param name="name">Name of the module to deactivate.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when deactivating a module that's not loaded and not activated.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Deactivate(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Deactivates a module.  Generally this means, for a module, to interact with an <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.
+            It is invalid to deactivated a module that not loaded and not activated.
+            </summary>
+            <param name="module">A module to deactivate</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when deactivating a module that's not loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.DeactivateAll">
+            <summary>
+            Deactivates all activated modules in reverse order that they have been loaded.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Unload(System.String)">
+            <summary>
+            Unloads a module.  If <see cref="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.ModuleManager"/> is provided and the module implements <see cref="T:Ninject.Core.IModule"/>, 
+            then the module will also be unloaded from Ninject.  It is invalid to unload a module that's not been loaded.
+            </summary>
+            <param name="name">Name of a module to unload.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the module has not been loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Unload(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
+            <summary>
+            Unloads a module.  If <see cref="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.ModuleManager"/> is provided and the module implements <see cref="T:Ninject.Core.IModule"/>, 
+            then the module will also be unloaded from Ninject.  It is invalid to unload a module that's not been loaded.
+            </summary>
+            <param name="module">A module to unload.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the module has not been loaded.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.UnloadAll">
+            <summary>
+            Unloads all loaded modules.  Automatically deactivates all modules before unloading them.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.PresentationController">
+            <summary>
+            Gets or sets the presentation controller used to activate modules.  Using the controller, modules and place themselves
+            in the UI loop.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.ModuleManager">
+            <summary>
+            Gets or sets Ninject's module manager.  If provided, then loading and unloading Ninject modules will affect Ninject as well.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.All">
+            <summary>
+            Returns a list of all loaded modules.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.ApplicationModuleManager.Count">
+            <summary>
+            Gets the total number of loaded modules.  Decreases when unloading modules.
+            </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
@@ -487,10 +674,6 @@
             <summary>
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ContainerConfiguration">
-            <summary>
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
             <summary>
             Represents a view.
@@ -506,60 +689,6 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Model">
             <summary>
             Gets or sets the Model.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerConfiguration">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerConfiguration.#ctor">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerConfiguration.Items">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerAdd">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerAdd.KeyType">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerAdd.ObjectType">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerRemove">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerRemove.TypeName">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ObjectContainerClear">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IExpandable`1">
-            <summary>
-            Defines a component whose behavior can be expanded by means of other components
-            that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">Contract type that extenders must implement when pluging into that expandable.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IExpandable`1.Register(Omniscient.Foundation.ApplicationModel.Modularity.IExtender{`0})">
-            <summary>
-            Plugs an extender into the expandable.  The extender must implement contract <typeparamref name="TContract"/>.
-            </summary>
-            <param name="extender"></param>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IExpandable`1.Extenders">
-            <summary>
-            Gets the list of plugged-in extenders
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelSingleEntityBase`1">
@@ -578,14 +707,6 @@
             Gets the root entity.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IModule">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Modularity.IModule.PresentationController">
-            <summary>
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
             <summary>
             Section handler for "foundation.application" configuration section.
@@ -600,51 +721,6 @@
             <param name="configContext"></param>
             <param name="section"></param>
             <returns>A deserialized configuration.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.ExpandableBase`1">
-            <summary>
-            </summary>
-            <typeparam name="TContract"></typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.ExpandableBase`1.#ctor">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Security.CredentialService">
-            <summary>
-            Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
-            as the AppDomain's principal.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.GetImplementation">
-            <summary>
-            Retrieves implementation for ICredentialService.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.EnsureUserIsAuthenticated">
-            <summary>
-            Ensures the user has entered login information.
-            </summary>
-            <remarks>
-            If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.Start">
-            <summary>
-            Starts the current service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Security.CredentialService.Stop">
-            <summary>
-            Stops the current service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Security.CredentialService.CurrentPrincipal">
-            <summary>
-            Returns the current user principal.  That user will not be logged in until a call is made to <c>EnsureUserIsLoggedIn</c>.
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
             <summary>
@@ -663,7 +739,7 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
             <summary>
-            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.IConfigurable"/>.
+            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ApplicationModel.IConfigurable"/>.
             </summary>
         </member>
     </members>
