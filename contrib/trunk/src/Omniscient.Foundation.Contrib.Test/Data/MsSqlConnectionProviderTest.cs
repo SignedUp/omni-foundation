@@ -9,33 +9,30 @@ namespace Omniscient.Foundation.Contrib.Data
     public class MsSqlConnectionProviderTest
     {
         private IConnectionProvider provider;
-        private string connectionString = "Data Source=myServerAddress;Initial Catalog=myDataBase;Integrated Security=SSPI;";
+        private string connectionStringName = "MsSqlConnection";
 
         [SetUp]
         public void SetUp()
         {
             Mock<IDbConnection> connectionMock = new Mock<IDbConnection>();
-            connectionMock.Expect(x => x.ConnectionString).Returns(connectionString);
-            connectionMock.Expect(x => x.Open());
-            connectionMock.Expect(x => x.State).Returns(ConnectionState.Closed);
 
             Mock<IConnectionProvider> providerMock;
             providerMock = new Mock<IConnectionProvider>();
-            providerMock.Expect(x => x.CreateConnection()).Returns((IDbConnection) connectionMock);
+            providerMock.Expect(x => x.CreateConnection()).Returns(connectionMock.Object);
 
-            provider = (IConnectionProvider) providerMock;
+            provider = providerMock.Object;
         }
 
         [Test]
         public void TestInstance()
         {
-            provider = new MsSqlConnectionProvider(connectionString);
+            provider = new MsSqlConnectionProvider(connectionStringName);
         }
 
         [Test]
         public void TestCreateConnection()
         {
-            provider = new MsSqlConnectionProvider(connectionString);
+            provider = new MsSqlConnectionProvider(connectionStringName);
 
             object actual = provider.CreateConnection();
 
