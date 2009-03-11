@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.ServiceModel;
+using Omniscient.Foundation.ApplicationModel;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.Security;
 using System.Security.Permissions;

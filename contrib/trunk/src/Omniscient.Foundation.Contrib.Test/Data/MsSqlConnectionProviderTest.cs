@@ -17,6 +17,8 @@ namespace Omniscient.Foundation.Contrib.Data
         public void SetUp()
         {
             Mock<IDbConnection> connectionMock = new Mock<IDbConnection>();
+            connectionMock.Expect(x => x.ConnectionString).Returns("Data Source=myServerAddress;Initial Catalog=myDataBase;Integrated Security=SSPI;");
+            connectionMock.Expect(x => x.State).Returns(ConnectionState.Closed);
 
             Mock<IConnectionProvider> providerMock;
             providerMock = new Mock<IConnectionProvider>();
