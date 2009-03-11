@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Linq;
-using Omniscient.Foundation.ApplicationModel.Modularity;
 using Omniscient.Foundation.Security;
 using System.Diagnostics;
 using System.Collections.Generic;
+using Omniscient.Foundation.ApplicationModel;
 
-namespace Omniscient.Foundation.ApplicationModel.Security
+namespace Omniscient.Foundation.Security
 {
     /// <summary>
     /// Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
     /// as the AppDomain's principal.
     /// </summary>
-    public class CredentialService : ServiceModel.ServiceBase<ICredentialService>, ICredentialService, IExpandable<ICredentialServiceExtender>
+    public class CredentialService : ServiceModel.ExtendableServiceBase<ICredentialService, ICredentialServiceExtender>, ICredentialService
     {
         private SecurePrincipal _current;
-        private List<IExtender<ICredentialServiceExtender>> _extenders;
-
-        public CredentialService()
-        {
-            _extenders = new List<IExtender<ICredentialServiceExtender>>();
-        }
 
         /// <summary>
         /// Retrieves implementation for ICredentialService.
@@ -47,7 +41,7 @@ namespace Omniscient.Foundation.ApplicationModel.Security
             {
                 extender.GetImplementation().NegociateAuthentication(CurrentPrincipal);
                 if (CurrentPrincipal.Identity.IsAuthenticated) return;
-            }            
+            }
         }
 
         /// <summary>
@@ -80,18 +74,5 @@ namespace Omniscient.Foundation.ApplicationModel.Security
 
         #endregion
 
-        #region IExpandable<ICredentialServiceExtender> Members
-
-        public void Register(IExtender<ICredentialServiceExtender> extender)
-        {
-            _extenders.Add(extender);
-        }
-
-        public System.Collections.Generic.IEnumerable<IExtender<ICredentialServiceExtender>> Extenders
-        {
-            get { foreach (IExtender<ICredentialServiceExtender> ext in _extenders) yield return ext; }
-        }
-
-        #endregion
     }
 }

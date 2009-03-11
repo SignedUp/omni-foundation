@@ -1,12 +1,13 @@
 ﻿using System;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Modularity;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
-    class ConfigManager
+    internal class ConfigManager
     {
-        public static void ConfigureServices(ServiceModel.IServiceProvider container, ApplicationConfiguration config)
+        internal static void LoadAndConfigureServices(ServiceModel.IServiceProvider container, ApplicationConfiguration config)
         {
             if (config == null) return;
             if (container == null) return;
@@ -25,7 +26,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
 
         }
 
-        public static void ConfigureModules(IObjectContainer container, ApplicationConfiguration config)
+        internal static void LoadModules(IApplicationModuleManager container, ApplicationConfiguration config)
         {
             if (config == null) return;
             if (container == null) return;
@@ -36,43 +37,11 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
                 if (moduleType == null) 
                     throw new InvalidOperationException(
                         string.Format("Cannot load type from string \"{0}\".", moduleDef.Type));
-                if (!typeof(IModule).IsAssignableFrom(moduleType))
-                    throw new InvalidCastException(string.Format("Type {0} does not implements type {1}.", moduleType, typeof(IModule)));
+                if (!typeof(IApplicationModule).IsAssignableFrom(moduleType))
+                    throw new InvalidCastException(string.Format("Type {0} does not implements type {1}.", moduleType, typeof(IApplicationModule)));
 
-                object module = Activator.CreateInstance(moduleType);
-                container.Register(moduleType, module);
-            }
-        }
-
-        public static void ConfigureContainer(IObjectContainer container, ApplicationConfiguration config)
-        {
-            if (config == null || config.ContainerConfiguration == null) return;
-            if (container == null) return;
-
-            foreach (object item in config.ContainerConfiguration.Items)
-            {
-                ObjectContainerAdd add = item as ObjectContainerAdd;
-                if (add != null)
-                {
-                    Type tKey = Type.GetType(add.KeyType, true, true);
-                    Type tObj = Type.GetType(add.ObjectType, true, true);
-
-                    container.Register(tKey, Activator.CreateInstance(tObj));
-                    continue;
-                }
-
-                ObjectContainerRemove remove = item as ObjectContainerRemove;
-                if (remove != null)
-                {
-                    throw new NotImplementedException("Removing an object is not supported yet.");
-                }
-
-                ObjectContainerClear clear = item as ObjectContainerClear;
-                if (clear != null)
-                {
-                    container.Clear();
-                    continue;
-                }
+                IApplicationModule module = (IApplicationModule)Activator.CreateInstance(moduleType);
+                container.Load(module);
             }
         }
     }
