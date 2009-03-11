@@ -79,7 +79,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
              where TEntity : IEntity
         {            
             IEntityController<TEntity> controller;
-            controller = ApplicationManager.Current.ObjectContainer.Get<IEntityController<TEntity>>();
+            controller = ApplicationManager.Current.Kernel.Get<IEntityController<TEntity>>();
             if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
 
             lock (_lock)
@@ -102,7 +102,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
              where TEntity : IEntity
         {
             IEntityController<TEntity> controller;
-            controller = ApplicationManager.Current.ObjectContainer.Get<IEntityController<TEntity>>();
+            controller = ApplicationManager.Current.Kernel.Get<IEntityController<TEntity>>();
             if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
 
             lock (_lock)
@@ -126,7 +126,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
              where TEntity : IEntity
         {
             IEntityController<TEntity> controller;
-            controller = ApplicationManager.Current.ObjectContainer.Get<IEntityController<TEntity>>();
+            controller = ApplicationManager.Current.Kernel.Get<IEntityController<TEntity>>();
             if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
 
             foreach (IView v in _openedViews)

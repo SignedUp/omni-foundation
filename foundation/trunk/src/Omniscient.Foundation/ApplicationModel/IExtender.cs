@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Foundation.ApplicationModel.Modularity
+﻿namespace Omniscient.Foundation.ApplicationModel
 {
     ///<summary>
     ///</summary>
