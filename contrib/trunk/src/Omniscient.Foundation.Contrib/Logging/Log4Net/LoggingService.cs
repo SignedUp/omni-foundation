@@ -1,4 +1,5 @@
 ﻿using System;
+using Omniscient.Foundation.ApplicationModel;
 using Omniscient.Foundation.Logging;
 using Omniscient.Foundation.ServiceModel;
 

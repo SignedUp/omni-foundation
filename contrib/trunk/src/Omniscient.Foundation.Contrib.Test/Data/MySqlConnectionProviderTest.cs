@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Data;
 using Moq;
 using NUnit.Framework;
-using Omniscient.Foundation.ApplicationModel;
 using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.Contrib.Data
@@ -18,6 +17,8 @@ namespace Omniscient.Foundation.Contrib.Data
         public void SetUp()
         {
             Mock<IDbConnection> connectionMock = new Mock<IDbConnection>();
+            connectionMock.Expect(x => x.ConnectionString).Returns("Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;");
+            connectionMock.Expect(x => x.State).Returns(ConnectionState.Closed);
 
             Mock<IConnectionProvider> providerMock;
             providerMock = new Mock<IConnectionProvider>();
