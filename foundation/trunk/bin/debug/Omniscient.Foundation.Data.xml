@@ -44,6 +44,17 @@
             The entity exists solely to maintain the values of another entity from which it has been cloned.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
+            <summary>
+             Provides a database connection for DB access.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
+            <summary>
+             Creates a database connection.
+            </summary>
+            <returns>A database connection</returns>
+        </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1">
             <summary>
             A predicate that checks a property (column) compared to a set of values of the same type.
@@ -749,17 +760,6 @@
             <summary>
             The value to compare with.
             </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
-            <summary>
-             Provides a database connection for DB access.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
-            <summary>
-             Creates a database connection.
-            </summary>
-            <returns>A database connection</returns>
         </member>
     </members>
 </doc>
