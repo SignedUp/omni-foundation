@@ -57,8 +57,7 @@ namespace Omniscient.Foundation.Contrib.Data
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(typeof (IDbConnection), actual);
 
-            Assert.IsNotNull(((IDbConnection) actual).ConnectionString);
-            Assert.IsNotEmpty(((IDbConnection) actual).ConnectionString);
+            Assert.IsFalse(string.IsNullOrEmpty(((IDbConnection)actual).ConnectionString));
 
             Assert.AreEqual(ConnectionState.Closed, ((IDbConnection) actual).State);
         }
