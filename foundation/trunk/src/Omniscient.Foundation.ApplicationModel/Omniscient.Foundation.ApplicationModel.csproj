@@ -63,6 +63,7 @@
     <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ApplicationConfigurationSectionHandler.cs" />
+    <Compile Include="Configuration\ConnectionProvider.cs" />
     <Compile Include="Configuration\ModuleDefinition.cs" />
     <Compile Include="Configuration\ModulesConfiguration.cs" />
     <Compile Include="Configuration\ObjectContainerConfiguration.cs" />
