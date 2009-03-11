@@ -71,6 +71,7 @@ namespace Omniscient.Foundation.ServiceModel
             Kernel.AddBinding(binding);
         }
 
+       
         private class ServiceProvider : ProviderBase
         {
             private IService _service;
@@ -92,4 +93,5 @@ namespace Omniscient.Foundation.ServiceModel
         }
 
     }
+
 }

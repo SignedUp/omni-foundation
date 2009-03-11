@@ -90,6 +90,45 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         public class Module2 : IApplicationModule
         {
             public Presentation.IPresentationController PresentationController { get; set; }
+
+            #region IApplicationModule Members
+
+            public string Name
+            {
+                get { throw new System.NotImplementedException(); }
+            }
+
+            public bool IsLoaded
+            {
+                get { throw new System.NotImplementedException(); }
+            }
+
+            public bool IsActivated
+            {
+                get { throw new System.NotImplementedException(); }
+            }
+
+            public void Load()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Activate(Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController presentation)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Deactivate()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Unload()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            #endregion
         }
     }       
 }

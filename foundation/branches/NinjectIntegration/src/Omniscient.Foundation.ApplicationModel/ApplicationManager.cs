@@ -61,7 +61,7 @@ namespace Omniscient.Foundation.ApplicationModel
             get { return _serviceProvider; }
             set
             {
-                if (IsStarted) throw new InvalidOperationException("Invalid after application is started.");
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
                 _serviceProvider = value;
             }
         }
@@ -77,7 +77,7 @@ namespace Omniscient.Foundation.ApplicationModel
             get { return _presentationController; }
             set
             {
-                if (IsStarted) throw new InvalidOperationException("Invalid after application is started.");
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
                 _presentationController = value;
             }
         }
@@ -94,7 +94,7 @@ namespace Omniscient.Foundation.ApplicationModel
             get { return _shell; }
             set 
             {
-                if (IsStarted) throw new InvalidOperationException("Invalid after application is started.");
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
                 _shell = value;
             }
         }
@@ -109,7 +109,7 @@ namespace Omniscient.Foundation.ApplicationModel
             get { return _kernel; }
             set
             {
-                if (IsStarted) throw new InvalidOperationException("Invalid after application is started.");
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
                 _kernel = value;
             }
         }
@@ -125,7 +125,7 @@ namespace Omniscient.Foundation.ApplicationModel
             get { return _applicationModuleManager; }
             set
             {
-                if (IsStarted) throw new InvalidOperationException("Invalid after application is started.");
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
                 _applicationModuleManager = value;
             }
         }
