@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Configuration;
+using System.Data;
 using Moq;
 using NUnit.Framework;
 using Omniscient.Foundation.ApplicationModel;
@@ -25,20 +27,39 @@ namespace Omniscient.Foundation.Contrib.Data
         }
 
         [Test]
-        public void TestInstance()
+        public void TestInstanceSuccessWithValidConnectionString()
         {
-            provider = new MsSqlConnectionProvider(connectionStringName);
+            provider = new MySqlConnectionProvider(connectionStringName);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInstanceFailureWithEmptyConnectionString()
+        {
+            provider = new MySqlConnectionProvider(string.Empty);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void TestInstanceFailureWithInvalidConnectionString()
+        {
+            provider = new MySqlConnectionProvider("TestString");
         }
 
         [Test]
         public void TestCreateConnection()
         {
-            provider = new MsSqlConnectionProvider(connectionStringName);
+            provider = new MySqlConnectionProvider(connectionStringName);
 
             object actual = provider.CreateConnection();
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(typeof(IDbConnection), actual);
+
+            Assert.IsNotNull(((IDbConnection) actual).ConnectionString);
+            Assert.IsNotEmpty(((IDbConnection) actual).ConnectionString);
+
+            Assert.AreEqual(ConnectionState.Closed, ((IDbConnection) actual).State);
         }
     }
 }
