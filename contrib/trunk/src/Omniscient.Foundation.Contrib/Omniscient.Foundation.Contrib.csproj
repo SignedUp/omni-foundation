@@ -57,9 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\SecureChannelFactoryService.cs" />
-    <Compile Include="Data\MySql\Configuration\Connectivity.cs" />
-    <Compile Include="Data\MySql\ConnectivityService.cs" />
-    <Compile Include="Data\MySql\ConnectivityServiceImpl.cs" />
+    <Compile Include="Data\MsSqlConnectionProvider.cs" />
+    <Compile Include="Data\MySqlConnectionProvider.cs" />
     <Compile Include="Logging\Log4Net\Logger.cs" />
     <Compile Include="Logging\Log4Net\LoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
