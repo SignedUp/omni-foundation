@@ -21,18 +21,32 @@ namespace Ninject.Core.Binding.Syntax
         ///<returns></returns>
         public static IBindingConditionBehaviorHeuristicComponentOrParameterSyntax To<T>(this IBindingTargetSyntax syntax, IKernel kernel, T instance)
         {
-            IEnumerator enumerator;
-            enumerator = kernel.Components.BindingRegistry.GetBindings(typeof (T)).GetEnumerator();
-            while(enumerator.MoveNext())
+            lock (kernel.Components.BindingRegistry)
             {
-                IBinding b = (IBinding) enumerator.Current;
-                if (b.Provider == null)
+                IEnumerator enumerator;
+                enumerator = kernel.Components.BindingRegistry.GetBindings(typeof (T)).GetEnumerator();
+
+                while (enumerator.MoveNext())
                 {
-                    b.Provider = new InstanceProvider<T>(instance);
+                    IBinding b = (IBinding) enumerator.Current;
+                    if (b.Provider == null)
+                    {
+                        b.Provider = new InstanceProvider<T>(instance);
+                        break;
+                    }
                 }
             }
 
             return (IBindingConditionBehaviorHeuristicComponentOrParameterSyntax)syntax;
+        }
+    }
+
+    public class InstanceBinding<T> : StandardBinding
+    {
+        public InstanceBinding(IKernel kernel, T instance)
+            : base(kernel, typeof(T))
+        {
+            Provider = new InstanceProvider<T>(instance);
         }
     }
 
