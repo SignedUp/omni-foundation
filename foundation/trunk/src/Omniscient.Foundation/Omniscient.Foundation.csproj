@@ -65,6 +65,7 @@
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
+    <Compile Include="Extensions\IBindingTargetSyntaxExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
