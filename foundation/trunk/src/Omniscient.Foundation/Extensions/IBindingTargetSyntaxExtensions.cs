@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Ninject.Core.Activation;
 using Ninject.Core.Creation.Providers;
 
@@ -20,48 +21,39 @@ namespace Ninject.Core.Binding.Syntax
         ///<returns></returns>
         public static IBindingConditionBehaviorHeuristicComponentOrParameterSyntax To<T>(this IBindingTargetSyntax syntax, IKernel kernel, T instance)
         {
-            InstanceBinding<T> binding;
-            binding = new InstanceBinding<T>(kernel, instance);
-            kernel.AddBinding(binding);
+            IEnumerator enumerator;
+            enumerator = kernel.Components.BindingRegistry.GetBindings(typeof (T)).GetEnumerator();
+            while(enumerator.MoveNext())
+            {
+                IBinding b = (IBinding) enumerator.Current;
+                if (b.Provider == null)
+                {
+                    b.Provider = new InstanceProvider<T>(instance);
+                }
+            }
 
             return (IBindingConditionBehaviorHeuristicComponentOrParameterSyntax)syntax;
         }
     }
 
-    ///<summary>
-    ///</summary>
-    ///<typeparam name="T"></typeparam>
-    public class InstanceBinding<T> : StandardBinding
+    public class InstanceProvider<T> : ProviderBase
     {
-        ///<summary>
-        ///</summary>
-        ///<param name="kernel"></param>
-        ///<param name="instance"></param>
-        public InstanceBinding(IKernel kernel, T instance)
-            : base(kernel, typeof(T))
+        private T _instance;
+
+        public InstanceProvider(T instance)
+            : base(typeof(T))
         {
-            Provider = new InstanceProvider(instance);
+            _instance = instance;
         }
 
-        private class InstanceProvider : ProviderBase
+        public override object Create(IContext context)
         {
-            private T _instance;
+            return _instance;
+        }
 
-            public InstanceProvider(T instance)
-                : base(typeof(T))
-            {
-                _instance = instance;
-            }
-
-            public override object Create(IContext context)
-            {
-                return _instance;
-            }
-
-            protected override Type DoGetImplementationType(IContext context)
-            {
-                return typeof(T);
-            }
+        protected override Type DoGetImplementationType(IContext context)
+        {
+            return typeof(T);
         }
     }
 }
