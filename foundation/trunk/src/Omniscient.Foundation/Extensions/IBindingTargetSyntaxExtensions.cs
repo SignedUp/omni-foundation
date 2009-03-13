@@ -18,7 +18,7 @@ namespace Ninject.Core.Binding.Syntax
         ///<param name="instance">Instance of type.</param>
         ///<typeparam name="T">Type of object.</typeparam>
         ///<returns></returns>
-        public static IBindingConditionBehaviorHeuristicComponentOrParameterSyntax To<T>(this IBindingTargetSyntax syntax, IKernel kernel, T instance) where T : class
+        public static IBindingConditionBehaviorHeuristicComponentOrParameterSyntax To<T>(this IBindingTargetSyntax syntax, IKernel kernel, T instance)
         {
             InstanceBinding<T> binding;
             binding = new InstanceBinding<T>(kernel, instance);
