@@ -532,6 +532,33 @@
             Gets the number of services that are registered.
             </summary>
         </member>
+        <member name="T:Ninject.Core.Binding.Syntax.IBindingTargetSyntaxExtension">
+            <summary>
+             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
+            </summary>
+        </member>
+        <member name="M:Ninject.Core.Binding.Syntax.IBindingTargetSyntaxExtension.To``1(Ninject.Core.Binding.Syntax.IBindingTargetSyntax,Ninject.Core.IKernel,``0)">
+            <summary>
+             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
+             by allowing binding instances of types directly.
+            </summary>
+            <param name="syntax"></param>
+            <param name="kernel"></param>
+            <param name="instance">Instance of type.</param>
+            <typeparam name="T">Type of object.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Ninject.Core.Binding.Syntax.InstanceBinding`1">
+            <summary>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Ninject.Core.Binding.Syntax.InstanceBinding`1.#ctor(Ninject.Core.IKernel,`0)">
+            <summary>
+            </summary>
+            <param name="kernel"></param>
+            <param name="instance"></param>
+        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
             <summary>
             </summary>
@@ -617,33 +644,6 @@
             Prompts a user for his/her credential and returns it.
             </summary>
             <returns>User credentials.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.IBindingTargetSyntaxExtension">
-            <summary>
-             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.IBindingTargetSyntaxExtension.To``1(Ninject.Core.Binding.Syntax.IBindingTargetSyntax,Ninject.Core.IKernel,``0)">
-            <summary>
-             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
-             by allowing binding instances of types directly.
-            </summary>
-            <param name="syntax"></param>
-            <param name="kernel"></param>
-            <param name="instance">Instance of type.</param>
-            <typeparam name="T">Type of object.</typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:Omniscient.Foundation.InstanceBinding`1">
-            <summary>
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.InstanceBinding`1.#ctor(Ninject.Core.IKernel,`0)">
-            <summary>
-            </summary>
-            <param name="kernel"></param>
-            <param name="instance"></param>
         </member>
     </members>
 </doc>

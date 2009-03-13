@@ -1,11 +1,8 @@
 ﻿using System;
-using Ninject.Core;
 using Ninject.Core.Activation;
-using Ninject.Core.Binding;
-using Ninject.Core.Binding.Syntax;
 using Ninject.Core.Creation.Providers;
 
-namespace Omniscient.Foundation
+namespace Ninject.Core.Binding.Syntax
 {
     ///<summary>
     /// Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
