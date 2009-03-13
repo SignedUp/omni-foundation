@@ -548,17 +548,6 @@
             <typeparam name="T">Type of object.</typeparam>
             <returns></returns>
         </member>
-        <member name="T:Ninject.Core.Binding.Syntax.InstanceBinding`1">
-            <summary>
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Ninject.Core.Binding.Syntax.InstanceBinding`1.#ctor(Ninject.Core.IKernel,`0)">
-            <summary>
-            </summary>
-            <param name="kernel"></param>
-            <param name="instance"></param>
-        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
             <summary>
             </summary>
