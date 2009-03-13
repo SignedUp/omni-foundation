@@ -20,7 +20,10 @@ namespace Ninject.Core.Binding.Syntax
         ///<returns></returns>
         public static IBindingConditionBehaviorHeuristicComponentOrParameterSyntax To<T>(this IBindingTargetSyntax syntax, IKernel kernel, T instance) where T : class
         {
-            kernel.AddBinding(new InstanceBinding<T>(kernel, instance));
+            InstanceBinding<T> binding;
+            binding = new InstanceBinding<T>(kernel, instance);
+            kernel.AddBinding(binding);
+
             return (IBindingConditionBehaviorHeuristicComponentOrParameterSyntax)syntax;
         }
     }
@@ -37,10 +40,10 @@ namespace Ninject.Core.Binding.Syntax
         public InstanceBinding(IKernel kernel, T instance)
             : base(kernel, typeof(T))
         {
-            Provider = new InstanceProvider<T>(instance);
+            Provider = new InstanceProvider(instance);
         }
 
-        private class InstanceProvider<T> : ProviderBase
+        private class InstanceProvider : ProviderBase
         {
             private T _instance;
 
