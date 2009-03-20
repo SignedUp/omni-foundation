@@ -367,6 +367,22 @@
             </summary>
             <param name="message"></param>
         </member>
+        <member name="T:Ninject.Core.Binding.Syntax.IBindingTargetSyntaxExtension">
+            <summary>
+             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
+            </summary>
+        </member>
+        <member name="M:Ninject.Core.Binding.Syntax.IBindingTargetSyntaxExtension.To``1(Ninject.Core.Binding.Syntax.IBindingTargetSyntax,Ninject.Core.IKernel,``0)">
+            <summary>
+             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
+             by allowing binding instances of types directly.
+            </summary>
+            <param name="syntax"></param>
+            <param name="kernel"></param>
+            <param name="instance">Instance of type.</param>
+            <typeparam name="T">Type of object.</typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.DIServiceProvider">
             <summary>
             Service provider that registers services against Ninject's dependency injection container.  Once registered, the service
