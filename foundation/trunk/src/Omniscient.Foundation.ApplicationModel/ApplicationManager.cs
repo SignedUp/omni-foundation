@@ -6,6 +6,7 @@ using Omniscient.Foundation.ApplicationModel.Presentation;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 using System.Collections.Generic;
 using Ninject.Core;
+using Omniscient.Foundation.Logging;
 
 namespace Omniscient.Foundation.ApplicationModel
 {
@@ -114,6 +115,17 @@ namespace Omniscient.Foundation.ApplicationModel
             }
         }
 
+        private ILogger _logger;
+        public ILogger Logger
+        {
+            get { return _logger; }
+            set
+            {
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
+                _logger = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets the <see cref="IApplicationModuleManager"/>.  If not set, then it will automatically be created with
         /// an instance of <see cref="ApplicationModuleManager"/>.  
@@ -208,6 +220,7 @@ namespace Omniscient.Foundation.ApplicationModel
 
         protected virtual void InitializeComponents()
         {
+            if (Logger == null) Logger = new StandardLogger(Console.Out, false);
             if (ServiceProvider == null)
             {
                 //if we have a kernel, then let's create a "depency-injection service provider".

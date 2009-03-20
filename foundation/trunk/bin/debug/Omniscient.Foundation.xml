@@ -4,6 +4,23 @@
         <name>Omniscient.Foundation</name>
     </assembly>
     <members>
+        <member name="T:Omniscient.Foundation.ApplicationModel.IConfigurable">
+            <summary>
+            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            </summary>
+            <remarks>
+            See the configuration schema for more details.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IConfigurable.Configure(System.Xml.XmlElement)">
+            <summary>
+            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            </summary>
+            <param name="config">The xml configuration.</param>
+            <remarks>
+            See the ApplicationModel configuration schema for more details.
+            </remarks>
+        </member>
         <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
             <summary>
             Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
@@ -50,110 +67,21 @@
             Gets the <c>SecureIdentity</c> of that principal.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.StringExtensions">
-            <summary>
-            Defines extension methods on the String class.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.TransitiveCommand">
+        <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
             <summary>
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
-            <summary>
-            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
-            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
-            created because we don't believe that commands should be limited to environments with a user interface.
-            </summary>
-            <remarks>
-            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
-            the members signatures are identical, you don't need to replicate any code; each member's implementation
-            will handle the member from both interfaces automatically.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
-            <summary>
-            Retreives a value that indicates whether or not the command is in a state that allows execution.
-            </summary>
-            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
-            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
-            <summary>
-            Executes the command
-            </summary>
-            <param name="param">Any value needed for execution.</param>
-        </member>
-        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
-            <summary>
-            Raised when the command's availability changes.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Commanding.ICommandCore.Name">
-            <summary>
-            Gets the name of the command.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.#ctor">
+        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.FromSecureString(System.Security.SecureString)">
             <summary>
             </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.RegisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
-            <summary>
-            </summary>
-            <param name="handler"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.UnregisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
-            <summary>
-            </summary>
-            <param name="handler"></param>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
-            <summary>
-            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
-            and implementation type <typeparamref name="TImplementation"/>.
-            
-            This service's implementation will be instaciated each time the service is requested.
-            </summary>
-            <typeparam name="TContract">Service's contract type.</typeparam>
-            <typeparam name="TImplementation">Implementation type.</typeparam>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
-            <summary>
-            </summary>
-            <typeparam name="TContract"></typeparam>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IService">
-            <summary>
-            Defines the base interface for a service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
-            <summary>
-            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
-            </summary>
-            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
-            <summary>
-            Gets the name of the service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
-            <summary>
-            Gets the implementation's contract type of the service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
-            <summary>
-            </summary>
+            <param name="secureString"></param>
             <returns></returns>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
+        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.ToSecureString(System.String)">
             <summary>
-            Returns the implementation; instanciate a new one on each call.
             </summary>
-            <returns>Service's implementation.</returns>
+            <param name="regularString"></param>
+            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.Security.SecureIdentity">
             <summary>
@@ -225,6 +153,37 @@
             Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
             as the AppDomain's principal.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+            <summary>
+            Defines the base interface for a service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
+            <summary>
+            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
+            </summary>
+            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+            <summary>
+            Gets the name of the service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
+            <summary>
+            Gets the implementation's contract type of the service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
+            <summary>
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
             <summary>
@@ -310,122 +269,79 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IConfigurable">
+        <member name="T:Omniscient.Foundation.StringExtensions">
             <summary>
-            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            Defines extension methods on the String class.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.TransitiveCommand">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
+            <summary>
+            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
+            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
+            created because we don't believe that commands should be limited to environments with a user interface.
             </summary>
             <remarks>
-            See the configuration schema for more details.
+            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
+            the members signatures are identical, you don't need to replicate any code; each member's implementation
+            will handle the member from both interfaces automatically.
             </remarks>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IConfigurable.Configure(System.Xml.XmlElement)">
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
             <summary>
-            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            Retreives a value that indicates whether or not the command is in a state that allows execution.
             </summary>
-            <param name="config">The xml configuration.</param>
-            <remarks>
-            See the ApplicationModel configuration schema for more details.
-            </remarks>
+            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
+            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
         </member>
-        <member name="T:Omniscient.Foundation.Logging.ILoggingService">
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
             <summary>
+            Executes the command
             </summary>
+            <param name="param">Any value needed for execution.</param>
         </member>
-        <member name="M:Omniscient.Foundation.Logging.ILoggingService.GetLogger(System.String)">
+        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
             <summary>
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILoggingService.GetLogger(System.Type)">
-            <summary>
-            </summary>
-            <param name="logSource"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.DelegateCommandHandler">
-            <summary>
+            Raised when the command's availability changes.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICommandHandler">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandHandler.Execute(System.Object)">
-            <summary>
-            </summary>
-            <param name="param"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.#ctor(System.Action{System.Object})">
-            <summary>
-            </summary>
-            <param name="executeMethod"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.Execute(System.Object)">
-            <summary>
-            </summary>
-            <param name="param"></param>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
-            <summary>
-            Defines a composite command.  When executed, a composite command is executing all its children commands.  
-            See <see cref="T:Omniscient.Foundation.Commanding.CompositeCommand"/> for default implementation.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.CompositeCommand">
-            <summary>
-            Base class for composite commands.  When executed, a composite command is executing all its children commands.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.#ctor">
-            <summary>
-            default constructor
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.CanExecute(System.Object)">
-            <summary>
-            Returns True if the command is in a state that allows execution.  Otherwise, False.
-            </summary>
-            <param name="param">The object that will be passed to <see cref="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)"/>.</param>
-            <returns>True if command allows execution.  Otherwise, False.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)">
-            <summary>
-            Executes all children commands sequentially.  Overrides may add behavior to the execution.
-            </summary>
-            <param name="param">Object passed to the command for the execution.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Commands">
-            <summary>
-            Gets the list of children (composed) commands.  Upon execution, those children commands will be executed sequentially.
-            </summary>
-        </member>
-        <member name="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged">
-            <summary>
-            Raised when <see cref="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged"/> will change its return value.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Name">
+        <member name="P:Omniscient.Foundation.Commanding.ICommandCore.Name">
             <summary>
             Gets the name of the command.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
+        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.#ctor">
             <summary>
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.FromSecureString(System.Security.SecureString)">
+        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.RegisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
             <summary>
             </summary>
-            <param name="secureString"></param>
-            <returns></returns>
+            <param name="handler"></param>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.ToSecureString(System.String)">
+        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.UnregisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
             <summary>
             </summary>
-            <param name="regularString"></param>
-            <returns></returns>
+            <param name="handler"></param>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+            <summary>
+            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
+            and implementation type <typeparamref name="TImplementation"/>.
+            
+            This service's implementation will be instaciated each time the service is requested.
+            </summary>
+            <typeparam name="TContract">Service's contract type.</typeparam>
+            <typeparam name="TImplementation">Implementation type.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
+            <summary>
+            Returns the implementation; instanciate a new one on each call.
+            </summary>
+            <returns>Service's implementation.</returns>
         </member>
         <member name="T:Omniscient.Foundation.Logging.ILogger">
             <summary>
@@ -450,6 +366,26 @@
             <summary>
             </summary>
             <param name="message"></param>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.DIServiceProvider">
+            <summary>
+            Service provider that registers services against Ninject's dependency injection container.  Once registered, the service
+            is available from the Kernel, as well as from the service provider itself.  In all cases, a call to 
+            <see cref="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation"/> will be made each time the service is accessed.
+            </summary>
+            <example>
+            Let's have a validation service: IValidator and IValidatorService (derives from IService).  Let's also have a class named Validator that implements
+            IValidator and IValidatorService, and returns a reference to itself when GetImplementation is invoked.
+            You register that service with a call to DIServiceProvider.RegisterService&lt;IValidator&gt;(new Validator());
+            
+            Once it's registered, you can access the service like this:
+            IValidator v = serviceProvider.GetService&lt;IValidator&gt;();
+            
+            or like that:
+            IValidator v = kernel.Get&lt;IValidator&gt;();
+            
+            In all cases, the framework will call GetImplementation on the service to return an instance of IValidator.
+            </example>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
             <summary>
@@ -532,21 +468,85 @@
             Gets the number of services that are registered.
             </summary>
         </member>
-        <member name="T:Ninject.Core.Binding.Syntax.IBindingTargetSyntaxExtension">
+        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.#ctor(Ninject.Core.IKernel)">
             <summary>
-             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
+            Ctor
+            </summary>
+            <param name="kernel">a Ninject kernel</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider, and adds a binding to the Kernel, allowing the service to be part of the dependency
+            injection machanism.
+            </summary>
+            <param name="contractType">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.DIServiceProvider.Kernel">
+            <summary>
+            Gets or sets the Ninject kernel used to register regular services as Ninject's services, so that they're part of
+            the DI mechanism.
             </summary>
         </member>
-        <member name="M:Ninject.Core.Binding.Syntax.IBindingTargetSyntaxExtension.To``1(Ninject.Core.Binding.Syntax.IBindingTargetSyntax,Ninject.Core.IKernel,``0)">
+        <member name="T:Omniscient.Foundation.Logging.ILoggingService">
             <summary>
-             Extends functionality of <typeparamref name="IBindingTargetSyntax"/>
-             by allowing binding instances of types directly.
             </summary>
-            <param name="syntax"></param>
-            <param name="kernel"></param>
-            <param name="instance">Instance of type.</param>
-            <typeparam name="T">Type of object.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILoggingService.GetLogger(System.String)">
+            <summary>
+            </summary>
+            <param name="name"></param>
             <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILoggingService.GetLogger(System.Type)">
+            <summary>
+            </summary>
+            <param name="logSource"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
+            <summary>
+            Defines a composite command.  When executed, a composite command is executing all its children commands.  
+            See <see cref="T:Omniscient.Foundation.Commanding.CompositeCommand"/> for default implementation.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.CompositeCommand">
+            <summary>
+            Base class for composite commands.  When executed, a composite command is executing all its children commands.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.CanExecute(System.Object)">
+            <summary>
+            Returns True if the command is in a state that allows execution.  Otherwise, False.
+            </summary>
+            <param name="param">The object that will be passed to <see cref="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)"/>.</param>
+            <returns>True if command allows execution.  Otherwise, False.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)">
+            <summary>
+            Executes all children commands sequentially.  Overrides may add behavior to the execution.
+            </summary>
+            <param name="param">Object passed to the command for the execution.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Commands">
+            <summary>
+            Gets the list of children (composed) commands.  Upon execution, those children commands will be executed sequentially.
+            </summary>
+        </member>
+        <member name="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged">
+            <summary>
+            Raised when <see cref="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged"/> will change its return value.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Name">
+            <summary>
+            Gets the name of the command.
+            </summary>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
             <summary>
@@ -573,56 +573,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.DIServiceProvider">
-            <summary>
-            Service provider that registers services against Ninject's dependency injection container.  Once registered, the service
-            is available from the Kernel, as well as from the service provider itself.  In all cases, a call to 
-            <see cref="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation"/> will be made each time the service is accessed.
-            </summary>
-            <example>
-            Let's have a validation service: IValidator and IValidatorService (derives from IService).  Let's also have a class named Validator that implements
-            IValidator and IValidatorService, and returns a reference to itself when GetImplementation is invoked.
-            You register that service with a call to DIServiceProvider.RegisterService&lt;IValidator&gt;(new Validator());
-            
-            Once it's registered, you can access the service like this:
-            IValidator v = serviceProvider.GetService&lt;IValidator&gt;();
-            
-            or like that:
-            IValidator v = kernel.Get&lt;IValidator&gt;();
-            
-            In all cases, the framework will call GetImplementation on the service to return an instance of IValidator.
-            </example>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.#ctor(Ninject.Core.IKernel)">
-            <summary>
-            Ctor
-            </summary>
-            <param name="kernel">a Ninject kernel</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the provider, and adds a binding to the Kernel, allowing the service to be part of the dependency
-            injection machanism.
-            </summary>
-            <param name="contractType">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.DIServiceProvider.Kernel">
-            <summary>
-            Gets or sets the Ninject kernel used to register regular services as Ninject's services, so that they're part of
-            the DI mechanism.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.IRoleProvider">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IRoleProvider.GetRolesForUser(System.String)">
-            <summary>
-            </summary>
-            <param name="username"></param>
-            <returns></returns>
-        </member>
         <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtender">
             <summary>
             Defines an Extender contract for prompting a user for his/her credential.
@@ -633,6 +583,40 @@
             Prompts a user for his/her credential and returns it.
             </summary>
             <returns>User credentials.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICommandHandler">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandHandler.Execute(System.Object)">
+            <summary>
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.DelegateCommandHandler">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.#ctor(System.Action{System.Object})">
+            <summary>
+            </summary>
+            <param name="executeMethod"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.Execute(System.Object)">
+            <summary>
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.IRoleProvider">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IRoleProvider.GetRolesForUser(System.String)">
+            <summary>
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
