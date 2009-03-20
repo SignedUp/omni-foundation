@@ -44,6 +44,17 @@
             The entity exists solely to maintain the values of another entity from which it has been cloned.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
+            <summary>
+             Provides a database connection for DB access.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
+            <summary>
+             Creates a database connection.
+            </summary>
+            <returns>A database connection</returns>
+        </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1">
             <summary>
             A predicate that checks a property (column) compared to a set of values of the same type.
@@ -159,7 +170,7 @@
         </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.AcceptChanges(`0)">
             <summary>
-            Use this fonction to accept changes on an entity.  Use <see cref="!:IEntityAdapter"/> to save it to the database.
+            Use this fonction to accept changes on an entity.  Use <see cref="T:Omniscient.Foundation.Data.IEntityAdapter`1"/> to save it to the database.
             </summary>
             <remarks>
             If Status is <see cref="F:Omniscient.Foundation.Data.EntityStatus.Dirty"/>, then the status is set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
@@ -182,6 +193,10 @@
             <param name="original">The entity to clone</param>
             <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
             <returns>A clone, with the same id and values.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityController`1.RegisterObserver(Omniscient.Foundation.Data.IEntityModificationObserver{`0},Omniscient.Foundation.Data.EntityList{`0})">
+            <summary>
+            </summary>
         </member>
         <member name="M:Omniscient.Foundation.Data.EntityController`1.#ctor">
             <summary>
@@ -388,6 +403,18 @@
             Gets the type of the entity, a string that uniquelly identifies this type of entity.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IEntityModificationObserver`1">
+            <summary>
+             Represents a class that observes modifications in an entity,
+             and gets notified when any changes occur.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityModificationObserver`1.Notify(`0)">
+            <summary>
+             Server to inform the observer of an entity modification.
+            </summary>
+            <param name="entity">Entity that has been modified.</param>
+        </member>
         <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
             <summary>
             Represents an adapter that manages a certain type of entities.  
@@ -405,6 +432,19 @@
             <param name="id">The unique id of the entity that is sought.</param>
             <returns>Returns the entity if found; Otherwise, returns Null.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByForeignKey(System.String,System.Guid)">
+            <summary>
+            </summary>
+            <param name="propertyName"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByQuery(System.String)">
+            <summary>
+            </summary>
+            <param name="queryName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
             <summary>
             Retrieves an entity from the database by an object query.
@@ -412,11 +452,28 @@
             <param name="query">The object query to search entities.</param>
             <returns>An array of entities that are found using the given object query.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByValueProperty(System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="propertyName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadAll">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
             <summary>
             Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
             </summary>
             <param name="entity">The entity to save.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            </summary>
+            <param name="entities"></param>
         </member>
         <member name="T:Omniscient.Foundation.Data.ILookup">
             <summary>
@@ -706,4 +763,3 @@
         </member>
     </members>
 </doc>
-
