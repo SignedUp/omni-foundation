@@ -26,37 +26,6 @@ namespace Omniscient.Foundation.Data
 
         ///<summary>
         ///</summary>
-        ///<param name="propertyName"></param>
-        ///<param name="id"></param>
-        ///<returns></returns>
-        [OperationContract]
-        EntityList<TEntity> LoadByForeignKey(string propertyName, Guid id);
-
-        ///<summary>
-        ///</summary>
-        ///<param name="queryName"></param>
-        ///<returns></returns>
-        [OperationContract]
-        EntityList<TEntity> LoadByQuery(string queryName);
-
-        /// <summary>
-        /// Retrieves an entity from the database by an object query.
-        /// </summary>
-        /// <param name="query">The object query to search entities.</param>
-        /// <returns>An array of entities that are found using the given object query.</returns>
-        [OperationContract]
-        EntityList<TEntity> LoadByObjectQuery(ObjectQuery.OQuery<TEntity> query);
-
-        ///<summary>
-        ///</summary>
-        ///<param name="propertyName"></param>
-        ///<param name="value"></param>
-        ///<returns></returns>
-        [OperationContract]
-        EntityList<TEntity> LoadByValueProperty(string propertyName, object value);
-
-        ///<summary>
-        ///</summary>
         ///<returns></returns>
         [OperationContract]
         EntityList<TEntity> LoadAll();
