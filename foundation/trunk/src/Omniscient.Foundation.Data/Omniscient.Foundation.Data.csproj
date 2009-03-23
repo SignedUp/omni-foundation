@@ -25,7 +25,7 @@
     <DocumentationFile>bin\Debug\Omniscient.Foundation.Data.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -112,8 +112,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetPath) $(SolutionDir)..\bin\debug\$(TargetFileName) /B
-IF $(ConfigurationName) == DebugAndCopyBinaries copy /B /Y $(TargetDir)$(TargetName).pdb $(SolutionDir)..\bin\debug\$(TargetName).pdb /B
-IF $(ConfigurationName) == DebugAndCopyBinaries copy /A /Y $(TargetDir)$(TargetName).xml $(SolutionDir)..\bin\debug\$(TargetName).xml /A</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
