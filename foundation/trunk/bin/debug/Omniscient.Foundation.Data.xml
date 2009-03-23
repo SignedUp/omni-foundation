@@ -698,33 +698,6 @@
             <param name="id">The unique id of the entity that is sought.</param>
             <returns>Returns the entity if found; Otherwise, returns Null.</returns>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByForeignKey(System.String,System.Guid)">
-            <summary>
-            </summary>
-            <param name="propertyName"></param>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByQuery(System.String)">
-            <summary>
-            </summary>
-            <param name="queryName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByObjectQuery(Omniscient.Foundation.Data.ObjectQuery.OQuery{`0})">
-            <summary>
-            Retrieves an entity from the database by an object query.
-            </summary>
-            <param name="query">The object query to search entities.</param>
-            <returns>An array of entities that are found using the given object query.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadByValueProperty(System.String,System.Object)">
-            <summary>
-            </summary>
-            <param name="propertyName"></param>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
         <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.LoadAll">
             <summary>
             </summary>
