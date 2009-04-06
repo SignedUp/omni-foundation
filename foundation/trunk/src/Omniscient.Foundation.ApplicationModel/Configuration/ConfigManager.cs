@@ -2,6 +2,7 @@
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Modularity;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
