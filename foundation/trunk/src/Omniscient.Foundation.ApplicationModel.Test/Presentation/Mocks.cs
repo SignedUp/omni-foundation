@@ -39,6 +39,26 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         #endregion
+
+        #region IViewController Members
+
+
+        public void Focus(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CloseView(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CloseViewRange(System.Collections.Generic.IEnumerable<IView> views)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     public class MainViewControllerMock : IViewController
@@ -73,6 +93,26 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                 _current = value;
                 if (CurrentViewChanged != null) CurrentViewChanged(this, EventArgs.Empty);
             }
+        }
+
+        #endregion
+
+        #region IViewController Members
+
+
+        public void Focus(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CloseView(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CloseViewRange(System.Collections.Generic.IEnumerable<IView> views)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

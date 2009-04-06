@@ -75,6 +75,7 @@
     <Compile Include="Presentation\IPresenter.cs" />
     <Compile Include="Presentation\IShell.cs" />
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
+    <Compile Include="Presentation\IViewNavigator.cs" />
     <Compile Include="Presentation\ModelBase.cs" />
     <Compile Include="Presentation\ModelMultiEntitiesBase.cs" />
     <Compile Include="Presentation\ModelSingleEntityBase.cs" />

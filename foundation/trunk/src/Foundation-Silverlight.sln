@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Data-silver", "Omniscient.Foundation.Data\Omniscient.Foundation.Data-silver.csproj", "{CF22BC22-9DB1-476C-AC43-9F0229A9D6F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contrib", "Contrib", "{927CD2C8-7AFC-4AA7-9877-8C1C590C8ACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Contrib.Silverlight", "Omniscient.Foundation.Contrib.Silverlight\Omniscient.Foundation.Contrib.Silverlight.csproj", "{CD843623-75A0-4455-A92C-396F3C197000}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -29,8 +33,15 @@ Global
 		{CF22BC22-9DB1-476C-AC43-9F0229A9D6F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF22BC22-9DB1-476C-AC43-9F0229A9D6F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF22BC22-9DB1-476C-AC43-9F0229A9D6F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD843623-75A0-4455-A92C-396F3C197000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD843623-75A0-4455-A92C-396F3C197000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD843623-75A0-4455-A92C-396F3C197000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD843623-75A0-4455-A92C-396F3C197000}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD843623-75A0-4455-A92C-396F3C197000} = {927CD2C8-7AFC-4AA7-9877-8C1C590C8ACE}
 	EndGlobalSection
 EndGlobal

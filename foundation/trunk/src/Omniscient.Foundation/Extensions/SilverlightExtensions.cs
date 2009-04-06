@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Omniscient.Foundation.Extensions
+namespace Omniscient.Foundation
 {
     public static class SilverlightExtensions
     {

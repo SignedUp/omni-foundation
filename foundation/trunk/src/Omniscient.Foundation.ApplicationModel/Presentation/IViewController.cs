@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -25,5 +26,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// Raised when the current view is changed for a new view.
         /// </summary>
         event EventHandler CurrentViewChanged;
+
+        void Focus(IView view);
+        bool CloseView(IView view);
+        bool CloseViewRange(IEnumerable<IView> views);
+
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Presentation\IView.cs" />
     <Compile Include="Presentation\IViewController.cs" />
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
+    <Compile Include="Presentation\IViewNavigator.cs" />
     <Compile Include="Presentation\ModelBase.cs" />
     <Compile Include="Presentation\ModelMultiEntitiesBase.cs" />
     <Compile Include="Presentation\ModelSingleEntityBase.cs" />
