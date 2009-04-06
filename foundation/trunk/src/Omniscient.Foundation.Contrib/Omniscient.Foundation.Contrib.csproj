@@ -39,14 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\mysql\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Omniscient.Foundation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\foundation\Omniscient.Foundation.dll</HintPath>
-    </Reference>
-    <Reference Include="Omniscient.Foundation.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\foundation\Omniscient.Foundation.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -62,6 +54,16 @@
     <Compile Include="Logging\Log4Net\Logger.cs" />
     <Compile Include="Logging\Log4Net\LoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Omniscient.Foundation.Data\Omniscient.Foundation.Data.csproj">
+      <Project>{55AF3468-EE23-426D-A321-44FC866A7D8A}</Project>
+      <Name>Omniscient.Foundation.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation.csproj">
+      <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
+      <Name>Omniscient.Foundation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
