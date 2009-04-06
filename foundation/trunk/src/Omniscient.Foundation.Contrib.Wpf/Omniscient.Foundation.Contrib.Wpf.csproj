@@ -38,14 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\wpfContrib\AvalonLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Omniscient.Foundation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\foundation\Omniscient.Foundation.dll</HintPath>
-    </Reference>
-    <Reference Include="Omniscient.Foundation.ApplicationModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\foundation\Omniscient.Foundation.ApplicationModel.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -107,6 +99,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Omniscient.Foundation.ApplicationModel\Omniscient.Foundation.ApplicationModel.csproj">
+      <Project>{796F6AEB-DB90-4748-B9E5-00BB19D98966}</Project>
+      <Name>Omniscient.Foundation.ApplicationModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation.csproj">
+      <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
+      <Name>Omniscient.Foundation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
