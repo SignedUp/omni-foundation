@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contrib", "Contrib", "{927C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Contrib.Silverlight", "Omniscient.Foundation.Contrib.Silverlight\Omniscient.Foundation.Contrib.Silverlight.csproj", "{CD843623-75A0-4455-A92C-396F3C197000}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Development", "Development", "{D501DDF5-7429-458A-8D81-DDB383F93803}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
