@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Ninject.Core.Modules;
 using Omniscient.Foundation.ApplicationModel.Presentation;
+using Omniscient.Foundation.Extensions;
 
 namespace Omniscient.Foundation.ApplicationModel.Modularity
 {
