@@ -25,7 +25,11 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         /// Optional.  Any configuration needed by a service that implements <see cref="IConfigurable"/>.
         /// </summary>
         [XmlElement("config", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
+#if SILVERLIGHT
+        public object Config { get; set; }
+#else
         public XmlElement Config { get; set; }
+#endif
     }
 
 }
