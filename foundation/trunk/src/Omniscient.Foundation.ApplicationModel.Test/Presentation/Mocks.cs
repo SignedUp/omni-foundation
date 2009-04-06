@@ -5,7 +5,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     #region View Controllers
     
-    public class SidePanelViewControllerMock: IViewController
+    public class SidePanelViewControllerMock : IViewController
     {
         IView _current;
 
