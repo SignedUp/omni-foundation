@@ -11,6 +11,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation.Navigation
         {
             ClosedForwards = delegate { };
         }
+        public ForwardsClosingViewNavigator()
+            : base()
+        {
+            ClosedForwards = delegate { };
+        }
 
         public override void NavigateTo(IView view)
         {
@@ -35,6 +40,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation.Navigation
             if (!this.CanGoForward())
             {
                 RegisteredViews.Add(view);
+                OnAddedView(view, this.CurrentPosition + 1);
                 GoForward();
             }
             else
@@ -51,6 +57,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation.Navigation
 
                     //add the newly added item, and focus it
                     RegisteredViews.Add(view);
+                    OnAddedView(view, this.CurrentPosition + 1);
                     GoForward();
                 }
             }
