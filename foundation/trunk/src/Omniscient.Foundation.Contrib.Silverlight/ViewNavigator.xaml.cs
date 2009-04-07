@@ -53,27 +53,50 @@ namespace Omniscient.Foundation.Contrib.Silverlight
 
             Button current = _buttons[_navigator.CurrentPosition];
             current.BorderBrush = new SolidColorBrush(Colors.Blue);
+            current.Focus();
         }
 
         void ClosedForwards(object sender, System.EventArgs e)
         {
-            for (int i = _navigator.CurrentPosition; i < _buttons.Count; i++)
-                StackPanelContent.Children.Remove(_buttons[i]);    
+            for (int i = _navigator.CurrentPosition + 1; i < _buttons.Count; i++)
+            {
+                StackPanelContent.Children.Remove(_buttons[i]);
+            }
+            _buttons.RemoveRange(_navigator.CurrentPosition + 1, _buttons.Count - (_navigator.CurrentPosition + 1));
         }
 
         void AddedView(object sender, AddedViewEventArgs e)
         {
-            Button b = new Button();
-            b.Content = new ViewContent(e.View);
-            b.Click += new RoutedEventHandler(NavigationButton_Click);
-            StackPanelContent.Children.Add(b);
-            _buttons.Add(b);
+            NavigationButton button = new NavigationButton();
+            StackPanel panel = new StackPanel();
+            
+            TextBlock title = new TextBlock();
+            title.TextAlignment = TextAlignment.Center;
+            title.Text = e.View.Title;
+            panel.Children.Add(title);
+            
+            Image icon = (Image)e.View.Icon;
+            icon.Stretch = Stretch.Fill;
+            ContentControl iconPlaceholder = new ContentControl();
+            iconPlaceholder.Height = 24.0;
+            iconPlaceholder.Width = 24.0;
+            iconPlaceholder.Content = icon;
+            iconPlaceholder.Margin = new Thickness(3.0);
+            panel.Children.Add(iconPlaceholder);
+
+            button.Margin = new Thickness(0, 0, 3, 0);
+            button.Content = panel;
+            button.View = e.View;
+            
+            button.Click += new RoutedEventHandler(NavigationButton_Click);
+            StackPanelContent.Children.Add(button);
+            _buttons.Add(button);
         }
 
         void NavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewContent content = (ViewContent)((Button)sender).Content;
-            _navigator.NavigateTo(content.View);
+            NavigationButton button = (NavigationButton)sender;
+            _navigator.NavigateTo(button.View);
         }
 
         public IViewController Controller

@@ -65,7 +65,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation.Navigation
 
         private IEnumerable<IView> GetForwards()
         {
-            for (int i = Cursor; i < RegisteredViews.Count - 1; i++)
+            for (int i = Cursor + 1; i < RegisteredViews.Count; i++)
                 yield return RegisteredViews[i];
         }
 
