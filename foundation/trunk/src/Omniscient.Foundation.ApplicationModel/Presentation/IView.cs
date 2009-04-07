@@ -16,5 +16,10 @@
         /// Called when the Model is modified from the outside of the View (probably in another view).
         /// </summary>
         void UpdateView();
+
+        /// <summary>
+        /// Gets or sets the view's title.
+        /// </summary>
+        string Title { get; set; }
     }
 }
