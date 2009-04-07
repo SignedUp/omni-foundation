@@ -14,6 +14,7 @@ using Omniscient.Foundation.ApplicationModel.Presentation;
 using Microsoft.Windows.Controls;
 using Omniscient.Foundation.Data;
 using Omniscient.Foundation.ApplicationModel.Presentation.Navigation;
+using System.Windows.Media.Imaging;
 
 namespace Contrib.Silverlight.Client
 {
@@ -68,9 +69,9 @@ namespace Contrib.Silverlight.Client
             }
 
             TextBlockView v = new TextBlockView((MyModel)model);
-            Panel.Children.Add(v.Block);
             _views.Add(v);
             Navigator.NavigateTo(v);
+            Panel.Children.Add(v.Block);
             return v;
         }
 
@@ -84,19 +85,32 @@ namespace Contrib.Silverlight.Client
 
         public void Focus(IView view)
         {
-            if (CurrentView != null) ((TextBlockView)CurrentView).Block.Opacity = 0.7;
-            ((TextBlockView)view).Block.Opacity = 1.0;
+            TextBlockView myView;
+
+            if (CurrentView != null)
+            {
+                myView = (TextBlockView)CurrentView;
+                myView.Block.Opacity = 0.7;
+                myView.Block.FontSize = 12;
+            }
+
+            myView = (TextBlockView)view;
+            myView.Block.Opacity = 1.0;
+            myView.Block.FontSize = 24;
             CurrentView = view;
         }
 
         public bool CloseView(IView view)
         {
-            throw new NotImplementedException();
+            _views.Remove(view);
+            Panel.Children.Remove(((TextBlockView)view).Block);
+            return true;
         }
 
         public bool CloseViewRange(IEnumerable<IView> views)
         {
-            throw new NotImplementedException();
+            foreach (IView v in views) CloseView(v);
+            return true;
         }
 
         #endregion
@@ -108,6 +122,10 @@ namespace Contrib.Silverlight.Client
         {
             Model = model;
             Block = new TextBlock();
+            Image icon = new Image();
+            
+            icon.Source = new BitmapImage(new Uri("/Contrib.Silverlight.Client;Component/Resources/application_side_boxes.png", UriKind.Relative));
+            this.Icon = icon;
             UpdateView();
         }
 
@@ -128,6 +146,12 @@ namespace Contrib.Silverlight.Client
         {
             get { return Model.Name; }
             set { }
+        }
+
+        public object Icon
+        {
+            get;
+            set;
         }
     }
 
