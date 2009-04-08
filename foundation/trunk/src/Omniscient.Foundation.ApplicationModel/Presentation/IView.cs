@@ -21,11 +21,5 @@
         /// Gets or sets the view's title.
         /// </summary>
         string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets the icon.  Depending on the hosting system, the type of icon will change and therefore, 
-        /// we use object as the type.
-        /// </summary>
-        object Icon { get; set; }
     }
 }

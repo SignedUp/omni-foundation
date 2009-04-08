@@ -77,6 +77,9 @@
     <Resource Include="Resources\control_fastforward_blue.png" />
     <Resource Include="Resources\control_rewind_blue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\application_side_boxes.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

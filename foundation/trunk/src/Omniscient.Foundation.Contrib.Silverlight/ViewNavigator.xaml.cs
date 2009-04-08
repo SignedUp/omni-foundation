@@ -4,6 +4,8 @@ using Omniscient.Foundation.ApplicationModel.Presentation.Navigation;
 using Omniscient.Foundation.ApplicationModel.Presentation;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System;
 
 namespace Omniscient.Foundation.Contrib.Silverlight
 {
@@ -74,8 +76,9 @@ namespace Omniscient.Foundation.Contrib.Silverlight
             title.TextAlignment = TextAlignment.Center;
             title.Text = e.View.Title;
             panel.Children.Add(title);
-            
-            Image icon = (Image)e.View.Icon;
+
+            Image icon = new Image();
+            icon.Source = new BitmapImage(new Uri("/Omniscient.Foundation.Contrib.Silverlight;Component/Resources/application_side_boxes.png", UriKind.Relative));
             icon.Stretch = Stretch.Fill;
             ContentControl iconPlaceholder = new ContentControl();
             iconPlaceholder.Height = 24.0;
