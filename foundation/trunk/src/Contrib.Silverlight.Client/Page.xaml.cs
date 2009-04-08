@@ -122,10 +122,7 @@ namespace Contrib.Silverlight.Client
         {
             Model = model;
             Block = new TextBlock();
-            Image icon = new Image();
             
-            icon.Source = new BitmapImage(new Uri("/Contrib.Silverlight.Client;Component/Resources/application_side_boxes.png", UriKind.Relative));
-            this.Icon = icon;
             UpdateView();
         }
 

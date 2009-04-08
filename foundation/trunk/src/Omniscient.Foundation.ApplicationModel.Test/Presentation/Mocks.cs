@@ -197,6 +197,18 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         {
             //update controls here...
         }
+
+        public string Title
+        {
+            get;
+            set;
+        }
+
+        public object Icon
+        {
+            get;
+            set;
+        }
     }
 
     public class InvoiceList : IView
