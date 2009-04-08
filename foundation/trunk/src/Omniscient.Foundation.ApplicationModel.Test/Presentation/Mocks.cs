@@ -204,11 +204,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             set;
         }
 
-        public object Icon
-        {
-            get;
-            set;
-        }
     }
 
     public class InvoiceList : IView
@@ -224,6 +219,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void UpdateView()
         {
             throw new NotImplementedException();
+        }
+
+        public string Title
+        {
+            get;
+            set;
         }
 
         #endregion
