@@ -31,7 +31,7 @@ namespace Omniscient.Foundation.ApplicationModel
             _instance = new ApplicationManager();
         }
 
-        private ApplicationManager()
+        protected ApplicationManager()
         {
         }
 
