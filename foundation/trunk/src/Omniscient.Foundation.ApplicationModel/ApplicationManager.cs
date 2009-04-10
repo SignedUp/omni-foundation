@@ -41,6 +41,11 @@ namespace Omniscient.Foundation.ApplicationModel
         public static ApplicationManager Current
         {
             get { return _instance; }
+            set
+            {
+                if (_instance.IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
+                _instance = value;
+            }
         }
 
         /// <summary>
