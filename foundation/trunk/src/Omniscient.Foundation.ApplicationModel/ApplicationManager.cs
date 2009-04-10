@@ -16,7 +16,6 @@ namespace Omniscient.Foundation.ApplicationModel
     /// </summary>
     public class ApplicationManager
     {
-        private static ApplicationManager _instance;
         private ApplicationConfiguration _config;
         private bool _started;
         
@@ -28,10 +27,10 @@ namespace Omniscient.Foundation.ApplicationModel
 
         static ApplicationManager()
         {
-            _instance = new ApplicationManager();
+            ApplicationContext = new StaticApplicationContext();
         }
 
-        protected ApplicationManager()
+        protected internal ApplicationManager()
         {
         }
 
@@ -40,12 +39,13 @@ namespace Omniscient.Foundation.ApplicationModel
         /// </summary>
         public static ApplicationManager Current
         {
-            get { return _instance; }
-            set
-            {
-                if (_instance.IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
-                _instance = value;
-            }
+            get { return ApplicationContext.Current; }
+        }
+
+        public static IApplicationContext ApplicationContext
+        {
+            get;
+            set;
         }
 
         /// <summary>

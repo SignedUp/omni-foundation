@@ -56,6 +56,7 @@
     <Compile Include="Configuration\ModulesConfiguration.cs" />
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
+    <Compile Include="IApplicationContext.cs" />
     <Compile Include="Modularity\ApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModule.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Presentation\IView.cs" />
     <Compile Include="Presentation\IViewController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaticApplicationContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Foundation.Application.xsd">
