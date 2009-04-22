@@ -32,7 +32,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Omniscient.Foundation.Contrib.Wpf.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AvalonLibrary, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b5d01516e28df45f, processorArchitecture=MSIL">
@@ -119,4 +120,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(SolutionDir)deploy mkdir $(SolutionDir)deploy
+if not exist $(SolutionDir)deploy\$(ConfigurationName) mkdir $(SolutionDir)deploy\$(ConfigurationName)
+if exist $(TargetName).dll copy /Y $(TargetName).dll $(SolutionDir)deploy\$(ConfigurationName)
+if exist $(TargetName).xml copy /Y $(TargetName).xml $(SolutionDir)deploy\$(ConfigurationName)
+if exist $(TargetName).pdb copy /Y $(TargetName).pdb $(SolutionDir)deploy\$(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

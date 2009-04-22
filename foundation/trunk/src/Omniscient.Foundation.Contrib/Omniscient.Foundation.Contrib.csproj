@@ -30,7 +30,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Omniscient.Foundation.Contrib.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
@@ -53,8 +54,7 @@
     <Compile Include="Communication\SecureChannelFactoryService.cs" />
     <Compile Include="Data\MsSqlConnectionProvider.cs" />
     <Compile Include="Data\MySqlConnectionProvider.cs" />
-    <Compile Include="Logging\Log4Net\Logger.cs" />
-    <Compile Include="Logging\Log4Net\LoggingService.cs" />
+    <Compile Include="Logging\Log4Net\LogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,4 +75,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(SolutionDir)deploy mkdir $(SolutionDir)deploy
+if not exist $(SolutionDir)deploy\$(ConfigurationName) mkdir $(SolutionDir)deploy\$(ConfigurationName)
+if exist $(TargetName).dll copy /Y $(TargetName).dll $(SolutionDir)deploy\$(ConfigurationName)
+if exist $(TargetName).xml copy /Y $(TargetName).xml $(SolutionDir)deploy\$(ConfigurationName)
+if exist $(TargetName).pdb copy /Y $(TargetName).pdb $(SolutionDir)deploy\$(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

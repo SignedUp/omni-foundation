@@ -11,6 +11,7 @@ namespace Omniscient.Foundation.Logging
         public TextWriterBasedWriter(TextWriter writer)
         {
             Writer = writer;
+            IsEnabled = true;
         }
 
         public LogLevel Level
