@@ -8,43 +8,64 @@ namespace Omniscient.Foundation.Logging
 {
     public class StandardLogger: ILogger
     {
-        private TextWriter _writer;
-        private bool _autoflush;
+        private List<ILogWriter> _writers;
 
-        public StandardLogger(TextWriter writer, bool autoflush)
+        public StandardLogger()
         {
-            _writer = writer;
-            _autoflush = autoflush;
+            _writers = new List<ILogWriter>();
         }
 
-        #region ILogger Members
-
-        private void Write(object message)
+        public void Register(ILogWriter writer)
         {
-            _writer.WriteLine(message);
-            if (_autoflush) _writer.Flush();
+            _writers.Add(writer);
+        }
+
+        public void Unregister(ILogWriter writer)
+        {
+            _writers.Remove(writer);
+        }
+
+        public virtual void Log(LogEntry entry)
+        {
+            foreach (ILogWriter writer in _writers)
+            {
+                if (writer.IsEnabled && entry.Level >= writer.Level) writer.Write(entry);
+            }
+        }
+
+        public void Log(object message, LogLevel level)
+        {
+            Log(new LogEntry(message, level));
         }
 
         public void Debug(object message)
         {
-            Write(message);
+            Log(new LogEntry(message, LogLevel.Debug));
         }
 
         public void Info(object message)
         {
-            Write(message);
+            Log(new LogEntry(message, LogLevel.Info));
         }
 
         public void Error(object message)
         {
-            Write(message);
+            Log(new LogEntry(message, LogLevel.Error));
         }
 
         public void Fatal(object message)
         {
-            Write(message);
+            Log(new LogEntry(message, LogLevel.Fatal));
         }
 
-        #endregion
+        public IEnumerator<ILogWriter> GetEnumerator()
+        {
+            return _writers.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return _writers.GetEnumerator();
+        }
     }
 }

@@ -55,13 +55,16 @@
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
-    <Compile Include="Extensions\IBindingTargetSyntaxExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
     <Compile Include="ApplicationModel\IExtendable.cs" />
     <Compile Include="ApplicationModel\IExtender.cs" />
+    <Compile Include="Logging\ILogWriter.cs" />
+    <Compile Include="Logging\LogEntry.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\StandardLogger.cs" />
+    <Compile Include="Logging\TextWriterBasedWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CredentialService.cs" />
     <Compile Include="Security\ICredentialService.cs" />

@@ -229,7 +229,11 @@ namespace Omniscient.Foundation.ApplicationModel
 
         protected virtual void InitializeComponents()
         {
-            if (Logger == null) Logger = new StandardLogger(Console.Out, false);
+            if (Logger == null)
+            {
+                Logger = new StandardLogger();
+                Logger.Register(new TextWriterBasedWriter(Console.Out));
+            }
             if (ServiceProvider == null)
             {
                 //if we have a kernel, then let's create a "depency-injection service provider".

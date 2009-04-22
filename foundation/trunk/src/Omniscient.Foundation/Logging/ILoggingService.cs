@@ -4,6 +4,7 @@ namespace Omniscient.Foundation.Logging
 {
     ///<summary>
     ///</summary>
+    [Obsolete("Use the Kernel for dependency injection instead of the service.")]
     public interface ILoggingService
     {
         ///<summary>
