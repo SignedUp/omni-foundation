@@ -32,10 +32,7 @@ namespace Omniscient.Foundation.Web.Security
         {
             _provider = provider;
             _cache = new Hashtable();
-            ILoggingService service;
-            service = ApplicationManager.Current.ServiceProvider.GetService<ILoggingService>();
-            if (service == null) return;
-            _logger = service.GetLogger(GetType());
+            _logger = ApplicationManager.Current.Logger;
         }
 
         protected void LogDebug(object message)

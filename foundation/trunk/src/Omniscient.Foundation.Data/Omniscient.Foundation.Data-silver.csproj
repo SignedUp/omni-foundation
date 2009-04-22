@@ -27,7 +27,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>Bin\ReleaseSilver\</OutputPath>
     <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
@@ -90,4 +90,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(SolutionDir)deploy mkdir $(SolutionDir)deploy
+if not exist $(SolutionDir)deploy\$(ConfigurationName)-silver mkdir $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).dll copy /Y $(TargetName).dll $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).xml copy /Y $(TargetName).xml $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).pdb copy /Y $(TargetName).pdb $(SolutionDir)deploy\$(ConfigurationName)-silver</PostBuildEvent>
+  </PropertyGroup>
 </Project>
