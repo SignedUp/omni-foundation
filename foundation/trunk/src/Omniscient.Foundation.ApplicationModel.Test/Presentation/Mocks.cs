@@ -1,5 +1,6 @@
 ﻿using System;
 using Omniscient.Foundation.Data;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -161,7 +162,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
     public class InvoicesModel : ModelMultiEntitiesBase<Invoice>
     {
-        public InvoicesModel(EntityList<Invoice> invoices) : base(invoices) { }
+        public InvoicesModel(List<Invoice> invoices) : base(invoices) { }
 
         public override bool HasEntity(Guid id)
         {

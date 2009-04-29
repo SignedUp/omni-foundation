@@ -85,7 +85,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         [Test]
         public void TestEndEdit()
         {
-            //EntityList<Invoice> invoices;
+            //List<Invoice> invoices;
             //invoices = _invoiceAdapter.LoadByObjectQuery(new OQuery<Invoice>());
             //InvoicesModel invModel = new InvoicesModel(invoices);
             //_controller.OpenView(invModel);

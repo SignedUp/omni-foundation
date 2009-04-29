@@ -1,4 +1,5 @@
 ﻿using Omniscient.Foundation.Data;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -12,7 +13,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// Ctor.
         /// </summary>
         /// <param name="entities">The list of root entities.</param>
-        protected ModelMultiEntitiesBase(EntityList<TEntity> entities)
+        protected ModelMultiEntitiesBase(List<TEntity> entities)
         {
             Entities = entities;
         }
@@ -20,7 +21,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <summary>
         /// Gets the list of root entities.
         /// </summary>
-        public EntityList<TEntity> Entities
+        public List<TEntity> Entities
         {
             get;
             private set;

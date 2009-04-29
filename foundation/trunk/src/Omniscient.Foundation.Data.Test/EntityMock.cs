@@ -5,7 +5,7 @@ namespace Omniscient.Foundation.Data
     public class EntityMock: EntityBase
     {
         public EntityMock() { }
-        public EntityMock(Guid id, bool isLoaded) : base(id, isLoaded) { }
+        public EntityMock(Guid id, bool isLoaded) : base(id) { }
 
         public string Name { get; set; }
 

@@ -6,11 +6,6 @@
     public enum EntityStatus
     {
         /// <summary>
-        /// The entity is yet to be loaded from the database.
-        /// </summary>
-        NotLoadedYet,
-        
-        /// <summary>
         /// The entity is new and doesn't exist yet in the database.  The next save will result in the entity being created.
         /// </summary>
         New,

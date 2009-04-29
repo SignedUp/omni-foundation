@@ -9,17 +9,17 @@ namespace Omniscient.Foundation.Data
     {
         public Client()
         {
-            Invoices = new EntityList<Invoice>();
+            Invoices = new List<Invoice>();
         }
 
-        public Client(Guid id, bool isLoaded) : base(id, isLoaded)
+        public Client(Guid id) : base(id)
         {
-            Invoices = new EntityList<Invoice>();
+            Invoices = new List<Invoice>();
         }
 
         public string Name { get; set; }
 
-        public EntityList<Invoice> Invoices { get; private set; }
+        public List<Invoice> Invoices { get; private set; }
     }
 
     public class Invoice : EntityBase
@@ -27,7 +27,7 @@ namespace Omniscient.Foundation.Data
         public Invoice()
         { }
 
-        public Invoice(Guid id, bool isLoaded) : base(id, isLoaded) { }
+        public Invoice(Guid id) : base(id) { }
 
         public double Amount { get; set; }
     }
@@ -38,14 +38,14 @@ namespace Omniscient.Foundation.Data
 
     public class ClientAdapter : IEntityAdapter<Client>
     {
-        private EntityList<Client> _list;
+        private List<Client> _list;
 
         public ClientAdapter()
         {
-            _list = new EntityList<Client>();
-            _list.Add(new Client(Guid.NewGuid(), true) { Name = "dave" });
-            _list.Add(new Client(Guid.NewGuid(), true) { Name = "frank" });
-            _list.Add(new Client(Guid.NewGuid(), true) { Name = "steve" });
+            _list = new List<Client>();
+            _list.Add(new Client(Guid.NewGuid()) { Name = "dave" });
+            _list.Add(new Client(Guid.NewGuid()) { Name = "frank" });
+            _list.Add(new Client(Guid.NewGuid()) { Name = "steve" });
             
         }
 
@@ -58,7 +58,7 @@ namespace Omniscient.Foundation.Data
             return null;
         }
 
-        public EntityList<Client> LoadByObjectQuery(ObjectQuery.OQuery<Client> query)
+        public List<Client> LoadByObjectQuery(ObjectQuery.OQuery<Client> query)
         {
             return _list;
         }
@@ -68,22 +68,22 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<Client> LoadByForeignKey(string propertyName, Guid id)
+        public List<Client> LoadByForeignKey(string propertyName, Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<Client> LoadByQuery(string queryName)
+        public List<Client> LoadByQuery(string queryName)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<Client> LoadAll()
+        public IList<Client> LoadAll()
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<Client> LoadByValueProperty(string propertyName, object value)
+        public List<Client> LoadByValueProperty(string propertyName, object value)
         {
             throw new NotImplementedException();
         }
@@ -116,14 +116,14 @@ namespace Omniscient.Foundation.Data
             return null;
         }
 
-        public EntityList<Invoice> LoadByObjectQuery(ObjectQuery.OQuery<Invoice> query)
+        public List<Invoice> LoadByObjectQuery(ObjectQuery.OQuery<Invoice> query)
         {
-            EntityList<Invoice> invoices;
+            List<Invoice> invoices;
 
-            invoices = new EntityList<Invoice>();
+            invoices = new List<Invoice>();
             for (int i = 0; i < 9; i++)
             {
-                invoices.Add(new Invoice(_ids[i], true) { Amount = i + 1});
+                invoices.Add(new Invoice(_ids[i]) { Amount = i + 1});
             }
             return invoices;
         }
@@ -133,22 +133,22 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<Invoice> LoadByForeignKey(string propertyName, Guid id)
+        public List<Invoice> LoadByForeignKey(string propertyName, Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<Invoice> LoadByQuery(string queryName)
+        public List<Invoice> LoadByQuery(string queryName)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<Invoice> LoadByValueProperty(string propertyName, object value)
+        public List<Invoice> LoadByValueProperty(string propertyName, object value)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<Invoice> LoadAll()
+        public IList<Invoice> LoadAll()
         {
             throw new NotImplementedException();
         }

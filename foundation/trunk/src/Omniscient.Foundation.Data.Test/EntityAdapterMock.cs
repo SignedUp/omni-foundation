@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> Fetch(ObjectQuery.OQuery<EntityMock> query)
+        public IList<EntityMock> Fetch(ObjectQuery.OQuery<EntityMock> query)
         {
             throw new NotImplementedException();
         }
@@ -23,27 +23,27 @@ namespace Omniscient.Foundation.Data
         #region IEntityAdapter<EntityMock> Members
 
 
-        public EntityList<EntityMock> LoadByForeignKey(string propertyName, Guid id)
+        public IList<EntityMock> LoadByForeignKey(string propertyName, Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> LoadByQuery(string queryName)
+        public IList<EntityMock> LoadByQuery(string queryName)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> LoadByObjectQuery(ObjectQuery.OQuery<EntityMock> query)
+        public IList<EntityMock> LoadByObjectQuery(ObjectQuery.OQuery<EntityMock> query)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> LoadByValueProperty(string propertyName, object value)
+        public IList<EntityMock> LoadByValueProperty(string propertyName, object value)
         {
             throw new NotImplementedException();
         }
 
-        public EntityList<EntityMock> LoadAll()
+        public IList<EntityMock> LoadAll()
         {
             throw new NotImplementedException();
         }
