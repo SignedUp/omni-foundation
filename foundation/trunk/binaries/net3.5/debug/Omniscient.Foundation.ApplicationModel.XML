@@ -736,7 +736,7 @@
             Base class for models with multiple entities as the root.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ModelMultiEntitiesBase`1.#ctor(Omniscient.Foundation.Data.EntityList{`0})">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ModelMultiEntitiesBase`1.#ctor(System.Collections.Generic.List{`0})">
             <summary>
             Ctor.
             </summary>
