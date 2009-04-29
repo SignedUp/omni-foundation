@@ -57,39 +57,15 @@ namespace Omniscient.Foundation.Data
         }
 
         /// <summary>
-        /// Returns a string that uniquely identifies the type of the Entity.  By default, this is the name of the class.  Can be overriden.
+        /// Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
         /// </summary>
-        public virtual string Type
-        {
-            get { return GetType().Name; }
-        }
-
-        /// <summary>
-        /// Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
-        /// and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
-        /// all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
-        /// <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
-        /// the reference.
-        /// </summary>
-        /// <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
         /// <param name="target">The entity to copy values to.</param>
-        public virtual void CopyTo(IEntity target, bool copyReferences)
+        public virtual void CopyTo(IEntity target)
         {
-            CopyInternal(target, copyReferences);
-        }
-
-        private void CopyInternal(IEntity target, bool copyReferences)
-        {
-            foreach (PropertyInfo p in GetType().GetProperties())
+            foreach (PropertyInfo p in this.GetType().GetProperties())
             {
-                object[] attributes;
-                attributes = p.GetCustomAttributes(typeof(EntityPropertyAttribute), true);
-                if (attributes.Length == 0) continue;
-                EntityPropertyAttribute att = (EntityPropertyAttribute) attributes[0];
-                if (att.Type == EntityPropertyType.Value || copyReferences)
-                {
+                if (p.Name != "Id" && p.Name != "Status")
                     p.SetValue(target, p.GetValue(this, null), null);
-                }
             }
         }
 
@@ -121,7 +97,7 @@ namespace Omniscient.Foundation.Data
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Entity type:{0} id:{1} status:{2}", Type, Id, Status);
+            return string.Format("Entity type:{0} id:{1} status:{2}", this.GetType().Name, Id, Status);
         }
     }
 }

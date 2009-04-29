@@ -46,7 +46,7 @@ namespace Omniscient.Foundation.Data
                     break;
             }
 
-            clone = Clone(entity, false);
+            clone = Clone(entity);
             _clones.Add(clone.Id, clone);
         }
 
@@ -134,7 +134,7 @@ namespace Omniscient.Foundation.Data
         {
             TEntity clone;
             clone = _clones[entity.Id];
-            clone.CopyTo(entity, false);
+            clone.CopyTo(entity);
             _clones.Remove(entity.Id);
         }
 
@@ -145,17 +145,15 @@ namespace Omniscient.Foundation.Data
 
         /// <summary>
         /// Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="EntityStatus.Clone"/>.
-        /// See <see cref="IEntity.CopyTo"/> for details about <paramref name="copyReferences"/>.
         /// </summary>
         /// <param name="original">The entity to clone</param>
-        /// <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
         /// <returns>A clone, with the same id and values.</returns>
-        public TEntity Clone(TEntity original, bool copyReferences)
+        public TEntity Clone(TEntity original)
         {
             TEntity clone;
 
             clone = (TEntity)Activator.CreateInstance(typeof(TEntity), new object[] {original.Id, true});
-            original.CopyTo(clone, copyReferences);
+            original.CopyTo(clone);
             clone.Status = EntityStatus.Clone;
             return clone;
         }

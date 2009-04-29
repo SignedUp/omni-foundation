@@ -17,10 +17,8 @@ namespace Omniscient.Foundation.Data
             Invoices = new EntityList<Invoice>();
         }
 
-        [EntityProperty(EntityPropertyType.Value)]
         public string Name { get; set; }
 
-        [EntityProperty(EntityPropertyType.ReferenceList)]
         public EntityList<Invoice> Invoices { get; private set; }
     }
 
@@ -31,7 +29,6 @@ namespace Omniscient.Foundation.Data
 
         public Invoice(Guid id, bool isLoaded) : base(id, isLoaded) { }
 
-        [EntityProperty(EntityPropertyType.Value)]
         public double Amount { get; set; }
     }
 

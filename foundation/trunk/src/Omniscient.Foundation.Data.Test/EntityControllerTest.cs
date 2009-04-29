@@ -149,7 +149,7 @@ namespace Omniscient.Foundation.Data
         public void TestBeginChangesOnClone()
         {
             IEntity clone;
-            clone = _controller.Clone(_entityNew, false);
+            clone = _controller.Clone(_entityNew);
             Assert.AreEqual(_entityNew.Id, clone.Id);
             Assert.AreEqual(EntityStatus.Clone, clone.Status);
 
@@ -186,7 +186,7 @@ namespace Omniscient.Foundation.Data
         public void TestCancelChangesOnClone()
         {
             IEntity clone;
-            clone = _controller.Clone(_entityClean, false);
+            clone = _controller.Clone(_entityClean);
             _controller.CancelChanges(clone as EntityMock);
         }
 
