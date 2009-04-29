@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.Data
 {
@@ -55,6 +56,6 @@ namespace Omniscient.Foundation.Data
         /// <summary>
         /// </summary>
         [OperationContract]
-        void RegisterObserver(IEntityModificationObserver<TEntity> observer, EntityList<TEntity> list); 
+        void RegisterObserver(IEntityModificationObserver<TEntity> observer, List<TEntity> list); 
     }
 }

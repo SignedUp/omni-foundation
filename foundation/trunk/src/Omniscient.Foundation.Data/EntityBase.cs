@@ -24,15 +24,11 @@ namespace Omniscient.Foundation.Data
 
         /// <summary>
         /// Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
-        /// Depending on the value of <paramref name="entityIsLoaded"/>, the status is either set to
-        /// <see cref="EntityStatus.Clean"/> (if the entity is being loaded with all its values), or 
-        /// <see cref="EntityStatus.NotLoadedYet"/> (if the entity is not being loaded with its values)
         /// </summary>
-        /// <param name="entityIsLoaded">Indicates whether the entity is being loaded with all its value, or is just assigned an Id for future load.</param>
-        /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/> or <see cref="EntityStatus.NotLoadedYet"/>.</param>
-        public EntityBase(Guid id, bool entityIsLoaded)
+        /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/>.</param>
+        public EntityBase(Guid id)
         {
-            Status = entityIsLoaded? EntityStatus.Clean : EntityStatus.NotLoadedYet;
+            Status = EntityStatus.Clean;
             Id = id;
         }
 

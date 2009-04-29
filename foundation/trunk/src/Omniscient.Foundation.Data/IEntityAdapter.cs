@@ -28,7 +28,7 @@ namespace Omniscient.Foundation.Data
         ///</summary>
         ///<returns></returns>
         [OperationContract]
-        EntityList<TEntity> LoadAll();
+        IList<TEntity> LoadAll();
 
         /// <summary>
         /// Saves the entity.  Executes different queries based on the <see cref="EntityStatus"/> of the entity.

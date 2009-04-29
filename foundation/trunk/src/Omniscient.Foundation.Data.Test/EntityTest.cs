@@ -31,11 +31,5 @@ namespace Omniscient.Foundation.Data
             Assert.AreEqual(EntityStatus.Clean, entity.Status);
         }
 
-        [Test]
-        public void TestCreateExistingLazyLoad()
-        {
-            var entity = new EntityMock(Guid.NewGuid(), false);
-            Assert.AreEqual(EntityStatus.NotLoadedYet, entity.Status);
-        }
     }
 }

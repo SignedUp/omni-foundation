@@ -56,7 +56,6 @@
     <Compile Include="Mocks.cs" />
     <Compile Include="ObjectQuery\OQueryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EntityListTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Omniscient.Foundation.ApplicationModel\Omniscient.Foundation.ApplicationModel.csproj">

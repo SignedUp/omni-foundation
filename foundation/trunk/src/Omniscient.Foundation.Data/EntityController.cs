@@ -11,7 +11,7 @@ namespace Omniscient.Foundation.Data
         where TEntity: IEntity
     {
         private Dictionary<Guid, TEntity> _clones;
-        private Dictionary<IEntityModificationObserver<TEntity>, EntityList<TEntity>> _observers;
+        private Dictionary<IEntityModificationObserver<TEntity>, List<TEntity>> _observers;
 
         /// <summary>
         /// Ctor.
@@ -19,7 +19,7 @@ namespace Omniscient.Foundation.Data
         public EntityController()
         {
             _clones = new Dictionary<Guid, TEntity>();
-            _observers = new Dictionary<IEntityModificationObserver<TEntity>, EntityList<TEntity>>();
+            _observers = new Dictionary<IEntityModificationObserver<TEntity>, List<TEntity>>();
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Omniscient.Foundation.Data
             return clone;
         }
 
-        public void RegisterObserver(IEntityModificationObserver<TEntity> observer, EntityList<TEntity> list)
+        public void RegisterObserver(IEntityModificationObserver<TEntity> observer, List<TEntity> list)
         {
             if(_observers.ContainsKey(observer))
             {
