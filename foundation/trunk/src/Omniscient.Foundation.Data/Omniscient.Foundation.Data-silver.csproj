@@ -52,8 +52,6 @@
     <Compile Include="EntityController.cs" />
     <Compile Include="EntityDictionary.cs" />
     <Compile Include="EntityList.cs" />
-    <Compile Include="EntityPropertyAttribute.cs" />
-    <Compile Include="EntityPropertyType.cs" />
     <Compile Include="EntityStatus.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityAdapter.cs" />

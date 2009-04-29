@@ -15,7 +15,7 @@ namespace Omniscient.Foundation.Data
 
             Assert.AreEqual(EntityStatus.New, entity.Status);
             
-            Assert.AreEqual("EntityMock", entity.Type);
+            Assert.AreEqual("EntityMock", entity.GetType().Name);
         }
 
         [Test]

@@ -4,34 +4,6 @@
         <name>Omniscient.Foundation.Data</name>
     </assembly>
     <members>
-        <member name="T:Omniscient.Foundation.Data.EntityPropertyAttribute">
-            <summary>
-            Marks a property as being serialized with the entity.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityPropertyAttribute.#ctor(Omniscient.Foundation.Data.EntityPropertyType)">
-            <summary>
-            Ctor
-            </summary>
-            <param name="type">Either a value type, a reference type, or a reference list.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.EntityPropertyAttribute.#ctor(Omniscient.Foundation.Data.EntityPropertyType,System.String)">
-            <summary>
-            Ctor
-            </summary>
-            <param name="type">Either a value type, a reference type, or a reference list.</param>
-            <param name="column">The column mapped to this property.  Can be null.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.EntityPropertyAttribute.Type">
-            <summary>
-            Gets the property type of this property.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.EntityPropertyAttribute.ColumnName">
-            <summary>
-            Gets or sets the column name that this property saves to.  Can be null or empty.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.Data.IEntityModificationObserver`1">
             <summary>
              Represents a class that observes modifications in an entity,
@@ -98,13 +70,11 @@
             </summary>
             <param name="entity"></param>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityController`1.Clone(`0,System.Boolean)">
+        <member name="M:Omniscient.Foundation.Data.IEntityController`1.Clone(`0)">
             <summary>
             Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
-            See <see cref="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)"/> for details about <paramref name="copyReferences"/>.
             </summary>
             <param name="original">The entity to clone</param>
-            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
             <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="M:Omniscient.Foundation.Data.IEntityController`1.RegisterObserver(Omniscient.Foundation.Data.IEntityModificationObserver{`0},Omniscient.Foundation.Data.EntityList{`0})">
@@ -144,13 +114,11 @@
             </summary>
             <param name="entity"></param>
         </member>
-        <member name="M:Omniscient.Foundation.Data.EntityController`1.Clone(`0,System.Boolean)">
+        <member name="M:Omniscient.Foundation.Data.EntityController`1.Clone(`0)">
             <summary>
             Clones the entity.  The result is an entity with the same Id, same values, and status set to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clone"/>.
-            See <see cref="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)"/> for details about <paramref name="copyReferences"/>.
             </summary>
             <param name="original">The entity to clone</param>
-            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
             <returns>A clone, with the same id and values.</returns>
         </member>
         <member name="T:Omniscient.Foundation.Data.InvalidOperationForStatusException">
@@ -174,15 +142,10 @@
             Represents an entity.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)">
+        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity)">
             <summary>
-            Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
-            and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
-            all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
-            <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
-            the reference.
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
             </summary>
-            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
             <param name="target">The entity to copy values to.</param>
         </member>
         <member name="P:Omniscient.Foundation.Data.IEntity.Status">
@@ -193,11 +156,6 @@
         <member name="P:Omniscient.Foundation.Data.IEntity.Id">
             <summary>
             The Id is the surrogate key of the entity in the database.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.IEntity.Type">
-            <summary>
-            Gets the type of the entity, a string that uniquelly identifies this type of entity.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.RelationMarker">
@@ -617,15 +575,10 @@
             <param name="entityIsLoaded">Indicates whether the entity is being loaded with all its value, or is just assigned an Id for future load.</param>
             <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/> or <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/>.</param>
         </member>
-        <member name="M:Omniscient.Foundation.Data.EntityBase.CopyTo(Omniscient.Foundation.Data.IEntity,System.Boolean)">
+        <member name="M:Omniscient.Foundation.Data.EntityBase.CopyTo(Omniscient.Foundation.Data.IEntity)">
             <summary>
-            Copies the values of the entity to another entity.  By default, all properties marked with <c>EntityPropertyAttribute</c>
-            and <c>EntityPropertyType.Value</c> will be copied.  If <paramref name="copyReferences"/> is <c>true</c>, then by default
-            all properties marked with <c>EntityPropertyAttribute</c> and <c>EntityPropertyType.Reference</c> or 
-            <c>EntityPropertyType.ReferenceList</c> will be copied as well.  Note that this is only a pointer copy, not a deep copy of 
-            the reference.
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
             </summary>
-            <param name="copyReferences"><c>true</c> to copy references; Otherwise, <c>false</c>.</param>
             <param name="target">The entity to copy values to.</param>
         </member>
         <member name="M:Omniscient.Foundation.Data.EntityBase.Equals(System.Object)">
@@ -655,11 +608,6 @@
         <member name="P:Omniscient.Foundation.Data.EntityBase.Id">
             <summary>
             Gets or sets the Id.  Setting the id is possible only when Status == <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/>.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.EntityBase.Type">
-            <summary>
-            Returns a string that uniquely identifies the type of the Entity.  By default, this is the name of the class.  Can be overriden.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition">
@@ -696,26 +644,6 @@
         <member name="P:Omniscient.Foundation.Data.IEntityList.Status">
             <summary>
             Gets or sets the status of that collection.  Useful for lazy loading with <see cref="F:Omniscient.Foundation.Data.EntityStatus.NotLoadedYet"/>.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.EntityPropertyType">
-            <summary>
-            An entity's property type.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.EntityPropertyType.Value">
-            <summary>
-            Value property types are a scalar being serialized to a column in the database.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.EntityPropertyType.Reference">
-            <summary>
-            Specifies that the property is a pointer to another entity.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.EntityPropertyType.ReferenceList">
-            <summary>
-            Specifies that the property is a pointer to a list of other entities.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.EntityList`1">
