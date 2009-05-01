@@ -11,6 +11,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     public interface IViewController
     {
         /// <summary>
+        /// Raise when the selected item changed inside the current view.
+        /// </summary>
+        event ViewContextChangedEventHandler ViewContextChanged;
+
+        /// <summary>
         /// Opens a view for the given model.
         /// </summary>
         /// <param name="model">Model to open in a view.</param>
