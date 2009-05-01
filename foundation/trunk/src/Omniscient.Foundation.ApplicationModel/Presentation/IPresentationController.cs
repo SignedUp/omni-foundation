@@ -10,6 +10,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     public interface IPresentationController
     {
         /// <summary>
+        /// Raise when the selected item changed inside the current view.
+        /// </summary>
+        event ViewContextChangedEventHandler ViewContextChanged;
+
+        /// <summary>
         /// Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
         /// and displaying it correctly.
         /// </summary>

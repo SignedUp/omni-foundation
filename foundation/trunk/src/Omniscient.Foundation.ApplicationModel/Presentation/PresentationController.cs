@@ -16,6 +16,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private List<IView> _openedViews;
         private Dictionary<string, IPresenter> _presenters;
 
+        public event ViewContextChangedEventHandler ViewContextChanged;
+
         ///<summary>
         ///</summary>
         public PresentationController() : this(true) { }
@@ -185,5 +187,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             get;
             private set;
         }
+
     }
 }

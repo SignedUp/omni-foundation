@@ -60,6 +60,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         #endregion
+
+        #region IViewController Members
+
+        public event ViewContextChangedEventHandler ViewContextChanged;
+
+        #endregion
     }
 
     public class MainViewControllerMock : IViewController
@@ -115,6 +121,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region IViewController Members
+
+        public event ViewContextChangedEventHandler ViewContextChanged;
 
         #endregion
     }
@@ -205,6 +217,51 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             set;
         }
 
+
+        #region IView Members
+
+        public event ViewContextChangedEventHandler ViewContextChanged;
+
+        #endregion
+
+        #region IView Members
+
+        event ViewContextChangedEventHandler IView.ViewContextChanged
+        {
+            add { throw new NotImplementedException(); }
+            remove { throw new NotImplementedException(); }
+        }
+
+        IModel IView.Model
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        void IView.UpdateView()
+        {
+            throw new NotImplementedException();
+        }
+
+        string IView.Title
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
     }
 
     public class InvoiceList : IView
@@ -227,6 +284,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             get;
             set;
         }
+
+        #endregion
+
+        #region IView Members
+
+        public event ViewContextChangedEventHandler ViewContextChanged;
 
         #endregion
     }

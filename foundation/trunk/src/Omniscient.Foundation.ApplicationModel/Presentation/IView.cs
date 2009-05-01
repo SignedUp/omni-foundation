@@ -1,5 +1,14 @@
-﻿namespace Omniscient.Foundation.ApplicationModel.Presentation
+﻿using System;
+namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
+
+    public delegate void ViewContextChangedEventHandler(object source, ViewContextChangedEventArgs e);
+    public class ViewContextChangedEventArgs : EventArgs
+    {
+        IView CurrentView { get; set; }
+        Object CurrentSelectedObject { get; set; }
+    }
+
     /// <summary>
     /// Represents a view.
     /// 
@@ -7,6 +16,11 @@
     /// </summary>
     public interface IView
     {
+        /// <summary>
+        /// Raise when the selected item changed inside the current view.
+        /// </summary>
+        event ViewContextChangedEventHandler ViewContextChanged;
+
         /// <summary>
         /// Gets or sets the Model.
         /// </summary>
