@@ -22,8 +22,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller = new PresentationController(false);
             _sideController = new SidePanelViewControllerMock();
             _mainController = new MainViewControllerMock();
-            _controller.ViewControllers.Add(_mainController);
-            _controller.ViewControllers.Add(_sideController);
+            _controller.RegisterViewController(_mainController);
+            _controller.RegisterViewController(_sideController);
 
             //ApplicationManager.Current.ObjectContainer = new ObjectContainer();
 
