@@ -11,9 +11,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     public interface IViewController
     {
         /// <summary>
-        /// Raise when the selected item changed inside the current view.
+        /// Raised when the user switches the current view.
         /// </summary>
-        event ViewContextChangedEventHandler ViewContextChanged;
+        event EventHandler CurrentViewChanged;
 
         /// <summary>
         /// Opens a view for the given model.
@@ -27,14 +27,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         IView CurrentView { get; set; }
 
-        /// <summary>
-        /// Raised when the current view is changed for a new view.
-        /// </summary>
-        event EventHandler CurrentViewChanged;
-
         void Focus(IView view);
         bool CloseView(IView view);
         bool CloseViewRange(IEnumerable<IView> views);
-
     }
 }

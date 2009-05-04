@@ -16,8 +16,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         private List<IView> _openedViews;
         private Dictionary<string, IPresenter> _presenters;
 
-        public event ViewContextChangedEventHandler ViewContextChanged;
-
         ///<summary>
         ///</summary>
         public PresentationController() : this(true) { }
@@ -33,8 +31,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _openedViews = new List<IView>();
             SupportsUserInput = supportsUserInput;
             _presenters = new Dictionary<string, IPresenter>();
-
-            ViewContextChanged = delegate { };
         }
 
 
@@ -53,7 +49,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             }
         }
 
-        public void CloseAllView()
+        public void CloseAllViews()
         {
             foreach (IViewController vc in _controllers)
             {
@@ -186,10 +182,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             private set;
         }
 
-
-        #region IPresentationController Members
-
-
         public void RegisterViewController(IViewController controller)
         {
             if (controller == null) throw new ArgumentNullException("view controller");
@@ -205,9 +197,5 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                 if (typeof(ViewControllerType).IsAssignableFrom(controller.GetType())) return (ViewControllerType)controller;
             return default(ViewControllerType);
         }
-
-        #endregion
-
-
     }
 }
