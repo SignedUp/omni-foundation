@@ -63,7 +63,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         #region IViewController Members
 
-        public event ViewContextChangedEventHandler ViewContextChanged;
+        public event SelectionChangedEventHandler CurrentViewSelectionChanged;
 
         #endregion
     }
@@ -126,7 +126,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         #region IViewController Members
 
-        public event ViewContextChangedEventHandler ViewContextChanged;
+        public event SelectionChangedEventHandler CurrentViewSelectionChanged;
 
         #endregion
     }
@@ -220,13 +220,13 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         #region IView Members
 
-        public event ViewContextChangedEventHandler ViewContextChanged;
+        public event SelectionChangedEventHandler ViewContextChanged;
 
         #endregion
 
         #region IView Members
 
-        event ViewContextChangedEventHandler IView.ViewContextChanged
+        event SelectionChangedEventHandler IView.SelectionChanged
         {
             add { throw new NotImplementedException(); }
             remove { throw new NotImplementedException(); }
@@ -262,6 +262,16 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         #endregion
+
+        #region IView Members
+
+
+        public object Selection
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 
     public class InvoiceList : IView
@@ -289,7 +299,17 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         #region IView Members
 
-        public event ViewContextChangedEventHandler ViewContextChanged;
+        public event SelectionChangedEventHandler SelectionChanged;
+
+        #endregion
+
+        #region IView Members
+
+
+        public object Selection
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         #endregion
     }

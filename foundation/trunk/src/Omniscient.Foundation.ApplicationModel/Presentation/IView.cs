@@ -1,24 +1,43 @@
 ﻿using System;
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
-
-    public delegate void ViewContextChangedEventHandler(object source, ViewContextChangedEventArgs e);
+    /// <summary>
+    /// Describes an event handler that handles selection changes that occur from within a view.
+    /// </summary>
+    /// <param name="source">The source of the event (generally an IView)</param>
+    /// <param name="e">Event args</param>
+    public delegate void SelectionChangedEventHandler(object source, SelectionChangedEventArgs e);
     
-    public class ViewContextChangedEventArgs : EventArgs
+    /// <summary>
+    /// Arguments passed to a SelectionChanged event raised by an IView.
+    /// </summary>
+    public class SelectionChangedEventArgs : EventArgs
     {
-        public IView CurrentView { get; set; }
-        public Object CurrentSelectedObject { get; set; }
+        public IView View { get; set; }
+        public Object Selection { get; set; }
 
-        public ViewContextChangedEventArgs()
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public SelectionChangedEventArgs()
         { }
 
-        public ViewContextChangedEventArgs(IView currentView)
-            :this(currentView, null){}
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="view">The view that raises the event</param>
+        public SelectionChangedEventArgs(IView view)
+            :this(view, null){}
         
-        public ViewContextChangedEventArgs(IView currentView, object currentSelectedObject)
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="view">The view that raises the event</param>
+        /// <param name="selection">The object being selected in the view</param>
+        public SelectionChangedEventArgs(IView view, object selection)
         {
-            CurrentView = currentView;
-            CurrentSelectedObject = currentSelectedObject;
+            View = view;
+            Selection = selection;
         }
     }
 
@@ -30,9 +49,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     public interface IView
     {
         /// <summary>
-        /// Raise when the selected item changed inside the current view.
+        /// Raised when the selected item changed inside the current view.
         /// </summary>
-        event ViewContextChangedEventHandler ViewContextChanged;
+        event SelectionChangedEventHandler SelectionChanged;
 
         /// <summary>
         /// Gets or sets the Model.
@@ -48,5 +67,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// Gets or sets the view's title.
         /// </summary>
         string Title { get; set; }
+
+        /// <summary>
+        /// Gets an object that is currently selected by the user.  Works in pair with ViewContextChangedEventHandler.
+        /// </summary>
+        object Selection { get; }
     }
 }
