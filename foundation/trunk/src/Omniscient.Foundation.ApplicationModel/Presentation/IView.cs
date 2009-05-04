@@ -3,10 +3,23 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
 
     public delegate void ViewContextChangedEventHandler(object source, ViewContextChangedEventArgs e);
+    
     public class ViewContextChangedEventArgs : EventArgs
     {
-        IView CurrentView { get; set; }
-        Object CurrentSelectedObject { get; set; }
+        public IView CurrentView { get; set; }
+        public Object CurrentSelectedObject { get; set; }
+
+        public ViewContextChangedEventArgs()
+        { }
+
+        public ViewContextChangedEventArgs(IView currentView)
+            :this(currentView, null){}
+        
+        public ViewContextChangedEventArgs(IView currentView, object currentSelectedObject)
+        {
+            CurrentView = currentView;
+            CurrentSelectedObject = currentSelectedObject;
+        }
     }
 
     /// <summary>

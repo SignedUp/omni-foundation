@@ -53,10 +53,20 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <param name="entity">The entity that was edited.</param>
         void CancelEdit<TEntity>(IView view, TEntity entity) where TEntity : IEntity;
 
+      
         /// <summary>
-        /// Gets the list of view controllers.  Default use is to feed that list at application startup.
+        /// Registers an <c>IViewController</c>. Default use is to feed that list at application startup.
         /// </summary>
-        List<IViewController> ViewControllers { get; }
+        /// <param name="controller">An <c>IViewController</c> to register.</param>
+        void RegisterViewController(IViewController controller);
+
+        /// <summary>
+        /// Gets an <c>IViewController</c> using its type.
+        /// </summary>
+        /// <typeparam name="ViewControllerType">The type of the view controller to look for.</typeparam>
+        /// <returns>An <c>IViewController</c> if found.  Otherwise, null.</returns>
+        ViewControllerType GetViewController<ViewControllerType>() where ViewControllerType : IViewController;
+
 
         /// <summary>
         /// Registers an <c>IPresenter</c>.
@@ -86,5 +96,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// that requires user input will fail.
         /// </summary>
         bool SupportsUserInput { get; }
+
+        /// <summary>
+        /// Close all current view of all view controllers.
+        /// </summary>
+        void CloseAllView();
+
     }
 }

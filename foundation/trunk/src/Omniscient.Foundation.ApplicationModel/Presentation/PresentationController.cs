@@ -33,18 +33,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _openedViews = new List<IView>();
             SupportsUserInput = supportsUserInput;
             _presenters = new Dictionary<string, IPresenter>();
+
+            ViewContextChanged = delegate { };
         }
 
-        /// <summary>
-        /// Gets the list of view controllers.  Default use is to feed that list at application startup.
-        /// </summary>
-        public List<IViewController> ViewControllers
-        {
-            get
-            {
-                return _controllers;
-            }
-        }
 
         /// <summary>
         /// Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
@@ -54,12 +46,21 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void OpenView(IModel model)
         {
             IView view;
-            foreach (IViewController controller in ViewControllers)
+            foreach (IViewController controller in _controllers)
             {
                 view = controller.OpenView(model);
                 if (view != null) _openedViews.Add(view);
             }
         }
+
+        public void CloseAllView()
+        {
+            foreach (IViewController vc in _controllers)
+            {
+                vc.CloseView(vc.CurrentView);
+            }
+        }
+
 
         /// <summary>
         /// Informs the controller that a view has been closed.
@@ -168,9 +169,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         {
             if (!_presenters.ContainsKey(name)) return null;
             return _presenters[name];
-
-
-
         }
 
         public PresenterType GetPresenter<PresenterType>() where PresenterType : IPresenter
@@ -187,6 +185,29 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             get;
             private set;
         }
+
+
+        #region IPresentationController Members
+
+
+        public void RegisterViewController(IViewController controller)
+        {
+            if (controller == null) throw new ArgumentNullException("view controller");
+            if (_controllers.Contains(controller))
+                throw new InvalidOperationException(string.Format("A view controller with name {0} is already registered.  Choose another view controller.", controller.ToString()));
+            _controllers.Add(controller);
+
+        }
+
+        public ViewControllerType GetViewController<ViewControllerType>() where ViewControllerType : IViewController
+        {
+            foreach (object controller in _controllers)
+                if (typeof(ViewControllerType).IsAssignableFrom(controller.GetType())) return (ViewControllerType)controller;
+            return default(ViewControllerType);
+        }
+
+        #endregion
+
 
     }
 }

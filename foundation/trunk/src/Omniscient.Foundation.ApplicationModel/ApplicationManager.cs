@@ -212,7 +212,7 @@ namespace Omniscient.Foundation.ApplicationModel
             {
                 foreach (IViewController ctrl in Shell.CreateViewControllers())
                 {
-                    PresentationController.ViewControllers.Add(ctrl);
+                    PresentationController.RegisterViewController(ctrl);
                 }
                 foreach (IPresenter presenter in Shell.CreatePresenters())
                 {
@@ -273,7 +273,6 @@ namespace Omniscient.Foundation.ApplicationModel
             //Clean containers
             //todo: something else to clean?
             ServiceProvider.Clear();
-            PresentationController.ViewControllers.Clear();
 
             _started = false;
         }
