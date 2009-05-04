@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Omniscient.Foundation.Commanding;
 using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.ApplicationModel.Presentation;
@@ -24,6 +25,7 @@ namespace Omniscient.Foundation.ApplicationModel
         private IShell _shell;
         private IKernel _kernel;
         private IApplicationModuleManager _applicationModuleManager;
+        private ICommandStore _commandStore;
 
         static ApplicationManager()
         {
@@ -117,6 +119,21 @@ namespace Omniscient.Foundation.ApplicationModel
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
                 _kernel = value;
+            }
+        }
+
+        /// <summary>
+        /// Get or stes Ninject's Command strore.  If not set, then this application will run without dependency injection.
+        /// This stored is used to get all the application commands.
+        /// </summary>
+        public ICommandStore CommandStore
+        {
+            get { return _commandStore; }
+
+            set
+            {
+                if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
+                _commandStore = value;
             }
         }
 

@@ -51,10 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationModel\IStartable.cs" />
+    <Compile Include="Commanding\CommandBase.cs" />
     <Compile Include="Commanding\CompositeCommand.cs" />
     <Compile Include="Commanding\DelegateCommandHandler.cs" />
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandHandler.cs" />
+    <Compile Include="Commanding\ICommandStore.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
