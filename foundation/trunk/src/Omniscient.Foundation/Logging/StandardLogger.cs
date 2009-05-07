@@ -8,26 +8,21 @@ namespace Omniscient.Foundation.Logging
 {
     public class StandardLogger: ILogger
     {
-        private List<ILogWriter> _writers;
-
-        public StandardLogger()
+        public StandardLogger(ILogWriter defaultWriter)
         {
-            _writers = new List<ILogWriter>();
+            if (defaultWriter == null) throw new ArgumentNullException("defaultWriter");
+            Writers = new List<ILogWriter>();
+            Writers.Add(defaultWriter);
         }
 
-        public void RegisterWriter(ILogWriter writer)
+        public ILogWriter DefaultWriter
         {
-            _writers.Add(writer);
-        }
-
-        public void UnregisterWriter(ILogWriter writer)
-        {
-            _writers.Remove(writer);
+            get { return Writers[0]; }
         }
 
         public virtual void Log(LogEntry entry)
         {
-            foreach (ILogWriter writer in _writers)
+            foreach (ILogWriter writer in Writers )
             {
                 if (writer.IsEnabled && entry.Level >= writer.Level) writer.Write(entry);
             }
@@ -58,12 +53,10 @@ namespace Omniscient.Foundation.Logging
             Log(new LogEntry(message, LogLevel.Fatal));
         }
 
-        public IEnumerable<ILogWriter> Writers
+        public List<ILogWriter> Writers
         {
-            get
-            {
-                foreach (ILogWriter writer in _writers) yield return writer;
-            }
+            get;
+            private set;
         }
     }
 }

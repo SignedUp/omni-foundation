@@ -248,13 +248,10 @@ namespace Omniscient.Foundation.ApplicationModel
         {
             if (Logger == null)
             {
-                Logger = new StandardLogger();
-                System.IO.MemoryStream m = new System.IO.MemoryStream();
-                System.IO.StreamWriter w = new System.IO.StreamWriter(m);
-                ILogWriter writer = new TextLogWriter(w);
+                ILogWriter writer = new TextLogWriter(new System.IO.StreamWriter(new System.IO.MemoryStream()));
                 writer.AutoflushLevel = LogLevel.Fatal;
                 writer.IsEnabled = false;
-                Logger.RegisterWriter(writer);
+                Logger = new StandardLogger(writer);
             }
             if (ServiceProvider == null)
             {
