@@ -59,7 +59,7 @@ namespace Omniscient.Foundation.Logging
         {
             if (!this.IsEnabled || this.Level > entry.Level || entry == null) return;
             Writer.WriteLine(entry.ToString());
-            if (this.AutoflushLevel <= entry.Level) Flush();
+            if (flush || this.AutoflushLevel <= entry.Level) Flush();
         }
 
         /// <summary>
