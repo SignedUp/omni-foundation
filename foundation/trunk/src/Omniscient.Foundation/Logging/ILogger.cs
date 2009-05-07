@@ -7,16 +7,14 @@ namespace Omniscient.Foundation.Logging
     public interface ILogger
     {
         /// <summary>
-        /// Registers a log writer against the logger.
+        /// Gets the list of writers.
         /// </summary>
-        /// <param name="writer">The log writer to register</param>
-        void RegisterWriter(ILogWriter writer);
+        List<ILogWriter> Writers { get; }
 
         /// <summary>
-        /// Unregister a log writer from the logger.
+        /// Gets a default writer.
         /// </summary>
-        /// <param name="writer">The log writer to unregister.</param>
-        void UnregisterWriter(ILogWriter writer);
+        ILogWriter DefaultWriter { get; }
 
         /// <summary>
         /// Logs a log entry directly
@@ -54,10 +52,5 @@ namespace Omniscient.Foundation.Logging
         /// </summary>
         /// <param name="message">The message to log</param>
         void Fatal(object message);
-
-        /// <summary>
-        /// Gets the list of registered writers.
-        /// </summary>
-        IEnumerable<ILogWriter> Writers { get; }
     }
 }
