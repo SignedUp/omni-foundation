@@ -15,12 +15,12 @@ namespace Omniscient.Foundation.Logging
             _writers = new List<ILogWriter>();
         }
 
-        public void Register(ILogWriter writer)
+        public void RegisterWriter(ILogWriter writer)
         {
             _writers.Add(writer);
         }
 
-        public void Unregister(ILogWriter writer)
+        public void UnregisterWriter(ILogWriter writer)
         {
             _writers.Remove(writer);
         }
@@ -58,14 +58,12 @@ namespace Omniscient.Foundation.Logging
             Log(new LogEntry(message, LogLevel.Fatal));
         }
 
-        public IEnumerator<ILogWriter> GetEnumerator()
+        public IEnumerable<ILogWriter> Writers
         {
-            return _writers.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return _writers.GetEnumerator();
+            get
+            {
+                foreach (ILogWriter writer in _writers) yield return writer;
+            }
         }
     }
 }
