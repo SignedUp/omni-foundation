@@ -54,7 +54,6 @@
     <Compile Include="Communication\SecureChannelFactoryService.cs" />
     <Compile Include="Data\MsSqlConnectionProvider.cs" />
     <Compile Include="Data\MySqlConnectionProvider.cs" />
-    <Compile Include="Logging\Log4Net\LogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
