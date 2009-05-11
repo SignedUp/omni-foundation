@@ -8,11 +8,17 @@ namespace Omniscient.Foundation.Logging
 {
     public class TextLogWriter: ILogWriter
     {
-        public TextLogWriter(TextWriter writer)
+        public TextLogWriter(Stream stream)
         {
-            Writer = writer;
+            Writer = new StreamWriter(stream);
             IsEnabled = true;
         }
+
+        /// <summary>
+        /// Gets the underlying stream
+        /// </summary>
+        public Stream Stream { get; private set; }
+
 
         /// <summary>
         /// The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
@@ -33,12 +39,12 @@ namespace Omniscient.Foundation.Logging
         }
 
         /// <summary>
-        /// Gets or sets the underlying TextWriter object.
+        /// Gets the underlying TextWriter object.
         /// </summary>
         public TextWriter Writer
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>

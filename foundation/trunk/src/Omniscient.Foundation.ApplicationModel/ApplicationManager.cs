@@ -248,7 +248,7 @@ namespace Omniscient.Foundation.ApplicationModel
         {
             if (Logger == null)
             {
-                ILogWriter writer = new TextLogWriter(new System.IO.StreamWriter(new System.IO.MemoryStream()));
+                TextLogWriter writer = new TextLogWriter(new System.IO.MemoryStream());
                 writer.AutoflushLevel = LogLevel.Fatal;
                 writer.IsEnabled = false;
                 Logger = new StandardLogger(writer);
