@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace Omniscient.Foundation.Logging
 {
     /// <summary>
-    /// Writer that ultimately receives log entries and write them to a media
+    /// Writer that ultimately receives log entries and write them to an underlying stream.
     /// </summary>
     public interface ILogWriter
     {
@@ -25,22 +26,5 @@ namespace Omniscient.Foundation.Logging
         /// </summary>
         /// <param name="entry">The entry to log.</param>
         void Write(LogEntry entry);
-
-        /// <summary>
-        /// Writes the log entry to a medium.
-        /// </summary>
-        /// <param name="entry">The entry to log.</param>
-        /// <param name="flush">A value indicating whether the writer should call Flush after writing to the TextWriter.</param>
-        void Write(LogEntry entry, bool flush);
-
-        /// <summary>
-        /// Flushes the writer to the underlying media.
-        /// </summary>
-        void Flush();
-
-        /// <summary>
-        /// Minimum level at which Flush will be automatically called after a call to Write.  Equivalent to calling Write(entry, false).
-        /// </summary>
-        LogLevel AutoflushLevel { get; set; }
     }
 }
