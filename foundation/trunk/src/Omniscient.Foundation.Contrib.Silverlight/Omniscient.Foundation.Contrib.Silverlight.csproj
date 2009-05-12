@@ -51,6 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commanding\CommandBase.cs" />
+    <Compile Include="Dialogs\ButtonLayout.cs" />
+    <Compile Include="Dialogs\Dialog.cs" />
+    <Compile Include="Dialogs\DialogBase.cs" />
+    <Compile Include="Dialogs\DialogButton.cs" />
+    <Compile Include="Dialogs\DragDropPanel.cs" />
     <Compile Include="NavigationButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewNavigator.xaml.cs">
@@ -68,6 +73,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\generic.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ViewNavigator.xaml">
       <SubType>Page</SubType>
       <Generator>MSBuild:MarkupCompilePass1</Generator>
