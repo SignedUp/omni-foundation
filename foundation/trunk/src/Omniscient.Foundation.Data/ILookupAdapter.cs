@@ -8,9 +8,16 @@
         where TLookup: ILookup
     {
         /// <summary>
+        /// Loads a lookup by its code.
+        /// </summary>
+        /// <param name="code">The code to look for</param>
+        /// <returns>A lookup with given code.</returns>
+        TLookup LoadByCode(string code);
+
+        /// <summary>
         /// Returns all available lookups for that type.
         /// </summary>
         /// <returns>All available lookups of that type.</returns>
-        TLookup[] FetchAll();
+        List<TLookup> LoadAll();
     }
 }
