@@ -10,8 +10,8 @@ namespace Omniscient.Foundation.Logging
     {
         public TextLogWriter(Stream stream)
         {
-            Stream = stream;
             Writer = new StreamWriter(stream);
+            Stream = stream;
             IsEnabled = true;
         }
 
