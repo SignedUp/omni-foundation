@@ -1,4 +1,5 @@
-﻿namespace Omniscient.Foundation.Data
+﻿using System.Collections.Generic;
+namespace Omniscient.Foundation.Data
 {
     /// <summary>
     /// Represents an entity adapter to bridge with the database.
