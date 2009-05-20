@@ -68,8 +68,6 @@
     <Compile Include="Presentation\IShell.cs" />
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
     <Compile Include="Presentation\ModelBase.cs" />
-    <Compile Include="Presentation\ModelMultiEntitiesBase.cs" />
-    <Compile Include="Presentation\ModelSingleEntityBase.cs" />
     <Compile Include="Presentation\Navigation\ForwardsClosingViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\IViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\ViewNavigatorBase.cs" />

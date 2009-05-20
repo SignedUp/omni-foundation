@@ -10,8 +10,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     /// </summary>
     public class PresentationController: IPresentationController
     {
-        private Dictionary<Guid, object> _locks;
-        private object _lock;
         private List<IViewController> _controllers;
         private List<IView> _openedViews;
         private Dictionary<string, IPresenter> _presenters;
@@ -25,8 +23,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         public PresentationController(bool supportsUserInput)
         {
-            _locks = new Dictionary<Guid, object>();
-            _lock = new object();
             _controllers = new List<IViewController>();
             _openedViews = new List<IView>();
             SupportsUserInput = supportsUserInput;
@@ -65,89 +61,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public void ViewClosed(IView view)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit{TEntity}"/> would be called.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type.</typeparam>
-        /// <param name="view">The view that wants to edit the entity.</param>
-        /// <param name="entity">The entity to edit</param>
-        /// <exception cref="InvalidOperationException">Thrown when the entity is already being edited elsewhere.</exception>
-        public void BeginEdit<TEntity>(IView view, TEntity entity)
-             where TEntity : IEntity
-        {            
-            IEntityController<TEntity> controller;
-            controller = ApplicationManager.Current.Kernel.Get<IEntityController<TEntity>>();
-            if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
-
-            lock (_lock)
-            {
-                if (_locks.ContainsKey(entity.Id))
-                    throw new InvalidOperationException(string.Format("Entity {0} is already being edited.", entity));
-                _locks.Add(entity.Id, null);
-            }
-
-            controller.BeginChanges(entity);
-        }
-
-        /// <summary>
-        /// Cancels editing the entity.  The entity will be recopied against the clone, and the status set back to <see cref="EntityStatus.Clean"/>.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type.</typeparam>
-        /// <param name="view">The view that was editing the entity.</param>
-        /// <param name="entity">The entity that was edited.</param>
-        public void CancelEdit<TEntity>(IView view, TEntity entity)
-             where TEntity : IEntity
-        {
-            IEntityController<TEntity> controller;
-            controller = ApplicationManager.Current.Kernel.Get<IEntityController<TEntity>>();
-            if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
-
-            lock (_lock)
-            {
-                if (!_locks.ContainsKey(entity.Id))
-                    throw new InvalidOperationException(string.Format("Entity {0} is not being edited.", entity));
-                _locks.Remove(entity.Id);
-            }
-
-            controller.CancelChanges(entity);
-        }
-
-        /// <summary>
-        /// Ends editing an entity - that is, accept changes.  The clone will be destroyed, and the entity will be permanently changed,
-        /// but not saved yet.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type.</typeparam>
-        /// <param name="view">The view that was editing the entity.</param>
-        /// <param name="entity">The entity that was edited.</param>
-        public void EndEdit<TEntity>(IView view, TEntity entity)
-             where TEntity : IEntity
-        {
-            IEntityController<TEntity> controller;
-            controller = ApplicationManager.Current.Kernel.Get<IEntityController<TEntity>>();
-            if (controller == null) throw new InvalidOperationException(string.Format("No entity controller found for type {0}.", typeof(TEntity).FullName));
-
-            foreach (IView v in _openedViews)
-            {
-                if (entity.Status == EntityStatus.New)
-                {
-                    Debug.Assert(false, "Implement capability to add new entities and update views");
-                }
-
-                if (v != view && v.Model.HasEntity(entity.Id))
-                { 
-                    //ensure that new values are transfered to this model.
-                    entity.CopyTo(v.Model.GetEntity(entity.Id));
-                    v.UpdateView();
-                }
-            }
-            lock (_lock)
-            {
-                if (!_locks.ContainsKey(entity.Id))
-                    throw new InvalidOperationException(string.Format("Entity {0} is not being edited.", entity));
-                _locks.Remove(entity.Id);
-            }
         }
 
         public void RegisterPresenter(IPresenter presenter)

@@ -1,52 +1,109 @@
 ﻿using System;
 using Omniscient.Foundation.Data;
+using System.Collections.Generic;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     /// <summary>
     /// Base class for models.
     /// </summary>
-    public abstract class ModelBase: IModel
+    public abstract class ModelBase<TEntity>: IModel<TEntity>
+        where TEntity: IEntity, new()
     {
-        private readonly string _name;
+        private TEntity _clone;
+        private List<string> _changedProperties;
 
-        /// <summary>
-        /// Ctor; sets the name to this type's name
-        /// </summary>
-        protected ModelBase()
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public ModelBase(TEntity entity)
         {
-            _name = GetType().Name;
+            Entity = entity;
         }
 
-        /// <summary>
-        /// Gets the name of the model.  Overridable.
-        /// </summary>
-        public virtual string Name
+        TEntity IModel<TEntity>.Entity
         {
-            get { return _name; }
+            get { return (TEntity)Entity; }
         }
 
-        /// <summary>
-        /// Returns true if the Model has an entity with given Id in its entity graph.
-        /// </summary>
-        /// <param name="id">Id of the entity sought.</param>
-        /// <returns>True if the Model has the entity in its entity graph.</returns>
-        public abstract bool HasEntity(Guid id);
+        public IEntity Entity
+        {
+            get;
+            private set;
+        }
 
-        /// <summary>
-        /// Returns true if the model contains an entity that needs to be saved.  The model will not dig the graph
-        /// more than required by the boundary that it represents (e.g. a "Client" model will not check for client's addresses, 
-        /// while a "ClientAddress" model would.
-        /// </summary>
-        /// <returns></returns>
-        public abstract bool ContainsEntitiesThatNeedToBeSaved();
+        public EntityStatus EntityStatus
+        {
+            get { return Entity.Status; }
+            set { Entity.Status = value; }
+        }
 
-        /// <summary>
-        /// Returns a child entity that has the given Id.
-        /// </summary>
-        /// <param name="id">The id of the entity sought.</param>
-        /// <returns>The entity, or null if no entity is found.</returns>
-        public abstract IEntity GetEntity(Guid id);
+        public virtual void BeginEdit()
+        {
+            if (IsBeingEdited) throw new InvalidOperationException("Already in edit mode.");
+            if (EntityStatus != EntityStatus.Clean && EntityStatus != EntityStatus.New && EntityStatus != EntityStatus.Dirty)
+                throw new InvalidOperationException("Invalid entity status for this operation.");
 
+            _clone = OnGetClone();
+            _changedProperties = new List<string>();
+        }
+
+        protected virtual TEntity OnGetClone()
+        {
+            TEntity clone = new TEntity();
+            Entity.CopyTo(clone);
+            clone.Status = EntityStatus.Clone;
+            return clone;
+        }
+
+        public virtual void EndEdit(bool acceptChanges)
+        {
+            if (!IsBeingEdited) throw new InvalidOperationException("Not in edit mode.");
+
+            if (acceptChanges)
+            {
+                if (EntityStatus == EntityStatus.Clean) Entity.Status = EntityStatus.Dirty;
+                _changedProperties.ForEach(propertyName => RaisePropertyChanged(propertyName));
+            }
+            else
+            {
+                OnRecopyOriginalValues();
+            }
+            _clone = default(TEntity);
+        }
+
+        protected virtual void OnValueChanged(string propertyName)
+        {
+            if (IsBeingEdited)
+            {
+                _changedProperties.Add(propertyName);
+            }
+            else
+            {
+                RaisePropertyChanged(propertyName);
+            }
+        }
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+
+        protected virtual void OnRecopyOriginalValues()
+        {
+            _clone.CopyTo(Entity);
+        }
+
+        public bool IsBeingEdited
+        {
+            get { return (_clone != null); }
+        }
+
+        public void MarkAsDeleted()
+        {
+            if (EntityStatus != EntityStatus.Clean && EntityStatus != EntityStatus.Dirty && EntityStatus != EntityStatus.ToBeDeleted)
+                throw new InvalidOperationException("Invalid entity status for this operation.");
+            
+            EntityStatus = EntityStatus.ToBeDeleted;
+        }
     }
 }

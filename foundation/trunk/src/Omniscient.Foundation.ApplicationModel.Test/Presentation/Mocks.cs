@@ -16,7 +16,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         public IView OpenView(IModel model)
         {
-            if (model.Name != "InvoicesModel") return null;
+            if (model.GetType().Name != "InvoicesModel") return null;
 
             InvoiceList view;
             view = new InvoiceList();
@@ -79,7 +79,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public IView OpenView(IModel model)
         {
 
-            if (model.Name != "ClientInvoicesModel") return null;
+            if (model.GetType().Name != "ClientInvoicesModel") return null;
 
             ClientDetail view;
             view = new ClientDetail();
@@ -135,7 +135,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
     #region Models
 
-    public class ClientInvoicesModel : ModelSingleEntityBase<Client>
+    public class ClientInvoicesModel : ModelBase<Client>
     {
         private Client _client;
 
@@ -144,53 +144,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _client = c;
         }
 
-        public override bool HasEntity(Guid id)
-        {
-            if (_client.Id == id) return true;
-
-            foreach (Invoice inv in _client.Invoices)
-            {
-                if (inv.Id == id) return true;
-            }
-            return false;
-        }
-
-        public override IEntity GetEntity(Guid id)
-        {
-            if (_client.Id == id) return _client;
-
-            foreach (Invoice inv in _client.Invoices)
-            {
-                if (inv.Id == id) return inv;
-            }
-            return null;
-        }
-
-        public override bool ContainsEntitiesThatNeedToBeSaved()
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    public class InvoicesModel : ModelMultiEntitiesBase<Invoice>
-    {
-        public InvoicesModel(List<Invoice> invoices) : base(invoices) { }
-
-        public override bool HasEntity(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool ContainsEntitiesThatNeedToBeSaved()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IEntity GetEntity(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
 
     #endregion

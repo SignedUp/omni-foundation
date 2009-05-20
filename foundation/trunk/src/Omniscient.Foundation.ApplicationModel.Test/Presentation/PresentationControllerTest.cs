@@ -46,7 +46,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller.OpenView(model);
 
             Assert.IsNotNull(_mainController.CurrentView);
-            Assert.AreEqual(client, ((ModelSingleEntityBase<Client>)_mainController.CurrentView.Model).Entity);
+            Assert.AreEqual(client, ((ModelBase<Client>)_mainController.CurrentView.Model).Entity);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller.OpenView(model);
 
             Assert.AreEqual(EntityStatus.Clean, client.Status);
-            _controller.BeginEdit(_mainController.CurrentView, client);
+            model.BeginEdit();
             Assert.AreEqual(EntityStatus.Dirty, client.Status);
         }
 
@@ -74,10 +74,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             ClientInvoicesModel model = new ClientInvoicesModel(client);
             _controller.OpenView(model);
 
-            _controller.BeginEdit(_mainController.CurrentView, client);
+            //_controller.BeginEdit(_mainController.CurrentView, client);
             client.Name = "new name";
             Assert.AreEqual("new name", client.Name);
-            _controller.CancelEdit(_mainController.CurrentView, client);
+            //_controller.CancelEdit(_mainController.CurrentView, client);
             Assert.AreEqual(originalName, client.Name);
             Assert.AreEqual(EntityStatus.Clean, client.Status);
         }
