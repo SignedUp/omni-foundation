@@ -6,7 +6,7 @@
     <members>
         <member name="T:Omniscient.Foundation.Logging.ILogWriter">
             <summary>
-            Writer that ultimately receives log entries and write them to a media
+            Writer that ultimately receives log entries and write them to an underlying stream.
             </summary>
         </member>
         <member name="M:Omniscient.Foundation.Logging.ILogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
@@ -14,18 +14,6 @@
             Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
             </summary>
             <param name="entry">The entry to log.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogWriter.Write(Omniscient.Foundation.Logging.LogEntry,System.Boolean)">
-            <summary>
-            Writes the log entry to a medium.
-            </summary>
-            <param name="entry">The entry to log.</param>
-            <param name="flush">A value indicating whether the writer should call Flush after writing to the TextWriter.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogWriter.Flush">
-            <summary>
-            Flushes the writer to the underlying media.
-            </summary>
         </member>
         <member name="P:Omniscient.Foundation.Logging.ILogWriter.Level">
             <summary>
@@ -35,11 +23,6 @@
         <member name="P:Omniscient.Foundation.Logging.ILogWriter.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the writer is available to receive log entries.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.ILogWriter.AutoflushLevel">
-            <summary>
-            Minimum level at which Flush will be automatically called after a call to Write.  Equivalent to calling Write(entry, false).
             </summary>
         </member>
         <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
@@ -60,6 +43,11 @@
             Flushes the writer to the underlying media.
             </summary>
         </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Stream">
+            <summary>
+            Gets the underlying stream
+            </summary>
+        </member>
         <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Level">
             <summary>
             The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
@@ -72,7 +60,7 @@
         </member>
         <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Writer">
             <summary>
-            Gets or sets the underlying TextWriter object.
+            Gets the underlying TextWriter object.
             </summary>
         </member>
         <member name="P:Omniscient.Foundation.Logging.TextLogWriter.AutoflushLevel">
@@ -774,6 +762,17 @@
             <summary>
             </summary>
             <param name="handler"></param>
+        </member>
+        <member name="T:Omniscient.Foundation.INamed">
+            <summary>
+            Represents something that is identifiable by a Name.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.INamed.Name">
+            <summary>
+            Gets or sets the name of this Named item.  Can be unique, or not 
+            (this is not part of the contract; to be specified by concrete types)
+            </summary>
         </member>
     </members>
 </doc>

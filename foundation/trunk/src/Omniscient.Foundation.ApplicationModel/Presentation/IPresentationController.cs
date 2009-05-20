@@ -23,33 +23,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         void ViewClosed(IView view);
 
         /// <summary>
-        /// Begins editing an entity.  The entity will be cloned to preserve original values, in case that <see cref="CancelEdit{TEntity}"/> would be called.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type.</typeparam>
-        /// <param name="view">The view that wants to edit the entity.</param>
-        /// <param name="entity">The entity to edit</param>
-        /// <exception cref="InvalidOperationException">Thrown when the entity is already being edited elsewhere.</exception>
-        void BeginEdit<TEntity>(IView view, TEntity entity) where TEntity: IEntity;
-
-        /// <summary>
-        /// Ends editing an entity - that is, accept changes.  The clone will be destroyed, and the entity will be permanently changed,
-        /// but not saved yet.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type.</typeparam>
-        /// <param name="view">The view that was editing the entity.</param>
-        /// <param name="entity">The entity that was edited.</param>
-        void EndEdit<TEntity>(IView view, TEntity entity) where TEntity : IEntity;
-
-        /// <summary>
-        /// Cancels editing the entity.  The entity will be recopied against the clone, and the status set back to <see cref="EntityStatus.Clean"/>.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type.</typeparam>
-        /// <param name="view">The view that was editing the entity.</param>
-        /// <param name="entity">The entity that was edited.</param>
-        void CancelEdit<TEntity>(IView view, TEntity entity) where TEntity : IEntity;
-
-      
-        /// <summary>
         /// Registers an <c>IViewController</c>. Default use is to feed that list at application startup.
         /// </summary>
         /// <param name="controller">An <c>IViewController</c> to register.</param>

@@ -59,6 +59,7 @@
     <Compile Include="Commanding\ICommandStore.cs" />
     <Compile Include="Commanding\TransitiveCommand.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="INamed.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="ApplicationModel\IExtendable.cs" />
     <Compile Include="ApplicationModel\IExtender.cs" />

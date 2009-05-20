@@ -23,26 +23,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             public string Name { get; set; }
         }
 
-        public class ClientModel: ModelSingleEntityBase<Client>
+        public class ClientModel: ModelBase<Client>
         {
             public ClientModel(Client client)
                 : base(client)
             { }
 
-            public override bool HasEntity(Guid id)
-            {
-                throw new NotImplementedException();
-            }
-
-            public override bool ContainsEntitiesThatNeedToBeSaved()
-            {
-                throw new NotImplementedException();
-            }
-
-            public override IEntity GetEntity(Guid id)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }
