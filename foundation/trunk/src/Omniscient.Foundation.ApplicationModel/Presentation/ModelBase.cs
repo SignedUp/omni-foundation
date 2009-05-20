@@ -20,15 +20,15 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             Entity = entity;
         }
 
-        TEntity IModel<TEntity>.Entity
-        {
-            get { return (TEntity)Entity; }
-        }
-
-        public IEntity Entity
+        public TEntity Entity
         {
             get;
             private set;
+        }
+
+        IEntity IModel.Entity
+        {
+            get { return Entity; }
         }
 
         public EntityStatus EntityStatus
