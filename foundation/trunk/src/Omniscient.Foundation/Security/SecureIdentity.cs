@@ -10,13 +10,15 @@ namespace Omniscient.Foundation.Security
     /// to authenticated with a name, password and an authentication type.
     /// </summary>
     [DataContract]
-    [Serializable]
     public class SecureIdentity: IIdentity
     {
         private string _name;
         private string _authType;
-        [NonSerialized]
+#if SILVERLIGHT
+        private string _password;
+#else
         private SecureString _password;
+#endif
 
         /// <summary>
         /// Creates an anonymous (unauthenticated) user.
@@ -29,7 +31,13 @@ namespace Omniscient.Foundation.Security
         /// <param name="name">The name of the authenticated user.</param>
         /// <param name="password">The password used to authenticate the user.</param>
         /// <remarks>The password is allowed to be null.</remarks>
-        public SecureIdentity(string name, SecureString password) : this(name, password, string.Empty) { }
+        public SecureIdentity(string name, 
+#if SILVERLIGHT
+            string password
+#else
+            SecureString password
+#endif
+            ) : this(name, password, string.Empty) { }
         
         /// <summary>
         /// Creates an authenticated user with given name, password and authentication machanism.
@@ -38,7 +46,12 @@ namespace Omniscient.Foundation.Security
         /// <param name="password">The password used to authenticate the user.</param>
         /// <param name="authenticationType">The authentication mechanism used to authenticate the user.</param>
         /// <remarks>The password is allowed to be null.</remarks>
+#if SILVERLIGHT
+        public SecureIdentity(string name, string password, string authenticationType)            
+#else
         public SecureIdentity(string name, SecureString password, string authenticationType)
+#endif
+
         {
             if (name == null) name = string.Empty;
             if (authenticationType == null) authenticationType = string.Empty;
@@ -53,7 +66,11 @@ namespace Omniscient.Foundation.Security
         /// <remarks>The password is allowed to be null.</remarks>
         /// <param name="name">The username used to authenticate.</param>
         /// <param name="password">The password used to authenticate.</param>
+#if SILVERLIGHT
+        public void Promote(string name, string password)
+#else
         public void Promote(string name, SecureString password)
+#endif
         {
             Promote(name, password, string.Empty);
         }
@@ -64,7 +81,11 @@ namespace Omniscient.Foundation.Security
         /// <param name="name">The username used to authenticate.</param>
         /// <param name="password">The password used to authenticate.</param>
         /// <param name="authenticationType">The authentication type used to authenticate.</param>
+#if SILVERLIGHT
+        public void Promote(string name, string password, string authenticationType)
+#else
         public void Promote(string name, SecureString password, string authenticationType)
+#endif
         {
             if (name == null) name = string.Empty;
             if (authenticationType == null) authenticationType = string.Empty;
@@ -77,7 +98,11 @@ namespace Omniscient.Foundation.Security
         /// Gets the password used to promote (authenticate) this Identity, or null if no password was supplied or if the 
         /// identity is anonymous (unauthenticated).
         /// </summary>
+#if SILVERLIGHT
+        public string Password
+#else
         public SecureString Password
+#endif
         {
             get { return _password; }
         }
