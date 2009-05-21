@@ -44,6 +44,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
   </ItemGroup>
@@ -69,6 +70,11 @@
     <Compile Include="Logging\StandardLogger.cs" />
     <Compile Include="Logging\TextLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CredentialService.cs" />
+    <Compile Include="Security\ICredentialService.cs" />
+    <Compile Include="Security\ICredentialServiceExtender.cs" />
+    <Compile Include="Security\SecureIdentity.cs" />
+    <Compile Include="Security\SecurePrincipal.cs" />
     <Compile Include="ServiceModel\DIServiceProvider.cs" />
     <Compile Include="ServiceModel\ExtendableServiceBase.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />

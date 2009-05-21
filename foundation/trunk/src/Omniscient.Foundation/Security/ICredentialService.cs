@@ -19,6 +19,17 @@ namespace Omniscient.Foundation.Security
         void EnsureUserIsAuthenticated();
 
         /// <summary>
+        /// Like <see cref="EnsureUserIsAuthenticated"/> but the call returns immediately.  After authentication, event
+        /// <see cref="UserAuthenticated"/> will be raised.
+        /// </summary>
+        void BeginEnsureUserIsAuthenticated();
+        
+        /// <summary>
+        /// Raised after a call to <see cref="BeginEnsureUserIsAuthenticated"/> returns an authenticated user.
+        /// </summary>
+        event EventHandler UserAuthenticated;
+
+        /// <summary>
         /// Called on request from anywhere where the user credentials are required.  Returns the same object as 
         /// <c>System.Threading.Thread.CurrentPrincipal</c>.
         /// </summary>

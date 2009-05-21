@@ -9,7 +9,6 @@ namespace Omniscient.Foundation.Security
     /// Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
     /// </summary>
     [DataContract]
-    [Serializable]
     public class SecurePrincipal : IPrincipal
     {
         private SecureIdentity _identity;
