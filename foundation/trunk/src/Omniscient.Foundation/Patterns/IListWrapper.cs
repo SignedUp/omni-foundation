@@ -10,7 +10,7 @@ namespace Omniscient.Foundation.Patterns
     /// It is recommended that implementers return the class itself as the result of a call 
     /// to <see cref="Adapt"/>.
     /// </summary>
-    public interface IListWrapper<T>: IObjectWrapper<List<T>>, IList<T>
+    public interface IListWrapper<T>: IObjectWrapper<IList<T>>, IList<T>
     {
     }
 }
