@@ -59,6 +59,7 @@
     <Compile Include="IApplicationContext.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Modularity\ApplicationModuleBase.cs" />
     <Compile Include="Modularity\ApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModule.cs" />
     <Compile Include="Modularity\IApplicationModuleManager.cs" />
