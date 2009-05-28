@@ -14,10 +14,6 @@ namespace Omniscient.Foundation.Security
     public class CredentialService : ServiceModel.ExtendableServiceBase<ICredentialService, ICredentialServiceExtender>, ICredentialService
     {
         private SecurePrincipal _current;
-        private bool _isWaiting;
-        private object _lock = new object();
-
-        public event EventHandler UserAuthenticated = delegate { };
 
         /// <summary>
         /// Retrieves implementation for ICredentialService.
@@ -50,48 +46,6 @@ namespace Omniscient.Foundation.Security
                 return;
             }
             throw new InvalidOperationException("No extenders have been registered for the CredentialService service.  Cannot authenticate user.");
-        }
-
-        /// <summary>
-        /// Ensures the user has entered login information, using extenders.  Only the first extender will be used. 
-        /// This call returns immediately, resulting in a temporary non-authenticated user.
-        /// </summary>
-        /// <remarks>
-        /// If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
-        /// </remarks>
-        /// <exception cref="System.Security.SecurityException">Thrown if the extender is unable to authenticate the user.</exception>
-        public virtual void BeginEnsureUserIsAuthenticated()
-        {
-            if (_current.Identity.IsAuthenticated) return;
-
-            Debug.Assert(CurrentPrincipal != null);
-            lock (_lock)
-            {
-                if (_isWaiting) return;
-                _isWaiting = true;
-
-                foreach (IExtender<ICredentialServiceExtender> extender in this.Extenders)
-                {
-                    ICredentialServiceExtender realExtender = extender.GetImplementation();
-                    Action<SecurePrincipal> action = new Action<SecurePrincipal>(realExtender.NegociateAuthentication);
-                    action.BeginInvoke(CurrentPrincipal, new AsyncCallback(EndEnsureUserIsAuthenticated), null);
-                    return;
-                }
-                _isWaiting = false;
-                throw new InvalidOperationException("No extenders have been registered for the CredentialService service.  Cannot authenticate user.");
-            }
-        }
-
-        private void EndEnsureUserIsAuthenticated(IAsyncResult result)
-        {
-            lock (_lock)
-            {
-                _isWaiting = false;
-
-                if (!CurrentPrincipal.Identity.IsAuthenticated)
-                    throw new System.Security.SecurityException("Unable to authenticate current principal.");
-            }
-            UserAuthenticated(this, EventArgs.Empty);
         }
 
         /// <summary>

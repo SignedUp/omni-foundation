@@ -66,6 +66,63 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         public event SelectionChangedEventHandler CurrentViewSelectionChanged;
 
         #endregion
+
+        #region IViewController Members
+
+
+        public IView OpenView<TModel>(IEnumerable<TModel> models) where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IViewController Members
+
+        event EventHandler IViewController.CurrentViewChanged
+        {
+            add { throw new NotImplementedException(); }
+            remove { throw new NotImplementedException(); }
+        }
+
+        IView IViewController.OpenView(IModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        IView IViewController.OpenView<TModel>(IEnumerable<TModel> models)
+        {
+            throw new NotImplementedException();
+        }
+
+        IView IViewController.CurrentView
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        void IViewController.Focus(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IViewController.CloseView(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IViewController.CloseViewRange(IEnumerable<IView> views)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     public class MainViewControllerMock : IViewController
@@ -127,6 +184,16 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         #region IViewController Members
 
         public event SelectionChangedEventHandler CurrentViewSelectionChanged;
+
+        #endregion
+
+        #region IViewController Members
+
+
+        public IView OpenView<TModel>(IEnumerable<TModel> models) where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
