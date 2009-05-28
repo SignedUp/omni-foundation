@@ -50,7 +50,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// and displaying it correctly.
         /// </summary>
         /// <param name="models">The models to open.</param>
-        public void OpenView<TModel>(IEnumerable<TModel> models)
+        public void OpenView<TModel>(IList<TModel> models)
             where TModel: IModel
         {
             IView view;

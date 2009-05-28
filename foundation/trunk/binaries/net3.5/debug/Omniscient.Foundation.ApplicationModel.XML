@@ -128,7 +128,7 @@
             <param name="model">Model to open in a view.</param>
             <returns>Newly opened view.</returns>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.OpenView``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.OpenView``1(System.Collections.Generic.IList{``0})">
             <summary>
             Opens a view for the given list of models.
             </summary>
@@ -572,7 +572,7 @@
             </summary>
             <param name="model">The model to open.</param>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView``1(System.Collections.Generic.IList{``0})">
             <summary>
             Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
             and displaying it correctly.
@@ -653,7 +653,7 @@
             </summary>
             <param name="model">The model to open.</param>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView``1(System.Collections.Generic.IList{``0})">
             <summary>
             Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
             and displaying it correctly.
