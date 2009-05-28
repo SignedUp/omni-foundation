@@ -58,6 +58,7 @@
     <Compile Include="Configuration\ServiceDefinition.cs" />
     <Compile Include="Configuration\ServicesConfiguration.cs" />
     <Compile Include="IApplicationContext.cs" />
+    <Compile Include="Modularity\ApplicationModuleBase.cs" />
     <Compile Include="Modularity\ApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModule.cs" />
