@@ -27,7 +27,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         /// <param name="model">Models to open in a view.</param>
         /// <returns>Newly opened view.</returns>
-        IView OpenView<TModel>(IEnumerable<TModel> models)
+        IView OpenView<TModel>(IList<TModel> models)
             where TModel : IModel;
 
         /// <summary>
