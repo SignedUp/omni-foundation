@@ -11,6 +11,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
     
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public NotifyEntityModelBase()
+            : base() { }
+
+        public NotifyEntityModelBase(TEntity entity)
+            : base(entity) { }
+
         public override void BeginEdit()
         {
             base.BeginEdit();
