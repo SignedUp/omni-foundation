@@ -70,7 +70,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         #region IViewController Members
 
 
-        public IView OpenView<TModel>(IEnumerable<TModel> models) where TModel : IModel
+        public IView OpenView<TModel>(IList<TModel> models) where TModel : IModel
         {
             throw new NotImplementedException();
         }
@@ -90,7 +90,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             throw new NotImplementedException();
         }
 
-        IView IViewController.OpenView<TModel>(IEnumerable<TModel> models)
+        IView IViewController.OpenView<TModel>(IList<TModel> models)
         {
             throw new NotImplementedException();
         }
@@ -190,7 +190,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         #region IViewController Members
 
 
-        public IView OpenView<TModel>(IEnumerable<TModel> models) where TModel : IModel
+        public IView OpenView<TModel>(IList<TModel> models) where TModel : IModel
         {
             throw new NotImplementedException();
         }
