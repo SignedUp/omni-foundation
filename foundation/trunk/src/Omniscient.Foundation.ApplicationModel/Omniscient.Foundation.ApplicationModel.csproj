@@ -62,13 +62,16 @@
     <Compile Include="Modularity\ApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModuleManager.cs" />
     <Compile Include="Modularity\IApplicationModule.cs" />
+    <Compile Include="Presentation\IEntityListModel.cs" />
+    <Compile Include="Presentation\IEntityModel.cs" />
+    <Compile Include="Presentation\IListModel.cs" />
     <Compile Include="Presentation\IPresentableCommandObject.cs" />
     <Compile Include="Presentation\IPresentableHierarchicalObject.cs" />
     <Compile Include="Presentation\IPresentableObject.cs" />
     <Compile Include="Presentation\IPresenter.cs" />
     <Compile Include="Presentation\IShell.cs" />
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
-    <Compile Include="Presentation\ModelBase.cs" />
+    <Compile Include="Presentation\EntityModelBase.cs" />
     <Compile Include="Presentation\Navigation\ForwardsClosingViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\IViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\ViewNavigatorBase.cs" />

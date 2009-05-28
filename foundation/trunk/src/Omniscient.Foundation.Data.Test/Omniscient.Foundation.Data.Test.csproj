@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityAdapterMock.cs" />
-    <Compile Include="EntityControllerTest.cs" />
     <Compile Include="EntityMock.cs" />
     <Compile Include="EntityTest.cs" />
     <Compile Include="Mocks.cs" />

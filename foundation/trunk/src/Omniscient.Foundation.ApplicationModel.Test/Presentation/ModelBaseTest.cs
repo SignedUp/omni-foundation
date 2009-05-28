@@ -23,7 +23,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             public string Name { get; set; }
         }
 
-        public class ClientModel: ModelBase<Client>
+        public class ClientModel: EntityModelBase<Client>
         {
             public ClientModel(Client client)
                 : base(client)

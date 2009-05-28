@@ -5,7 +5,7 @@ namespace Omniscient.Foundation.Data
 {
     #region Entities
 
-    public class Client : EntityBase
+    public class Client : UniqueEntityBase
     {
         public Client()
         {
@@ -22,7 +22,7 @@ namespace Omniscient.Foundation.Data
         public List<Invoice> Invoices { get; private set; }
     }
 
-    public class Invoice : EntityBase
+    public class Invoice : UniqueEntityBase
     {
         public Invoice()
         { }
@@ -78,7 +78,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public IList<Client> LoadAll()
+        public IList<Client> Load()
         {
             throw new NotImplementedException();
         }
@@ -148,7 +148,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public IList<Invoice> LoadAll()
+        public IList<Invoice> Load()
         {
             throw new NotImplementedException();
         }

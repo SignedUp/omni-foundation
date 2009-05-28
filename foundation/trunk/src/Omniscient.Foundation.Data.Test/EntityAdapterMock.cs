@@ -43,7 +43,7 @@ namespace Omniscient.Foundation.Data
             throw new NotImplementedException();
         }
 
-        public IList<EntityMock> LoadAll()
+        public IList<EntityMock> Load()
         {
             throw new NotImplementedException();
         }

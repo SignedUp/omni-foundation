@@ -2,7 +2,7 @@
 
 namespace Omniscient.Foundation.Data
 {
-    public class EntityMock: EntityBase
+    public class EntityMock: UniqueEntityBase
     {
         public EntityMock() { }
         public EntityMock(Guid id, bool isLoaded) : base(id) { }

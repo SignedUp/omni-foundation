@@ -67,6 +67,8 @@
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\StandardLogger.cs" />
     <Compile Include="Logging\TextLogWriter.cs" />
+    <Compile Include="Patterns\IListWrapper.cs" />
+    <Compile Include="Patterns\IObjectWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CredentialService.cs" />
     <Compile Include="Security\IAuthenticationService.cs" />

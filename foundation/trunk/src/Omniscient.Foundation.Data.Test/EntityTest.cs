@@ -9,7 +9,7 @@ namespace Omniscient.Foundation.Data
         [Test]
         public void TestCreateNew()
         {
-            IEntity entity = new EntityMock();
+            IEntity<Guid> entity = new EntityMock();
             Assert.IsNotNull(entity.Id);
             Assert.AreNotEqual(Guid.Empty, entity.Id);
 
@@ -22,7 +22,7 @@ namespace Omniscient.Foundation.Data
         public void TestCreateExisting()
         {
             Guid id;
-            IEntity entity;
+            IEntity<Guid> entity;
 
             id = Guid.NewGuid();
             entity = new EntityMock(id, true);
