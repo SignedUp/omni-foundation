@@ -31,13 +31,12 @@ namespace Omniscient.Foundation.Security
         /// <param name="name">The name of the authenticated user.</param>
         /// <param name="password">The password used to authenticate the user.</param>
         /// <remarks>The password is allowed to be null.</remarks>
-        public SecureIdentity(string name, 
 #if SILVERLIGHT
-            string password
+        public SecureIdentity(string name, string password) : this(name, password, string.Empty) { }
 #else
-            SecureString password
+        public SecureIdentity(string name, SecureString password) : this(name, password, string.Empty) { }
 #endif
-            ) : this(name, password, string.Empty) { }
+            
         
         /// <summary>
         /// Creates an authenticated user with given name, password and authentication machanism.

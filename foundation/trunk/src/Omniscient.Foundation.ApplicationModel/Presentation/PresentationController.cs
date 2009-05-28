@@ -45,6 +45,22 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             }
         }
 
+        /// <summary>
+        /// Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
+        /// and displaying it correctly.
+        /// </summary>
+        /// <param name="models">The models to open.</param>
+        public void OpenView<TModel>(IEnumerable<TModel> models)
+            where TModel: IModel
+        {
+            IView view;
+            foreach (IViewController controller in _controllers)
+            {
+                view = controller.OpenView(models);
+                if (view != null) _openedViews.Add(view);
+            }
+        }
+
         public void CloseAllViews()
         {
             foreach (IViewController vc in _controllers)

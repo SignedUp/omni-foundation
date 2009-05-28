@@ -23,6 +23,14 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         IView OpenView(IModel model);
 
         /// <summary>
+        /// Opens a view for the given list of models.
+        /// </summary>
+        /// <param name="model">Models to open in a view.</param>
+        /// <returns>Newly opened view.</returns>
+        IView OpenView<TModel>(IEnumerable<TModel> models)
+            where TModel : IModel;
+
+        /// <summary>
         /// Returns the view that has the focus, or by any other mean is the "current view".
         /// </summary>
         IView CurrentView { get; set; }

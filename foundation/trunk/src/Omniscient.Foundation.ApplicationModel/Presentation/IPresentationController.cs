@@ -17,6 +17,14 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         void OpenView(IModel model);
 
         /// <summary>
+        /// Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
+        /// and displaying it correctly.
+        /// </summary>
+        /// <param name="model">The models to open.</param>
+        void OpenView<TModel>(IEnumerable<TModel> models)
+            where TModel : IModel;
+
+        /// <summary>
         /// Informs the controller that a view has been closed.
         /// </summary>
         /// <param name="view">The view that's been closed.</param>
@@ -33,7 +41,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         /// <typeparam name="ViewControllerType">The type of the view controller to look for.</typeparam>
         /// <returns>An <c>IViewController</c> if found.  Otherwise, null.</returns>
-        ViewControllerType GetViewController<ViewControllerType>() where ViewControllerType : IViewController;
+        ViewControllerType GetViewController<ViewControllerType>() 
+            where ViewControllerType : IViewController;
 
 
         /// <summary>
@@ -56,7 +65,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         /// <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
         /// <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
-        PresenterType GetPresenter<PresenterType>() where PresenterType : IPresenter;
+        PresenterType GetPresenter<PresenterType>() 
+            where PresenterType : IPresenter;
 
         /// <summary>
         /// Gets a value indicating wheter this presentation controller supports user input.
