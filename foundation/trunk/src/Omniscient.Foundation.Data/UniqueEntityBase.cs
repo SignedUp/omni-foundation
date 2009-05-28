@@ -85,8 +85,8 @@ namespace Omniscient.Foundation.Data
         /// <returns>True if the entities' Id are equal.  Otherwise, false.</returns>
         public static bool operator ==(UniqueEntityBase left, UniqueEntityBase right)
         {
-            if (left == null && right == null) return true;
-            if (left == null || right == null) return false;
+            if ((object)left == null && (object)right == null) return true;
+            if ((object)left == null || (object)right == null) return false;
             return (left.Id == right.Id);
         }
 
@@ -98,8 +98,8 @@ namespace Omniscient.Foundation.Data
         /// <returns>True if the entities' Id are different.  Otherwise, false.</returns>
         public static bool operator !=(UniqueEntityBase left, UniqueEntityBase right)
         {
-            if (left == null && right == null) return true;
-            if (left == null || right == null) return false;
+            if ((object)left == null && (object)right == null) return true;
+            if ((object)left == null || (object)right == null) return false;
             return (left.Id != right.Id);
         }
 
