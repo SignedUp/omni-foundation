@@ -80,6 +80,7 @@
     <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
     <Compile Include="Presentation\Navigation\IViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\ViewNavigatorBase.cs" />
+    <Compile Include="Presentation\NotifyEntityModelBase.cs" />
     <Compile Include="Presentation\PresentationController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticApplicationContext.cs">

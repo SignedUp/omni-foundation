@@ -75,6 +75,7 @@
     <Compile Include="Presentation\Navigation\ForwardsClosingViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\IViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\ViewNavigatorBase.cs" />
+    <Compile Include="Presentation\NotifyEntityModelBase.cs" />
     <Compile Include="Presentation\PresentationController.cs" />
     <Compile Include="Presentation\IPresentationController.cs" />
     <Compile Include="Presentation\IModel.cs" />
