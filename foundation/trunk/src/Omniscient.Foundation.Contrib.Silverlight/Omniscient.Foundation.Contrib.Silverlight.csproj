@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CommandControls\Button.cs" />
     <Compile Include="Commanding\CommandBase.cs" />
+    <Compile Include="Commanding\DelegateCommand.cs" />
     <Compile Include="Dialogs\ButtonLayout.cs" />
     <Compile Include="Dialogs\Dialog.cs" />
     <Compile Include="Dialogs\DialogBase.cs" />
@@ -107,9 +108,9 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PostBuildEvent>if not exist $(SolutionDir)deploy mkdir $(SolutionDir)deploy
-if not exist $(SolutionDir)deploy\$(ConfigurationName) mkdir $(SolutionDir)deploy\$(ConfigurationName)
-if exist $(TargetName).dll copy /Y $(TargetName).dll $(SolutionDir)deploy\$(ConfigurationName)
-if exist $(TargetName).xml copy /Y $(TargetName).xml $(SolutionDir)deploy\$(ConfigurationName)
-if exist $(TargetName).pdb copy /Y $(TargetName).pdb $(SolutionDir)deploy\$(ConfigurationName)</PostBuildEvent>
+if not exist $(SolutionDir)deploy\$(ConfigurationName)-silver mkdir $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).dll copy /Y $(TargetName).dll $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).xml copy /Y $(TargetName).xml $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).pdb copy /Y $(TargetName).pdb $(SolutionDir)deploy\$(ConfigurationName)-silver</PostBuildEvent>
   </PropertyGroup>
 </Project>

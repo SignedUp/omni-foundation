@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commanding\TestTransitiveCommand.cs" />
     <Compile Include="Logging\LogEntryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecurePrincipalTest.cs" />
@@ -69,6 +68,9 @@
       <Project>{7CA4BEA5-AF23-4197-BD4E-74F431583976}</Project>
       <Name>Omniscient.Foundation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commanding\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
