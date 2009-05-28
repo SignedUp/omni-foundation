@@ -4,23 +4,11 @@ using System;
 
 namespace Omniscient.Foundation.Contrib.Silverlight.Commanding
 {
-    public class CommandBase: ICommandCore, ICommand
+    /// <summary>
+    /// This is a <see cref="Omniscient.Foundation.Commanding.CommandBase"/> that implements
+    /// the <see cref="ICommand"/> Silverlight interface, in order to be compatible with Silverlight.
+    /// </summary>
+    public abstract class CommandBase : Omniscient.Foundation.Commanding.CommandBase, ICommand
     {
-        public event EventHandler CanExecuteChanged;
-
-        public virtual bool CanExecute(object param)
-        {
-            return true;
-        }
-
-        public virtual void Execute(object param)
-        {
-            //nop
-        }
-
-        public virtual string Name
-        {
-            get { return this.GetType().Name; }
-        }
     }
 }
