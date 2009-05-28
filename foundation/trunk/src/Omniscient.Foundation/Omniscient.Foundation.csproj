@@ -53,11 +53,9 @@
     <Compile Include="ApplicationModel\IStartable.cs" />
     <Compile Include="Commanding\CommandBase.cs" />
     <Compile Include="Commanding\CompositeCommand.cs" />
-    <Compile Include="Commanding\DelegateCommandHandler.cs" />
+    <Compile Include="Commanding\DelegateCommand.cs" />
     <Compile Include="Commanding\ICommandCore.cs" />
-    <Compile Include="Commanding\ICommandHandler.cs" />
     <Compile Include="Commanding\ICommandStore.cs" />
-    <Compile Include="Commanding\TransitiveCommand.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="INamed.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -70,6 +68,8 @@
     <Compile Include="Logging\TextLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CredentialService.cs" />
+    <Compile Include="Security\IAuthenticationService.cs" />
+    <Compile Include="Security\IAuthorizationService.cs" />
     <Compile Include="Security\ICredentialService.cs" />
     <Compile Include="Security\ICredentialServiceExtender.cs" />
     <Compile Include="Security\IRoleProvider.cs" />
