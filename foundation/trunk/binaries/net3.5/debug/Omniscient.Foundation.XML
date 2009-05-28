@@ -167,11 +167,12 @@
         </member>
         <member name="M:Omniscient.Foundation.Security.CredentialService.EnsureUserIsAuthenticated">
             <summary>
-            Ensures the user has entered login information.
+            Ensures the user has entered login information, using extenders.  Only the first extender will be used.
             </summary>
             <remarks>
             If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
             </remarks>
+            <exception cref="T:System.Security.SecurityException">Thrown if the extender is unable to authenticate the user.</exception>
         </member>
         <member name="M:Omniscient.Foundation.Security.CredentialService.Start">
             <summary>
@@ -444,6 +445,66 @@
             Gets the name of the user represented by this Identity.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Commanding.DelegateCommand">
+            <summary>
+            Command that delegates the execution of Execute and CanExecute
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
+            <summary>
+            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
+            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
+            created because we don't believe that commands should be limited to environments with a user interface.
+            </summary>
+            <remarks>
+            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
+            the members signatures are identical, you don't need to replicate any code; each member's implementation
+            will handle the member from both interfaces automatically.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
+            <summary>
+            Retreives a value that indicates whether or not the command is in a state that allows execution.
+            </summary>
+            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
+            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
+            <summary>
+            Executes the command
+            </summary>
+            <param name="param">Any value needed for execution.</param>
+        </member>
+        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
+            <summary>
+            Raised when the command's availability changes.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.ICommandCore.Name">
+            <summary>
+            Gets the name of the command.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Constructs a command that delegates the execution of Execute and CanExecute
+            </summary>
+            <param name="executeAction">Action to call when executing Execute</param>
+            <param name="canExecuteFunc">Function to call when executing CanExecute</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.CanExecute(System.Object)">
+            <summary>
+            Returns true if the command can be executed.  Otherwise, false.
+            </summary>
+            <param name="param">The param that will be passed to Execute.</param>
+            <returns>True if the command can be executed.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.Execute(System.Object)">
+            <summary>
+            Executes the command.  Returns without executing the command if a call to CanExecute returns false.
+            </summary>
+            <param name="param">The param passed to the executing command.</param>
+        </member>
         <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
             <summary>
             Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
@@ -489,6 +550,30 @@
             <summary>
             Gets the <c>SecureIdentity</c> of that principal.
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.IAuthenticationService">
+            <summary>
+            Authenticates a user based on a username (the identifier) and a password.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Promote(Omniscient.Foundation.Security.SecureIdentity,System.String,System.String)">
+            <summary>
+            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object by authenticating the 
+            username and password.
+            </summary>
+            <param name="identity">An existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object.</param>
+            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
+            Can be empty (anonymous).</param>
+            <param name="password">A password to validate.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Authenticate(System.String,System.String)">
+            <summary>
+            Authenticates the username and password and returns a new <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.
+            </summary>
+            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
+            Can be empty (anonymous).</param>
+            <param name="password">A password to validate.</param>
+            <returns>An authenticated user, or anonymous if the username was empty.</returns>
         </member>
         <member name="T:Omniscient.Foundation.Logging.ILogger">
             <summary>
@@ -573,45 +658,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Omniscient.Foundation.INamed">
+            <summary>
+            Represents something that is identifiable by a Name.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.INamed.Name">
+            <summary>
+            Gets or sets the name of this Named item.  Can be unique, or not 
+            (this is not part of the contract; to be specified by concrete types)
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
             <summary>
             Defines a composite command.  When executed, a composite command is executing all its children commands.  
             See <see cref="T:Omniscient.Foundation.Commanding.CompositeCommand"/> for default implementation.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
-            <summary>
-            Interface that represents a command.  The event CanExecuteChanged has been simplified so that this 
-            interface is identical to the one contained in WPF (PresentationCore.dll).  ICommandCore has been 
-            created because we don't believe that commands should be limited to environments with a user interface.
-            </summary>
-            <remarks>
-            Your command can easily implement both interfaces to be able to leverage WPF's functionalities.  Since
-            the members signatures are identical, you don't need to replicate any code; each member's implementation
-            will handle the member from both interfaces automatically.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.CanExecute(System.Object)">
-            <summary>
-            Retreives a value that indicates whether or not the command is in a state that allows execution.
-            </summary>
-            <param name="param">This is the param that would be passed to <see cref="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)"/> method.</param>
-            <returns>True if the command is in a state that allows execution; otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandCore.Execute(System.Object)">
-            <summary>
-            Executes the command
-            </summary>
-            <param name="param">Any value needed for execution.</param>
-        </member>
-        <member name="E:Omniscient.Foundation.Commanding.ICommandCore.CanExecuteChanged">
-            <summary>
-            Raised when the command's availability changes.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Commanding.ICommandCore.Name">
-            <summary>
-            Gets the name of the command.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Commanding.CompositeCommand">
@@ -651,30 +712,6 @@
             <summary>
             Gets the name of the command.
             </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICommandHandler">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.ICommandHandler.Execute(System.Object)">
-            <summary>
-            </summary>
-            <param name="param"></param>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.DelegateCommandHandler">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.#ctor(System.Action{System.Object})">
-            <summary>
-            </summary>
-            <param name="executeMethod"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommandHandler.Execute(System.Object)">
-            <summary>
-            </summary>
-            <param name="param"></param>
         </member>
         <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtender">
             <summary>
@@ -745,34 +782,42 @@
             <param name="username"></param>
             <returns></returns>
         </member>
-        <member name="T:Omniscient.Foundation.Commanding.TransitiveCommand">
+        <member name="T:Omniscient.Foundation.Security.IAuthorizationService">
             <summary>
+            Authorizes a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object by promoting it with roles.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.#ctor">
+        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Promote(Omniscient.Foundation.Security.SecurePrincipal)">
             <summary>
+            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object with roles.
+            </summary>
+            <param name="principal">Principal object to promote with roles.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Authorize(Omniscient.Foundation.Security.SecureIdentity)">
+            <summary>
+            Authorizes a Principal with roles and returns it as a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/>.
+            </summary>
+            <param name="identity">The Identity used by the new Principal.</param>
+            <returns>A Principal with roles.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Patterns.IListWrapper`1" -->
+        <member name="T:Omniscient.Foundation.Patterns.IObjectWrapper`1">
+            <summary>
+            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
+            </summary>
+            <typeparam name="T">the type of object to wrap.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Patterns.IObjectWrapper`1.Adapt">
+            <summary>
+            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
+            adaptation is allowed (or possible).
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.RegisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
+        <member name="M:Omniscient.Foundation.Patterns.IObjectWrapper`1.Wrap(`0)">
             <summary>
+            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
             </summary>
-            <param name="handler"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.TransitiveCommand.UnregisterHandler(Omniscient.Foundation.Commanding.ICommandHandler)">
-            <summary>
-            </summary>
-            <param name="handler"></param>
-        </member>
-        <member name="T:Omniscient.Foundation.INamed">
-            <summary>
-            Represents something that is identifiable by a Name.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.INamed.Name">
-            <summary>
-            Gets or sets the name of this Named item.  Can be unique, or not 
-            (this is not part of the contract; to be specified by concrete types)
-            </summary>
+            <param name="item">The item to wrap.</param>
         </member>
     </members>
 </doc>

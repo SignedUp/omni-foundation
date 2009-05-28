@@ -128,6 +128,13 @@
             <param name="model">Model to open in a view.</param>
             <returns>Newly opened view.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.OpenView``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Opens a view for the given list of models.
+            </summary>
+            <param name="model">Models to open in a view.</param>
+            <returns>Newly opened view.</returns>
+        </member>
         <member name="E:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.CurrentViewChanged">
             <summary>
             Raised when the user switches the current view.
@@ -338,8 +345,7 @@
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
             <summary>
-            Represents a model.  Models are logical wrappers around entities; they define relations between entities
-            and are responsible for managing the state and status of entities.
+            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
@@ -350,6 +356,11 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject.Text">
             <summary>
             Gets or sets the text displayed on the screen for that object.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule">
+            <summary>
+             An application module is 
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
@@ -370,6 +381,31 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ModulesConfiguration">
             <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
+            <summary>
+            Represents a view in the Model-View-Controller, Model-View-Presenter or Model-View-ViewModel patterns.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IView.UpdateView">
+            <summary>
+            Called when the view has to refresh itself.
+            </summary>
+        </member>
+        <member name="E:Omniscient.Foundation.ApplicationModel.Presentation.IView.SelectionChanged">
+            <summary>
+            Raised when the selected item changed inside the current view.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Title">
+            <summary>
+            Gets or sets the view's title.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Selection">
+            <summary>
+            Gets an object that is currently selected by the user.  Works in pair with ViewContextChangedEventHandler.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.SelectionChangedEventHandler">
@@ -401,38 +437,6 @@
             </summary>
             <param name="view">The view that raises the event</param>
             <param name="selection">The object being selected in the view</param>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
-            <summary>
-            Represents a view.
-            
-            Views are responsible for displaying <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel"/> objects to the UI.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IView.UpdateView">
-            <summary>
-            Called when the Model is modified from the outside of the View (probably in another view).
-            </summary>
-        </member>
-        <member name="E:Omniscient.Foundation.ApplicationModel.Presentation.IView.SelectionChanged">
-            <summary>
-            Raised when the selected item changed inside the current view.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Model">
-            <summary>
-            Gets or sets the Model.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Title">
-            <summary>
-            Gets or sets the view's title.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IView.Selection">
-            <summary>
-            Gets an object that is currently selected by the user.  Works in pair with ViewContextChangedEventHandler.
-            </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
             <summary>
@@ -497,11 +501,6 @@
             </summary>
             <returns>The list of created presenters.</returns>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ModelBase`1">
-            <summary>
-            Base class for models.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
             <summary>
             Placeholder for a service definition.
@@ -561,11 +560,6 @@
             value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule">
-            <summary>
-             An application module is 
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
             <summary>
             Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
@@ -577,6 +571,13 @@
             and displaying it correctly.
             </summary>
             <param name="model">The model to open.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="model">The models to open.</param>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
             <summary>
@@ -652,11 +653,35 @@
             </summary>
             <param name="model">The model to open.</param>
         </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="models">The models to open.</param>
+        </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
             <summary>
             Informs the controller that a view has been closed.
             </summary>
             <param name="view">The view that's been closed.</param>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
+            <summary>
+            Base class for models.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel`1">
+            <summary>
+            Represents a model.  Models are logical wrappers around entities; they define relations between entities
+            and are responsible for managing the state and status of entities.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel">
+            <summary>
+            Represents a model.  Models are logical wrappers around entities; they define relations between entities
+            and are responsible for managing the state and status of entities.
+            </summary>
         </member>
     </members>
 </doc>
