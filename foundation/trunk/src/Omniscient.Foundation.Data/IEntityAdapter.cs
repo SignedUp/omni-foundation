@@ -16,19 +16,11 @@ namespace Omniscient.Foundation.Data
     [ServiceContract]
     public interface IEntityAdapter<TEntity> where TEntity: IEntity
     {
-        /// <summary>
-        /// Retrieves an entity from the database by unique id.
-        /// </summary>
-        /// <param name="id">The unique id of the entity that is sought.</param>
-        /// <returns>Returns the entity if found; Otherwise, returns Null.</returns>
-        [OperationContract]
-        TEntity LoadByKey(Guid id);
-
         ///<summary>
         ///</summary>
         ///<returns></returns>
         [OperationContract]
-        IList<TEntity> LoadAll();
+        IList<TEntity> Load();
 
         /// <summary>
         /// Saves the entity.  Executes different queries based on the <see cref="EntityStatus"/> of the entity.

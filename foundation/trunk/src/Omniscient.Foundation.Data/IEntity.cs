@@ -13,14 +13,19 @@ namespace Omniscient.Foundation.Data
         EntityStatus Status { get; set; }
         
         /// <summary>
-        /// The Id is the surrogate key of the entity in the database.
-        /// </summary>
-        Guid Id { get; }
-        
-        /// <summary>
         /// Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
         /// </summary>
         /// <param name="target">The entity to copy values to.</param>
         void CopyTo(IEntity target);
+    }
+
+    public interface IEntity<TId> : IEntity
+    {
+        /// <summary>
+        /// Gets an id that uniquely represents an entity in a given space.  For example, and IEntity&lt;Guid&gt;
+        /// will be unique in the universe, while an IEntity&lt;long&gt; will probably be unique amongst other
+        /// entities of the same type.
+        /// </summary>
+        TId Id { get; }
     }
 }

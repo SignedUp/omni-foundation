@@ -202,7 +202,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
     #region Models
 
-    public class ClientInvoicesModel : ModelBase<Client>
+    public class ClientInvoicesModel : EntityModelBase<Client>
     {
         private Client _client;
 
@@ -252,18 +252,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         {
             add { throw new NotImplementedException(); }
             remove { throw new NotImplementedException(); }
-        }
-
-        IModel IView.Model
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         void IView.UpdateView()

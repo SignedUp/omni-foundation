@@ -1,22 +1,28 @@
 ﻿using System;
 using Omniscient.Foundation.Data;
 using System.Collections.Generic;
+using Omniscient.Foundation.Patterns;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     /// <summary>
     /// Base class for models.
     /// </summary>
-    public abstract class ModelBase<TEntity>: IModel<TEntity>
+    public abstract class EntityModelBase<TEntity>: IEntityModel<TEntity>
         where TEntity: IEntity, new()
     {
         private TEntity _clone;
-        private List<string> _changedProperties;
 
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged = delegate { };
+        public EntityModelBase() { }
 
-        public ModelBase(TEntity entity)
+        public EntityModelBase(TEntity entity)
         {
+            Entity = entity;
+        }
+
+        public void Wrap(TEntity entity)
+        {
+            if (Entity != null) throw new InvalidOperationException("An entity is already wrapped.");
             Entity = entity;
         }
 
@@ -26,9 +32,9 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             private set;
         }
 
-        IEntity IModel.Entity
+        public TEntity Adapt()
         {
-            get { return Entity; }
+            return default(TEntity);
         }
 
         public EntityStatus EntityStatus
@@ -44,7 +50,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
                 throw new InvalidOperationException("Invalid entity status for this operation.");
 
             _clone = OnGetClone();
-            _changedProperties = new List<string>();
         }
 
         protected virtual TEntity OnGetClone()
@@ -62,30 +67,12 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             if (acceptChanges)
             {
                 if (EntityStatus == EntityStatus.Clean) Entity.Status = EntityStatus.Dirty;
-                _changedProperties.ForEach(propertyName => RaisePropertyChanged(propertyName));
             }
             else
             {
                 OnRecopyOriginalValues();
             }
             _clone = default(TEntity);
-        }
-
-        protected virtual void OnValueChanged(string propertyName)
-        {
-            if (IsBeingEdited)
-            {
-                _changedProperties.Add(propertyName);
-            }
-            else
-            {
-                RaisePropertyChanged(propertyName);
-            }
-        }
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
         }
 
         protected virtual void OnRecopyOriginalValues()

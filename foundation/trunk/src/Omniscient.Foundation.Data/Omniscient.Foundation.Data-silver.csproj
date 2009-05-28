@@ -49,16 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityBase.cs" />
-    <Compile Include="EntityController.cs" />
     <Compile Include="EntityStatus.cs" />
+    <Compile Include="FriendlyNameAttribute.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityAdapter.cs" />
-    <Compile Include="IEntityController.cs" />
-    <Compile Include="IEntityModificationObserver.cs" />
-    <Compile Include="ILookup.cs" />
-    <Compile Include="ILookupAdapter.cs" />
-    <Compile Include="InvalidOperationForStatusException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemPropertyAttribute.cs" />
+    <Compile Include="UniqueEntityBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation-silver.csproj">

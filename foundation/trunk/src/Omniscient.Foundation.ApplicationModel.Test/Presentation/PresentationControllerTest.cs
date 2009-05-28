@@ -11,8 +11,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         IPresentationController _controller;
         SidePanelViewControllerMock _sideController;
         MainViewControllerMock _mainController;
-        EntityController<Client> _clientController;
-        EntityController<Invoice> _invoiceController;
         IEntityAdapter<Client> _clientAdapter;
         IEntityAdapter<Invoice> _invoiceAdapter;
 
@@ -46,7 +44,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             _controller.OpenView(model);
 
             Assert.IsNotNull(_mainController.CurrentView);
-            Assert.AreEqual(client, ((ModelBase<Client>)_mainController.CurrentView.Model).Entity);
         }
 
         [Test]
