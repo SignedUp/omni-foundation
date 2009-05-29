@@ -20,6 +20,29 @@
             </summary>
             <returns>A database connection</returns>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IEntity">
+            <summary>
+            Represents an entity.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.IEntity.Status">
+            <summary>
+            Gets or sets the status of the entity.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.IEntity`1.Id">
+            <summary>
+            Gets an id that uniquely represents an entity in a given space.  For example, and IEntity&lt;Guid&gt;
+            will be unique in the universe, while an IEntity&lt;long&gt; will probably be unique amongst other
+            entities of the same type.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.RelationMarker">
             <summary>
             An equality or inequality marker.
@@ -340,22 +363,6 @@
             Base class for entities.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Data.IEntity">
-            <summary>
-            Represents an entity.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity)">
-            <summary>
-            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
-            </summary>
-            <param name="target">The entity to copy values to.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.IEntity.Status">
-            <summary>
-            Gets or sets the status of the entity.
-            </summary>
-        </member>
         <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor">
             <summary>
             Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, and a brand new Id.
@@ -391,13 +398,6 @@
         <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.Or">
             <summary>
             Logical OR.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.IEntity`1.Id">
-            <summary>
-            Gets an id that uniquely represents an entity in a given space.  For example, and IEntity&lt;Guid&gt;
-            will be unique in the universe, while an IEntity&lt;long&gt; will probably be unique amongst other
-            entities of the same type.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.UniqueEntityBase">

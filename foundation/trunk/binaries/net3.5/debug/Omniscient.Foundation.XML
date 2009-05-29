@@ -800,20 +800,20 @@
             <param name="identity">The Identity used by the new Principal.</param>
             <returns>A Principal with roles.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Patterns.IListWrapper`1" -->
-        <member name="T:Omniscient.Foundation.Patterns.IObjectWrapper`1">
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
+        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
             <summary>
             Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
             </summary>
             <typeparam name="T">the type of object to wrap.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.Patterns.IObjectWrapper`1.Adapt">
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
             <summary>
             Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
             adaptation is allowed (or possible).
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Patterns.IObjectWrapper`1.Wrap(`0)">
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
             <summary>
             Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
             </summary>
