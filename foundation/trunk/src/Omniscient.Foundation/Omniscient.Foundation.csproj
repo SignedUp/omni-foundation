@@ -57,9 +57,9 @@
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandStore.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Patterns\IListWrapper.cs" />
+    <Compile Include="ApplicationModel\IListWrapper.cs" />
     <Compile Include="INamed.cs" />
-    <Compile Include="Patterns\IObjectWrapper.cs" />
+    <Compile Include="ApplicationModel\IObjectWrapper.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="ApplicationModel\IExtendable.cs" />
     <Compile Include="ApplicationModel\IExtender.cs" />

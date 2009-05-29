@@ -8,8 +8,8 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         where TEntity : IEntity, new()
     {
         private List<string> _changedProperties;
-    
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public NotifyEntityModelBase()
             : base() { }

@@ -1,4 +1,4 @@
-﻿namespace Omniscient.Foundation.Patterns
+﻿namespace Omniscient.Foundation.ApplicationModel
 {
     /// <summary>
     /// Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.

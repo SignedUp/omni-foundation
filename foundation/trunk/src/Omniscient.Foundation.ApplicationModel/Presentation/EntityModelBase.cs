@@ -1,7 +1,7 @@
 ﻿using System;
 using Omniscient.Foundation.Data;
 using System.Collections.Generic;
-using Omniscient.Foundation.Patterns;
+using Omniscient.Foundation.ApplicationModel;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
