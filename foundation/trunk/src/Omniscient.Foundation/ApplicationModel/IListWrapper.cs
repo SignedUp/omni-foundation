@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Omniscient.Foundation.Patterns
+namespace Omniscient.Foundation.ApplicationModel
 {
     /// <summary>
     /// Represents a special <see cref="IObjectWrapper<T>"/> that is specialized on wrapping lists.

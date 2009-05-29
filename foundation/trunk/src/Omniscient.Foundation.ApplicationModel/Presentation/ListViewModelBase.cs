@@ -20,8 +20,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             if (Original != null) throw new InvalidOperationException("Models already wrapped.");
 
             Original = item;
-            foreach (TModel model in item)
-                this.Add(model);
         }
 
         #endregion
