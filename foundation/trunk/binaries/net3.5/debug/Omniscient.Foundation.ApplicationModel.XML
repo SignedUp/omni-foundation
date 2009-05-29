@@ -453,6 +453,17 @@
             <param name="section"></param>
             <returns>A deserialized configuration.</returns>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
+            <summary>
+            Base class for models.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel`1">
+            <summary>
+            Represents a model.  Models are logical wrappers around entities; they define relations between entities
+            and are responsible for managing the state and status of entities.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition">
             <summary>
             </summary>
@@ -500,6 +511,12 @@
             The shell does not have to keep a reference to those presenters.
             </summary>
             <returns>The list of created presenters.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel">
+            <summary>
+            Represents a model.  Models are logical wrappers around entities; they define relations between entities
+            and are responsible for managing the state and status of entities.
+            </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
             <summary>
@@ -665,23 +682,6 @@
             Informs the controller that a view has been closed.
             </summary>
             <param name="view">The view that's been closed.</param>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
-            <summary>
-            Base class for models.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel`1">
-            <summary>
-            Represents a model.  Models are logical wrappers around entities; they define relations between entities
-            and are responsible for managing the state and status of entities.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel">
-            <summary>
-            Represents a model.  Models are logical wrappers around entities; they define relations between entities
-            and are responsible for managing the state and status of entities.
-            </summary>
         </member>
     </members>
 </doc>
