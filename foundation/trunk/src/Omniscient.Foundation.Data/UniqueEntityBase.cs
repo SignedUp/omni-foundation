@@ -14,17 +14,21 @@ namespace Omniscient.Foundation.Data
     public class UniqueEntityBase : EntityBase, IEntity<Guid>
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="UniqueEntityBase"/> class. 
         /// Creates an entity with the status <see cref="EntityStatus.New"/>, and a brand new Id.
         /// </summary>
         public UniqueEntityBase()
+            : this(Guid.NewGuid())
         {
-            Id = Guid.NewGuid();
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="UniqueEntityBase"/> class. 
         /// Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
         /// </summary>
-        /// <param name="id">Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/>.</param>
+        /// <param name="id">
+        /// Id must correspond to what's in the database.  Entity is assigned status <see cref="EntityStatus.Clean"/>.
+        /// </param>
         public UniqueEntityBase(Guid id)
         {
             Status = EntityStatus.Clean;
@@ -32,23 +36,40 @@ namespace Omniscient.Foundation.Data
         }
 
         /// <summary>
-        /// Gets or sets the Status.
+        /// Gets or sets the Id.
         /// </summary>
         [DataMember]
-        public EntityStatus Status
+        [SystemProperty]
+        public Guid Id
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Gets or sets the Id.  Setting the id is possible only when Status == <see cref="EntityStatus.NotLoadedYet" />.
+        /// Compares two entities based on their Id.  Returns true if both Id are equal.
         /// </summary>
-        [DataMember]
-        public Guid Id
+        /// <param name="left">The first entity to compare.</param>
+        /// <param name="right">The second entity to compare.</param>
+        /// <returns>True if the entities' Id are equal.  Otherwise, false.</returns>
+        public static bool operator ==(UniqueEntityBase left, UniqueEntityBase right)
         {
-            get;
-            set;
+            if ((object)left == null && (object)right == null) return true;
+            if ((object)left == null || (object)right == null) return false;
+            return left.Id == right.Id;
+        }
+
+        /// <summary>
+        /// Compares two entities based on their Id.  Returns true if both Id are different.
+        /// </summary>
+        /// <param name="left">The first entity to compare.</param>
+        /// <param name="right">The second entity to compare.</param>
+        /// <returns>True if the entities' Id are different.  Otherwise, false.</returns>
+        public static bool operator !=(UniqueEntityBase left, UniqueEntityBase right)
+        {
+            if ((object)left == null && (object)right == null) return true;
+            if ((object)left == null || (object)right == null) return false;
+            return left.Id != right.Id;
         }
 
         /// <summary>
@@ -71,38 +92,11 @@ namespace Omniscient.Foundation.Data
         /// <returns>Returns True if the two entities have the same ID.</returns>
         public override bool Equals(object obj)
         {
-            UniqueEntityBase comp;
-            comp = obj as UniqueEntityBase;
-            if (comp == null) return false;
-            return Id.Equals(comp.Id);
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(UniqueEntityBase)) return false;
+            return Equals((UniqueEntityBase) obj);
         }
-
-        /// <summary>
-        /// Compares two entities based on their Id.  Returns true if both Id are equal.
-        /// </summary>
-        /// <param name="left">The first entity to compare.</param>
-        /// <param name="right">The second entity to compare.</param>
-        /// <returns>True if the entities' Id are equal.  Otherwise, false.</returns>
-        public static bool operator ==(UniqueEntityBase left, UniqueEntityBase right)
-        {
-            if ((object)left == null && (object)right == null) return true;
-            if ((object)left == null || (object)right == null) return false;
-            return (left.Id == right.Id);
-        }
-
-        /// <summary>
-        /// Compares two entities based on their Id.  Returns true if both Id are different.
-        /// </summary>
-        /// <param name="left">The first entity to compare.</param>
-        /// <param name="right">The second entity to compare.</param>
-        /// <returns>True if the entities' Id are different.  Otherwise, false.</returns>
-        public static bool operator !=(UniqueEntityBase left, UniqueEntityBase right)
-        {
-            if ((object)left == null && (object)right == null) return true;
-            if ((object)left == null || (object)right == null) return false;
-            return (left.Id != right.Id);
-        }
-
 
         /// <summary>
         /// Returns a string representation of the Entity.
@@ -111,6 +105,34 @@ namespace Omniscient.Foundation.Data
         public override string ToString()
         {
             return string.Format("Entity type:{0} id:{1} status:{2}", this.GetType().Name, Id, Status);
+        }
+
+        /// <summary>
+        /// Compares two Entities based on their IDs.  Same as operator ==.
+        /// </summary>
+        /// <param name="obj">
+        /// The obj being compared.
+        /// </param>
+        /// <returns>
+        /// True if the entities' ID are equal; otherwise, false.
+        /// </returns>
+        public bool Equals(UniqueEntityBase obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.Id.Equals(Id);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for a particular type. 
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }

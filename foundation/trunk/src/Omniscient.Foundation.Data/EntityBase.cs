@@ -11,9 +11,10 @@ namespace Omniscient.Foundation.Data
 #if (!SILVERLIGHT)
     [Serializable]
 #endif
-    public class EntityBase: IEntity
+    public class EntityBase : IEntity
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="EntityBase"/> class. 
         /// Creates an entity with the status <see cref="EntityStatus.New"/>, and a brand new Id.
         /// </summary>
         public EntityBase()
@@ -25,6 +26,7 @@ namespace Omniscient.Foundation.Data
         /// Gets or sets the Status.
         /// </summary>
         [DataMember]
+        [SystemProperty]
         public EntityStatus Status
         {
             get;

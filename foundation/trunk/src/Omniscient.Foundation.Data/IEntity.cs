@@ -19,6 +19,12 @@ namespace Omniscient.Foundation.Data
         void CopyTo(IEntity target);
     }
 
+    /// <summary>
+    /// Generic IEntity interface of specify types
+    /// </summary>
+    /// <typeparam name="TId">
+    /// The primary Key type of your entity 
+    /// </typeparam>
     public interface IEntity<TId> : IEntity
     {
         /// <summary>
