@@ -2,15 +2,15 @@
 
 namespace Omniscient.Foundation.Data
 {
-    ///<summary>
+    /// <summary>
     /// Provides a database connection for DB access.
-    ///</summary>
+    /// </summary>
     public interface IConnectionProvider
     {
-        ///<summary>
+        /// <summary>
         /// Creates a database connection.
-        ///</summary>
-        ///<returns>A database connection</returns>
+        /// </summary>
+        /// <returns>A database connection</returns>
         IDbConnection CreateConnection();
     }
 }

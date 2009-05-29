@@ -4,7 +4,6 @@ using System.ServiceModel;
 
 namespace Omniscient.Foundation.Data
 {
-    
     /// <summary>
     /// Represents an adapter that manages a certain type of entities.  
     /// Responsible for connecting to the database, and executing queries.
@@ -14,11 +13,14 @@ namespace Omniscient.Foundation.Data
     /// </remarks>
     /// <typeparam name="TEntity">The type of entities to manage.</typeparam>
     [ServiceContract]
-    public interface IEntityAdapter<TEntity> where TEntity: IEntity
+    public interface IEntityAdapter<TEntity> where TEntity : IEntity
     {
-        ///<summary>
-        ///</summary>
-        ///<returns></returns>
+        /// <summary>
+        /// Loads a list of entities
+        /// </summary>
+        /// <returns>
+        /// Returns a list of entities
+        /// </returns>
         [OperationContract]
         IList<TEntity> Load();
 
@@ -29,11 +31,13 @@ namespace Omniscient.Foundation.Data
         [OperationContract]
         void Save(TEntity entity);
 
-        ///<summary>
-        ///</summary>
-        ///<param name="entities"></param>
+        /// <summary>
+        /// Save a list of entities to a data store
+        /// </summary>
+        /// <param name="entities">
+        /// The list of entities to save to the data store
+        /// </param>
         [OperationContract(Name = "SaveList")]
         void Save(IEnumerable<TEntity> entities);
-
     }
 }
