@@ -4,6 +4,19 @@
         <name>Omniscient.Foundation.Contrib.Wpf</name>
     </assembly>
     <members>
+        <member name="T:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu">
+            <summary>
+            Interaction logic for StandardCommandContextMenu.xaml
+            </summary>
+            <summary>
+            StandardCommandContextMenu
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Contrib.Wpf.NotifyIconPresenter">
             <summary>
             That presenter displays an icon in the notification area. Messages sent to the presenter are displayed in a balloon that floats
@@ -88,19 +101,6 @@
         <member name="P:Omniscient.Foundation.Contrib.Wpf.NotifyIconPresenter.RequiresUserInput">
             <summary>
             Returns True.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu">
-            <summary>
-            Interaction logic for StandardCommandContextMenu.xaml
-            </summary>
-            <summary>
-            StandardCommandContextMenu
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu.InitializeComponent">
-            <summary>
-            InitializeComponent
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Contrib.Wpf.Properties.Resources">
