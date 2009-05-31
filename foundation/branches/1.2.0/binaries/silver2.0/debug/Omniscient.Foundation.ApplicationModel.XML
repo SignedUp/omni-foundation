@@ -434,6 +434,11 @@
             <summary>
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
+            <summary>
+            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
             <summary>
             Base class for models.
@@ -443,11 +448,6 @@
             <summary>
             Represents a model.  Models are logical wrappers around entities; they define relations between entities
             and are responsible for managing the state and status of entities.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
-            <summary>
-            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
@@ -617,21 +617,6 @@
             and are responsible for managing the state and status of entities.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
-            <summary>
-            Section handler for "foundation.application" configuration section.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
-            <summary>
-            Standard implementation (see <see cref="T:System.Configuration.IConfigurationSectionHandler"/>).
-            </summary>
-            <seealso cref="T:System.Xml.Serialization.XmlSerializer"/>
-            <param name="parent"></param>
-            <param name="configContext"></param>
-            <param name="section"></param>
-            <returns>A deserialized configuration.</returns>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
             Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
@@ -651,6 +636,16 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ModulesConfiguration">
             <summary>
             </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract.GetView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
             <summary>
@@ -706,16 +701,6 @@
             </summary>
             <param name="view">The view that raises the event</param>
             <param name="selection">The object being selected in the view</param>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract.GetView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
-            <summary>
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController">
             <summary>

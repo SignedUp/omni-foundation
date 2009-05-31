@@ -4,23 +4,23 @@ using Omniscient.Foundation.ApplicationModel.Presentation;
 
 namespace Omniscient.Foundation.Contrib.Silverlight.Presentation
 {
-    public class NotifyViewModel<TModel>: IViewModel<TModel>, INotifyPropertyChanged
+    public class NotifyViewModel<TModel>: IViewModel, INotifyPropertyChanged
         where TModel: IModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public TModel Adapt()
+        public IModel Adapt()
         {
             return default(TModel);
         }
 
-        public void Wrap(TModel item)
+        public void Wrap(IModel item)
         {
             if (Original != null) throw new InvalidOperationException("Model already wrapped.");
             Original = item;
         }
 
-        protected TModel Original { get; set; }
+        protected IModel Original { get; set; }
 
         protected virtual void OnValueChanged(string propertyName)
         {
