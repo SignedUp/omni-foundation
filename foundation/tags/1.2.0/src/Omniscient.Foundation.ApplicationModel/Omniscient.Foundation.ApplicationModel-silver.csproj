@@ -1,0 +1,134 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B3CC0F91-5B24-43EB-A4D0-81356E87C1F3}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Omniscient.Foundation.ApplicationModel</RootNamespace>
+    <AssemblyName>Omniscient.Foundation.ApplicationModel</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>false</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\DebugSilver\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Bin\DebugSilver\Omniscient.Foundation.ApplicationModel.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ReleaseSilver\</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\silverlight\ninject\Ninject.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationManager.cs" />
+    <Compile Include="Configuration\ApplicationConfiguration.cs" />
+    <Compile Include="Configuration\ConfigManager.cs" />
+    <Compile Include="Configuration\ConnectionProvider.cs" />
+    <Compile Include="Configuration\ModuleDefinition.cs" />
+    <Compile Include="Configuration\ModulesConfiguration.cs" />
+    <Compile Include="Configuration\ServiceDefinition.cs" />
+    <Compile Include="Configuration\ServicesConfiguration.cs" />
+    <Compile Include="IApplicationContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modularity\ApplicationModuleBase.cs" />
+    <Compile Include="Modularity\ApplicationModuleManager.cs" />
+    <Compile Include="Modularity\IApplicationModule.cs" />
+    <Compile Include="Modularity\IApplicationModuleManager.cs" />
+    <Compile Include="Presentation\EntityModelBase.cs" />
+    <Compile Include="Presentation\IEntityListModel.cs" />
+    <Compile Include="Presentation\IEntityModel.cs" />
+    <Compile Include="Presentation\IListModel.cs" />
+    <Compile Include="Presentation\IListViewModel.cs" />
+    <Compile Include="Presentation\IViewModel.cs" />
+    <Compile Include="Presentation\ListViewModelBase.cs" />
+    <Compile Include="Presentation\Navigation\ForwardsClosingViewNavigator.cs" />
+    <Compile Include="Presentation\IModel.cs" />
+    <Compile Include="Presentation\IPresentableCommandObject.cs" />
+    <Compile Include="Presentation\IPresentableHierarchicalObject.cs" />
+    <Compile Include="Presentation\IPresentableObject.cs" />
+    <Compile Include="Presentation\IPresentationController.cs" />
+    <Compile Include="Presentation\IPresenter.cs" />
+    <Compile Include="Presentation\IShell.cs" />
+    <Compile Include="Presentation\IView.cs" />
+    <Compile Include="Presentation\IViewController.cs" />
+    <Compile Include="Presentation\IViewControllerExtenderContract.cs" />
+    <Compile Include="Presentation\Navigation\IViewNavigator.cs" />
+    <Compile Include="Presentation\Navigation\ViewNavigatorBase.cs" />
+    <Compile Include="Presentation\NotifyEntityModelBase.cs" />
+    <Compile Include="Presentation\PresentationController.cs" />
+    <Compile Include="Presentation\ViewControllerBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaticApplicationContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Omniscient.Foundation.Data\Omniscient.Foundation.Data-silver.csproj">
+      <Project>{CF22BC22-9DB1-476C-AC43-9F0229A9D6F2}</Project>
+      <Name>Omniscient.Foundation.Data-silver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omniscient.Foundation\Omniscient.Foundation-silver.csproj">
+      <Project>{880378CA-ED02-459E-9761-F2AA55CE4258}</Project>
+      <Name>Omniscient.Foundation-silver</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\ConfigSample.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Foundation.Application.xsd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(SolutionDir)deploy mkdir $(SolutionDir)deploy
+if not exist $(SolutionDir)deploy\$(ConfigurationName)-silver mkdir $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).dll copy /Y $(TargetName).dll $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).xml copy /Y $(TargetName).xml $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist $(TargetName).pdb copy /Y $(TargetName).pdb $(SolutionDir)deploy\$(ConfigurationName)-silver
+if exist ninject.core.dll copy /Y ninject.core.dll $(SolutionDir)deploy\$(ConfigurationName)-silver</PostBuildEvent>
+  </PropertyGroup>
+</Project>
