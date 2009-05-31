@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Omniscient.Foundation.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Omniscient.Foundation.Data.SystemProperty">
+            <summary>
+            Determines if an object Property is for proper system functions rather than true Domain Driven behavior
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.IEntity">
+            <summary>
+            Represents an entity.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.IEntity.Status">
+            <summary>
+            Gets or sets the status of the entity.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.IEntity`1">
+            <summary>
+            Generic IEntity interface of specify types
+            </summary>
+            <typeparam name="TId">
+            The primary Key type of your entity 
+            </typeparam>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.IEntity`1.Id">
+            <summary>
+            Gets an id that uniquely represents an entity in a given space.  For example, and IEntity&lt;Guid&gt;
+            will be unique in the universe, while an IEntity&lt;long&gt; will probably be unique amongst other
+            entities of the same type.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.FriendlyNameAttribute">
+            <summary>
+            Provides an attribute to give a friendly name to a property to help in UI setup
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.FriendlyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.FriendlyNameAttribute"/> class.
+            </summary>
+            <param name="name">
+            The properties' friendly name.
+            </param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.FriendlyNameAttribute.Name">
+            <summary>
+            Gets or sets property friendly Name.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.EntityStatus">
+            <summary>
+            The status of an entity relative to its data store.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.New">
+            <summary>
+            The entity is new and doesn't exist yet in the data store.  The next save will result in the entity being created.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.Clean">
+            <summary>
+            The entity is loaded from the data store, and hasn't been modified since.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.Dirty">
+            <summary>
+            The entity is loaded from the data store, and has been modified since.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.ToBeDeleted">
+            <summary>
+            The entity will be deleted from the data store at the next commit.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.NonExistent">
+            <summary>
+            The entity doesn't exist in the database, and won't be created.  Basically, an entity in this state is dead.
+            Generally, an entity will be in this state after it's been marked as ToBeDeleted, and has been committed 
+            (effectively deleted from the datastore).
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.Clone">
+            <summary>
+            The entity exists solely to maintain the values of another entity from which it has been cloned.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
+            <summary>
+            Represents an adapter that manages a certain type of entities.  
+            Responsible for connecting to the database, and executing queries.
+            </summary>
+            <remarks>
+            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
+            </remarks>
+            <typeparam name="TEntity">The type of entities to manage.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Load">
+            <summary>
+            Loads a list of entities
+            </summary>
+            <returns>
+            Returns a list of entities
+            </returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
+            <summary>
+            Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
+            </summary>
+            <param name="entity">The entity to save.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Save a list of entities to a data store
+            </summary>
+            <param name="entities">
+            The list of entities to save to the data store
+            </param>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.EntityBase">
+            <summary>
+            Base class for entities.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.EntityBase"/> class. 
+            Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, and a brand new Id.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.ToString">
+            <summary>
+            Returns a string representation of the Entity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.EntityBase.Status">
+            <summary>
+            Gets or sets the Status.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.UniqueEntityBase">
+            <summary>
+            Base class for unique entities.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.UniqueEntityBase"/> class. 
+            Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, and a brand new Id.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.#ctor(System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.UniqueEntityBase"/> class. 
+            Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
+            </summary>
+            <param name="id">
+            Id must correspond to what's in the database.  Entity is assigned status <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            </param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.op_Equality(Omniscient.Foundation.Data.UniqueEntityBase,Omniscient.Foundation.Data.UniqueEntityBase)">
+            <summary>
+            Compares two entities based on their Id.  Returns true if both Id are equal.
+            </summary>
+            <param name="left">The first entity to compare.</param>
+            <param name="right">The second entity to compare.</param>
+            <returns>True if the entities' Id are equal.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.op_Inequality(Omniscient.Foundation.Data.UniqueEntityBase,Omniscient.Foundation.Data.UniqueEntityBase)">
+            <summary>
+            Compares two entities based on their Id.  Returns true if both Id are different.
+            </summary>
+            <param name="left">The first entity to compare.</param>
+            <param name="right">The second entity to compare.</param>
+            <returns>True if the entities' Id are different.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.Equals(System.Object)">
+            <summary>
+            Compares two Entities based on their IDs.  Same as operator ==.
+            </summary>
+            <param name="obj">The Entity to compare with.</param>
+            <returns>Returns True if the two entities have the same ID.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.ToString">
+            <summary>
+            Returns a string representation of the Entity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.Equals(Omniscient.Foundation.Data.UniqueEntityBase)">
+            <summary>
+            Compares two Entities based on their IDs.  Same as operator ==.
+            </summary>
+            <param name="obj">
+            The obj being compared.
+            </param>
+            <returns>
+            True if the entities' ID are equal; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object" />.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.UniqueEntityBase.Id">
+            <summary>
+            Gets or sets the Id.
+            </summary>
+        </member>
+    </members>
+</doc>

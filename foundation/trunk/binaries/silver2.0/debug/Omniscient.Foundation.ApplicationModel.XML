@@ -363,11 +363,6 @@
             Gets the total number of loaded modules.  Decreases when unloading modules.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
-            <summary>
-            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
             <summary>
             Represents an object that has a Text property to be displayed on the UI.
@@ -376,6 +371,11 @@
         <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject.Text">
             <summary>
             Gets or sets the text displayed on the screen for that object.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
+            <summary>
+            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule">
@@ -457,21 +457,6 @@
             </summary>
             <param name="view">The view that raises the event</param>
             <param name="selection">The object being selected in the view</param>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler">
-            <summary>
-            Section handler for "foundation.application" configuration section.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
-            <summary>
-            Standard implementation (see <see cref="T:System.Configuration.IConfigurationSectionHandler"/>).
-            </summary>
-            <seealso cref="T:System.Xml.Serialization.XmlSerializer"/>
-            <param name="parent"></param>
-            <param name="configContext"></param>
-            <param name="section"></param>
-            <returns>A deserialized configuration.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
             <summary>
