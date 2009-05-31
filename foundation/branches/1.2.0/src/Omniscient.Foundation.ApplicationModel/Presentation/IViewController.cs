@@ -25,7 +25,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <summary>
         /// Opens a view for the given list of models.
         /// </summary>
-        /// <param name="model">Models to open in a view.</param>
+        /// <param name="models">Models to open in a view.</param>
         /// <returns>Newly opened view.</returns>
         IView OpenView<TModel>(IList<TModel> models)
             where TModel : IModel;
@@ -35,8 +35,24 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         IView CurrentView { get; set; }
 
+        /// <summary>
+        /// Puts a certain view into focus, given that this view is already opened by the controller.
+        /// </summary>
+        /// <param name="view">The view that receives focus.</param>
         void Focus(IView view);
+
+        /// <summary>
+        /// Closes a certain view, given that this view is already opened by the controller.
+        /// </summary>
+        /// <param name="view">The view to close.</param>
+        /// <returns>True if the view has been successfully closed.  Otherwise, false.</returns>
         bool CloseView(IView view);
+
+        /// <summary>
+        /// Closes a group of views, until a certain view is not already opened by the controller.
+        /// </summary>
+        /// <param name="views">The views to close.</param>
+        /// <returns>True if all views have been closed.  Otherwise, false.</returns>
         bool CloseViewRange(IEnumerable<IView> views);
     }
 }
