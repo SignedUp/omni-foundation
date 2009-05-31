@@ -391,7 +391,7 @@
             Creates an anonymous (unauthenticated) user.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString)">
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.String)">
             <summary>
             Creates an authenticated user with given name and password.
             </summary>
@@ -399,7 +399,7 @@
             <param name="password">The password used to authenticate the user.</param>
             <remarks>The password is allowed to be null.</remarks>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.Security.SecureString,System.String)">
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor(System.String,System.String,System.String)">
             <summary>
             Creates an authenticated user with given name, password and authentication machanism.
             </summary>
@@ -408,7 +408,7 @@
             <param name="authenticationType">The authentication mechanism used to authenticate the user.</param>
             <remarks>The password is allowed to be null.</remarks>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString)">
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.String)">
             <summary>
             Promotes the identity with a username and password.  The identity is then considered authenticated.
             </summary>
@@ -416,7 +416,7 @@
             <param name="name">The username used to authenticate.</param>
             <param name="password">The password used to authenticate.</param>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.Security.SecureString,System.String)">
+        <member name="M:Omniscient.Foundation.Security.SecureIdentity.Promote(System.String,System.String,System.String)">
             <summary>
             Promotes the identity with a username.  The identity is then considered authenticated.
             </summary>
@@ -444,25 +444,6 @@
             <summary>
             Gets the name of the user represented by this Identity.
             </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
-        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
-            <summary>
-            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
-            </summary>
-            <typeparam name="T">the type of object to wrap.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
-            <summary>
-            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
-            adaptation is allowed (or possible).
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
-            <summary>
-            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
-            </summary>
-            <param name="item">The item to wrap.</param>
         </member>
         <member name="T:Omniscient.Foundation.Commanding.DelegateCommand">
             <summary>
@@ -523,6 +504,25 @@
             Executes the command.  Returns without executing the command if a call to CanExecute returns false.
             </summary>
             <param name="param">The param passed to the executing command.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
+        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
+            <summary>
+            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
+            </summary>
+            <typeparam name="T">the type of object to wrap.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
+            <summary>
+            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
+            adaptation is allowed (or possible).
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
+            <summary>
+            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
+            </summary>
+            <param name="item">The item to wrap.</param>
         </member>
         <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
             <summary>
@@ -766,7 +766,7 @@
             See the configuration schema for more details.
             </remarks>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IConfigurable.Configure(System.Xml.XmlElement)">
+        <member name="M:Omniscient.Foundation.ApplicationModel.IConfigurable.Configure(System.Object)">
             <summary>
             Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
             </summary>
@@ -774,32 +774,6 @@
             <remarks>
             See the ApplicationModel configuration schema for more details.
             </remarks>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.FromSecureString(System.Security.SecureString)">
-            <summary>
-            </summary>
-            <param name="secureString"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.ToSecureString(System.String)">
-            <summary>
-            </summary>
-            <param name="regularString"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.IRoleProvider">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IRoleProvider.GetRolesForUser(System.String)">
-            <summary>
-            </summary>
-            <param name="username"></param>
-            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.Security.IAuthorizationService">
             <summary>
