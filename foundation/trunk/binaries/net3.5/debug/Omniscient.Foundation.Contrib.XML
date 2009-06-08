@@ -27,8 +27,8 @@
         </member>
         <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.#ctor(log4net.ILog)">
             <summary>
-            Creates a writer with a valid log4net logger.  Defaults to <see cref="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.Level"/> equal to
-            <see cref="F:Omniscient.Foundation.Logging.LogLevel.Fatal"/> and <see cref="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.IsEnabled"/> equal to False.
+            Creates a disabled (<see cref="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.IsEnabled"/> == False) writer with a valid log4net logger.
+            Initializes the <see cref="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.Level"/> according to the <paramref name="log4netLogger"/>'s level.
             </summary>
             <param name="log4netLogger">A valid log4net logger.</param>
         </member>

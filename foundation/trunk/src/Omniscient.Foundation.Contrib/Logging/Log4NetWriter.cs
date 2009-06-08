@@ -21,8 +21,8 @@ namespace Omniscient.Foundation.Contrib.Logging
         }
 
         /// <summary>
-        /// Creates a writer with a valid log4net logger.  Defaults to <see cref="Level"/> equal to
-        /// <see cref="LogLevel.Fatal"/> and <see cref="IsEnabled"/> equal to False.
+        /// Creates a disabled (<see cref="IsEnabled"/> == False) writer with a valid log4net logger.
+        /// Initializes the <see cref="Level"/> according to the <paramref name="log4netLogger"/>'s level.
         /// </summary>
         /// <param name="log4netLogger">A valid log4net logger.</param>
         public Log4NetWriter(ILog log4netLogger)
@@ -33,8 +33,11 @@ namespace Omniscient.Foundation.Contrib.Logging
         private void Initialize(ILog log4netLogger)
         {
             _logger = log4netLogger;
-            Level = LogLevel.Fatal;
             IsEnabled = false;
+            Level = LogLevel.Fatal;
+            if (log4netLogger.IsDebugEnabled) Level = LogLevel.Debug;
+            else if (log4netLogger.IsInfoEnabled) Level = LogLevel.Info;
+            else if (log4netLogger.IsErrorEnabled) Level = LogLevel.Error;
         }
 
         /// <summary>
