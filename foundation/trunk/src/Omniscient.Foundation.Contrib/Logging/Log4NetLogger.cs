@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using System.Net.Mime;
 using log4net;
 using log4net.Config;
 using Omniscient.Foundation.Logging;
@@ -16,16 +19,9 @@ namespace Omniscient.Foundation.Contrib.Logging
         ///<summary>
         /// Constructor
         ///</summary>
-        ///<param name="fileName">Log4Net configuration file name.</param>
-        public Log4NetLogger(string fileName) : this(new FileInfo(fileName)) {}
-
-        ///<summary>
-        /// Constructor
-        ///</summary>
-        ///<param name="fileInfo">Log4Net configuration file information.</param>
-        public Log4NetLogger(FileInfo fileInfo)
+        public Log4NetLogger()
         {
-            XmlConfigurator.ConfigureAndWatch(fileInfo);
+            XmlConfigurator.Configure();
             _logger = LogManager.GetLogger(typeof(Log4NetLogger));
         }
 
