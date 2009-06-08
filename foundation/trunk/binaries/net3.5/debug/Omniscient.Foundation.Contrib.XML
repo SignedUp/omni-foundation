@@ -9,17 +9,10 @@
              Wrapper for log4net logger.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetLogger.#ctor(System.String)">
+        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetLogger.#ctor">
             <summary>
              Constructor
             </summary>
-            <param name="fileName">Log4Net configuration file name.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetLogger.#ctor(System.IO.FileInfo)">
-            <summary>
-             Constructor
-            </summary>
-            <param name="fileInfo">Log4Net configuration file information.</param>
         </member>
     </members>
 </doc>
