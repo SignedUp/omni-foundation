@@ -34,6 +34,11 @@ namespace Omniscient.Foundation.ApplicationModel
 
         protected internal ApplicationManager()
         {
+            TextLogWriter writer = new TextLogWriter(new System.IO.MemoryStream());
+            writer.Level = LogLevel.Fatal;
+            writer.AutoflushLevel = LogLevel.Fatal;
+            writer.IsEnabled = false;
+            Logger = new StandardLogger(writer);
         }
 
         /// <summary>
@@ -205,11 +210,13 @@ namespace Omniscient.Foundation.ApplicationModel
         /// <param name="config">Loaded application object.</param>
         public void StartApplication(ApplicationConfiguration config)
         {
+            Logger.Info("Starting application...");
             _config = config;
 
             InitializeComponents();
 
             //Load services and modules from the config file.
+            Logger.Info("Loading services and modules from config.");
             if (_config != null)
             {
                 ConfigManager.LoadAndConfigureServices(ServiceProvider, _config);
@@ -217,6 +224,7 @@ namespace Omniscient.Foundation.ApplicationModel
             }
 
             //start services
+            Logger.Info("Starting services.");
             foreach (IService service in ServiceProvider.AllServices)
             {
                 IStartable startable;
@@ -227,6 +235,7 @@ namespace Omniscient.Foundation.ApplicationModel
             //Display the Shell, if any.
             if (Shell != null)
             {
+                Logger.Info("Displaying the Shell.");
                 foreach (IViewController ctrl in Shell.CreateViewControllers())
                 {
                     PresentationController.RegisterViewController(ctrl);
@@ -239,20 +248,15 @@ namespace Omniscient.Foundation.ApplicationModel
             }
             
             //Activate modules
+            Logger.Info("Activating modules.");
             ApplicationModuleManager.ActivateAll();
 
             _started = true;
+            Logger.Info("Application started.");
         }
 
         protected virtual void InitializeComponents()
         {
-            if (Logger == null)
-            {
-                TextLogWriter writer = new TextLogWriter(new System.IO.MemoryStream());
-                writer.AutoflushLevel = LogLevel.Fatal;
-                writer.IsEnabled = false;
-                Logger = new StandardLogger(writer);
-            }
             if (ServiceProvider == null)
             {
                 //if we have a kernel, then let's create a "depency-injection service provider".
