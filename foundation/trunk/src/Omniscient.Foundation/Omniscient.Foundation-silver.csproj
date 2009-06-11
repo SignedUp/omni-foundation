@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="ApplicationModel\IConfigurable.cs" />
     <Compile Include="ApplicationModel\IExtendable.cs" />
-    <Compile Include="ApplicationModel\IExtender.cs" />
     <Compile Include="ApplicationModel\IListWrapper.cs" />
     <Compile Include="ApplicationModel\IObjectWrapper.cs" />
     <Compile Include="ApplicationModel\IStartable.cs" />

@@ -38,9 +38,9 @@ namespace Omniscient.Foundation.Security
             if (_current.Identity.IsAuthenticated) return;
             Debug.Assert(CurrentPrincipal != null);
 
-            foreach (IExtender<ICredentialServiceExtender> extender in this.Extenders)
+            foreach (ICredentialServiceExtender extender in this.AllExtenders)
             {
-                extender.GetImplementation().NegociateAuthentication(CurrentPrincipal);
+                extender.NegociateAuthentication(CurrentPrincipal);
                 if (!CurrentPrincipal.Identity.IsAuthenticated)
                     throw new System.Security.SecurityException("Unable to authenticate current principal.");
                 return;

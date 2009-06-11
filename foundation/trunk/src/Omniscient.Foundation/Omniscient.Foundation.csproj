@@ -62,7 +62,6 @@
     <Compile Include="ApplicationModel\IObjectWrapper.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="ApplicationModel\IExtendable.cs" />
-    <Compile Include="ApplicationModel\IExtender.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LogLevel.cs" />
