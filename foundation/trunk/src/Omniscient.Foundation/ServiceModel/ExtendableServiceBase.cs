@@ -6,27 +6,28 @@ using Omniscient.Foundation.ApplicationModel;
 
 namespace Omniscient.Foundation.ServiceModel
 {
-    public abstract class ExtendableServiceBase<TServiceContract, TExtensionContract>: ServiceBase<TServiceContract>, IExtendable<TExtensionContract>
+    public abstract class ExtendableServiceBase<TServiceContract, TExtensionContract>
+        : ServiceBase<TServiceContract>, IExtendable<TExtensionContract>
     {
-        private List<IExtender<TExtensionContract>> _extenders;
+        private List<TExtensionContract> _extenders;
 
         public ExtendableServiceBase()
         {
-            _extenders = new List<IExtender<TExtensionContract>>();
+            _extenders = new List<TExtensionContract>();
         }
 
         #region IExtendable<TExtensionContract> Members
 
-        public void Register(IExtender<TExtensionContract> extender)
+        public void RegisterExtender(TExtensionContract extender)
         {
             _extenders.Add(extender);
         }
 
-        public IEnumerable<IExtender<TExtensionContract>> Extenders
+        public IEnumerable<TExtensionContract> AllExtenders
         {
             get 
             { 
-                foreach (IExtender<TExtensionContract> ext in _extenders) yield return ext; 
+                foreach (TExtensionContract ext in _extenders) yield return ext; 
             }
         }
 

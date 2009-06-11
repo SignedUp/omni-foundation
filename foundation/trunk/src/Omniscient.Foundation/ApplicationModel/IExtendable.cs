@@ -12,14 +12,14 @@ namespace Omniscient.Foundation.ApplicationModel
     public interface IExtendable<TContract>
     { 
         /// <summary>
-        /// Plugs an extender into the extendable.  The extender must implement contract <typeparamref name="TContract"/>.
+        /// Registers an implementation of <typeparamref name="TContract"/> agains the extendable object.
         /// </summary>
-        /// <param name="extender"></param>
-        new void Register(IExtender<TContract> extender);
-        
+        /// <param name="implementation">The extender's implementation</param>
+        void RegisterExtender(TContract implementation);
+
         /// <summary>
-        /// Gets the list of plugged-in extenders
+        /// Gets a list of all extenders.
         /// </summary>
-        new IEnumerable<IExtender<TContract>> Extenders { get; }        
+        IEnumerable<TContract> AllExtenders { get; }
     }
 }
