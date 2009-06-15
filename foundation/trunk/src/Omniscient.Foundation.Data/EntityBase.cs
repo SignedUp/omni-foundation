@@ -41,7 +41,7 @@ namespace Omniscient.Foundation.Data
         {
             foreach (PropertyInfo p in this.GetType().GetProperties())
             {
-                if (p.Name != "Status")
+                if (p.Name != "Status" && p.CanWrite)
                     p.SetValue(target, p.GetValue(this, null), null);
             }
         }
