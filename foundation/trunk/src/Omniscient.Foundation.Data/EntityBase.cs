@@ -42,14 +42,18 @@ namespace Omniscient.Foundation.Data
             foreach (PropertyInfo p in this.GetType().GetProperties())
             {
                 if (p.Name != "Status" && p.GetSetMethod() != null)
+                {
                     p.SetValue(target, p.GetValue(this, null), null);
+                }
             }
         }
 
         /// <summary>
         /// Returns a string representation of the Entity.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// A string representation of the Entity.
+        /// </returns>
         public override string ToString()
         {
             return string.Format("Entity type:{0} status:{1}", this.GetType().Name, Status);
