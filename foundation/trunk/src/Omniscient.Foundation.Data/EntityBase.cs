@@ -41,7 +41,7 @@ namespace Omniscient.Foundation.Data
         {
             foreach (PropertyInfo p in this.GetType().GetProperties())
             {
-                if (p.Name != "Status" && p.CanWrite)
+                if (p.Name != "Status" && p.GetSetMethod() != null)
                     p.SetValue(target, p.GetValue(this, null), null);
             }
         }
@@ -52,7 +52,7 @@ namespace Omniscient.Foundation.Data
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Entity type:{0} status:{2}", this.GetType().Name, Status);
+            return string.Format("Entity type:{0} status:{1}", this.GetType().Name, Status);
         }
     }
 }
