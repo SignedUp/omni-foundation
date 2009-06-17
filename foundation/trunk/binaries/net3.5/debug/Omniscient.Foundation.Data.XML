@@ -393,7 +393,9 @@
             <summary>
             Returns a string representation of the Entity.
             </summary>
-            <returns></returns>
+            <returns>
+            A string representation of the Entity.
+            </returns>
         </member>
         <member name="P:Omniscient.Foundation.Data.EntityBase.Status">
             <summary>
