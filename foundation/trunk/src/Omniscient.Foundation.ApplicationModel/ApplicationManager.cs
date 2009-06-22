@@ -5,7 +5,6 @@ using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Configuration;
 using Omniscient.Foundation.ApplicationModel.Presentation;
 using Omniscient.Foundation.ApplicationModel.Modularity;
-using System.Collections.Generic;
 using Ninject.Core;
 using Omniscient.Foundation.Logging;
 
@@ -26,6 +25,7 @@ namespace Omniscient.Foundation.ApplicationModel
         private IKernel _kernel;
         private IApplicationModuleManager _applicationModuleManager;
         private ICommandStore _commandStore;
+        private ILogger _logger;
 
         static ApplicationManager()
         {
@@ -64,14 +64,18 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="IServiceProvider"/>.  If not set, then it will automatically be created with an instance
+        /// Gets or sets the <see cref="ServiceModel.IServiceProvider"/>.  If not set, then it will automatically be created with an instance
         /// of <see cref="ServiceProvider"/>.
-        /// Once the application is started with <see cref="StartApplication"/>, it is not possible to set this to a new value.
+        /// Once the application is started with <see cref="StartApplication()"/>, it is not possible to set this to a new value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         public ServiceModel.IServiceProvider ServiceProvider
         {
-            get { return _serviceProvider; }
+            get
+            {
+                return _serviceProvider;
+            }
+
             set
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
@@ -82,12 +86,16 @@ namespace Omniscient.Foundation.ApplicationModel
         /// <summary>
         /// Gets or sets the <see cref="IPresentationController"/>.  If not set, then it will automatically be created with an 
         /// instance of <see cref="PresentationController"/>.
-        /// Once the application is started with <see cref="StartApplication"/>, it is not possible to set this to a new value.
+        /// Once the application is started with <see cref="StartApplication()"/>, it is not possible to set this to a new value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         public IPresentationController PresentationController
         {
-            get { return _presentationController; }
+            get
+            {
+                return _presentationController;
+            }
+
             set
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
@@ -99,12 +107,16 @@ namespace Omniscient.Foundation.ApplicationModel
         /// Gets or sets the <see cref="IShell"/>, which is the main UI fabric of a desktop application.  If not set, then
         /// the user will have to manually create presenters (<see cref="IPresenter"/>) and view controllers
         /// (<see cref="IViewController"/>), and bind those to the UI.
-        /// Once the application is started with <see cref="StartApplication"/>, it is not possible to set this to a new value.
+        /// Once the application is started with <see cref="StartApplication()"/>, it is not possible to set this to a new value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         public IShell Shell
         {
-            get { return _shell; }
+            get
+            {
+                return _shell;
+            }
+
             set 
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
@@ -114,12 +126,16 @@ namespace Omniscient.Foundation.ApplicationModel
 
         /// <summary>
         /// Gets or sets Ninject's Kernel.  If not set, then this application will run without dependency injection.
-        /// Once the application is started with <see cref="StartApplication"/>, it is not possible to set this to a new value.
+        /// Once the application is started with <see cref="StartApplication()"/>, it is not possible to set this to a new value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         public IKernel Kernel
         {
-            get { return _kernel; }
+            get
+            {
+                return _kernel;
+            }
+
             set
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
@@ -128,12 +144,15 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Get or stes Ninject's Command strore.  If not set, then this application will run without dependency injection.
+        /// Get or sets Ninject's Command strore.  If not set, then this application will run without dependency injection.
         /// This stored is used to get all the application commands.
         /// </summary>
         public ICommandStore CommandStore
         {
-            get { return _commandStore; }
+            get
+            {
+                return _commandStore;
+            }
 
             set
             {
@@ -142,10 +161,17 @@ namespace Omniscient.Foundation.ApplicationModel
             }
         }
 
-        private ILogger _logger;
+        /// <summary>
+        /// Gets or sets the application logger.  A logger consists of one or more <see cref="ILogWriter"/> objects,
+        /// sequentially called during a logging operation.  The default logger comes with one in-memory log writer.
+        /// </summary>
         public ILogger Logger
         {
-            get { return _logger; }
+            get
+            {
+                return _logger;
+            }
+
             set
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
@@ -156,12 +182,16 @@ namespace Omniscient.Foundation.ApplicationModel
         /// <summary>
         /// Gets or sets the <see cref="IApplicationModuleManager"/>.  If not set, then it will automatically be created with
         /// an instance of <see cref="ApplicationModuleManager"/>.  
-        /// Once the application is started with <see cref="StartApplication"/>, it is not possible to set this to a new value.
+        /// Once the application is started with <see cref="StartApplication()"/>, it is not possible to set this to a new value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         public IApplicationModuleManager ApplicationModuleManager
         {
-            get { return _applicationModuleManager; }
+            get
+            {
+                return _applicationModuleManager;
+            }
+
             set
             {
                 if (IsStarted) throw new InvalidOperationException("Invalid call after application is started.");
@@ -170,7 +200,10 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Gets the deserialized configuration.
+        /// Gets the deserialized configuration.  In the configuration file, the config section must
+        /// be called "foundation.application", and must be in the namespace 
+        /// "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
+        /// for the complete schema.
         /// </summary>
         public ApplicationConfiguration Config
         {
@@ -188,12 +221,12 @@ namespace Omniscient.Foundation.ApplicationModel
         /// <remarks>
         /// That method will look for application configuration.  In the configuration file, the config section must
         /// be called "foundation.application", and must be in the namespace 
-        /// "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
-        /// for the complete schema.
+        /// "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  The section handler is 
+        /// <see cref="ApplicationConfigurationSectionHandler"/>.
         /// </remarks>
         public void StartApplication()
         {
-            //Get configuration from default config file.
+            // Get configuration from default config file.
             ApplicationConfiguration config;
 #if SILVERLIGHT
             config = new ApplicationConfiguration();
@@ -215,7 +248,7 @@ namespace Omniscient.Foundation.ApplicationModel
 
             InitializeComponents();
 
-            //Load services and modules from the config file.
+            // Load services and modules from the config file.
             Logger.Info("Loading services and modules from config.");
             if (_config != null)
             {
@@ -223,7 +256,7 @@ namespace Omniscient.Foundation.ApplicationModel
                 ConfigManager.LoadModules(ApplicationModuleManager, _config);
             }
 
-            //start services
+            // start services
             Logger.Info("Starting services.");
             foreach (IService service in ServiceProvider.AllServices)
             {
@@ -232,7 +265,7 @@ namespace Omniscient.Foundation.ApplicationModel
                 if (startable != null) startable.Start();
             }
 
-            //Display the Shell, if any.
+            // Display the Shell, if any.
             if (Shell != null)
             {
                 Logger.Info("Displaying the Shell.");
@@ -247,29 +280,12 @@ namespace Omniscient.Foundation.ApplicationModel
                 Shell.Show();
             }
             
-            //Activate modules
+            // Activate modules
             Logger.Info("Activating modules.");
             ApplicationModuleManager.ActivateAll();
 
             _started = true;
             Logger.Info("Application started.");
-        }
-
-        protected virtual void InitializeComponents()
-        {
-            if (ServiceProvider == null)
-            {
-                //if we have a kernel, then let's create a "depency-injection service provider".
-                if (Kernel != null) ServiceProvider = new DIServiceProvider(Kernel);
-                //otherwise, create a regular, plain service provider
-                else ServiceProvider = new ServiceProvider();
-            }
-            if (PresentationController == null) PresentationController = new PresentationController();
-            if (ApplicationModuleManager == null) ApplicationModuleManager = new ApplicationModuleManager();
-
-            ApplicationModuleManager.PresentationController = PresentationController;
-            //if the Kernel is present, then link both module managers (from Foundation and from Ninject).
-            if (Kernel != null) ApplicationModuleManager.ModuleManager = Kernel.Components.ModuleManager;
         }
 
         /// <summary>
@@ -281,11 +297,11 @@ namespace Omniscient.Foundation.ApplicationModel
         /// </remarks>
         public virtual void CloseApplication()
         {
-            //Deactivate and unload all modules
+            // Deactivate and unload all modules
             ApplicationModuleManager.DeactivateAll();
             ApplicationModuleManager.UnloadAll();
 
-            //Stop all services
+            // Stop all services
             foreach (IService service in ServiceProvider.AllServices.Reverse())
             {
                 IStartable startable;
@@ -293,11 +309,31 @@ namespace Omniscient.Foundation.ApplicationModel
                 if (startable != null) startable.Stop();
             }
 
-            //Clean containers
-            //todo: something else to clean?
+            // Clean containers
+            // todo: something else to clean?
             ServiceProvider.Clear();
 
             _started = false;
+        }
+
+        protected virtual void InitializeComponents()
+        {
+            if (ServiceProvider == null)
+            {
+                // if we have a kernel, then let's create a "depency-injection service provider".
+                if (Kernel != null) ServiceProvider = new DIServiceProvider(Kernel);
+
+                // otherwise, create a regular, plain service provider
+                else ServiceProvider = new ServiceProvider();
+            }
+
+            if (PresentationController == null) PresentationController = new PresentationController();
+            if (ApplicationModuleManager == null) ApplicationModuleManager = new ApplicationModuleManager();
+
+            ApplicationModuleManager.PresentationController = PresentationController;
+
+            // if the Kernel is present, then link both module managers (from Foundation and from Ninject).
+            if (Kernel != null) ApplicationModuleManager.ModuleManager = Kernel.Components.ModuleManager;
         }
     }
 }
