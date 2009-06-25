@@ -77,6 +77,7 @@
     <Compile Include="Security\SecureIdentity.cs" />
     <Compile Include="Security\SecurePrincipal.cs" />
     <Compile Include="Security\SecureStringConverter.cs" />
+    <Compile Include="ServiceModel\ConfigurableServiceBase.cs" />
     <Compile Include="ServiceModel\DIServiceProvider.cs" />
     <Compile Include="ServiceModel\ExtendableServiceBase.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />

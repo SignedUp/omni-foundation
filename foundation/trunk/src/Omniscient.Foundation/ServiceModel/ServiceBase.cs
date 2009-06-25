@@ -3,9 +3,10 @@
 namespace Omniscient.Foundation.ServiceModel
 {
     ///<summary>
+    /// Base class for services.
     ///</summary>
-    ///<typeparam name="TContract"></typeparam>
-    public abstract class ServiceBase<TContract>: IService
+    ///<typeparam name="TContract">The service's contract type.</typeparam>
+    public abstract class ServiceBase<TContract> : IService
     {
         #region IService Members
 
@@ -29,8 +30,9 @@ namespace Omniscient.Foundation.ServiceModel
         #region IService<TContract> Members
 
         ///<summary>
+        /// Returns an implementation of the contract.
         ///</summary>
-        ///<returns></returns>
+        ///<returns>An implementation of the contract.</returns>
         public abstract TContract GetImplementation();
 
         #endregion
