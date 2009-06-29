@@ -11,6 +11,7 @@ namespace Omniscient.Foundation
             {
                 if (predicate(item)) return true;
             }
+
             return false;
         }
 
@@ -20,6 +21,7 @@ namespace Omniscient.Foundation
             {
                 if (predicate(item)) return item;
             }
+
             return default(T);
         }
     }

@@ -56,7 +56,7 @@
     <Compile Include="Commanding\DelegateCommand.cs" />
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandStore.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="ApplicationModel\IListWrapper.cs" />
     <Compile Include="INamed.cs" />
     <Compile Include="ApplicationModel\IObjectWrapper.cs" />

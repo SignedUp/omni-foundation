@@ -61,7 +61,7 @@
     <Compile Include="Commanding\ICommandCore.cs" />
     <Compile Include="Commanding\ICommandStore.cs" />
     <Compile Include="Extensions\SilverlightExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="INamed.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
