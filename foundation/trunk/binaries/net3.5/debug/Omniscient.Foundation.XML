@@ -76,8 +76,9 @@
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
             <summary>
+             Base class for services.
             </summary>
-            <typeparam name="TContract"></typeparam>
+            <typeparam name="TContract">The service's contract type.</typeparam>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.IService">
             <summary>
@@ -102,8 +103,9 @@
         </member>
         <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
             <summary>
+             Returns an implementation of the contract.
             </summary>
-            <returns></returns>
+            <returns>An implementation of the contract.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
             <summary>
@@ -808,6 +810,35 @@
             </summary>
             <param name="identity">The Identity used by the new Principal.</param>
             <returns>A Principal with roles.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2">
+            <summary>
+            Base class for services that are configurable. A configurable service will have an xml node (the "root")
+            under the &lt;config&gt; child element of the &lt;serviceDefinition&gt; element in the config file.
+            </summary>
+            <typeparam name="TContract">
+            The service's contract type.
+            </typeparam>
+            <typeparam name="TConfigRoot">
+            The xml serializable class that is the root of the configuration for this service.
+            </typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2.Configure(System.Xml.XmlElement)">
+            <summary>
+            Automatically called at load time by the ApplicationManager.  Or, can be manually called.  The parameter
+            must be deserializable into type <typeparamref name="TConfigRoot"/>.
+            </summary>
+            <param name="config">
+            The config.  Must be deserializable into type <typeparamref name="TConfigRoot"/>.
+            </param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2.Configuration">
+            <summary>
+            Gets Configuration as it has been deserialized.
+            </summary>
+            <value>
+            The configuration.
+            </value>
         </member>
     </members>
 </doc>
