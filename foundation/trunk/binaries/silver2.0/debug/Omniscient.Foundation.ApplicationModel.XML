@@ -33,8 +33,8 @@
             <remarks>
             That method will look for application configuration.  In the configuration file, the config section must
             be called "foundation.application", and must be in the namespace 
-            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
-            for the complete schema.
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  The section handler is 
+            <see cref="!:ApplicationConfigurationSectionHandler"/>.
             </remarks>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication(Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration)">
@@ -65,7 +65,7 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider">
             <summary>
-            Gets or sets the <see cref="!:IServiceProvider"/>.  If not set, then it will automatically be created with an instance
+            Gets or sets the <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  If not set, then it will automatically be created with an instance
             of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider"/>.
             Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
             </summary>
@@ -97,8 +97,14 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.CommandStore">
             <summary>
-            Get or stes Ninject's Command strore.  If not set, then this application will run without dependency injection.
+            Get or sets Ninject's Command strore.  If not set, then this application will run without dependency injection.
             This stored is used to get all the application commands.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Logger">
+            <summary>
+            Gets or sets the application logger.  A logger consists of one or more <see cref="T:Omniscient.Foundation.Logging.ILogWriter"/> objects,
+            sequentially called during a logging operation.  The default logger comes with one in-memory log writer.
             </summary>
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager">
@@ -111,7 +117,10 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
             <summary>
-            Gets the deserialized configuration.
+            Gets the deserialized configuration.  In the configuration file, the config section must
+            be called "foundation.application", and must be in the namespace 
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
+            for the complete schema.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewController">

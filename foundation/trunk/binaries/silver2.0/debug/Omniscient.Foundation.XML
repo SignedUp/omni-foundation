@@ -76,8 +76,9 @@
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
             <summary>
+             Base class for services.
             </summary>
-            <typeparam name="TContract"></typeparam>
+            <typeparam name="TContract">The service's contract type.</typeparam>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.IService">
             <summary>
@@ -102,8 +103,9 @@
         </member>
         <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
             <summary>
+             Returns an implementation of the contract.
             </summary>
-            <returns></returns>
+            <returns>An implementation of the contract.</returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
             <summary>
