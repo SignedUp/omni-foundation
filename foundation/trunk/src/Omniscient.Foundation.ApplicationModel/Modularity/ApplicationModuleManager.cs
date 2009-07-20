@@ -41,8 +41,7 @@ namespace Omniscient.Foundation.ApplicationModel.Modularity
             if (ModuleManager != null && typeof(Ninject.Core.IModule).IsAssignableFrom(module.GetType()))
                 ModuleManager.Load((Ninject.Core.IModule)module);
             else
-                //don't use Ninject.
-                module.Load();
+                module.Load(); // don't use Ninject.
         }
 
         /// <summary>
