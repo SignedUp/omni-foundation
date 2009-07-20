@@ -648,11 +648,6 @@
             Gets a default writer.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.StringExtensions">
-            <summary>
-            Defines extension methods on the String class.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
             <summary>
             Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
@@ -766,6 +761,11 @@
             <remarks>
             See the ApplicationModel configuration schema for more details.
             </remarks>
+        </member>
+        <member name="T:Omniscient.Foundation.Extensions">
+            <summary>
+            Defines extension methods on the String class.
+            </summary>
         </member>
         <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
             <summary>

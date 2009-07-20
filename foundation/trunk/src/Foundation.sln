@@ -1,6 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E422B493-43CA-42BF-9A9C-648F59C1649E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D46FF3D9-0F4D-4502-8679-9E9C60C90D7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contrib", "Contrib", "{86A96274-0722-4972-AA97-80646251DB2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{C968F7E7-94CA-4A0C-B547-5DF0201E281A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Data", "Omniscient.Foundation.Data\Omniscient.Foundation.Data.csproj", "{55AF3468-EE23-426D-A321-44FC866A7D8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation", "Omniscient.Foundation\Omniscient.Foundation.csproj", "{7CA4BEA5-AF23-4197-BD4E-74F431583976}"
@@ -13,21 +21,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.ApplicationModel.Test", "Omniscient.Foundation.ApplicationModel.Test\Omniscient.Foundation.ApplicationModel.Test.csproj", "{BC75CF22-ACEE-4291-8A1F-D77A3144D130}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E422B493-43CA-42BF-9A9C-648F59C1649E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Web", "Omniscient.Foundation.Web\Omniscient.Foundation.Web.csproj", "{E2765E34-3253-42C8-9C17-550667F6A98A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D46FF3D9-0F4D-4502-8679-9E9C60C90D7A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Client", "Omniscient.Foundation.Client\Omniscient.Foundation.Client.csproj", "{D37869F7-5166-456B-811F-36CA6B7DBD04}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contrib", "Contrib", "{86A96274-0722-4972-AA97-80646251DB2E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Contrib", "Omniscient.Foundation.Contrib\Omniscient.Foundation.Contrib.csproj", "{968C73B6-8F9C-4A24-BEAF-93355A0B5364}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.Contrib.Wpf", "Omniscient.Foundation.Contrib.Wpf\Omniscient.Foundation.Contrib.Wpf.csproj", "{D24238B7-6F0B-4330-A859-CF7B96EF6088}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{C968F7E7-94CA-4A0C-B547-5DF0201E281A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation-silver", "Omniscient.Foundation\Omniscient.Foundation-silver.csproj", "{880378CA-ED02-459E-9761-F2AA55CE4258}"
 EndProject
@@ -108,9 +108,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
 		{CC104492-83F1-429D-8417-394916CE456D} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
 		{BC75CF22-ACEE-4291-8A1F-D77A3144D130} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
-		{6B28B53E-A193-4DC7-8374-22C34CDF5D7B} = {E422B493-43CA-42BF-9A9C-648F59C1649E}
 		{D37869F7-5166-456B-811F-36CA6B7DBD04} = {D46FF3D9-0F4D-4502-8679-9E9C60C90D7A}
 		{968C73B6-8F9C-4A24-BEAF-93355A0B5364} = {86A96274-0722-4972-AA97-80646251DB2E}
 		{D24238B7-6F0B-4330-A859-CF7B96EF6088} = {86A96274-0722-4972-AA97-80646251DB2E}
