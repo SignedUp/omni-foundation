@@ -10,10 +10,10 @@
     <xs:element name="foundation.data.connectionProvider" type="ConnectionProvider" />
     
     <xs:complexType name="ApplicationConfiguration">
-        <xs:choice>
+        <xs:all>
             <xs:element name="services" minOccurs="0" maxOccurs="1" type="ServicesConfiguration" />
             <xs:element name="modules" minOccurs="0" maxOccurs="1" type="ModulesConfiguration" />
-        </xs:choice>    
+        </xs:all>    
     </xs:complexType>
 
     <xs:complexType name="ModulesConfiguration">
