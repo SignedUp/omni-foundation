@@ -20,6 +20,7 @@ namespace Omniscient.Foundation.Data
         public UniqueEntityBase()
             : this(Guid.NewGuid())
         {
+            Status = EntityStatus.New;
         }
 
         /// <summary>

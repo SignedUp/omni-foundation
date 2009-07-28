@@ -13,7 +13,7 @@ namespace Omniscient.Foundation.Data
         EntityStatus Status { get; set; }
         
         /// <summary>
-        /// Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
+        /// Copies the values of the entity to another entity.  Copies the data values, except the <see cref="Status"/>.
         /// </summary>
         /// <param name="target">The entity to copy values to.</param>
         void CopyTo(IEntity target);
