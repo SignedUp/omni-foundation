@@ -91,8 +91,8 @@ namespace Omniscient.Foundation.Data
         }
 
         /// <summary>
-        /// Gets an id that uniquely represents an entity in a given space.  For example, and <see cref="IEntity{Guid}"/>
-        /// will be unique in the universe, while an <see cref="IEntity{Long}"/> will probably be unique amongst other
+        /// Gets an id that uniquely represents an entity in a given space.  For example, an <see cref="IEntity&lt;Guid&gt;"/>
+        /// will be unique in the universe, while an <see cref="IEntity&lt;long&gt;"/> will probably be unique amongst other
         /// entities of the same type.
         /// </summary>
         public TKey Id

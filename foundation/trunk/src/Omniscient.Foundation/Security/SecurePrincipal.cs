@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Omniscient.Foundation.Security
 {
     /// <summary>
-    /// Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
+    /// Implementation of <see href="IPrincipal"</see> that allows the principal to be "promoted", that is, add roles to it.
     /// </summary>
     [DataContract]
     public class SecurePrincipal : IPrincipal
@@ -16,13 +16,13 @@ namespace Omniscient.Foundation.Security
         private List<string> _roles;
         
         /// <summary>
-        /// Creates an instance of SecurePrincipal with an anonymous (unauthenticated) <c>SecureIdentity</c>, and an empty collection
+        /// Creates an instance of SecurePrincipal with an anonymous (unauthenticated) <see href="SecureIdentity"</see>, and an empty collection
         /// of roles.
         /// </summary>
         public SecurePrincipal() : this(new SecureIdentity(), new string[] { }) { }
 
         /// <summary>
-        /// Creates an instance of SecurePrincipal with an existing <c>SecureIdentity</c>, and an initial collection of roles.
+        /// Creates an instance of SecurePrincipal with an existing <see href="SecureIdentity"</see>, and an initial collection of roles.
         /// </summary>
         /// <param name="identity"></param>
         /// <param name="roles"></param>
@@ -57,7 +57,7 @@ namespace Omniscient.Foundation.Security
         #region IPrincipal Members
 
         /// <summary>
-        /// Gets the <c>IIdentity</c> of that principal.  Concrete type is <c>SecureIdentity</c>.
+        /// Gets the <see href="IIdentity"</see> of that principal.  Concrete type is <see href="SecureIdentity"</see>.
         /// </summary>
         IIdentity IPrincipal.Identity
         {
@@ -65,7 +65,7 @@ namespace Omniscient.Foundation.Security
         }
 
         /// <summary>
-        /// Gets the <c>SecureIdentity</c> of that principal.
+        /// Gets the <see href="SecureIdentity"</see> of that principal.
         /// </summary>
         [DataMember]
         public SecureIdentity Identity

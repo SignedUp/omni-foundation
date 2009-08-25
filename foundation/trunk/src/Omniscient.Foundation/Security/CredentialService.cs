@@ -49,7 +49,7 @@ namespace Omniscient.Foundation.Security
         }
 
         /// <summary>
-        /// Returns the current user principal.  That user will not be logged in until a call is made to <c>EnsureUserIsLoggedIn</c>.
+        /// Returns the current user principal.  That user will not be logged in until a call is made to <see href="EnsureUserIsLoggedIn"</see>.
         /// </summary>
         /// <returns></returns>
         public virtual SecurePrincipal CurrentPrincipal

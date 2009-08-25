@@ -28,8 +28,8 @@ namespace Omniscient.Foundation.Data
     public interface IEntity<TId> : IEntity
     {
         /// <summary>
-        /// Gets an id that uniquely represents an entity in a given space.  For example, and IEntity&lt;Guid&gt;
-        /// will be unique in the universe, while an IEntity&lt;long&gt; will probably be unique amongst other
+        /// Gets an id that uniquely represents an entity in a given space.  For example, an <see cref="IEntity&lt;Guid&gt;"/>
+        /// will be unique in the universe, while an <see cref="IEntity&lt;long&gt;"/> will probably be unique amongst other
         /// entities of the same type.
         /// </summary>
         TId Id { get; }

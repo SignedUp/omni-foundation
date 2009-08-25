@@ -6,7 +6,7 @@ namespace Omniscient.Foundation.Security
 {
     /// <summary>
     /// Defines a service that will provide the application with user credentials.  The service places the current user
-    /// in the <c>System.Threading.Thread.CurrentPrincipal</c> value.
+    /// in the <see href="System.Threading.Thread.CurrentPrincipal"</see> value.
     /// </summary>
     public interface ICredentialService : IStartable, IExtendable<ICredentialServiceExtender>
     {
@@ -20,7 +20,7 @@ namespace Omniscient.Foundation.Security
 
         /// <summary>
         /// Called on request from anywhere where the user credentials are required.  Returns the same object as 
-        /// <c>System.Threading.Thread.CurrentPrincipal</c>.
+        /// <see href="System.Threading.Thread.CurrentPrincipal"</see>.
         /// </summary>
         SecurePrincipal CurrentPrincipal { get; }
     }
