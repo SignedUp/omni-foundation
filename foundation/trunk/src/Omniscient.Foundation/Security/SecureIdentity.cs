@@ -6,7 +6,7 @@ using System.Security;
 namespace Omniscient.Foundation.Security
 {
     /// <summary>
-    /// Implementation of <c>IIdentity</c> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
+    /// Implementation of <see href="IIdentity"</see> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
     /// to authenticated with a name, password and an authentication type.
     /// </summary>
     [DataContract]

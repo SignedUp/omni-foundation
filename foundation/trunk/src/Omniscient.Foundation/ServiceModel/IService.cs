@@ -18,9 +18,9 @@ namespace Omniscient.Foundation.ServiceModel
         Type ImplementationType { get; }
 
         /// <summary>
-        /// Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
+        /// Gets the implementation of the service.  Returns an object whose type must be equal to <see href="ImplementationType"</see>.
         /// </summary>
-        /// <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        /// <returns>Service's implementation, of type <see href="ImplementationType"</see>.</returns>
         object GetImplementation();
     }
 }

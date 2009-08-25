@@ -20,7 +20,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
         /// and displaying it correctly.
         /// </summary>
-        /// <param name="model">The models to open.</param>
+        /// <param name="models">The models to open.</param>
         void OpenView<TModel>(IList<TModel> models)
             where TModel : IModel;
 
@@ -31,46 +31,46 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         void ViewClosed(IView view);
 
         /// <summary>
-        /// Registers an <c>IViewController</c>. Default use is to feed that list at application startup.
+        /// Registers an <see href="IViewController"</see>. Default use is to feed that list at application startup.
         /// </summary>
-        /// <param name="controller">An <c>IViewController</c> to register.</param>
+        /// <param name="controller">An <see href="IViewController"</see> to register.</param>
         void RegisterViewController(IViewController controller);
 
         /// <summary>
-        /// Gets an <c>IViewController</c> using its type.
+        /// Gets an <see href="IViewController"</see> using its type.
         /// </summary>
         /// <typeparam name="ViewControllerType">The type of the view controller to look for.</typeparam>
-        /// <returns>An <c>IViewController</c> if found.  Otherwise, null.</returns>
+        /// <returns>An <see href="IViewController"</see> if found.  Otherwise, null.</returns>
         ViewControllerType GetViewController<ViewControllerType>() 
             where ViewControllerType : IViewController;
 
 
         /// <summary>
-        /// Registers an <c>IPresenter</c>.
+        /// Registers an <see href="IPresenter"</see>.
         /// </summary>
-        /// <param name="presenter">An <c>IPresenter</c> to register.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the <c>IPresenter.RequiresUserInput</c> is
-        /// <c>True</c>, while the value of <c>SupportsUserInput</c> is <c>False</c>.</exception>
+        /// <param name="presenter">An <see href="IPresenter"</see> to register.</param>
+        /// <exception cref="InvalidOperationException">Thrown if the <see href="IPresenter.RequiresUserInput"</see> is
+        /// <see href="True"</see>, while the value of <see href="SupportsUserInput"</see> is <see href="False"</see>.</exception>
         void RegisterPresenter(IPresenter presenter);
 
         /// <summary>
-        /// Gets an <c>IPresenter</c> using its name.
+        /// Gets an <see href="IPresenter"</see> using its name.
         /// </summary>
         /// <param name="name">The name of the presenter to look for.</param>
-        /// <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        /// <returns>An <see href="IPresenter"</see> if found.  Otherwise, null.</returns>
         IPresenter GetPresenter(string name);
 
         /// <summary>
-        /// Gets an <c>IPresenter</c> using its type.
+        /// Gets an <see href="IPresenter"</see> using its type.
         /// </summary>
         /// <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
-        /// <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        /// <returns>An <see href="IPresenter"</see> if found.  Otherwise, null.</returns>
         PresenterType GetPresenter<PresenterType>() 
             where PresenterType : IPresenter;
 
         /// <summary>
         /// Gets a value indicating wheter this presentation controller supports user input.
-        /// If <c>False</c>, then calling <c>RegisterPresenter</c> with an <c>IPresenter</c>
+        /// If <see href="False"</see>, then calling <see href="RegisterPresenter"</see> with an <see href="IPresenter"</see>
         /// that requires user input will fail.
         /// </summary>
         bool SupportsUserInput { get; }
