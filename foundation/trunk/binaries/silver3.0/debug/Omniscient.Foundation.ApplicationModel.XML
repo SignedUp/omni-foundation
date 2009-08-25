@@ -21,7 +21,7 @@
             Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
             and displaying it correctly.
             </summary>
-            <param name="model">The models to open.</param>
+            <param name="models">The models to open.</param>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
             <summary>
@@ -29,53 +29,17 @@
             </summary>
             <param name="view">The view that's been closed.</param>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterViewController(Omniscient.Foundation.ApplicationModel.Presentation.IViewController)">
-            <summary>
-            Registers an <c>IViewController</c>. Default use is to feed that list at application startup.
-            </summary>
-            <param name="controller">An <c>IViewController</c> to register.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetViewController``1">
-            <summary>
-            Gets an <c>IViewController</c> using its type.
-            </summary>
-            <typeparam name="ViewControllerType">The type of the view controller to look for.</typeparam>
-            <returns>An <c>IViewController</c> if found.  Otherwise, null.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)">
-            <summary>
-            Registers an <c>IPresenter</c>.
-            </summary>
-            <param name="presenter">An <c>IPresenter</c> to register.</param>
-            <exception cref="T:System.InvalidOperationException">Thrown if the <c>IPresenter.RequiresUserInput</c> is
-            <c>True</c>, while the value of <c>SupportsUserInput</c> is <c>False</c>.</exception>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)">
-            <summary>
-            Gets an <c>IPresenter</c> using its name.
-            </summary>
-            <param name="name">The name of the presenter to look for.</param>
-            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1">
-            <summary>
-            Gets an <c>IPresenter</c> using its type.
-            </summary>
-            <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
-            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterViewController(Omniscient.Foundation.ApplicationModel.Presentation.IViewController)" -->
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetViewController``1" -->
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)" -->
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1" -->
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CloseAllViews">
             <summary>
             Close all views of all view controllers.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput">
-            <summary>
-            Gets a value indicating wheter this presentation controller supports user input.
-            If <c>False</c>, then calling <c>RegisterPresenter</c> with an <c>IPresenter</c>
-            that requires user input will fail.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput" -->
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
             <summary>
             Represents an object that has a Text property to be displayed on the UI.
@@ -115,29 +79,13 @@
              An application module is 
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell">
-            <summary>
-            The shell is the main window in an application.  It defines placeholders for displaying <c>IModel</c> objects,
-            which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information (like commands) through the
-            use of <c>IPresenter</c> objects.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.Presentation.IShell" -->
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.Show">
             <summary>
             Tells the shell to display itself, when the application starts.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreateViewControllers">
-            <summary>
-            Asks the shell to create one <c>IViewController</c> object for each region where <c>IModel</c> objects
-            will be displayed, and return all created controllers.  The shell does not have to keep a reference to
-            those controllers.
-            </summary>
-            <remarks>
-            In most applications, the shell will have only one view controllers.
-            </remarks>
-            <returns>The list of created view controllers.</returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreateViewControllers" -->
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreatePresenters">
             <summary>
             Asks the shell to create all non-data presenters (e.g. Status Bar Presenter, or Message Console Presenter).
@@ -447,12 +395,7 @@
             Gets the list of service definitions.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter">
-            <summary>
-            The IPresenter gives direct access to the UI.  Contrary to <c>IViewController</c>s, which are the entry door to the MVC,
-            IPresenter are there simply to display message windows, ask for user input, etc.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter" -->
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
             <summary>
             Writes a single message to the presentation medium.  Most presenters will add more complex functionality (through
@@ -465,14 +408,7 @@
             Gets the name of that presenter.  Generally the name of the concrete class.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput">
-            <summary>
-            Gets a values indicating whether this presenter will require user input.  For example, if the presenter
-            is to display message windows with an Ok button, then it requires user input.  If it simply writes messages
-            to a console window, or to a status bar, for example, then it does not require user input.  According to the 
-            value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput" -->
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewModel`1">
             <summary>
             IViewModel is a wrapper for the IModel which is bound to IView.
