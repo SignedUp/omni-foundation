@@ -4,111 +4,123 @@
         <name>Omniscient.Foundation.ApplicationModel</name>
     </assembly>
     <members>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
             <summary>
-            Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
+            Placeholder for services configuration.  Contains a list of service definitions.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.#ctor">
             <summary>
-            Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
-            and displaying it correctly.
-            </summary>
-            <param name="model">The model to open.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
-            and displaying it correctly.
-            </summary>
-            <param name="models">The models to open.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
-            <summary>
-            Informs the controller that a view has been closed.
-            </summary>
-            <param name="view">The view that's been closed.</param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterViewController(Omniscient.Foundation.ApplicationModel.Presentation.IViewController)" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetViewController``1" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1" -->
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CloseAllViews">
-            <summary>
-            Close all views of all view controllers.
+            Ctor.  Creates an empty list of service definitions.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput" -->
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.ServiceDefinitions">
             <summary>
-            Represents an object that has a Text property to be displayed on the UI.
+            Gets the list of service definitions.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject.Text">
+        <member name="T:Omniscient.Foundation.ApplicationModel.ApplicationManager">
             <summary>
-            Gets or sets the text displayed on the screen for that object.
+            Abstracts the concept of an application.  Serves as the bootstrapper of any application
+            that uses the Foundation.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition">
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
             <summary>
+            Starts the application.  That method should be one of the first being called when the program starts.  The method
+            loads the configuration from the AppDomain configuration file.
+            </summary>
+            <remarks>
+            That method will look for application configuration.  In the configuration file, the config section must
+            be called "foundation.application", and must be in the namespace 
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  The section handler is 
+            <see cref="!:ApplicationConfigurationSectionHandler"/>.
+            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication(Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration)">
+            <summary>
+            Starts the application.  That method should be one of the first being called when the program starts. The method
+            accepts an existing configuration object.  See <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/> for default configuration.
+            </summary>
+            <param name="config">Loaded application object.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
+            <summary>
+            Closes the application.  Generally, that should lead to the process being terminated.
+            </summary>
+            <remarks>
+            All services that implement <see cref="T:Omniscient.Foundation.ApplicationModel.IStartable"/> are stopped here, in reverse order that they 
+            have been started.
+            </remarks>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current">
+            <summary>
+            Gets the current Application object.  Each application using foundation has a single Current Application.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition.Type">
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.IsStarted">
             <summary>
+            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider">
             <summary>
-            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
+            Gets or sets the <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  If not set, then it will automatically be created with an instance
+            of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider"/>.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
+            <summary>
+            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  If not set, then it will automatically be created with an 
+            instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Shell">
+            <summary>
+            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell"/>, which is the main UI fabric of a desktop application.  If not set, then
+            the user will have to manually create presenters (<see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter"/>) and view controllers
+            (<see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewController"/>), and bind those to the UI.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Kernel">
+            <summary>
+            Gets or sets Ninject's Kernel.  If not set, then this application will run without dependency injection.
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.CommandStore">
+            <summary>
+            Get or sets Ninject's Command strore.  If not set, then this application will run without dependency injection.
+            This stored is used to get all the application commands.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Logger">
             <summary>
-            Base class for models.
+            Gets or sets the application logger.  A logger consists of one or more <see cref="T:Omniscient.Foundation.Logging.ILogWriter"/> objects,
+            sequentially called during a logging operation.  The default logger comes with one in-memory log writer.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel`1">
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager">
             <summary>
-            Represents a model.  Models are logical wrappers around entities; they define relations between entities
-            and are responsible for managing the state and status of entities.
+            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager"/>.  If not set, then it will automatically be created with
+            an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager"/>.  
+            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
             </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule">
+        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
             <summary>
-             An application module is 
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.Presentation.IShell" -->
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.Show">
-            <summary>
-            Tells the shell to display itself, when the application starts.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreateViewControllers" -->
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreatePresenters">
-            <summary>
-            Asks the shell to create all non-data presenters (e.g. Status Bar Presenter, or Message Console Presenter).
-            The shell does not have to keep a reference to those presenters.
-            </summary>
-            <returns>The list of created presenters.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration">
-            <summary>
-            Placeholder for modules configuration.  Contains a list of service definitions.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration.#ctor">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration.Modules">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase">
-            <summary>
-            Base class for view controllers that implements some generic functionalities.
+            Gets the deserialized configuration.  In the configuration file, the config section must
+            be called "foundation.application", and must be in the namespace 
+            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
+            for the complete schema.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewController">
@@ -161,259 +173,6 @@
             <summary>
             Returns the view that has the focus, or by any other mean is the "current view".
             </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.#ctor">
-            <summary>
-            Creates a view controller
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
-            <summary>
-            Opens a view for the given model.
-            </summary>
-            <param name="model">Model to open in a view.</param>
-            <returns>Newly opened view.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OnNewViewOpened(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
-            <summary>
-            Adds a view to the list of opened views, and sets <see cref="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentView"/>.
-            </summary>
-            <param name="view"></param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OpenView``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            Opens a view for the given list of models.
-            </summary>
-            <param name="models">Models to open in a view.</param>
-            <returns>Newly opened view.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.Focus(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
-            <summary>
-            Puts a certain view into focus, given that this view is already opened by the controller.
-            </summary>
-            <param name="view">The view that receives focus.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CloseView(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
-            <summary>
-            Closes a certain view, given that this view is already opened by the controller.
-            </summary>
-            <param name="view">The view to close.</param>
-            <returns>True if the view has been successfully closed.  Otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CloseViewRange(System.Collections.Generic.IEnumerable{Omniscient.Foundation.ApplicationModel.Presentation.IView})">
-            <summary>
-            Closes a group of views, until a certain view is not already opened by the controller.
-            </summary>
-            <param name="views">The views to close.</param>
-            <returns>True if all views have been closed.  Otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.Bind``1">
-            <summary>
-            Binds a model to a view and optionally a view model.  This is a DSL; e.g.:
-            Bind&lt;MyModel&gt;().To&lt;MyView&gt;().Through&lt;MyViewModel&gt;();
-            </summary>
-            <typeparam name="TModel">The type of model to bind.</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.GetBinding``1">
-            <summary>
-            Returns a binding for model of type <typeparamref name="TModel"/> name="TModel"/>, if any.  If not found, returns null.
-            </summary>
-            <typeparam name="TModel">The type of model to search a binding for.</typeparam>
-            <returns>A binding of found, or null if not found.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.GetBinding(System.Type)">
-            <summary>
-            Returns a binding for model of type <paramref name="modelType"/>, if any.  If not found, returns null.
-            </summary>
-            <param name="modelType">The type of model to search a binding for.</param>
-            <returns>A binding of found, or null if not found.</returns>
-        </member>
-        <member name="E:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentViewChanged">
-            <summary>
-            Raised when the <see cref="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentView"/> is changed to another view.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentView">
-            <summary>
-            Returns the view that has the focus, or by any other mean is the "current view".
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OpenedViews">
-            <summary>
-            Gets the list of currently opened views.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding">
-            <summary>
-            Holds a binding between a model and an view.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.#ctor(System.Type)">
-            <summary>
-            Creates a binding for a type of model.
-            </summary>
-            <param name="modelType">The type of model to bind.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.To``1">
-            <summary>
-            Binds a model to a view
-            </summary>
-            <typeparam name="TView">The type of view to bind to.</typeparam>
-            <returns>A binding.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.ModelType">
-            <summary>
-            The type of model that is bound.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.Binding">
-            <summary>
-            The binding to the view.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding">
-            <summary>
-            Represents a binding between a model, a view and optionally a view model.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.#ctor(System.Type)">
-            <summary>
-            Creates the binding
-            </summary>
-            <param name="viewType">The type of the view that is bound.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.Through``1">
-            <summary>
-            Binds a view model to the model-view binding.
-            </summary>
-            <typeparam name="TViewModel">The type of view model to bind.</typeparam>
-            <returns>Returns this.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.ViewType">
-            <summary>
-            Gets the type of the view that is bound.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.ViewModelType">
-            <summary>
-            Gets the optional view model that is bound.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController">
-            <summary>
-            Default implementation for <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  Generally, does not have to be derived for default behavior.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor(System.Boolean)">
-            <summary>
-            Ctor.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
-            <summary>
-            Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
-            and displaying it correctly.
-            </summary>
-            <param name="model">The model to open.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
-            and displaying it correctly.
-            </summary>
-            <param name="models">The models to open.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
-            <summary>
-            Informs the controller that a view has been closed.
-            </summary>
-            <param name="view">The view that's been closed.</param>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel">
-            <summary>
-            Represents a model.  Models are logical wrappers around entities; they define relations between entities
-            and are responsible for managing the state and status of entities.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
-            <summary>
-            Placeholder for a service definition.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Service">
-            <summary>
-            The assembly-qualified name of the type that implements IService for that service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Contract">
-            <summary>
-            The assembly-qualified name of that service's contract.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
-            <summary>
-            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ApplicationModel.IConfigurable"/>.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
-            <summary>
-            Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
-            ApplicationConfiguration.xsd.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.#ctor">
-            <summary>
-            Ctor.  Creates empty childs for optional childs.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ServicesConfiguration">
-            <summary>
-            Services section.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ModulesConfiguration">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration">
-            <summary>
-            Placeholder for services configuration.  Contains a list of service definitions.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.#ctor">
-            <summary>
-            Ctor.  Creates an empty list of service definitions.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServicesConfiguration.ServiceDefinitions">
-            <summary>
-            Gets the list of service definitions.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter" -->
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
-            <summary>
-            Writes a single message to the presentation medium.  Most presenters will add more complex functionality (through
-            a custom interface) than this simple function.
-            </summary>
-            <param name="message">A message to display.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.Name">
-            <summary>
-            Gets the name of that presenter.  Generally the name of the concrete class.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput" -->
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewModel`1">
-            <summary>
-            IViewModel is a wrapper for the IModel which is bound to IView.
-            </summary>
-            <typeparam name="TModel">Type of the model to be wrapped.</typeparam>
         </member>
         <member name="M:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager.Load(Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule)">
             <summary>
@@ -613,119 +372,45 @@
             Gets the total number of loaded modules.  Decreases when unloading modules.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.ApplicationManager">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject">
             <summary>
-            Abstracts the concept of an application.  Serves as the bootstrapper of any application
-            that uses the Foundation.
+            Represents an object that has a Text property to be displayed on the UI.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication">
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentableObject.Text">
             <summary>
-            Starts the application.  That method should be one of the first being called when the program starts.  The method
-            loads the configuration from the AppDomain configuration file.
-            </summary>
-            <remarks>
-            That method will look for application configuration.  In the configuration file, the config section must
-            be called "foundation.application", and must be in the namespace 
-            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  The section handler is 
-            <see cref="!:ApplicationConfigurationSectionHandler"/>.
-            </remarks>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication(Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration)">
-            <summary>
-            Starts the application.  That method should be one of the first being called when the program starts. The method
-            accepts an existing configuration object.  See <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/> for default configuration.
-            </summary>
-            <param name="config">Loaded application object.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.CloseApplication">
-            <summary>
-            Closes the application.  Generally, that should lead to the process being terminated.
-            </summary>
-            <remarks>
-            All services that implement <see cref="T:Omniscient.Foundation.ApplicationModel.IStartable"/> are stopped here, in reverse order that they 
-            have been started.
-            </remarks>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current">
-            <summary>
-            Gets the current Application object.  Each application using foundation has a single Current Application.
+            Gets or sets the text displayed on the screen for that object.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.IsStarted">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IModel">
             <summary>
-            Gets a value indicating whether <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Current"/> has been started by a call to <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>.
+            Core contract for a model.  See <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel"/> for models that wrap entities.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModule">
             <summary>
-            Gets or sets the <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  If not set, then it will automatically be created with an instance
-            of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ServiceProvider"/>.
-            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController">
-            <summary>
-            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  If not set, then it will automatically be created with an 
-            instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.PresentationController"/>.
-            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Shell">
-            <summary>
-            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell"/>, which is the main UI fabric of a desktop application.  If not set, then
-            the user will have to manually create presenters (<see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter"/>) and view controllers
-            (<see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewController"/>), and bind those to the UI.
-            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Kernel">
-            <summary>
-            Gets or sets Ninject's Kernel.  If not set, then this application will run without dependency injection.
-            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.CommandStore">
-            <summary>
-            Get or sets Ninject's Command strore.  If not set, then this application will run without dependency injection.
-            This stored is used to get all the application commands.
+             An application module is 
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Logger">
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration">
             <summary>
-            Gets or sets the application logger.  A logger consists of one or more <see cref="T:Omniscient.Foundation.Logging.ILogWriter"/> objects,
-            sequentially called during a logging operation.  The default logger comes with one in-memory log writer.
+            Placeholder for application configuration.  Will persist and unpersist against the schema defined in the file
+            ApplicationConfiguration.xsd.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager">
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.#ctor">
             <summary>
-            Gets or sets the <see cref="T:Omniscient.Foundation.ApplicationModel.Modularity.IApplicationModuleManager"/>.  If not set, then it will automatically be created with
-            an instance of <see cref="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.ApplicationModuleManager"/>.  
-            Once the application is started with <see cref="M:Omniscient.Foundation.ApplicationModel.ApplicationManager.StartApplication"/>, it is not possible to set this to a new value.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">Thrown when setting to a value after the application is started.</exception>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Config">
-            <summary>
-            Gets the deserialized configuration.  In the configuration file, the config section must
-            be called "foundation.application", and must be in the namespace 
-            "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
-            for the complete schema.
+            Ctor.  Creates empty childs for optional childs.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ServicesConfiguration">
             <summary>
+            Services section.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract.GetView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfiguration.ModulesConfiguration">
             <summary>
             </summary>
-            <param name="model"></param>
-            <returns></returns>
         </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IView">
             <summary>
@@ -781,6 +466,379 @@
             </summary>
             <param name="view">The view that raises the event</param>
             <param name="selection">The object being selected in the view</param>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.EntityModelBase`1">
+            <summary>
+            Base class for models.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel`1">
+            <summary>
+            Represents a model.  Models are logical wrappers around entities; they define relations between entities
+            and are responsible for managing the state and status of entities.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ModuleDefinition.Type">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewControllerExtenderContract.GetView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IShell">
+            <summary>
+            The shell is the main window in an application.  It defines placeholders for displaying <c>IModel</c> objects,
+            which wrap <c>IEntity</c> objects, and other placeholder for displaying non-data information (like commands) through the
+            use of <c>IPresenter</c> objects.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.Show">
+            <summary>
+            Tells the shell to display itself, when the application starts.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreateViewControllers">
+            <summary>
+            Asks the shell to create one <c>IViewController</c> object for each region where <c>IModel</c> objects
+            will be displayed, and return all created controllers.  The shell does not have to keep a reference to
+            those controllers.
+            </summary>
+            <remarks>
+            In most applications, the shell will have only one view controllers.
+            </remarks>
+            <returns>The list of created view controllers.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IShell.CreatePresenters">
+            <summary>
+            Asks the shell to create all non-data presenters (e.g. Status Bar Presenter, or Message Console Presenter).
+            The shell does not have to keep a reference to those presenters.
+            </summary>
+            <returns>The list of created presenters.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IEntityModel">
+            <summary>
+            Represents a model.  Models are logical wrappers around entities; they define relations between entities
+            and are responsible for managing the state and status of entities.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase">
+            <summary>
+            Base class for view controllers that implements some generic functionalities.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.#ctor">
+            <summary>
+            Creates a view controller
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            Opens a view for the given model.
+            </summary>
+            <param name="model">Model to open in a view.</param>
+            <returns>Newly opened view.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OnNewViewOpened(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
+            <summary>
+            Adds a view to the list of opened views, and sets <see cref="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentView"/>.
+            </summary>
+            <param name="view"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OpenView``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Opens a view for the given list of models.
+            </summary>
+            <param name="models">Models to open in a view.</param>
+            <returns>Newly opened view.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.Focus(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
+            <summary>
+            Puts a certain view into focus, given that this view is already opened by the controller.
+            </summary>
+            <param name="view">The view that receives focus.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CloseView(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
+            <summary>
+            Closes a certain view, given that this view is already opened by the controller.
+            </summary>
+            <param name="view">The view to close.</param>
+            <returns>True if the view has been successfully closed.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CloseViewRange(System.Collections.Generic.IEnumerable{Omniscient.Foundation.ApplicationModel.Presentation.IView})">
+            <summary>
+            Closes a group of views, until a certain view is not already opened by the controller.
+            </summary>
+            <param name="views">The views to close.</param>
+            <returns>True if all views have been closed.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.Bind``1">
+            <summary>
+            Binds a model to a view and optionally a view model.  This is a DSL; e.g.:
+            Bind&lt;MyModel&gt;().To&lt;MyView&gt;().Through&lt;MyViewModel&gt;();
+            </summary>
+            <typeparam name="TModel">The type of model to bind.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.GetBinding``1">
+            <summary>
+            Returns a binding for model of type <typeparamref name="TModel"/> name="TModel"/>, if any.  If not found, returns null.
+            </summary>
+            <typeparam name="TModel">The type of model to search a binding for.</typeparam>
+            <returns>A binding of found, or null if not found.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.GetBinding(System.Type)">
+            <summary>
+            Returns a binding for model of type <paramref name="modelType"/>, if any.  If not found, returns null.
+            </summary>
+            <param name="modelType">The type of model to search a binding for.</param>
+            <returns>A binding of found, or null if not found.</returns>
+        </member>
+        <member name="E:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentViewChanged">
+            <summary>
+            Raised when the <see cref="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentView"/> is changed to another view.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.CurrentView">
+            <summary>
+            Returns the view that has the focus, or by any other mean is the "current view".
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.OpenedViews">
+            <summary>
+            Gets the list of currently opened views.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding">
+            <summary>
+            Holds a binding between a model and an view.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.#ctor(System.Type)">
+            <summary>
+            Creates a binding for a type of model.
+            </summary>
+            <param name="modelType">The type of model to bind.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.To``1">
+            <summary>
+            Binds a model to a view
+            </summary>
+            <typeparam name="TView">The type of view to bind to.</typeparam>
+            <returns>A binding.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.ModelType">
+            <summary>
+            The type of model that is bound.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.Binding">
+            <summary>
+            The binding to the view.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding">
+            <summary>
+            Represents a binding between a model, a view and optionally a view model.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.#ctor(System.Type)">
+            <summary>
+            Creates the binding
+            </summary>
+            <param name="viewType">The type of the view that is bound.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.Through``1">
+            <summary>
+            Binds a view model to the model-view binding.
+            </summary>
+            <typeparam name="TViewModel">The type of view model to bind.</typeparam>
+            <returns>Returns this.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.ViewType">
+            <summary>
+            Gets the type of the view that is bound.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.ViewModelType">
+            <summary>
+            Gets the optional view model that is bound.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition">
+            <summary>
+            Placeholder for a service definition.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Service">
+            <summary>
+            The assembly-qualified name of the type that implements IService for that service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Contract">
+            <summary>
+            The assembly-qualified name of that service's contract.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ServiceDefinition.Config">
+            <summary>
+            Optional.  Any configuration needed by a service that implements <see cref="T:Omniscient.Foundation.ApplicationModel.IConfigurable"/>.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration">
+            <summary>
+            Placeholder for modules configuration.  Contains a list of service definitions.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Configuration.ModulesConfiguration.Modules">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter">
+            <summary>
+            The IPresenter gives direct access to the UI.  Contrary to <c>IViewController</c>s, which are the entry door to the MVC,
+            IPresenter are there simply to display message windows, ask for user input, etc.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
+            <summary>
+            Writes a single message to the presentation medium.  Most presenters will add more complex functionality (through
+            a custom interface) than this simple function.
+            </summary>
+            <param name="message">A message to display.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.Name">
+            <summary>
+            Gets the name of that presenter.  Generally the name of the concrete class.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.RequiresUserInput">
+            <summary>
+            Gets a values indicating whether this presenter will require user input.  For example, if the presenter
+            is to display message windows with an Ok button, then it requires user input.  If it simply writes messages
+            to a console window, or to a status bar, for example, then it does not require user input.  According to the 
+            value of <c>IPresentationController.SupportsUserInput</c>, the presenter may not be allowed to be registered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController">
+            <summary>
+            Represents an application controller.  Responsible for managing entity edition concurrency, and for managing the UI in general.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="model">The model to open.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.OpenView``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="model">The models to open.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
+            <summary>
+            Informs the controller that a view has been closed.
+            </summary>
+            <param name="view">The view that's been closed.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterViewController(Omniscient.Foundation.ApplicationModel.Presentation.IViewController)">
+            <summary>
+            Registers an <c>IViewController</c>. Default use is to feed that list at application startup.
+            </summary>
+            <param name="controller">An <c>IViewController</c> to register.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetViewController``1">
+            <summary>
+            Gets an <c>IViewController</c> using its type.
+            </summary>
+            <typeparam name="ViewControllerType">The type of the view controller to look for.</typeparam>
+            <returns>An <c>IViewController</c> if found.  Otherwise, null.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.RegisterPresenter(Omniscient.Foundation.ApplicationModel.Presentation.IPresenter)">
+            <summary>
+            Registers an <c>IPresenter</c>.
+            </summary>
+            <param name="presenter">An <c>IPresenter</c> to register.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the <c>IPresenter.RequiresUserInput</c> is
+            <c>True</c>, while the value of <c>SupportsUserInput</c> is <c>False</c>.</exception>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter(System.String)">
+            <summary>
+            Gets an <c>IPresenter</c> using its name.
+            </summary>
+            <param name="name">The name of the presenter to look for.</param>
+            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.GetPresenter``1">
+            <summary>
+            Gets an <c>IPresenter</c> using its type.
+            </summary>
+            <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
+            <returns>An <c>IPresenter</c> if found.  Otherwise, null.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.CloseAllViews">
+            <summary>
+            Close all views of all view controllers.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController.SupportsUserInput">
+            <summary>
+            Gets a value indicating wheter this presentation controller supports user input.
+            If <c>False</c>, then calling <c>RegisterPresenter</c> with an <c>IPresenter</c>
+            that requires user input will fail.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController">
+            <summary>
+            Default implementation for <see cref="T:Omniscient.Foundation.ApplicationModel.Presentation.IPresentationController"/>.  Generally, does not have to be derived for default behavior.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.#ctor(System.Boolean)">
+            <summary>
+            Ctor.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView(Omniscient.Foundation.ApplicationModel.Presentation.IModel)">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="model">The model to open.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.OpenView``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Opens a view.  The controller is responsible for finding a view for those models, instanciating the view
+            and displaying it correctly.
+            </summary>
+            <param name="models">The models to open.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.PresentationController.ViewClosed(Omniscient.Foundation.ApplicationModel.Presentation.IView)">
+            <summary>
+            Informs the controller that a view has been closed.
+            </summary>
+            <param name="view">The view that's been closed.</param>
         </member>
     </members>
 </doc>

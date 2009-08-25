@@ -4,74 +4,282 @@
         <name>Omniscient.Foundation</name>
     </assembly>
     <members>
-        <member name="T:Omniscient.Foundation.Logging.ILogger">
+        <member name="T:Omniscient.Foundation.Logging.ILogWriter">
             <summary>
-             Represents a logger.  It consists of a list of writers, and methods to log messages.
+            Writer that ultimately receives log entries and write them to an underlying stream.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogger.Log(Omniscient.Foundation.Logging.LogEntry)">
+        <member name="M:Omniscient.Foundation.Logging.ILogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
             <summary>
-            Logs a log entry directly
+            Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
             </summary>
-            <param name="entry">The entry to log</param>
+            <param name="entry">The entry to log.</param>
         </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogger.Log(System.Object,Omniscient.Foundation.Logging.LogLevel)">
+        <member name="P:Omniscient.Foundation.Logging.ILogWriter.Level">
             <summary>
-            Creates and logs an entry of the specified level.
-            </summary>
-            <param name="message">The message to log</param>
-            <param name="level">The level of the resulting log entry</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogger.Debug(System.Object)">
-            <summary>
-            Creates and logs an entry with the specified message, at the Debug level.
-            </summary>
-            <param name="message">The message to log</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogger.Info(System.Object)">
-            <summary>
-            Creates and logs an entry with the specified message, at the Info level.
-            </summary>
-            <param name="message">The message to log</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogger.Error(System.Object)">
-            <summary>
-            Creates and logs an entry with the specified message, at the Error level.
-            </summary>
-            <param name="message">The message to log</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogger.Fatal(System.Object)">
-            <summary>
-            Creates and logs an entry with the specified message, at the Fatal level.
-            </summary>
-            <param name="message">The message to log</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.ILogger.Writers">
-            <summary>
-            Gets the list of writers.
+            The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.Logging.ILogger.DefaultWriter">
+        <member name="P:Omniscient.Foundation.Logging.ILogWriter.IsEnabled">
             <summary>
-            Gets a default writer.
+            Gets or sets a value indicating whether the writer is available to receive log entries.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IConfigurable">
+        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
             <summary>
-            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
+            Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
+            </summary>
+            <param name="entry">The entry to log.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry,System.Boolean)">
+            <summary>
+            Writes the log entry to a medium.
+            </summary>
+            <param name="entry">The entry to log.</param>
+            <param name="flush">A value indicating whether the writer should call Flush after writing to the TextWriter.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Flush">
+            <summary>
+            Flushes the writer to the underlying media.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Stream">
+            <summary>
+            Gets the underlying stream
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Level">
+            <summary>
+            The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the writer is available to receive log entries.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Writer">
+            <summary>
+            Gets the underlying TextWriter object.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.AutoflushLevel">
+            <summary>
+            Minimum level at which Flush will be automatically called after a call to Write.  Equivalent to calling Write(entry, false).
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.CredentialService">
+            <summary>
+            Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
+            as the AppDomain's principal.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
+            <summary>
+             Base class for services.
+            </summary>
+            <typeparam name="TContract">The service's contract type.</typeparam>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+            <summary>
+            Defines the base interface for a service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation">
+            <summary>
+            Gets the implementation of the service.  Returns an object whose type must be equal to <c>ImplementationType</c>.
+            </summary>
+            <returns>Service's implementation, of type <c>ImplementationType</c>.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+            <summary>
+            Gets the name of the service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
+            <summary>
+            Gets the implementation's contract type of the service.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
+            <summary>
+             Returns an implementation of the contract.
+            </summary>
+            <returns>An implementation of the contract.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
+            <summary>
+            Defines a component whose behavior can be extended by means of other components
+            that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">Contract type that extenders must implement when pluging into that extendable.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IExtendable`1.RegisterExtender(`0)">
+            <summary>
+            Registers an implementation of <typeparamref name="TContract"/> agains the extendable object.
+            </summary>
+            <param name="implementation">The extender's implementation</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.IExtendable`1.AllExtenders">
+            <summary>
+            Gets a list of all extenders.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.ICredentialService">
+            <summary>
+            Defines a service that will provide the application with user credentials.  The service places the current user
+            in the <c>System.Threading.Thread.CurrentPrincipal</c> value.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.IStartable">
+            <summary>
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Start">
+            <summary>
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Stop">
+            <summary>
+            Called when the application shuts down.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.ICredentialService.EnsureUserIsAuthenticated">
+            <summary>
+            Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
+            If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The service must rely on extenders to ask for username and password;
+            therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.ICredentialService.CurrentPrincipal">
+            <summary>
+            Called on request from anywhere where the user credentials are required.  Returns the same object as 
+            <c>System.Threading.Thread.CurrentPrincipal</c>.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.CredentialService.GetImplementation">
+            <summary>
+            Retrieves implementation for ICredentialService.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.CredentialService.EnsureUserIsAuthenticated">
+            <summary>
+            Ensures the user has entered login information, using extenders.  Only the first extender will be used.
             </summary>
             <remarks>
-            See the configuration schema for more details.
+            If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
             </remarks>
+            <exception cref="T:System.Security.SecurityException">Thrown if the extender is unable to authenticate the user.</exception>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IConfigurable.Configure(System.Object)">
+        <member name="M:Omniscient.Foundation.Security.CredentialService.Start">
             <summary>
-            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
+            Starts the current service.
             </summary>
-            <param name="config">The xml configuration.</param>
-            <remarks>
-            See the ApplicationModel configuration schema for more details.
-            </remarks>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.CredentialService.Stop">
+            <summary>
+            Stops the current service.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.CredentialService.CurrentPrincipal">
+            <summary>
+            Returns the current user principal.  That user will not be logged in until a call is made to <c>EnsureUserIsLoggedIn</c>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Logging.LogLevel">
+            <summary>
+            Log level used to categorize log entries.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Logging.LogLevel.Debug">
+            <summary>
+            This level is commonly used to trace the program for debugging purposes.  Generally not used in production environments.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Logging.LogLevel.Info">
+            <summary>
+            This level is often use to log information in the normal course of the program
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Logging.LogLevel.Error">
+            <summary>
+            This level is generally used to log errors from which the program can recover (normally used in catch statements).
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Logging.LogLevel.Fatal">
+            <summary>
+            This level is used to log errors from which the program cannot recover or that leave inconsistent state.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Logging.LogEntry">
+            <summary>
+            A log entry.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.LogEntry.#ctor">
+            <summary>
+            Creates a log entry whose time is set to Now.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.LogEntry.#ctor(System.DateTime)">
+            <summary>
+            Creates a log entry at specified time.
+            </summary>
+            <param name="time">The time of the entry</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.LogEntry.#ctor(System.Object,Omniscient.Foundation.Logging.LogLevel)">
+            <summary>
+            Creates a log entry whose time is set to Now.
+            </summary>
+            <param name="message">The message</param>
+            <param name="level">The log level</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.LogEntry.ToString">
+            <summary>
+            Returns the string representation of the entry; this is what will be actually logged.
+            </summary>
+            <returns>A string representatino of the entry.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.LogEntry.Message">
+            <summary>
+            A message to log
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.LogEntry.Level">
+            <summary>
+            The level at which the entry has been created
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.LogEntry.Time">
+            <summary>
+            The local time at which the entry has been created
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.DIServiceProvider">
+            <summary>
+            Service provider that registers services against Ninject's dependency injection container.  Once registered, the service
+            is available from the Kernel, as well as from the service provider itself.  In all cases, a call to 
+            <see cref="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation"/> will be made each time the service is accessed.
+            </summary>
+            <example>
+            Let's have a validation service: IValidator and IValidatorService (derives from IService).  Let's also have a class named Validator that implements
+            IValidator and IValidatorService, and returns a reference to itself when GetImplementation is invoked.
+            You register that service with a call to DIServiceProvider.RegisterService&lt;IValidator&gt;(new Validator());
+            
+            Once it's registered, you can access the service like this:
+            IValidator v = serviceProvider.GetService&lt;IValidator&gt;();
+            
+            or like that:
+            IValidator v = kernel.Get&lt;IValidator&gt;();
+            
+            In all cases, the framework will call GetImplementation on the service to return an instance of IValidator.
+            </example>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
             <summary>
@@ -154,69 +362,32 @@
             Gets the number of services that are registered.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.#ctor(Ninject.Core.IKernel)">
             <summary>
-            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
-            and implementation type <typeparamref name="TImplementation"/>.
-            
-            This service's implementation will be instaciated each time the service is requested.
+            Ctor
             </summary>
-            <typeparam name="TContract">Service's contract type.</typeparam>
-            <typeparam name="TImplementation">Implementation type.</typeparam>
+            <param name="kernel">a Ninject kernel</param>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
+        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
             <summary>
-             Base class for services.
+            Adds a service to the provider, and adds a binding to the Kernel, allowing the service to be part of the dependency
+            injection machanism.
             </summary>
-            <typeparam name="TContract">The service's contract type.</typeparam>
+            <param name="contractType">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+        <member name="P:Omniscient.Foundation.ServiceModel.DIServiceProvider.Kernel">
             <summary>
-            Defines the base interface for a service.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ServiceModel.IService.GetImplementation" -->
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
-            <summary>
-            Gets the name of the service.
+            Gets or sets the Ninject kernel used to register regular services as Ninject's services, so that they're part of
+            the DI mechanism.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
+        <member name="T:Omniscient.Foundation.Security.SecureIdentity">
             <summary>
-            Gets the implementation's contract type of the service.
+            Implementation of <c>IIdentity</c> that allows the identity to be "promoted", that is, go from anonymous (non-authenticated)
+            to authenticated with a name, password and an authentication type.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
-            <summary>
-             Returns an implementation of the contract.
-            </summary>
-            <returns>An implementation of the contract.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
-            <summary>
-            Returns the implementation; instanciate a new one on each call.
-            </summary>
-            <returns>Service's implementation.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.IAuthorizationService">
-            <summary>
-            Authorizes a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object by promoting it with roles.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Promote(Omniscient.Foundation.Security.SecurePrincipal)">
-            <summary>
-            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object with roles.
-            </summary>
-            <param name="principal">Principal object to promote with roles.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Authorize(Omniscient.Foundation.Security.SecureIdentity)">
-            <summary>
-            Authorizes a Principal with roles and returns it as a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/>.
-            </summary>
-            <param name="identity">The Identity used by the new Principal.</param>
-            <returns>A Principal with roles.</returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.SecureIdentity" -->
         <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor">
             <summary>
             Creates an anonymous (unauthenticated) user.
@@ -276,23 +447,10 @@
             Gets the name of the user represented by this Identity.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
+        <member name="T:Omniscient.Foundation.Commanding.DelegateCommand">
             <summary>
-            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
+            Command that delegates the execution of Execute and CanExecute
             </summary>
-            <typeparam name="T">the type of object to wrap.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
-            <summary>
-            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
-            adaptation is allowed (or possible).
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
-            <summary>
-            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
-            </summary>
-            <param name="item">The item to wrap.</param>
         </member>
         <member name="T:Omniscient.Foundation.Commanding.ICommandCore">
             <summary>
@@ -329,62 +487,192 @@
             Gets the name of the command.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
             <summary>
-            Defines a component whose behavior can be extended by means of other components
-            that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
+            Constructs a command that delegates the execution of Execute and CanExecute
             </summary>
-            <typeparam name="TContract">Contract type that extenders must implement when pluging into that extendable.</typeparam>
+            <param name="executeAction">Action to call when executing Execute</param>
+            <param name="canExecuteFunc">Function to call when executing CanExecute</param>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IExtendable`1.RegisterExtender(`0)">
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.CanExecute(System.Object)">
             <summary>
-            Registers an implementation of <typeparamref name="TContract"/> agains the extendable object.
+            Returns true if the command can be executed.  Otherwise, false.
             </summary>
-            <param name="implementation">The extender's implementation</param>
+            <param name="param">The param that will be passed to Execute.</param>
+            <returns>True if the command can be executed.  Otherwise, false.</returns>
         </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.IExtendable`1.AllExtenders">
+        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.Execute(System.Object)">
             <summary>
-            Gets a list of all extenders.
+            Executes the command.  Returns without executing the command if a call to CanExecute returns false.
+            </summary>
+            <param name="param">The param passed to the executing command.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
+        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
+            <summary>
+            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
+            </summary>
+            <typeparam name="T">the type of object to wrap.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
+            <summary>
+            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
+            adaptation is allowed (or possible).
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.DIServiceProvider">
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
             <summary>
-            Service provider that registers services against Ninject's dependency injection container.  Once registered, the service
-            is available from the Kernel, as well as from the service provider itself.  In all cases, a call to 
-            <see cref="M:Omniscient.Foundation.ServiceModel.IService.GetImplementation"/> will be made each time the service is accessed.
+            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
             </summary>
-            <example>
-            Let's have a validation service: IValidator and IValidatorService (derives from IService).  Let's also have a class named Validator that implements
-            IValidator and IValidatorService, and returns a reference to itself when GetImplementation is invoked.
-            You register that service with a call to DIServiceProvider.RegisterService&lt;IValidator&gt;(new Validator());
+            <param name="item">The item to wrap.</param>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.SecurePrincipal">
+            <summary>
+            Implementation of <c>IPrincipal</c> that allows the principal to be "promoted", that is, add roles to it.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor">
+            <summary>
+            Creates an instance of SecurePrincipal with an anonymous (unauthenticated) <c>SecureIdentity</c>, and an empty collection
+            of roles.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])">
+            <summary>
+            Creates an instance of SecurePrincipal with an existing <c>SecureIdentity</c>, and an initial collection of roles.
+            </summary>
+            <param name="identity"></param>
+            <param name="roles"></param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
+            <summary>
+            Adds specified roles to the collection of roles.
+            </summary>
+            <param name="roles">Roles to add to the roles collection.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
+            <summary>
+            Returns true if that principal is granted with given role.  Otherwise, false.
+            </summary>
+            <param name="role">The role to test.</param>
+            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
+            <summary>
+            Gets a string array of all roles this principal is granted.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity">
+            <summary>
+            Gets the <c>IIdentity</c> of that principal.  Concrete type is <c>SecureIdentity</c>.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.Identity">
+            <summary>
+            Gets the <c>SecureIdentity</c> of that principal.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.IAuthenticationService">
+            <summary>
+            Authenticates a user based on a username (the identifier) and a password.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Promote(Omniscient.Foundation.Security.SecureIdentity,System.String,System.String)">
+            <summary>
+            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object by authenticating the 
+            username and password.
+            </summary>
+            <param name="identity">An existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object.</param>
+            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
+            Can be empty (anonymous).</param>
+            <param name="password">A password to validate.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Authenticate(System.String,System.String)">
+            <summary>
+            Authenticates the username and password and returns a new <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.
+            </summary>
+            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
+            Can be empty (anonymous).</param>
+            <param name="password">A password to validate.</param>
+            <returns>An authenticated user, or anonymous if the username was empty.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Logging.ILogger">
+            <summary>
+             Represents a logger.  It consists of a list of writers, and methods to log messages.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Log(Omniscient.Foundation.Logging.LogEntry)">
+            <summary>
+            Logs a log entry directly
+            </summary>
+            <param name="entry">The entry to log</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Log(System.Object,Omniscient.Foundation.Logging.LogLevel)">
+            <summary>
+            Creates and logs an entry of the specified level.
+            </summary>
+            <param name="message">The message to log</param>
+            <param name="level">The level of the resulting log entry</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Debug(System.Object)">
+            <summary>
+            Creates and logs an entry with the specified message, at the Debug level.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Info(System.Object)">
+            <summary>
+            Creates and logs an entry with the specified message, at the Info level.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Error(System.Object)">
+            <summary>
+            Creates and logs an entry with the specified message, at the Error level.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Logging.ILogger.Fatal(System.Object)">
+            <summary>
+            Creates and logs an entry with the specified message, at the Fatal level.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.ILogger.Writers">
+            <summary>
+            Gets the list of writers.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.ILogger.DefaultWriter">
+            <summary>
+            Gets a default writer.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+            <summary>
+            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
+            and implementation type <typeparamref name="TImplementation"/>.
             
-            Once it's registered, you can access the service like this:
-            IValidator v = serviceProvider.GetService&lt;IValidator&gt;();
-            
-            or like that:
-            IValidator v = kernel.Get&lt;IValidator&gt;();
-            
-            In all cases, the framework will call GetImplementation on the service to return an instance of IValidator.
-            </example>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.#ctor(Ninject.Core.IKernel)">
-            <summary>
-            Ctor
+            This service's implementation will be instaciated each time the service is requested.
             </summary>
-            <param name="kernel">a Ninject kernel</param>
+            <typeparam name="TContract">Service's contract type.</typeparam>
+            <typeparam name="TImplementation">Implementation type.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.DIServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
             <summary>
-            Adds a service to the provider, and adds a binding to the Kernel, allowing the service to be part of the dependency
-            injection machanism.
+            Returns the implementation; instanciate a new one on each call.
             </summary>
-            <param name="contractType">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
+            <returns>Service's implementation.</returns>
         </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.DIServiceProvider.Kernel">
+        <member name="T:Omniscient.Foundation.INamed">
             <summary>
-            Gets or sets the Ninject kernel used to register regular services as Ninject's services, so that they're part of
-            the DI mechanism.
+            Represents something that is identifiable by a Name.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.INamed.Name">
+            <summary>
+            Gets or sets the name of this Named item.  Can be unique, or not 
+            (this is not part of the contract; to be specified by concrete types)
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
@@ -431,22 +719,6 @@
             Gets the name of the command.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IStartable">
-            <summary>
-            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Start">
-            <summary>
-            Called when the application starts.  All services are loaded when this method is called.  Services are started
-            in the order they are defined in the configuration.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Stop">
-            <summary>
-            Called when the application shuts down.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtender">
             <summary>
             Defines an Extender contract for prompting a user for his/her credential.
@@ -457,89 +729,6 @@
             Prompts a user for his/her credential and returns it.
             </summary>
             <returns>User credentials.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.CredentialService">
-            <summary>
-            Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
-            as the AppDomain's principal.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.ICredentialService" -->
-        <member name="M:Omniscient.Foundation.Security.ICredentialService.EnsureUserIsAuthenticated">
-            <summary>
-            Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
-            If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">The service must rely on extenders to ask for username and password;
-            therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.ICredentialService.CurrentPrincipal" -->
-        <member name="M:Omniscient.Foundation.Security.CredentialService.GetImplementation">
-            <summary>
-            Retrieves implementation for ICredentialService.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.CredentialService.EnsureUserIsAuthenticated">
-            <summary>
-            Ensures the user has entered login information, using extenders.  Only the first extender will be used.
-            </summary>
-            <remarks>
-            If the user did not enter any information, UserCredential will be assigned the "anonymous" status.
-            </remarks>
-            <exception cref="T:System.Security.SecurityException">Thrown if the extender is unable to authenticate the user.</exception>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.CredentialService.Start">
-            <summary>
-            Starts the current service.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.CredentialService.Stop">
-            <summary>
-            Stops the current service.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.CredentialService.CurrentPrincipal" -->
-        <member name="T:Omniscient.Foundation.INamed">
-            <summary>
-            Represents something that is identifiable by a Name.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.INamed.Name">
-            <summary>
-            Gets or sets the name of this Named item.  Can be unique, or not 
-            (this is not part of the contract; to be specified by concrete types)
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Commanding.DelegateCommand">
-            <summary>
-            Command that delegates the execution of Execute and CanExecute
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
-            <summary>
-            Constructs a command that delegates the execution of Execute and CanExecute
-            </summary>
-            <param name="executeAction">Action to call when executing Execute</param>
-            <param name="canExecuteFunc">Function to call when executing CanExecute</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.CanExecute(System.Object)">
-            <summary>
-            Returns true if the command can be executed.  Otherwise, false.
-            </summary>
-            <param name="param">The param that will be passed to Execute.</param>
-            <returns>True if the command can be executed.  Otherwise, false.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Commanding.DelegateCommand.Execute(System.Object)">
-            <summary>
-            Executes the command.  Returns without executing the command if a call to CanExecute returns false.
-            </summary>
-            <param name="param">The param passed to the executing command.</param>
-        </member>
-        <member name="T:Omniscient.Foundation.Extensions">
-            <summary>
-            Defines extension methods on the String class.
-            </summary>
         </member>
         <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
             <summary>
@@ -556,186 +745,45 @@
             </summary>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
-        <member name="T:Omniscient.Foundation.Security.IAuthenticationService">
+        <member name="T:Omniscient.Foundation.Extensions">
             <summary>
-            Authenticates a user based on a username (the identifier) and a password.
+            Defines extension methods on the String class.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Promote(Omniscient.Foundation.Security.SecureIdentity,System.String,System.String)">
+        <member name="T:Omniscient.Foundation.ApplicationModel.IConfigurable">
             <summary>
-            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object by authenticating the 
-            username and password.
+            Defines a configurable service.  Implement this interface when you need your service to receive configuration.
             </summary>
-            <param name="identity">An existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object.</param>
-            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
-            Can be empty (anonymous).</param>
-            <param name="password">A password to validate.</param>
+            <remarks>
+            See the configuration schema for more details.
+            </remarks>
         </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Authenticate(System.String,System.String)">
+        <member name="M:Omniscient.Foundation.ApplicationModel.IConfigurable.Configure(System.Object)">
             <summary>
-            Authenticates the username and password and returns a new <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.
+            Called at configuration time.  If the service is defined in the configuration file, that method is automatically called.
             </summary>
-            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
-            Can be empty (anonymous).</param>
-            <param name="password">A password to validate.</param>
-            <returns>An authenticated user, or anonymous if the username was empty.</returns>
+            <param name="config">The xml configuration.</param>
+            <remarks>
+            See the ApplicationModel configuration schema for more details.
+            </remarks>
         </member>
-        <member name="T:Omniscient.Foundation.Logging.LogLevel">
+        <member name="T:Omniscient.Foundation.Security.IAuthorizationService">
             <summary>
-            Log level used to categorize log entries.
+            Authorizes a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object by promoting it with roles.
             </summary>
         </member>
-        <member name="F:Omniscient.Foundation.Logging.LogLevel.Debug">
+        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Promote(Omniscient.Foundation.Security.SecurePrincipal)">
             <summary>
-            This level is commonly used to trace the program for debugging purposes.  Generally not used in production environments.
+            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object with roles.
             </summary>
+            <param name="principal">Principal object to promote with roles.</param>
         </member>
-        <member name="F:Omniscient.Foundation.Logging.LogLevel.Info">
+        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Authorize(Omniscient.Foundation.Security.SecureIdentity)">
             <summary>
-            This level is often use to log information in the normal course of the program
+            Authorizes a Principal with roles and returns it as a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/>.
             </summary>
+            <param name="identity">The Identity used by the new Principal.</param>
+            <returns>A Principal with roles.</returns>
         </member>
-        <member name="F:Omniscient.Foundation.Logging.LogLevel.Error">
-            <summary>
-            This level is generally used to log errors from which the program can recover (normally used in catch statements).
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Logging.LogLevel.Fatal">
-            <summary>
-            This level is used to log errors from which the program cannot recover or that leave inconsistent state.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Logging.LogEntry">
-            <summary>
-            A log entry.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.LogEntry.#ctor">
-            <summary>
-            Creates a log entry whose time is set to Now.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.LogEntry.#ctor(System.DateTime)">
-            <summary>
-            Creates a log entry at specified time.
-            </summary>
-            <param name="time">The time of the entry</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.LogEntry.#ctor(System.Object,Omniscient.Foundation.Logging.LogLevel)">
-            <summary>
-            Creates a log entry whose time is set to Now.
-            </summary>
-            <param name="message">The message</param>
-            <param name="level">The log level</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.LogEntry.ToString">
-            <summary>
-            Returns the string representation of the entry; this is what will be actually logged.
-            </summary>
-            <returns>A string representatino of the entry.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.LogEntry.Message">
-            <summary>
-            A message to log
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.LogEntry.Level">
-            <summary>
-            The level at which the entry has been created
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.LogEntry.Time">
-            <summary>
-            The local time at which the entry has been created
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Logging.ILogWriter">
-            <summary>
-            Writer that ultimately receives log entries and write them to an underlying stream.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.ILogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
-            <summary>
-            Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
-            </summary>
-            <param name="entry">The entry to log.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.ILogWriter.Level">
-            <summary>
-            The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.ILogWriter.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the writer is available to receive log entries.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
-            <summary>
-            Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
-            </summary>
-            <param name="entry">The entry to log.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry,System.Boolean)">
-            <summary>
-            Writes the log entry to a medium.
-            </summary>
-            <param name="entry">The entry to log.</param>
-            <param name="flush">A value indicating whether the writer should call Flush after writing to the TextWriter.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Flush">
-            <summary>
-            Flushes the writer to the underlying media.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Stream">
-            <summary>
-            Gets the underlying stream
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Level">
-            <summary>
-            The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the writer is available to receive log entries.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Writer">
-            <summary>
-            Gets the underlying TextWriter object.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.AutoflushLevel">
-            <summary>
-            Minimum level at which Flush will be automatically called after a call to Write.  Equivalent to calling Write(entry, false).
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.SecurePrincipal" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.Security.SecurePrincipal.#ctor" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])" -->
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
-            <summary>
-            Adds specified roles to the collection of roles.
-            </summary>
-            <param name="roles">Roles to add to the roles collection.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
-            <summary>
-            Returns true if that principal is granted with given role.  Otherwise, false.
-            </summary>
-            <param name="role">The role to test.</param>
-            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
-            <summary>
-            Gets a string array of all roles this principal is granted.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity" -->
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.SecurePrincipal.Identity" -->
     </members>
 </doc>
