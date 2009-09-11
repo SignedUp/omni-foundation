@@ -123,6 +123,26 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         #endregion
+
+        #region IViewController Members
+
+
+        public ViewModelBinding Bind<TModel>() where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
+        public ViewModelBinding GetBinding<TModel>() where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
+        public ViewModelBinding GetBinding(Type modelType)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     public class MainViewControllerMock : IViewController
@@ -191,6 +211,26 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
 
         public IView OpenView<TModel>(IList<TModel> models) where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IViewController Members
+
+
+        public ViewModelBinding Bind<TModel>() where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
+        public ViewModelBinding GetBinding<TModel>() where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
+        public ViewModelBinding GetBinding(Type modelType)
         {
             throw new NotImplementedException();
         }
