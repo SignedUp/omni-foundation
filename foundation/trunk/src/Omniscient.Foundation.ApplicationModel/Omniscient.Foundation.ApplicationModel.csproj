@@ -85,6 +85,8 @@
     <Compile Include="Presentation\IView.cs" />
     <Compile Include="Presentation\IViewController.cs" />
     <Compile Include="Presentation\ViewControllerBase.cs" />
+    <Compile Include="Presentation\ViewModelBinding.cs" />
+    <Compile Include="Presentation\ViewViewModelBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticApplicationContext.cs" />
   </ItemGroup>

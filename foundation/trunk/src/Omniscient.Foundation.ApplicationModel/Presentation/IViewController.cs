@@ -54,5 +54,28 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <param name="views">The views to close.</param>
         /// <returns>True if all views have been closed.  Otherwise, false.</returns>
         bool CloseViewRange(IEnumerable<IView> views);
+
+        /// <summary>
+        /// Binds a model to a view and optionally a view model.  This is a DSL; e.g.:
+        /// Bind&lt;MyModel&gt;().To&lt;MyView&gt;().Through&lt;MyViewModel&gt;();
+        /// </summary>
+        /// <typeparam name="TModel">The type of model to bind.</typeparam>
+        /// <returns></returns>
+        ViewModelBinding Bind<TModel>() where TModel : IModel;
+
+
+        /// <summary>
+        /// Returns a binding for model of type <typeparamref name="TModel"/> name="TModel"/>, if any.  If not found, returns null.
+        /// </summary>
+        /// <typeparam name="TModel">The type of model to search a binding for.</typeparam>
+        /// <returns>A binding of found, or null if not found.</returns>
+        ViewModelBinding GetBinding<TModel>() where TModel : IModel;
+
+        /// <summary>
+        /// Returns a binding for model of type <paramref name="modelType"/>, if any.  If not found, returns null.
+        /// </summary>
+        /// <param name="modelType">The type of model to search a binding for.</param>
+        /// <returns>A binding of found, or null if not found.</returns>
+        ViewModelBinding GetBinding(Type modelType);
     }
 }
