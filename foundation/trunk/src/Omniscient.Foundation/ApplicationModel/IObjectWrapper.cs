@@ -1,9 +1,11 @@
-﻿namespace Omniscient.Foundation.ApplicationModel
+﻿using System;
+namespace Omniscient.Foundation.ApplicationModel
 {
     /// <summary>
     /// Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
     /// </summary>
     /// <typeparam name="T">the type of object to wrap.</typeparam>
+    [Obsolete("This interface is getting obsolete.")]
     public interface IObjectWrapper<T>
     {
         /// <summary>

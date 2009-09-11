@@ -75,6 +75,8 @@
     <Compile Include="Presentation\EntityModelBase.cs" />
     <Compile Include="Presentation\IViewModel.cs" />
     <Compile Include="Presentation\ListViewModelBase.cs" />
+    <Compile Include="Presentation\MVVM\IView.cs" />
+    <Compile Include="Presentation\MVVM\IViewModel.cs" />
     <Compile Include="Presentation\Navigation\ForwardsClosingViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\IViewNavigator.cs" />
     <Compile Include="Presentation\Navigation\ViewNavigatorBase.cs" />

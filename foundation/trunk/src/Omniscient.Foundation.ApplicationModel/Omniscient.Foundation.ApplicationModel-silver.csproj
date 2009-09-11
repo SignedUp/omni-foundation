@@ -76,6 +76,8 @@
     <Compile Include="Presentation\IListViewModel.cs" />
     <Compile Include="Presentation\IViewModel.cs" />
     <Compile Include="Presentation\ListViewModelBase.cs" />
+    <Compile Include="Presentation\MVVM\IView.cs" />
+    <Compile Include="Presentation\MVVM\IViewModel.cs" />
     <Compile Include="Presentation\Navigation\ForwardsClosingViewNavigator.cs" />
     <Compile Include="Presentation\IModel.cs" />
     <Compile Include="Presentation\IPresentableCommandObject.cs" />
