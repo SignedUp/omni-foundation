@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <section name="foundation.application" 
+                 type="Omniscient.Foundation.ApplicationModel.Configuration.ApplicationConfigurationSectionHandler, Omniscient.Foundation"/>
+    </configSections>
+    <foundation.application xmlns="http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd">
+        <services>
+            <serviceDefinition contract="Omniscient.Foundation.Data.MySql.IConnectivity, Omniscient.Foundation.Data" 
+                               service="Omniscient.Foundation.Data.MySql.ConnectivityService, Omniscient.Foundation.Data">
+                <config>
+                    <foundation.data.mysql connectionString="" />
+                </config>
+            </serviceDefinition>
+        </services>
+    </foundation.application>
+</configuration>
