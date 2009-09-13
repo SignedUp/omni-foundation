@@ -476,6 +476,28 @@
             <param name="views">The views to close.</param>
             <returns>True if all views have been closed.  Otherwise, false.</returns>
         </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.Bind``1">
+            <summary>
+            Binds a model to a view and optionally a view model.  This is a DSL; e.g.:
+            Bind&lt;MyModel&gt;().To&lt;MyView&gt;().Through&lt;MyViewModel&gt;();
+            </summary>
+            <typeparam name="TModel">The type of model to bind.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.GetBinding``1">
+            <summary>
+            Returns a binding for model of type <typeparamref name="TModel"/> name="TModel"/>, if any.  If not found, returns null.
+            </summary>
+            <typeparam name="TModel">The type of model to search a binding for.</typeparam>
+            <returns>A binding of found, or null if not found.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.GetBinding(System.Type)">
+            <summary>
+            Returns a binding for model of type <paramref name="modelType"/>, if any.  If not found, returns null.
+            </summary>
+            <param name="modelType">The type of model to search a binding for.</param>
+            <returns>A binding of found, or null if not found.</returns>
+        </member>
         <member name="E:Omniscient.Foundation.ApplicationModel.Presentation.IViewController.CurrentViewChanged">
             <summary>
             Raised when the user switches the current view.
@@ -672,62 +694,6 @@
             Gets the list of currently opened views.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding">
-            <summary>
-            Holds a binding between a model and an view.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.#ctor(System.Type)">
-            <summary>
-            Creates a binding for a type of model.
-            </summary>
-            <param name="modelType">The type of model to bind.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.To``1">
-            <summary>
-            Binds a model to a view
-            </summary>
-            <typeparam name="TView">The type of view to bind to.</typeparam>
-            <returns>A binding.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.ModelType">
-            <summary>
-            The type of model that is bound.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewModelBinding.Binding">
-            <summary>
-            The binding to the view.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding">
-            <summary>
-            Represents a binding between a model, a view and optionally a view model.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.#ctor(System.Type)">
-            <summary>
-            Creates the binding
-            </summary>
-            <param name="viewType">The type of the view that is bound.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.Through``1">
-            <summary>
-            Binds a view model to the model-view binding.
-            </summary>
-            <typeparam name="TViewModel">The type of view model to bind.</typeparam>
-            <returns>Returns this.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.ViewType">
-            <summary>
-            Gets the type of the view that is bound.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewControllerBase.ViewViewModelBinding.ViewModelType">
-            <summary>
-            Gets the optional view model that is bound.
-            </summary>
-        </member>
         <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter" -->
         <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.IPresenter.WriteMessage(System.Object)">
             <summary>
@@ -781,6 +747,62 @@
             The shell does not have to keep a reference to those presenters.
             </summary>
             <returns>The list of created presenters.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewModelBinding">
+            <summary>
+            Holds a binding between a model and an view.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewModelBinding.#ctor(System.Type)">
+            <summary>
+            Creates a binding for a type of model.
+            </summary>
+            <param name="modelType">The type of model to bind.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewModelBinding.To``1">
+            <summary>
+            Binds a model to a view
+            </summary>
+            <typeparam name="TView">The type of view to bind to.</typeparam>
+            <returns>A binding.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewModelBinding.ModelType">
+            <summary>
+            The type of model that is bound.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewModelBinding.Binding">
+            <summary>
+            The binding to the view.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.Presentation.ViewViewModelBinding">
+            <summary>
+            Represents a binding between a model, a view and optionally a view model.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewViewModelBinding.#ctor(System.Type)">
+            <summary>
+            Creates the binding
+            </summary>
+            <param name="viewType">The type of the view that is bound.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.Presentation.ViewViewModelBinding.Through``1">
+            <summary>
+            Binds a view model to the model-view binding.
+            </summary>
+            <typeparam name="TViewModel">The type of view model to bind.</typeparam>
+            <returns>Returns this.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewViewModelBinding.ViewType">
+            <summary>
+            Gets the type of the view that is bound.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.Presentation.ViewViewModelBinding.ViewModelType">
+            <summary>
+            Gets the optional view model that is bound.
+            </summary>
         </member>
     </members>
 </doc>
