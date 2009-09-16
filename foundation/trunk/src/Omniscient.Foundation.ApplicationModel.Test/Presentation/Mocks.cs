@@ -59,6 +59,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             throw new NotImplementedException();
         }
 
+        public bool CloseAllViews<TModel>() where TModel : IModel
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IViewController Members
@@ -195,6 +200,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         public bool CloseViewRange(System.Collections.Generic.IEnumerable<IView> views)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CloseAllViews<TModel>() where TModel : IModel
         {
             throw new NotImplementedException();
         }
