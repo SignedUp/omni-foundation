@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Omniscient.Foundation.Data;
-using System.Diagnostics;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
     /// <summary>
     /// Default implementation for <see cref="IPresentationController"/>.  Generally, does not have to be derived for default behavior.
     /// </summary>
-    public class PresentationController: IPresentationController
+    public class PresentationController : IPresentationController
     {
         private List<IViewController> _controllers;
         private List<IView> _openedViews;
@@ -28,7 +26,6 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             SupportsUserInput = supportsUserInput;
             _presenters = new Dictionary<string, IPresenter>();
         }
-
 
         /// <summary>
         /// Opens a view.  The controller is responsible for finding a view for that model, instanciating the view
@@ -51,7 +48,7 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         /// <param name="models">The models to open.</param>
         public void OpenView<TModel>(IList<TModel> models)
-            where TModel: IModel
+            where TModel : IModel
         {
             IView view;
             foreach (IViewController controller in _controllers)
@@ -69,6 +66,17 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             }
         }
 
+        ///<summary>
+        /// Closes all views for a specific model type.
+        ///</summary>
+        ///<typeparam name="TModel">Model type filter.</typeparam>
+        public void CloseAllViews<TModel>() where TModel : IModel
+        {
+            foreach (IViewController controller in _controllers)
+            {
+                controller.CloseAllViews<TModel>();
+            }
+        }
 
         /// <summary>
         /// Informs the controller that a view has been closed.
@@ -96,11 +104,11 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
             return _presenters[name];
         }
 
-        public PresenterType GetPresenter<PresenterType>() where PresenterType : IPresenter
-        {                  
-            foreach (object presenter in _presenters.Values)
-                if (typeof(PresenterType).IsAssignableFrom(presenter.GetType())) return (PresenterType)presenter;
-            return default(PresenterType);
+        public TPresenter GetPresenter<TPresenter>() where TPresenter : IPresenter
+        {
+            foreach (IPresenter presenter in _presenters.Values)
+                if (typeof(TPresenter).IsAssignableFrom(presenter.GetType())) return (TPresenter)presenter;
+            return default(TPresenter);
 
 
         }
@@ -113,18 +121,18 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
 
         public void RegisterViewController(IViewController controller)
         {
-            if (controller == null) throw new ArgumentNullException("view controller");
+            if (controller == null) throw new ArgumentNullException("controller");
             if (_controllers.Contains(controller))
-                throw new InvalidOperationException(string.Format("A view controller with name {0} is already registered.  Choose another view controller.", controller.ToString()));
+                throw new InvalidOperationException(string.Format("A view controller with name {0} is already registered.  Choose another view controller.", controller));
             _controllers.Add(controller);
 
         }
 
-        public ViewControllerType GetViewController<ViewControllerType>() where ViewControllerType : IViewController
+        public TViewController GetViewController<TViewController>() where TViewController : IViewController
         {
-            foreach (object controller in _controllers)
-                if (typeof(ViewControllerType).IsAssignableFrom(controller.GetType())) return (ViewControllerType)controller;
-            return default(ViewControllerType);
+            foreach (IViewController controller in _controllers)
+                if (typeof(TViewController).IsAssignableFrom(controller.GetType())) return (TViewController)controller;
+            return default(TViewController);
         }
     }
 }

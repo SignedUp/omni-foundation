@@ -25,33 +25,48 @@
             Gets or sets a value indicating whether the writer is available to receive log entries.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
+        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
             <summary>
-             Base class for services.
+            Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
             </summary>
-            <typeparam name="TContract">The service's contract type.</typeparam>
+            <param name="entry">The entry to log.</param>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry,System.Boolean)">
             <summary>
-            Defines the base interface for a service.
+            Writes the log entry to a medium.
             </summary>
+            <param name="entry">The entry to log.</param>
+            <param name="flush">A value indicating whether the writer should call Flush after writing to the TextWriter.</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ServiceModel.IService.GetImplementation" -->
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
+        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Flush">
             <summary>
-            Gets the name of the service.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
-            <summary>
-            Gets the implementation's contract type of the service.
+            Flushes the writer to the underlying media.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Stream">
             <summary>
-             Returns an implementation of the contract.
+            Gets the underlying stream
             </summary>
-            <returns>An implementation of the contract.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Level">
+            <summary>
+            The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the writer is available to receive log entries.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Writer">
+            <summary>
+            Gets the underlying TextWriter object.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.AutoflushLevel">
+            <summary>
+            Minimum level at which Flush will be automatically called after a call to Write.  Equivalent to calling Write(entry, false).
+            </summary>
         </member>
         <member name="T:Omniscient.Foundation.Commanding.DelegateCommand">
             <summary>
@@ -113,171 +128,43 @@
             </summary>
             <param name="param">The param passed to the executing command.</param>
         </member>
-        <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
+        <member name="T:Omniscient.Foundation.ServiceModel.ServiceBase`1">
             <summary>
-            Defines a composite command.  When executed, a composite command is executing all its children commands.  
-            See <see cref="T:Omniscient.Foundation.Commanding.CompositeCommand"/> for default implementation.
+             Base class for services.
+            </summary>
+            <typeparam name="TContract">The service's contract type.</typeparam>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IService">
+            <summary>
+            Defines the base interface for a service.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Commanding.CompositeCommand">
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.ServiceModel.IService.GetImplementation" -->
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.Name">
             <summary>
-            Base class for composite commands.  When executed, a composite command is executing all its children commands.
+            Gets the name of the service.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.#ctor">
+        <member name="P:Omniscient.Foundation.ServiceModel.IService.ImplementationType">
             <summary>
-            default constructor
+            Gets the implementation's contract type of the service.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.CanExecute(System.Object)">
+        <member name="M:Omniscient.Foundation.ServiceModel.ServiceBase`1.GetImplementation">
             <summary>
-            Returns True if the command is in a state that allows execution.  Otherwise, False.
+             Returns an implementation of the contract.
             </summary>
-            <param name="param">The object that will be passed to <see cref="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)"/>.</param>
-            <returns>True if command allows execution.  Otherwise, False.</returns>
+            <returns>An implementation of the contract.</returns>
         </member>
-        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)">
-            <summary>
-            Executes all children commands sequentially.  Overrides may add behavior to the execution.
-            </summary>
-            <param name="param">Object passed to the command for the execution.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Commands">
-            <summary>
-            Gets the list of children (composed) commands.  Upon execution, those children commands will be executed sequentially.
-            </summary>
-        </member>
-        <member name="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged">
-            <summary>
-            Raised when <see cref="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged"/> will change its return value.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Name">
-            <summary>
-            Gets the name of the command.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
-            <summary>
-            Defines a component whose behavior can be extended by means of other components
-            that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">Contract type that extenders must implement when pluging into that extendable.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IExtendable`1.RegisterExtender(`0)">
-            <summary>
-            Registers an implementation of <typeparamref name="TContract"/> agains the extendable object.
-            </summary>
-            <param name="implementation">The extender's implementation</param>
-        </member>
-        <member name="P:Omniscient.Foundation.ApplicationModel.IExtendable`1.AllExtenders">
-            <summary>
-            Gets a list of all extenders.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IStartable">
-            <summary>
-            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Start">
-            <summary>
-            Called when the application starts.  All services are loaded when this method is called.  Services are started
-            in the order they are defined in the configuration.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Stop">
-            <summary>
-            Called when the application shuts down.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.SecurePrincipal" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.Security.SecurePrincipal.#ctor" -->
-        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])" -->
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
-            <summary>
-            Adds specified roles to the collection of roles.
-            </summary>
-            <param name="roles">Roles to add to the roles collection.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
-            <summary>
-            Returns true if that principal is granted with given role.  Otherwise, false.
-            </summary>
-            <param name="role">The role to test.</param>
-            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
-        </member>
-        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
-            <summary>
-            Gets a string array of all roles this principal is granted.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity" -->
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.SecurePrincipal.Identity" -->
-        <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtender">
-            <summary>
-            Defines an Extender contract for prompting a user for his/her credential.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.ICredentialServiceExtender.NegociateAuthentication(Omniscient.Foundation.Security.SecurePrincipal)">
-            <summary>
-            Prompts a user for his/her credential and returns it.
-            </summary>
-            <returns>User credentials.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Extensions">
-            <summary>
-            Defines extension methods on the String class.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
-            <summary>
-            </summary>
-            <typeparam name="TContract"></typeparam>
-            <typeparam name="TImplementation"></typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingletonService`2.#ctor">
+        <member name="T:Omniscient.Foundation.Security.IRoleProvider">
             <summary>
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingletonService`2.GetImplementation">
+        <member name="M:Omniscient.Foundation.Security.IRoleProvider.GetRolesForUser(System.String)">
             <summary>
             </summary>
+            <param name="username"></param>
             <returns></returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.ICredentialService" -->
-        <member name="M:Omniscient.Foundation.Security.ICredentialService.EnsureUserIsAuthenticated">
-            <summary>
-            Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
-            If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">The service must rely on extenders to ask for username and password;
-            therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.ICredentialService.CurrentPrincipal" -->
-        <member name="T:Omniscient.Foundation.Security.IAuthenticationService">
-            <summary>
-            Authenticates a user based on a username (the identifier) and a password.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Promote(Omniscient.Foundation.Security.SecureIdentity,System.String,System.String)">
-            <summary>
-            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object by authenticating the 
-            username and password.
-            </summary>
-            <param name="identity">An existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object.</param>
-            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
-            Can be empty (anonymous).</param>
-            <param name="password">A password to validate.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Authenticate(System.String,System.String)">
-            <summary>
-            Authenticates the username and password and returns a new <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.
-            </summary>
-            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
-            Can be empty (anonymous).</param>
-            <param name="password">A password to validate.</param>
-            <returns>An authenticated user, or anonymous if the username was empty.</returns>
         </member>
         <member name="T:Omniscient.Foundation.Logging.ILogger">
             <summary>
@@ -331,62 +218,6 @@
             Gets a default writer.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.IServiceProvider">
-            <summary>
-            Defines a service provider.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.GetService``1">
-            <summary>
-            Gets a service that implements the contract <typeparamref name="TContract"/>.
-            </summary>
-            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
-            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService``1(Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the provider.
-            </summary>
-            <typeparam name="TContract">The type of contract that service implements.</typeparam>
-            <param name="service">A service implementation.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
-            <summary>
-            Adds a service to the provider.
-            </summary>
-            <param name="contract">Service's contract type.</param>
-            <param name="service">Service implementation (must support contract's type)</param>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.Clear">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.AllServices">
-            <summary>
-            Gets all services, in the order they have been registered.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.ServiceCount">
-            <summary>
-            Gets the number of services that are registered.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
-            <summary>
-            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
-            and implementation type <typeparamref name="TImplementation"/>.
-            
-            This service's implementation will be instaciated each time the service is requested.
-            </summary>
-            <typeparam name="TContract">Service's contract type.</typeparam>
-            <typeparam name="TImplementation">Implementation type.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
-            <summary>
-            Returns the implementation; instanciate a new one on each call.
-            </summary>
-            <returns>Service's implementation.</returns>
-        </member>
         <member name="T:Omniscient.Foundation.ApplicationModel.IConfigurable">
             <summary>
             Defines a configurable service.  Implement this interface when you need your service to receive configuration.
@@ -403,6 +234,129 @@
             <remarks>
             See the ApplicationModel configuration schema for more details.
             </remarks>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.IExtendable`1">
+            <summary>
+            Defines a component whose behavior can be extended by means of other components
+            that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">Contract type that extenders must implement when pluging into that extendable.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IExtendable`1.RegisterExtender(`0)">
+            <summary>
+            Registers an implementation of <typeparamref name="TContract"/> agains the extendable object.
+            </summary>
+            <param name="implementation">The extender's implementation</param>
+        </member>
+        <member name="P:Omniscient.Foundation.ApplicationModel.IExtendable`1.AllExtenders">
+            <summary>
+            Gets a list of all extenders.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2">
+            <summary>
+            Base class for services that are configurable. A configurable service will have an xml node (the "root")
+            under the &lt;config&gt; child element of the &lt;serviceDefinition&gt; element in the config file.
+            </summary>
+            <typeparam name="TContract">
+            The service's contract type.
+            </typeparam>
+            <typeparam name="TConfigRoot">
+            The xml serializable class that is the root of the configuration for this service.
+            </typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2.Configure(System.Xml.XmlElement)">
+            <summary>
+            Automatically called at load time by the ApplicationManager.  Or, can be manually called.  The parameter
+            must be deserializable into type <typeparamref name="TConfigRoot"/>.
+            </summary>
+            <param name="config">
+            The config.  Must be deserializable into type <typeparamref name="TConfigRoot"/>.
+            </param>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2.Configuration">
+            <summary>
+            Gets Configuration as it has been deserialized.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.FromSecureString(System.Security.SecureString)">
+            <summary>
+            </summary>
+            <param name="secureString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.ToSecureString(System.String)">
+            <summary>
+            </summary>
+            <param name="regularString"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.SecurePrincipal" -->
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.Security.SecurePrincipal.#ctor" -->
+        <!-- Badly formed XML comment ignored for member "M:Omniscient.Foundation.Security.SecurePrincipal.#ctor(Omniscient.Foundation.Security.SecureIdentity,System.String[])" -->
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.Promote(System.String[])">
+            <summary>
+            Adds specified roles to the collection of roles.
+            </summary>
+            <param name="roles">Roles to add to the roles collection.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.SecurePrincipal.IsInRole(System.String)">
+            <summary>
+            Returns true if that principal is granted with given role.  Otherwise, false.
+            </summary>
+            <param name="role">The role to test.</param>
+            <returns>True if that principal is granted with role <paramref name="role"/>.  Otherwise, false.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Security.SecurePrincipal.AllRoles">
+            <summary>
+            Gets a string array of all roles this principal is granted.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.SecurePrincipal.System#Security#Principal#IPrincipal#Identity" -->
+        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.SecurePrincipal.Identity" -->
+        <member name="T:Omniscient.Foundation.Security.IAuthorizationService">
+            <summary>
+            Authorizes a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object by promoting it with roles.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Promote(Omniscient.Foundation.Security.SecurePrincipal)">
+            <summary>
+            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object with roles.
+            </summary>
+            <param name="principal">Principal object to promote with roles.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Authorize(Omniscient.Foundation.Security.SecureIdentity)">
+            <summary>
+            Authorizes a Principal with roles and returns it as a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/>.
+            </summary>
+            <param name="identity">The Identity used by the new Principal.</param>
+            <returns>A Principal with roles.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
+        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
+            <summary>
+            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
+            </summary>
+            <typeparam name="T">the type of object to wrap.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
+            <summary>
+            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
+            adaptation is allowed (or possible).
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
+            <summary>
+            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
+            </summary>
+            <param name="item">The item to wrap.</param>
         </member>
         <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.SecureIdentity" -->
         <member name="M:Omniscient.Foundation.Security.SecureIdentity.#ctor">
@@ -462,49 +416,6 @@
         <member name="P:Omniscient.Foundation.Security.SecureIdentity.Name">
             <summary>
             Gets the name of the user represented by this Identity.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
-            <summary>
-            Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
-            </summary>
-            <param name="entry">The entry to log.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Write(Omniscient.Foundation.Logging.LogEntry,System.Boolean)">
-            <summary>
-            Writes the log entry to a medium.
-            </summary>
-            <param name="entry">The entry to log.</param>
-            <param name="flush">A value indicating whether the writer should call Flush after writing to the TextWriter.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Logging.TextLogWriter.Flush">
-            <summary>
-            Flushes the writer to the underlying media.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Stream">
-            <summary>
-            Gets the underlying stream
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Level">
-            <summary>
-            The level of log entries this writer accepts.  Anything below this level won't be passed to the writer.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the writer is available to receive log entries.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.Writer">
-            <summary>
-            Gets the underlying TextWriter object.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Logging.TextLogWriter.AutoflushLevel">
-            <summary>
-            Minimum level at which Flush will be automatically called after a call to Write.  Equivalent to calling Write(entry, false).
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Logging.LogLevel">
@@ -576,97 +487,89 @@
             The local time at which the entry has been created
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Security.SecureStringConverter">
+        <member name="T:Omniscient.Foundation.Commanding.ICompositeCommand">
             <summary>
+            Defines a composite command.  When executed, a composite command is executing all its children commands.  
+            See <see cref="T:Omniscient.Foundation.Commanding.CompositeCommand"/> for default implementation.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.FromSecureString(System.Security.SecureString)">
+        <member name="T:Omniscient.Foundation.Commanding.CompositeCommand">
             <summary>
-            </summary>
-            <param name="secureString"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.SecureStringConverter.ToSecureString(System.String)">
-            <summary>
-            </summary>
-            <param name="regularString"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Security.IAuthorizationService">
-            <summary>
-            Authorizes a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object by promoting it with roles.
+            Base class for composite commands.  When executed, a composite command is executing all its children commands.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Promote(Omniscient.Foundation.Security.SecurePrincipal)">
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.#ctor">
             <summary>
-            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/> object with roles.
-            </summary>
-            <param name="principal">Principal object to promote with roles.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Security.IAuthorizationService.Authorize(Omniscient.Foundation.Security.SecureIdentity)">
-            <summary>
-            Authorizes a Principal with roles and returns it as a <see cref="T:Omniscient.Foundation.Security.SecurePrincipal"/>.
-            </summary>
-            <param name="identity">The Identity used by the new Principal.</param>
-            <returns>A Principal with roles.</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2">
-            <summary>
-            Base class for services that are configurable. A configurable service will have an xml node (the "root")
-            under the &lt;config&gt; child element of the &lt;serviceDefinition&gt; element in the config file.
-            </summary>
-            <typeparam name="TContract">
-            The service's contract type.
-            </typeparam>
-            <typeparam name="TConfigRoot">
-            The xml serializable class that is the root of the configuration for this service.
-            </typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2.Configure(System.Xml.XmlElement)">
-            <summary>
-            Automatically called at load time by the ApplicationManager.  Or, can be manually called.  The parameter
-            must be deserializable into type <typeparamref name="TConfigRoot"/>.
-            </summary>
-            <param name="config">
-            The config.  Must be deserializable into type <typeparamref name="TConfigRoot"/>.
-            </param>
-        </member>
-        <member name="P:Omniscient.Foundation.ServiceModel.ConfigurableServiceBase`2.Configuration">
-            <summary>
-            Gets Configuration as it has been deserialized.
-            </summary>
-            <value>
-            The configuration.
-            </value>
-        </member>
-        <member name="T:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1">
-            <summary>
-            Represents a wrapper on an object.  Ideal for implementing the Adapter design pattern.
-            </summary>
-            <typeparam name="T">the type of object to wrap.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Adapt">
-            <summary>
-            Adapts the wrapper to the public interface of <paramref name="T"/>.  Returns null if no
-            adaptation is allowed (or possible).
+            default constructor
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.ApplicationModel.IObjectWrapper`1.Wrap(`0)">
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.CanExecute(System.Object)">
             <summary>
-            Wraps an item of type T.  It is recommended that implementers do not allow multiple calls to that function.
+            Returns True if the command is in a state that allows execution.  Otherwise, False.
             </summary>
-            <param name="item">The item to wrap.</param>
+            <param name="param">The object that will be passed to <see cref="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)"/>.</param>
+            <returns>True if command allows execution.  Otherwise, False.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.ApplicationModel.IListWrapper`1" -->
-        <member name="T:Omniscient.Foundation.Security.IRoleProvider">
+        <member name="M:Omniscient.Foundation.Commanding.CompositeCommand.Execute(System.Object)">
             <summary>
+            Executes all children commands sequentially.  Overrides may add behavior to the execution.
+            </summary>
+            <param name="param">Object passed to the command for the execution.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Commands">
+            <summary>
+            Gets the list of children (composed) commands.  Upon execution, those children commands will be executed sequentially.
             </summary>
         </member>
-        <member name="M:Omniscient.Foundation.Security.IRoleProvider.GetRolesForUser(System.String)">
+        <member name="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged">
             <summary>
+            Raised when <see cref="E:Omniscient.Foundation.Commanding.CompositeCommand.CanExecuteChanged"/> will change its return value.
             </summary>
-            <param name="username"></param>
-            <returns></returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Commanding.CompositeCommand.Name">
+            <summary>
+            Gets the name of the command.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ApplicationModel.IStartable">
+            <summary>
+            Defines a "startable" service.  Those services are informed of the application startup and shutdown.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Start">
+            <summary>
+            Called when the application starts.  All services are loaded when this method is called.  Services are started
+            in the order they are defined in the configuration.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ApplicationModel.IStartable.Stop">
+            <summary>
+            Called when the application shuts down.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Security.IAuthenticationService">
+            <summary>
+            Authenticates a user based on a username (the identifier) and a password.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Promote(Omniscient.Foundation.Security.SecureIdentity,System.String,System.String)">
+            <summary>
+            Promotes an existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object by authenticating the 
+            username and password.
+            </summary>
+            <param name="identity">An existing <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/> object.</param>
+            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
+            Can be empty (anonymous).</param>
+            <param name="password">A password to validate.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.IAuthenticationService.Authenticate(System.String,System.String)">
+            <summary>
+            Authenticates the username and password and returns a new <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.
+            </summary>
+            <param name="username">A username that identifies the <see cref="T:Omniscient.Foundation.Security.SecureIdentity"/>.  
+            Can be empty (anonymous).</param>
+            <param name="password">A password to validate.</param>
+            <returns>An authenticated user, or anonymous if the username was empty.</returns>
         </member>
         <member name="T:Omniscient.Foundation.INamed">
             <summary>
@@ -702,6 +605,46 @@
         <member name="T:Omniscient.Foundation.ServiceModel.ServiceProvider">
             <summary>
             Default implementation of an <see cref="T:Omniscient.Foundation.ServiceModel.IServiceProvider"/>.  Reads services from the configuration file.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.IServiceProvider">
+            <summary>
+            Defines a service provider.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.GetService``1">
+            <summary>
+            Gets a service that implements the contract <typeparamref name="TContract"/>.
+            </summary>
+            <typeparam name="TContract">The type of the contract implemented by the service.</typeparam>
+            <returns>The implementation of the contract, or null if no service is found for this contract.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService``1(Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <typeparam name="TContract">The type of contract that service implements.</typeparam>
+            <param name="service">A service implementation.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.RegisterService(System.Type,Omniscient.Foundation.ServiceModel.IService)">
+            <summary>
+            Adds a service to the provider.
+            </summary>
+            <param name="contract">Service's contract type.</param>
+            <param name="service">Service implementation (must support contract's type)</param>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.IServiceProvider.Clear">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.AllServices">
+            <summary>
+            Gets all services, in the order they have been registered.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.ServiceModel.IServiceProvider.ServiceCount">
+            <summary>
+            Gets the number of services that are registered.
             </summary>
         </member>
         <member name="M:Omniscient.Foundation.ServiceModel.ServiceProvider.#ctor">
@@ -760,6 +703,27 @@
             the DI mechanism.
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:Omniscient.Foundation.Security.ICredentialService" -->
+        <member name="M:Omniscient.Foundation.Security.ICredentialService.EnsureUserIsAuthenticated">
+            <summary>
+            Ensures that the current user is not anonymous.  The service will as extenders to ask for user name and password.
+            If no extenders are plugged in, the service is unable to log the user, and the InvalidOperationException is thrown.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The service must rely on extenders to ask for username and password;
+            therefore, if no extenders are plugged into the extension port, this exception is thrown.</exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.ICredentialService.CurrentPrincipal" -->
+        <member name="T:Omniscient.Foundation.Security.ICredentialServiceExtender">
+            <summary>
+            Defines an Extender contract for prompting a user for his/her credential.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Security.ICredentialServiceExtender.NegociateAuthentication(Omniscient.Foundation.Security.SecurePrincipal)">
+            <summary>
+            Prompts a user for his/her credential and returns it.
+            </summary>
+            <returns>User credentials.</returns>
+        </member>
         <member name="T:Omniscient.Foundation.Security.CredentialService">
             <summary>
             Defines a base implementation class for ICredentialService.  When this service starts, it registers an anonymous user
@@ -792,5 +756,41 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:Omniscient.Foundation.Security.CredentialService.CurrentPrincipal" -->
+        <member name="T:Omniscient.Foundation.Extensions">
+            <summary>
+            Defines extension methods on the String class.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2">
+            <summary>
+            Defines a generic "single call" service for contract type <typeparamref name="TContract"/> 
+            and implementation type <typeparamref name="TImplementation"/>.
+            
+            This service's implementation will be instaciated each time the service is requested.
+            </summary>
+            <typeparam name="TContract">Service's contract type.</typeparam>
+            <typeparam name="TImplementation">Implementation type.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingleCallService`2.GetImplementation">
+            <summary>
+            Returns the implementation; instanciate a new one on each call.
+            </summary>
+            <returns>Service's implementation.</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.ServiceModel.GenericSingletonService`2">
+            <summary>
+            </summary>
+            <typeparam name="TContract"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingletonService`2.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.ServiceModel.GenericSingletonService`2.GetImplementation">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

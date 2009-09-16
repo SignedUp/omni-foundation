@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Omniscient.Foundation.Data;
 
 namespace Omniscient.Foundation.ApplicationModel.Presentation
 {
@@ -39,10 +38,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <summary>
         /// Gets an <see href="IViewController"</see> using its type.
         /// </summary>
-        /// <typeparam name="ViewControllerType">The type of the view controller to look for.</typeparam>
+        /// <typeparam name="TViewController">The type of the view controller to look for.</typeparam>
         /// <returns>An <see href="IViewController"</see> if found.  Otherwise, null.</returns>
-        ViewControllerType GetViewController<ViewControllerType>() 
-            where ViewControllerType : IViewController;
+        TViewController GetViewController<TViewController>()
+            where TViewController : IViewController;
 
 
         /// <summary>
@@ -63,10 +62,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// <summary>
         /// Gets an <see href="IPresenter"</see> using its type.
         /// </summary>
-        /// <typeparam name="PresenterType">The type of the presenter to look for.</typeparam>
+        /// <typeparam name="TPresenter">The type of the presenter to look for.</typeparam>
         /// <returns>An <see href="IPresenter"</see> if found.  Otherwise, null.</returns>
-        PresenterType GetPresenter<PresenterType>() 
-            where PresenterType : IPresenter;
+        TPresenter GetPresenter<TPresenter>()
+            where TPresenter : IPresenter;
 
         /// <summary>
         /// Gets a value indicating wheter this presentation controller supports user input.
@@ -80,5 +79,10 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         /// </summary>
         void CloseAllViews();
 
+        ///<summary>
+        /// Closes all views for a specific model type.
+        ///</summary>
+        ///<typeparam name="TModel">Model type filter.</typeparam>
+        void CloseAllViews<TModel>() where TModel : IModel;
     }
 }

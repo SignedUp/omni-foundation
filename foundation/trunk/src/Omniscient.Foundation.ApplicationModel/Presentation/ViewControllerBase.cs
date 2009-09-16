@@ -117,6 +117,13 @@ namespace Omniscient.Foundation.ApplicationModel.Presentation
         }
 
         /// <summary>
+        /// Closes all opened views;
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
+        public abstract bool CloseAllViews<TModel>() where TModel : IModel;
+
+        /// <summary>
         /// Binds a model to a view and optionally a view model.  This is a DSL; e.g.:
         /// Bind&lt;MyModel&gt;().To&lt;MyView&gt;().Through&lt;MyViewModel&gt;();
         /// </summary>
