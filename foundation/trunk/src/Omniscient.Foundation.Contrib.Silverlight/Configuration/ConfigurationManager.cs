@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -12,11 +13,14 @@ namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
     public class ConfigurationManager
     {
         private static readonly XDocument XDocument;
+        private static readonly Dictionary<string, object> Sections;
 
         static ConfigurationManager()
         {
             var streamInfo = Application.GetResourceStream(new Uri("Silverlight.config", UriKind.RelativeOrAbsolute));
             ConfigurationManager.XDocument = XDocument.Load(streamInfo.Stream);
+            //ConfigurationManager.XDocument.
+            ConfigurationManager.Sections = new Dictionary<string, object>();
         }
 
 
@@ -52,6 +56,14 @@ namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
 
         public static TSection GetSection<TSection>(string sectionName)
         {
+            if (string.IsNullOrEmpty(sectionName)) return default(TSection);
+
+            // do we have a section for it?
+
+            // has it been cached?
+            if (ConfigurationManager.Sections.ContainsKey(sectionName))
+                return (TSection) ConfigurationManager.Sections[sectionName];
+
             var elements = ConfigurationManager.XDocument.Descendants(sectionName);
             if (elements == null) return default(TSection);
 
