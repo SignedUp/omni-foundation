@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Resources;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
 {
@@ -45,6 +45,20 @@ namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
             foreach (XElement item in elements)
             {
                 return handler.Create(item);
+            }
+            
+            return default(TSection);
+        }
+
+        public static TSection GetSection<TSection>(string sectionName)
+        {
+            var elements = ConfigurationManager.XDocument.Descendants(sectionName);
+            if (elements == null) return default(TSection);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(TSection));
+            foreach (XElement element in elements)
+            {
+                return (TSection) serializer.Deserialize(element.CreateReader());
             }
             
             return default(TSection);
