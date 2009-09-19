@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using Omniscient.Foundation.Commanding;
-using Omniscient.Foundation.ServiceModel;
-using Omniscient.Foundation.ApplicationModel.Configuration;
-using Omniscient.Foundation.ApplicationModel.Presentation;
-using Omniscient.Foundation.ApplicationModel.Modularity;
 using Ninject.Core;
+using Omniscient.Foundation.ApplicationModel.Configuration;
+using Omniscient.Foundation.ApplicationModel.Modularity;
+using Omniscient.Foundation.ApplicationModel.Presentation;
+using Omniscient.Foundation.Commanding;
 using Omniscient.Foundation.Logging;
+using Omniscient.Foundation.ServiceModel;
 
 namespace Omniscient.Foundation.ApplicationModel
 {
@@ -144,9 +144,9 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Get or sets Ninject's Command strore.  If not set, then this application will run without dependency injection.
-        /// This stored is used to get all the application commands.
+        /// Gets or sets an <see cref="ICommandStore"/>.  This is a shorcut to a stateful service that stores ICommand objects.
         /// </summary>
+        [Obsolete("There shouldn't be any IXXXStore, where XXX is a concrete type.  The store pattern should be implemented correctly instead.  This property will be removed in releases following 1.3.0.")]
         public ICommandStore CommandStore
         {
             get
