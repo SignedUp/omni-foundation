@@ -1,7 +1,7 @@
-﻿namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
-{
-    using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
+namespace Omniscient.Foundation.ApplicationModel.Configuration
+{
     /// <summary>
     /// Deserializes an XElement configuration element to type <typeparam name="TSection" />.
     /// </summary>

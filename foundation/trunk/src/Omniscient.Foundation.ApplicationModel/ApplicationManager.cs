@@ -229,7 +229,7 @@ namespace Omniscient.Foundation.ApplicationModel
             // Get configuration from default config file.
             ApplicationConfiguration config;
 #if SILVERLIGHT
-            config = new ApplicationConfiguration();
+            config = ConfigurationManager.GetSection<ApplicationConfiguration>("foundation.application");
 #else
             config = System.Configuration.ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
 #endif
