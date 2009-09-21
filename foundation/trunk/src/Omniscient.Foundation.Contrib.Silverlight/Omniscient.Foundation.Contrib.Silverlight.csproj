@@ -60,8 +60,6 @@
     <Compile Include="CommandControls\Button.cs" />
     <Compile Include="Commanding\CommandBase.cs" />
     <Compile Include="Commanding\DelegateCommand.cs" />
-    <Compile Include="Configuration\ConfigurationManager.cs" />
-    <Compile Include="Configuration\IConfigurationSectionHandler.cs" />
     <Compile Include="Dialogs\ButtonLayout.cs" />
     <Compile Include="Dialogs\Dialog.cs" />
     <Compile Include="Dialogs\DialogBase.cs" />

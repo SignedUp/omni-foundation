@@ -4,7 +4,7 @@ using System.Windows;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
+namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
     /// <summary>
     /// Serves as a replacement to System.Configuration.ConfigurationManager for Silverlight.  
@@ -64,13 +64,18 @@ namespace Omniscient.Foundation.Contrib.Silverlight.Configuration
             if (ConfigurationManager.Sections.ContainsKey(sectionName))
                 return (TSection) ConfigurationManager.Sections[sectionName];
 
-            var elements = ConfigurationManager.XDocument.Descendants(sectionName);
+            IEnumerable<XElement> elements;
+            if (sectionName == "foundation.application")
+                elements = ConfigurationManager.XDocument.Descendants(XName.Get("foundation.application", "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd"));
+            else
+                elements = ConfigurationManager.XDocument.Descendants(sectionName);
+
             if (elements == null) return default(TSection);
 
-            XmlSerializer serializer = new XmlSerializer(typeof(TSection));
             foreach (XElement element in elements)
             {
-                return (TSection) serializer.Deserialize(element.CreateReader());
+                XmlSerializer serializer = new XmlSerializer(typeof(TSection));
+                return (TSection)serializer.Deserialize(element.CreateReader());
             }
             
             return default(TSection);
