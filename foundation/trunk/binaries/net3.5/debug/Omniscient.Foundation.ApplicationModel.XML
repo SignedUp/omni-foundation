@@ -82,8 +82,7 @@
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.CommandStore">
             <summary>
-            Get or sets Ninject's Command strore.  If not set, then this application will run without dependency injection.
-            This stored is used to get all the application commands.
+            Gets or sets an <see cref="T:Omniscient.Foundation.Commanding.ICommandStore"/>.  This is a shorcut to a stateful service that stores ICommand objects.
             </summary>
         </member>
         <member name="P:Omniscient.Foundation.ApplicationModel.ApplicationManager.Logger">
