@@ -1,0 +1,107 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Dialogs="clr-namespace:Omniscient.Foundation.Contrib.Silverlight.Dialogs">
+    
+    <Style TargetType="Dialogs:DialogButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Dialogs:DialogButton">
+                    <Button Name="ButtonElement" 
+                            Content="{TemplateBinding Text}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="Dialogs:DialogBase">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Dialogs:DialogBase">
+                    <Border Name="RootElement" 
+                            Background="{TemplateBinding DialogBackground}" 
+                            BorderBrush="Black" 
+                            BorderThickness="1" 
+                            CornerRadius="5"
+                            Width="{TemplateBinding Width}" 
+                            Height="{TemplateBinding Height}" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0"
+                                    Background="{TemplateBinding HeaderBackground}"
+                                    MinHeight="25"
+                                    CornerRadius="4,4,0,0">
+                                <Grid Margin="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{TemplateBinding HeaderText}"
+                                               FontSize="12"
+                                               Margin="0,0,5,0"
+                                               Grid.Column="0" />
+                                    <Button Name="CloseButtonElement"
+                                            Content="X"
+                                            FontSize="11"
+                                            Width="17" 
+                                            Height="18" 
+                                            VerticalContentAlignment="Top"
+                                            Padding="1"
+                                            Grid.Column="1" />
+                                </Grid>
+                            </Border>
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              Margin="5"
+                                              Grid.Row="1" />
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="3"
+                                        Grid.Row="2">
+                                <Dialogs:DialogButton x:Name="FirstButtonElement"
+                                                      Text="{TemplateBinding FirstButtonText}"
+                                                      Command="{TemplateBinding FirstButtonCommand}"
+                                                      Visibility="{TemplateBinding FirstButtonVisibility}"
+                                                      Margin="3" />
+                                <Dialogs:DialogButton x:Name="SecondButtonElement" 
+                                                      Text="{TemplateBinding SecondButtonText}"
+                                                      Command="{TemplateBinding SecondButtonCommand}"
+                                                      Visibility="{TemplateBinding SecondButtonVisibility}"
+                                                      Margin="3" />
+                                <Dialogs:DialogButton x:Name="ThirdButtonElement"
+                                                      Text="{TemplateBinding ThirdButtonText}"
+                                                      Command="{TemplateBinding ThirdButtonCommand}"
+                                                      Visibility="{TemplateBinding ThirdButtonVisibility}"
+                                                      Margin="3" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="Dialogs:Dialog">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Dialogs:Dialog">
+                    <Grid Name="RootElement">
+                        <Rectangle Name="ShadowElement"
+                                   Fill="{TemplateBinding ShadowBackground}"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   Opacity="0.7"/>
+                        <Canvas>
+                            <Dialogs:DragDropPanel>
+                                <Dialogs:DialogBase x:Name="DialogElement" />
+                            </Dialogs:DragDropPanel>
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
