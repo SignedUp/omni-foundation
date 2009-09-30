@@ -1,0 +1,537 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Omniscient.Foundation.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
+            <summary>
+            Provides a database connection for DB access.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
+            <summary>
+            Creates a database connection.
+            </summary>
+            <returns>A database connection</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.EntityStatus">
+            <summary>
+            The status of an entity relative to its data store.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.New">
+            <summary>
+            The entity is new and doesn't exist yet in the data store.  The next save will result in the entity being created.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.Clean">
+            <summary>
+            The entity is loaded from the data store, and hasn't been modified since.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.Dirty">
+            <summary>
+            The entity is loaded from the data store, and has been modified since.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.ToBeDeleted">
+            <summary>
+            The entity will be deleted from the data store at the next commit.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.NonExistent">
+            <summary>
+            The entity doesn't exist in the database, and won't be created.  Basically, an entity in this state is dead.
+            Generally, an entity will be in this state after it's been marked as ToBeDeleted, and has been committed 
+            (effectively deleted from the datastore).
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.EntityStatus.Clone">
+            <summary>
+            The entity exists solely to maintain the values of another entity from which it has been cloned.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition">
+            <summary>
+            Logical <see cref="T:Omniscient.Foundation.Data.ObjectQuery.WhereGroup"/> composer.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.And">
+            <summary>
+            Logical AND.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.Or">
+            <summary>
+            Logical OR.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.FriendlyNameAttribute">
+            <summary>
+            Provides an attribute to give a friendly name to a property to help in UI setup
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.FriendlyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.FriendlyNameAttribute"/> class.
+            </summary>
+            <param name="name">
+            The properties' friendly name.
+            </param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.FriendlyNameAttribute.Name">
+            <summary>
+            Gets or sets property friendly Name.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.Predicate">
+            <summary>
+            Base class for predicates
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.Predicate.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="path">The path to the property being filtered.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.Predicate.Path">
+            <summary>
+            Gets the path to the property being filtered.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.RelationMarker">
+            <summary>
+            An equality or inequality marker.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Equal">
+            <summary>
+            Scalar equality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.NotEqual">
+            <summary>
+            Strict scalar inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Greater">
+            <summary>
+            Greater Than inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.GreaterOrEqual">
+            <summary>
+            Greater Than or Equal inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Smaller">
+            <summary>
+            Smaller Than inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.SmallerOrEqual">
+            <summary>
+            Smaller Than or Equal inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Is">
+            <summary>
+            Reference equality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.IsNot">
+            <summary>
+            Reference inequality.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.SystemProperty">
+            <summary>
+            Determines if an object Property is for proper system functions rather than true Domain Driven behavior
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetMarker">
+            <summary>
+            A set comparer.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.SetMarker.In">
+            <summary>
+            Specifies that a value should be part of given set.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.SetMarker.NotIn">
+            <summary>
+            Specifies that a value should NOT be part of given set.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.EntityBase">
+            <summary>
+            Base class for entities.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.IEntity">
+            <summary>
+            Represents an entity.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntity.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies the data values, except the <see cref="P:Omniscient.Foundation.Data.IEntity.Status"/>.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.IEntity.Status">
+            <summary>
+            Gets or sets the status of the entity.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.EntityBase"/> class. 
+            Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies the data values, except the <see cref="P:Omniscient.Foundation.Data.EntityBase.Status"/>.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase.ToString">
+            <summary>
+            Returns a string representation of the Entity.
+            </summary>
+            <returns>
+            A string representation of the Entity.
+            </returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.EntityBase.Status">
+            <summary>
+            Gets or sets the Status.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.EntityBase`1">
+            <summary>
+            Provides a base class for entities which have an Id.  Adds a constructor to <see cref="T:Omniscient.Foundation.Data.EntityBase"/> that
+            sets the <see cref="P:Omniscient.Foundation.Data.IEntity.Status"/> value to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            </summary>
+            <typeparam name="TKey">The type used for the <see cref="P:Omniscient.Foundation.Data.IEntity`1.Id"/> property.</typeparam>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.IEntity`1">
+            <summary>
+            Generic IEntity interface of specify types
+            </summary>
+            <typeparam name="TId">
+            The primary Key type of your entity 
+            </typeparam>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.IEntity`1.Id">
+            <summary>
+            Gets an id that uniquely represents an entity in a given space.  For example, an <see cref="T:Omniscient.Foundation.Data.IEntity`1"/>
+            will be unique in the universe, while an <see cref="!:IEntity&lt;long&gt;"/> will probably be unique amongst other
+            entities of the same type.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.EntityBase"/> class. Puts the <see cref="P:Omniscient.Foundation.Data.IEntity.Status"/> 
+            value to <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/> (delegates to base class' ctor).
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.EntityBase"/> class. Puts the <see cref="P:Omniscient.Foundation.Data.IEntity.Status"/> 
+            value to <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>
+            </summary>
+            <param name="id">
+            The id of the entity.  With this id, the entity is considered being loaded from a data store and thus be <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            </param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.EntityBase`1.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies the data values, except <see cref="P:Omniscient.Foundation.Data.IEntity.Status"/>
+            and <see cref="P:Omniscient.Foundation.Data.EntityBase`1.Id"/>.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.EntityBase`1.Id">
+            <summary>
+            Gets an id that uniquely represents an entity in a given space.  For example, an <see cref="T:Omniscient.Foundation.Data.IEntity`1"/>
+            will be unique in the universe, while an <see cref="!:IEntity&lt;long&gt;"/> will probably be unique amongst other
+            entities of the same type.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1">
+            <summary>
+            A predicate that checks a property (column) compared to a set of values of the same type.
+            </summary>
+            <typeparam name="T">The type of the values in the set (e.g. integer)</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.#ctor(System.String)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="path">The path to the property being compared.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.Marker">
+            <summary>
+            A set marker.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.Values">
+            <summary>
+            The type of the values in the set (e.g. integer)
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.WhereGroup">
+            <summary>
+            Represents a set of predicates grouped by a logical AND or OR operand.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.#ctor(Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="logic">AND or OR, depending on what kind of group is needed.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.AddValuePredicate``1(System.String,Omniscient.Foundation.Data.ObjectQuery.RelationMarker,``0)">
+            <summary>
+            Adds a Value predicate; generally compares a column to a scalar value.
+            </summary>
+            <typeparam name="T">The type of the value to compare with.</typeparam>
+            <param name="path">The path of the object property to compare value with.</param>
+            <param name="marker">An equality or inequality marker.</param>
+            <param name="value">The value to compare with.</param>
+            <returns>Returns current group.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.AddPathPredicate(System.String,Omniscient.Foundation.Data.ObjectQuery.RelationMarker,System.String)">
+            <summary>
+            Adds a path predicate; generally compares two columns in the database.
+            </summary>
+            <param name="path">The left-side path of the object property.</param>
+            <param name="marker">An equality or inequality marker.</param>
+            <param name="secondPath">The right-side path of the object property.</param>
+            <returns>Returns current group.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.AddSetPredicate``1(System.String,Omniscient.Foundation.Data.ObjectQuery.SetMarker,``0[])">
+            <summary>
+            Adds a set predicates; generally compares to a set of values of the same type (e.g. a set of integer values)
+            </summary>
+            <typeparam name="T">The type of the values in the set.</typeparam>
+            <param name="path">Teh path of the object property to compare against value set.</param>
+            <param name="marker">An equality or inequality marker.</param>
+            <param name="values">A set of values of type <typeparamref name="T"/>.</param>
+            <returns>Returns current group.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.AddGroup(Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition)">
+            <summary>
+            Add a subgroup to this group.
+            </summary>
+            <param name="logic">The logic of the new group.</param>
+            <returns>The new group.</returns>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.Logic">
+            <summary>
+            Gets the logic of that group; either AND or OR.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.Predicates">
+            <summary>
+            Returns the list of predicates for this group.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.WhereGroup.Groups">
+            <summary>
+            Returns the list of subgroups.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1">
+            <summary>
+            This predicate compares a column to a scalar value (e.g. an integer)
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.Marker">
+            <summary>
+            An equality or inequality marker.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.Value">
+            <summary>
+            The value to compare with.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.PathPredicate">
+            <summary>
+            Compares a path to another path (e.g. item.value &lt;= customer.threshold)
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="path">The path to the property being filtered.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.Marker">
+            <summary>
+            An equality or inequality marker.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.SecondPath">
+            <summary>
+            The path to the property that compares to the first path.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
+            <summary>
+            Represents an adapter that manages a certain type of entities.  
+            Responsible for connecting to the database, and executing queries.
+            </summary>
+            <remarks>
+            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
+            </remarks>
+            <typeparam name="TEntity">The type of entities to manage.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Load">
+            <summary>
+            Loads a list of entities
+            </summary>
+            <returns>
+            Returns a list of entities
+            </returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
+            <summary>
+            Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
+            </summary>
+            <param name="entity">The entity to save.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Save a list of entities to a data store
+            </summary>
+            <param name="entities">
+            The list of entities to save to the data store
+            </param>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.OQuery`1">
+            <summary>
+            Defines an object query that acts on an entity of type <typeparamref name="TEntity"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entity this query acts on.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.OQuery`1.#ctor">
+            <summary>
+            Ctor.  Creates the original WHERE clause; that <see cref="T:Omniscient.Foundation.Data.ObjectQuery.WhereGroup"/> is a logical AND.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.OQuery`1.Where">
+            <summary>
+            Returns the root of the WHERE clause.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.OQuery`1.Join">
+            <summary>
+            Not defined yet.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.OQuery`1.OrderBy">
+            <summary>
+            Not defined yet.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.OQuery`1.GroupBy">
+            <summary>
+            Not defined yet.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.UniqueEntityBase">
+            <summary>
+            Base class for unique entities.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.UniqueEntityBase"/> class. 
+            Creates an entity with the status <see cref="F:Omniscient.Foundation.Data.EntityStatus.New"/>, and a brand new Id.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.#ctor(System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.UniqueEntityBase"/> class. 
+            Creates an existing Entity.  The <paramref name="id"/> must exist in the database for that Entity.  
+            </summary>
+            <param name="id">
+            Id must correspond to what's in the database.  Entity is assigned status <see cref="F:Omniscient.Foundation.Data.EntityStatus.Clean"/>.
+            </param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.op_Equality(Omniscient.Foundation.Data.UniqueEntityBase,Omniscient.Foundation.Data.UniqueEntityBase)">
+            <summary>
+            Compares two entities based on their Id.  Returns true if both Id are equal.
+            </summary>
+            <param name="left">The first entity to compare.</param>
+            <param name="right">The second entity to compare.</param>
+            <returns>True if the entities' Id are equal.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.op_Inequality(Omniscient.Foundation.Data.UniqueEntityBase,Omniscient.Foundation.Data.UniqueEntityBase)">
+            <summary>
+            Compares two entities based on their Id.  Returns true if both Id are different.
+            </summary>
+            <param name="left">The first entity to compare.</param>
+            <param name="right">The second entity to compare.</param>
+            <returns>True if the entities' Id are different.  Otherwise, false.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.CopyTo(Omniscient.Foundation.Data.IEntity)">
+            <summary>
+            Copies the values of the entity to another entity.  Copies on the data values, skipping the Id and Status.
+            </summary>
+            <param name="target">The entity to copy values to.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.Equals(System.Object)">
+            <summary>
+            Compares two Entities based on their IDs.  Same as operator ==.
+            </summary>
+            <param name="obj">The Entity to compare with.</param>
+            <returns>Returns True if the two entities have the same ID.</returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.ToString">
+            <summary>
+            Returns a string representation of the Entity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.Equals(Omniscient.Foundation.Data.UniqueEntityBase)">
+            <summary>
+            Compares two Entities based on their IDs.  Same as operator ==.
+            </summary>
+            <param name="obj">
+            The obj being compared.
+            </param>
+            <returns>
+            True if the entities' ID are equal; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.UniqueEntityBase.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object" />.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.UniqueEntityBase.Id">
+            <summary>
+            Gets or sets the Id.
+            </summary>
+        </member>
+    </members>
+</doc>
