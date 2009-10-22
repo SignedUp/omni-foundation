@@ -12,7 +12,7 @@ namespace Omniscient.Foundation.ApplicationModel
     public interface IExtendable<TContract>
     { 
         /// <summary>
-        /// Registers an implementation of <typeparamref name="TContract"/> agains the extendable object.
+        /// Registers an implementation of <typeparamref name="TContract"/> against the extendable object.
         /// </summary>
         /// <param name="implementation">The extender's implementation</param>
         void RegisterExtender(TContract implementation);
