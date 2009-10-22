@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace Omniscient.Foundation.Contrib.Communication
 {
+    [Obsolete("Use Omniscient.Foundation.ServiceModel.ServiceProxy instead.")]
     public class SecureChannelFactoryService<TContract>: ServiceBase<TContract>, IConfigurable
     {
         private string _endpoint;
@@ -42,7 +43,6 @@ namespace Omniscient.Foundation.Contrib.Communication
 
         public void Configure(XmlElement config)
         {
-            //todo: add a complex type to contrib's schema file. 
             if (config == null) throw new ArgumentNullException("config");
 
             XmlNode endpointNode = config;
