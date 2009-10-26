@@ -134,7 +134,9 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
                                                             sectionHandlerType.FullName));
 
             IConfigurationSectionHandler handler = (IConfigurationSectionHandler)Activator.CreateInstance(sectionHandlerType);
-            return handler.Create(null, null, sectionNode);
+            var conf = handler.Create(null, null, sectionNode);
+            Sections[sectionName] = conf;
+            return conf;
         }
 
         private static XElement GetSectionNode(string sectionname)
