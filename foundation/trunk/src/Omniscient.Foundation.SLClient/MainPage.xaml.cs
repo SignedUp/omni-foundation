@@ -15,6 +15,7 @@ namespace Omniscient.Foundation.SLClient
         void MainPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             var t = (Test)ConfigurationManager.GetSection("test");
+            var t2 = (Test)ConfigurationManager.GetSection("test");
         }
     }
 }
