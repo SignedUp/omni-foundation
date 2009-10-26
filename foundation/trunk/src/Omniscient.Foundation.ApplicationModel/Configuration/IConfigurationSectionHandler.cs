@@ -3,18 +3,17 @@
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
     /// <summary>
-    /// Deserializes an XElement configuration element to type <typeparam name="TSection" />.
+    /// Deserializes an XNode configuration element to a usable object.
     /// </summary>
-    /// <typeparam name="TSection">
-    /// The type of the object to be deserialized from the configuration section.
-    /// </typeparam>
-    public interface IConfigurationSectionHandler<TSection>
+    public interface IConfigurationSectionHandler
     {
         /// <summary>
-        /// Creates an object of type <typeparamref name="TSection"/> from <see cref="XElement"/> <paramref name="element"/>.
+        /// Deserializes configuration section <paramref name="section"/> and returns the deserialized object.
         /// </summary>
-        /// <param name="element">The xml element containing the section.</param>
+        /// <param name="parent">The parameter is not used.</param>
+        /// <param name="configContext">The parameter is not used.</param>
+        /// <param name="section">The section to deserialize.</param>
         /// <returns>Deserialized object.</returns>
-        TSection Create(XElement element);
+        object Create(object parent, object configContext, XNode section);
     }
 }
