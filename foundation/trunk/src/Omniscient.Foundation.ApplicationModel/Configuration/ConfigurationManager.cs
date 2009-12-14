@@ -141,10 +141,14 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
 
         private static XElement GetSectionNode(string sectionname)
         {
-            var elements = from e in XDocument.Descendants(sectionname)
-                       select e;
-            
-            return elements.FirstOrDefault();
+            if (XDocument.Root == null) return null;
+
+            foreach (var child in XDocument.Root.Elements())
+            {
+                if (child.Name != null && child.Name.LocalName == sectionname) return child;
+            }
+
+            return null;
         }
     }
 }

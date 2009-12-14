@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Xml;
-using Omniscient.Foundation.ApplicationModel;
+using System.ServiceModel;
 
 namespace Omniscient.Foundation.ServiceModel
 {
     /// <summary>
     /// That service create a WCF communication channel
     /// </summary>
-    /// <typeparam name="TContract"></typeparam>
-    public class ServiceProxy<TContract> : ServiceBase<TContract>, IConfigurable
+    /// <typeparam name="TContract">The type of the WCF contract</typeparam>
+    public class ServiceProxy<TContract> : ConfigurableServiceBase<TContract, Configuration.Proxy>
     {
         /// <summary>
         /// Returns an implementation of the contract.
@@ -16,12 +15,10 @@ namespace Omniscient.Foundation.ServiceModel
         /// <returns>An implementation of the contract.</returns>
         public override TContract GetImplementation()
         {
-            throw new NotImplementedException();
-        }
+            if (this.Configuration == null) throw new InvalidOperationException("The service proxy is not configured.");
 
-        public void Configure(XmlElement config)
-        {
-            throw new NotImplementedException();
+            var factory = new ChannelFactory<TContract>(this.Configuration.Endpoint);
+            return factory.CreateChannel();
         }
     }
 }

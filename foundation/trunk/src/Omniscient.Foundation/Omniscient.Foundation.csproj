@@ -47,6 +47,9 @@
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +81,7 @@
     <Compile Include="Security\SecurePrincipal.cs" />
     <Compile Include="Security\SecureStringConverter.cs" />
     <Compile Include="ServiceModel\ConfigurableServiceBase.cs" />
+    <Compile Include="ServiceModel\Configuration\Proxy.cs" />
     <Compile Include="ServiceModel\DIServiceProvider.cs" />
     <Compile Include="ServiceModel\ExtendableServiceBase.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />

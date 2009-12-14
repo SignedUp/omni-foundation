@@ -1,8 +1,6 @@
 ﻿using System;
-using Omniscient.Foundation.ServiceModel;
 using Omniscient.Foundation.ApplicationModel.Modularity;
-using System.Collections.Generic;
-using System.Xml;
+using Omniscient.Foundation.ServiceModel;
 
 namespace Omniscient.Foundation.ApplicationModel.Configuration
 {
@@ -20,7 +18,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
                 IService service = (IService)Activator.CreateInstance(serviceType);
                 container.RegisterService(contractType, service);
 
-                //configure any IConfigurable service.
+                // configure any IConfigurable service.
                 if (typeof(IConfigurable).IsAssignableFrom(serviceType) && srvDef.Config != null)
                     ((IConfigurable)service).Configure(srvDef.Config);
             }

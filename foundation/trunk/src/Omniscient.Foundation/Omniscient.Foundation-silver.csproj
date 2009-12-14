@@ -51,8 +51,11 @@
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationModel\IConfigurable.cs" />
@@ -82,6 +85,8 @@
     <Compile Include="Security\ICredentialServiceExtender.cs" />
     <Compile Include="Security\SecureIdentity.cs" />
     <Compile Include="Security\SecurePrincipal.cs" />
+    <Compile Include="ServiceModel\ConfigurableServiceBase.cs" />
+    <Compile Include="ServiceModel\Configuration\Proxy.cs" />
     <Compile Include="ServiceModel\DIServiceProvider.cs" />
     <Compile Include="ServiceModel\ExtendableServiceBase.cs" />
     <Compile Include="ServiceModel\GenericSingleCallService.cs" />
@@ -90,6 +95,7 @@
     <Compile Include="ServiceModel\IServiceProvider.cs" />
     <Compile Include="ServiceModel\ServiceBase.cs" />
     <Compile Include="ServiceModel\ServiceProvider.cs" />
+    <Compile Include="ServiceModel\ServiceProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\v3.0\Microsoft.Silverlight.CSharp.targets" Condition="" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
