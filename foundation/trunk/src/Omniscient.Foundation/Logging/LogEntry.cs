@@ -10,9 +10,8 @@ namespace Omniscient.Foundation.Logging
         /// <summary>
         /// Creates a log entry whose time is set to Now.
         /// </summary>
-        public LogEntry()
+        public LogEntry() : this(DateTime.Now)
         {
-            Time = DateTime.Now;
         }
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace Omniscient.Foundation.Logging
         /// <param name="message">The message</param>
         /// <param name="level">The log level</param>
         public LogEntry(object message, LogLevel level)
-            : this()
+            : this(DateTime.Now)
         {
             Message = message;
             Level = level;
@@ -54,10 +53,23 @@ namespace Omniscient.Foundation.Logging
         /// <summary>
         /// Returns the string representation of the entry; this is what will be actually logged.
         /// </summary>
+        /// <param name="format">Format of the line.  Defaults to "{l,-5} - {d} - {m}".  All params (l, d, m) are optional.
+        /// {l}: replaced with the level of the log entry.
+        /// {d}: replaced with the date and time of the log entry.
+        /// {m}: replaced with the message of the log entry.
+        /// </param>
+        /// <param name="dateFormat">Optional.  If not null or empty, will call Time.ToString(dateFormat).  Otherwise, will use
+        /// default date format.</param>
         /// <returns>A string representatino of the entry.</returns>
-        public override string ToString()
+        public string ToString(string format, string dateFormat)
         {
-            return string.Format("{0,-5} - {1} {2} - {3}", Level.ToString().ToUpper(), Time.ToShortDateString(), Time.ToShortTimeString(), Message);
+            if (string.IsNullOrEmpty(format))
+                format = "{l,-5} - {d} - {m}";
+            string newFormat = format.Replace('l', '0').Replace('d', '1').Replace('m', '2');
+            if (!string.IsNullOrEmpty(dateFormat))
+                return string.Format(newFormat, this.Level.ToString().ToUpper(), this.Time.ToString(dateFormat), this.Message);
+            else
+                return string.Format(newFormat, this.Level.ToString().ToUpper(), this.Time, this.Message);
         }
     }
 }
