@@ -1,10 +1,5 @@
-﻿#region
-
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using Omniscient.Foundation.ApplicationModel;
-
-#endregion
 
 namespace Omniscient.Foundation.ServiceModel
 {
@@ -34,8 +29,6 @@ namespace Omniscient.Foundation.ServiceModel
             private set;
         }
 
-        #region IConfigurable Members
-
         /// <summary>
         /// Automatically called at load time by the ApplicationManager.  Or, can be manually called.  The parameter
         /// must be deserializable into type <typeparamref name="TConfigRoot"/>.
@@ -43,12 +36,18 @@ namespace Omniscient.Foundation.ServiceModel
         /// <param name="config">
         /// The config.  Must be deserializable into type <typeparamref name="TConfigRoot"/>.
         /// </param>
-        public void Configure(XmlElement config)
+#if SILVERLIGHT
+        public void Configure(System.Xml.Linq.XElement config)
         {
             var serializer = new XmlSerializer(typeof(TConfigRoot));
-            Configuration = serializer.Deserialize(new XmlNodeReader(config)) as TConfigRoot;
+            Configuration = serializer.Deserialize(config.CreateReader()) as TConfigRoot;
         }
-
-        #endregion
+#else
+        public void Configure(System.Xml.XmlElement config)
+        {
+            var serializer = new XmlSerializer(typeof(TConfigRoot));
+            Configuration = serializer.Deserialize(new System.Xml.XmlNodeReader(config)) as TConfigRoot;
+        }
+#endif
     }
 }

@@ -26,7 +26,7 @@ namespace Omniscient.Foundation.ApplicationModel.Configuration
         /// </summary>
         [XmlElement("config", Namespace = "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd")]
 #if SILVERLIGHT
-        public object Config { get; set; }
+        public System.Xml.Linq.XElement Config { get; set; }
 #else
         public XmlElement Config { get; set; }
 #endif

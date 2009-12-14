@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using Ninject.Core;
 using Omniscient.Foundation.ApplicationModel.Configuration;
@@ -227,12 +228,7 @@ namespace Omniscient.Foundation.ApplicationModel
         public void StartApplication()
         {
             // Get configuration from default config file.
-            ApplicationConfiguration config;
-#if SILVERLIGHT
-            config = ConfigurationManager.GetSection<ApplicationConfiguration>("foundation.application");
-#else
-            config = System.Configuration.ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
-#endif
+            var config = ConfigurationManager.GetSection("foundation.application") as ApplicationConfiguration;
             StartApplication(config);
         }
 

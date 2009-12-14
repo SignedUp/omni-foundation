@@ -16,7 +16,7 @@
         /// See the ApplicationModel configuration schema for more details.
         /// </remarks>
 #if SILVERLIGHT
-        void Configure(object config);
+        void Configure(System.Xml.Linq.XElement config);
 #else
         void Configure(System.Xml.XmlElement config);
 #endif

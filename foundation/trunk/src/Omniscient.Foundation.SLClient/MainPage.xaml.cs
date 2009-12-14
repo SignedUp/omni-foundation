@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using Omniscient.Foundation.ApplicationModel.Configuration;
+using Omniscient.Foundation.ApplicationModel;
 
 namespace Omniscient.Foundation.SLClient
 {
@@ -14,8 +15,11 @@ namespace Omniscient.Foundation.SLClient
 
         void MainPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            ApplicationManager.Current.StartApplication();
+
             var t = (Test)ConfigurationManager.GetSection("test");
             var t2 = (Test)ConfigurationManager.GetSection("test");
+
         }
     }
 }
