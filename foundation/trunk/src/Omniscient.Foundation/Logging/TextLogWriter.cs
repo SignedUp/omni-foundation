@@ -13,6 +13,7 @@ namespace Omniscient.Foundation.Logging
             Writer = new StreamWriter(stream);
             Stream = stream;
             IsEnabled = true;
+            this.DateFormat = "yyyy-MM-dd HH:mm:ss";
         }
 
         /// <summary>
@@ -49,6 +50,11 @@ namespace Omniscient.Foundation.Logging
         }
 
         /// <summary>
+        /// Date format of the log entry's output.  Defaults to "yyyy-MM-dd HH:mm:ss".
+        /// </summary>
+        public string DateFormat { get; set; }
+
+        /// <summary>
         /// Writes the log entry to a medium.  Equivalent to calling Write(entry, false).
         /// </summary>
         /// <param name="entry">The entry to log.</param>
@@ -65,7 +71,7 @@ namespace Omniscient.Foundation.Logging
         public void Write(LogEntry entry, bool flush)
         {
             if (!this.IsEnabled || this.Level > entry.Level || entry == null) return;
-            Writer.WriteLine(entry.ToString(string.Empty, "yyyy-mm-dd hh:MM:ss"));
+            Writer.WriteLine(entry.ToString(string.Empty, "yyyy-MM-dd HH:mm:ss"));
             if (flush || this.AutoflushLevel <= entry.Level) Flush();
         }
 
