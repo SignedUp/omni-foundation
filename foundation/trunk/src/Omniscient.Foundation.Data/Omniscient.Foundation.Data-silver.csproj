@@ -54,6 +54,9 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="EntityBase.cs" />
     <Compile Include="EntityStatus.cs" />
     <Compile Include="FriendlyNameAttribute.cs" />
