@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Omniscient.Foundation.Contrib</name>
+    </assembly>
+    <members>
+        <member name="T:Omniscient.Foundation.Contrib.Logging.Log4NetLogger">
+            <summary>
+             Wrapper for log4net logger.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetLogger.#ctor">
+            <summary>
+             Constructor
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Contrib.Logging.Log4NetWriter">
+            <summary>
+            Wraps a log4net logger under the <see cref="T:Omniscient.Foundation.Logging.ILogWriter"/> interface.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.#ctor">
+            <summary>
+            Automatically configures log4net and creates a log4net logger from this namespace.
+            Refer to constructor overload for default values.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.#ctor(log4net.ILog)">
+            <summary>
+            Creates a disabled (<see cref="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.IsEnabled"/> == False) writer with a valid log4net logger.
+            Initializes the <see cref="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.Level"/> according to the <paramref name="log4netLogger"/>'s level.
+            </summary>
+            <param name="log4netLogger">A valid log4net logger.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.Write(Omniscient.Foundation.Logging.LogEntry)">
+            <summary>
+            Writes a log entry to the underlying log4net logger.
+            </summary>
+            <param name="entry">The entry to log.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.Level">
+            <summary>
+            Gets or sets the level under which no logs will make it to the underlying log4net logger.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the writer is enabled or not.  If not, nothing
+            will be logged.
+            </summary>
+        </member>
+    </members>
+</doc>
