@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-
-namespace Omniscient.Foundation.ApplicationModel
+﻿namespace Omniscient.Foundation.ApplicationModel
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Defines a component whose behavior can be extended by means of other components
     /// that "plug" into the first, coupled only against contract <typeparamref name="TContract"/>.
     /// </summary>
     /// <typeparam name="TContract">Contract type that extenders must implement when pluging into that extendable.</typeparam>
     public interface IExtendable<TContract>
-    { 
+    {
+        /// <summary>
+        /// Gets a list of all extenders.
+        /// </summary>
+        IEnumerable<TContract> AllExtenders { get; }
+
         /// <summary>
         /// Registers an implementation of <typeparamref name="TContract"/> against the extendable object.
         /// </summary>
@@ -18,8 +22,9 @@ namespace Omniscient.Foundation.ApplicationModel
         void RegisterExtender(TContract implementation);
 
         /// <summary>
-        /// Gets a list of all extenders.
+        /// Unregisters all extenders of a certain type on the extendable object.
         /// </summary>
-        IEnumerable<TContract> AllExtenders { get; }
+        /// <param name="type">The extender's type to unregister</param>
+        void UnregisterExtenders(Type type);
     }
 }

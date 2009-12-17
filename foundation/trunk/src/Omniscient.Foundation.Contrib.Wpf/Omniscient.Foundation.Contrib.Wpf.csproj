@@ -66,6 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Commands\ContextMenuCommand.cs" />
     <Compile Include="ObservableHierarchicalCommandObject.cs" />
     <Compile Include="NotifyIconPresenter.cs" />
