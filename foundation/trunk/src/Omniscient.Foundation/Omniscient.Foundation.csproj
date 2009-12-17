@@ -53,6 +53,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="ApplicationModel\IStartable.cs" />
     <Compile Include="Commanding\CommandBase.cs" />
     <Compile Include="Commanding\CompositeCommand.cs" />

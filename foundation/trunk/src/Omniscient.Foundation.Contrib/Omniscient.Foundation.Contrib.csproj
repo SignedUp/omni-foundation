@@ -51,6 +51,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Communication\SecureChannelFactoryService.cs" />
     <Compile Include="Data\MsSqlConnectionProvider.cs" />
     <Compile Include="Data\MySqlConnectionProvider.cs" />

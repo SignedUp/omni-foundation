@@ -1,36 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Omniscient.Foundation.ApplicationModel;
-
-namespace Omniscient.Foundation.ServiceModel
+﻿namespace Omniscient.Foundation.ServiceModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Omniscient.Foundation.ApplicationModel;
+
+    /// <summary>
+    /// Extendable service
+    /// </summary>
+    /// <typeparam name="TServiceContract">
+    /// The Service contract which is going to be extended
+    /// </typeparam>
+    /// <typeparam name="TExtensionContract">
+    /// The extension's contract
+    /// </typeparam>
     public abstract class ExtendableServiceBase<TServiceContract, TExtensionContract>
         : ServiceBase<TServiceContract>, IExtendable<TExtensionContract>
     {
-        private List<TExtensionContract> _extenders;
+        private readonly List<TExtensionContract> _extenders;
 
-        public ExtendableServiceBase()
+        protected ExtendableServiceBase()
         {
             _extenders = new List<TExtensionContract>();
         }
 
-        #region IExtendable<TExtensionContract> Members
+        public IEnumerable<TExtensionContract> AllExtenders
+        {
+            get
+            {
+                foreach (TExtensionContract ext in _extenders) yield return ext;
+            }
+        }
 
         public void RegisterExtender(TExtensionContract extender)
         {
             _extenders.Add(extender);
         }
 
-        public IEnumerable<TExtensionContract> AllExtenders
+        public void UnregisterExtenders(Type type)
         {
-            get 
-            { 
-                foreach (TExtensionContract ext in _extenders) yield return ext; 
+            List<TExtensionContract> deletedTypes = new List<TExtensionContract>();
+            deletedTypes = _extenders.Where(p => p.GetType() == type).ToList();
+
+            foreach (var deletedType in deletedTypes)
+            {
+                _extenders.Remove(deletedType);
             }
         }
-
-        #endregion
     }
 }
