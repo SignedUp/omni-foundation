@@ -71,7 +71,7 @@ namespace Omniscient.Foundation.Logging
         public void Write(LogEntry entry, bool flush)
         {
             if (!this.IsEnabled || this.Level > entry.Level || entry == null) return;
-            Writer.WriteLine(entry.ToString(string.Empty, "yyyy-MM-dd HH:mm:ss"));
+            Writer.WriteLine(entry.ToString(string.Empty, this.DateFormat));
             if (flush || this.AutoflushLevel <= entry.Level) Flush();
         }
 
