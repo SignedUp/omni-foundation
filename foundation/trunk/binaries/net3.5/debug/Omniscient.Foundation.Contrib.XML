@@ -49,5 +49,10 @@
             will be logged.
             </summary>
         </member>
+        <member name="P:Omniscient.Foundation.Contrib.Logging.Log4NetWriter.Name">
+            <summary>
+            Gets or sets the name of this writer for convenience.  Defaults to "log4net".
+            </summary>
+        </member>
     </members>
 </doc>

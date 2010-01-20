@@ -4,67 +4,9 @@
         <name>Omniscient.Foundation.Data</name>
     </assembly>
     <members>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.PathPredicate">
+        <member name="T:Omniscient.Foundation.Data.SystemProperty">
             <summary>
-            Compares a path to another path (e.g. item.value &lt;= customer.threshold)
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.Predicate">
-            <summary>
-            Base class for predicates
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.ObjectQuery.Predicate.#ctor(System.String)">
-            <summary>
-            Ctor
-            </summary>
-            <param name="path">The path to the property being filtered.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.Predicate.Path">
-            <summary>
-            Gets the path to the property being filtered.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.#ctor(System.String)">
-            <summary>
-            Ctor
-            </summary>
-            <param name="path">The path to the property being filtered.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.Marker">
-            <summary>
-            An equality or inequality marker.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.SecondPath">
-            <summary>
-            The path to the property that compares to the first path.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
-            <summary>
-            Provides a database connection for DB access.
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
-            <summary>
-            Creates a database connection.
-            </summary>
-            <returns>A database connection</returns>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition">
-            <summary>
-            Logical <see cref="T:Omniscient.Foundation.Data.ObjectQuery.WhereGroup"/> composer.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.And">
-            <summary>
-            Logical AND.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.Or">
-            <summary>
-            Logical OR.
+            Determines if an object Property is for proper system functions rather than true Domain Driven behavior
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.UniqueEntityBase">
@@ -208,123 +150,6 @@
             Gets or sets the Id.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1">
-            <summary>
-            A predicate that checks a property (column) compared to a set of values of the same type.
-            </summary>
-            <typeparam name="T">The type of the values in the set (e.g. integer)</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.#ctor(System.String)">
-            <summary>
-            Ctor.
-            </summary>
-            <param name="path">The path to the property being compared.</param>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.Marker">
-            <summary>
-            A set marker.
-            </summary>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.Values">
-            <summary>
-            The type of the values in the set (e.g. integer)
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.RelationMarker">
-            <summary>
-            An equality or inequality marker.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Equal">
-            <summary>
-            Scalar equality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.NotEqual">
-            <summary>
-            Strict scalar inequality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Greater">
-            <summary>
-            Greater Than inequality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.GreaterOrEqual">
-            <summary>
-            Greater Than or Equal inequality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Smaller">
-            <summary>
-            Smaller Than inequality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.SmallerOrEqual">
-            <summary>
-            Smaller Than or Equal inequality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Is">
-            <summary>
-            Reference equality.
-            </summary>
-        </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.IsNot">
-            <summary>
-            Reference inequality.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
-            <summary>
-            Represents an adapter that manages a certain type of entities.  
-            Responsible for connecting to the database, and executing queries.
-            </summary>
-            <remarks>
-            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
-            </remarks>
-            <typeparam name="TEntity">The type of entities to manage.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Load">
-            <summary>
-            Loads a list of entities
-            </summary>
-            <returns>
-            Returns a list of entities
-            </returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
-            <summary>
-            Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
-            </summary>
-            <param name="entity">The entity to save.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Save a list of entities to a data store
-            </summary>
-            <param name="entities">
-            The list of entities to save to the data store
-            </param>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.FriendlyNameAttribute">
-            <summary>
-            Provides an attribute to give a friendly name to a property to help in UI setup
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.FriendlyNameAttribute.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.FriendlyNameAttribute"/> class.
-            </summary>
-            <param name="name">
-            The properties' friendly name.
-            </param>
-        </member>
-        <member name="P:Omniscient.Foundation.Data.FriendlyNameAttribute.Name">
-            <summary>
-            Gets or sets property friendly Name.
-            </summary>
-        </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.WhereGroup">
             <summary>
             Represents a set of predicates grouped by a logical AND or OR operand.
@@ -387,6 +212,66 @@
             Returns the list of subgroups.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IConnectionProvider">
+            <summary>
+            Provides a database connection for DB access.
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IConnectionProvider.CreateConnection">
+            <summary>
+            Creates a database connection.
+            </summary>
+            <returns>A database connection</returns>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.FriendlyNameAttribute">
+            <summary>
+            Provides an attribute to give a friendly name to a property to help in UI setup
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.FriendlyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Omniscient.Foundation.Data.FriendlyNameAttribute"/> class.
+            </summary>
+            <param name="name">
+            The properties' friendly name.
+            </param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.FriendlyNameAttribute.Name">
+            <summary>
+            Gets or sets property friendly Name.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition">
+            <summary>
+            Logical <see cref="T:Omniscient.Foundation.Data.ObjectQuery.WhereGroup"/> composer.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.And">
+            <summary>
+            Logical AND.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.LogicalGroupComposition.Or">
+            <summary>
+            Logical OR.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.Predicate">
+            <summary>
+            Base class for predicates
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.Predicate.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="path">The path to the property being filtered.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.Predicate.Path">
+            <summary>
+            Gets the path to the property being filtered.
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Data.EntityStatus">
             <summary>
             The status of an entity relative to its data store.
@@ -424,26 +309,85 @@
             The entity exists solely to maintain the values of another entity from which it has been cloned.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1">
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.PathPredicate">
             <summary>
-            This predicate compares a column to a scalar value (e.g. an integer)
+            Compares a path to another path (e.g. item.value &lt;= customer.threshold)
             </summary>
-            <typeparam name="T">The type of the value.</typeparam>
         </member>
-        <member name="M:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.#ctor(System.String)">
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.#ctor(System.String)">
             <summary>
             Ctor
             </summary>
-            <param name="path"></param>
+            <param name="path">The path to the property being filtered.</param>
         </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.Marker">
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.Marker">
             <summary>
             An equality or inequality marker.
             </summary>
         </member>
-        <member name="P:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.Value">
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.PathPredicate.SecondPath">
             <summary>
-            The value to compare with.
+            The path to the property that compares to the first path.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetMarker">
+            <summary>
+            A set comparer.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.SetMarker.In">
+            <summary>
+            Specifies that a value should be part of given set.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.SetMarker.NotIn">
+            <summary>
+            Specifies that a value should NOT be part of given set.
+            </summary>
+        </member>
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.RelationMarker">
+            <summary>
+            An equality or inequality marker.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Equal">
+            <summary>
+            Scalar equality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.NotEqual">
+            <summary>
+            Strict scalar inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Greater">
+            <summary>
+            Greater Than inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.GreaterOrEqual">
+            <summary>
+            Greater Than or Equal inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Smaller">
+            <summary>
+            Smaller Than inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.SmallerOrEqual">
+            <summary>
+            Smaller Than or Equal inequality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.Is">
+            <summary>
+            Reference equality.
+            </summary>
+        </member>
+        <member name="F:Omniscient.Foundation.Data.ObjectQuery.RelationMarker.IsNot">
+            <summary>
+            Reference inequality.
             </summary>
         </member>
         <member name="T:Omniscient.Foundation.Data.ObjectQuery.OQuery`1">
@@ -477,20 +421,59 @@
             Not defined yet.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetMarker">
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1">
             <summary>
-            A set comparer.
+            A predicate that checks a property (column) compared to a set of values of the same type.
+            </summary>
+            <typeparam name="T">The type of the values in the set (e.g. integer)</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.#ctor(System.String)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="path">The path to the property being compared.</param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.Marker">
+            <summary>
+            A set marker.
             </summary>
         </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.SetMarker.In">
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.SetPredicate`1.Values">
             <summary>
-            Specifies that a value should be part of given set.
+            The type of the values in the set (e.g. integer)
             </summary>
         </member>
-        <member name="F:Omniscient.Foundation.Data.ObjectQuery.SetMarker.NotIn">
+        <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
             <summary>
-            Specifies that a value should NOT be part of given set.
+            Represents an adapter that manages a certain type of entities.  
+            Responsible for connecting to the database, and executing queries.
             </summary>
+            <remarks>
+            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
+            </remarks>
+            <typeparam name="TEntity">The type of entities to manage.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Load">
+            <summary>
+            Loads a list of entities
+            </summary>
+            <returns>
+            Returns a list of entities
+            </returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
+            <summary>
+            Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
+            </summary>
+            <param name="entity">The entity to save.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Save a list of entities to a data store
+            </summary>
+            <param name="entities">
+            The list of entities to save to the data store
+            </param>
         </member>
         <member name="T:Omniscient.Foundation.Data.EntityBase`1">
             <summary>
@@ -528,9 +511,26 @@
             entities of the same type.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Data.SystemProperty">
+        <member name="T:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1">
             <summary>
-            Determines if an object Property is for proper system functions rather than true Domain Driven behavior
+            This predicate compares a column to a scalar value (e.g. an integer)
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.Marker">
+            <summary>
+            An equality or inequality marker.
+            </summary>
+        </member>
+        <member name="P:Omniscient.Foundation.Data.ObjectQuery.ValuePredicate`1.Value">
+            <summary>
+            The value to compare with.
             </summary>
         </member>
     </members>

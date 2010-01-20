@@ -4,6 +4,11 @@
         <name>Omniscient.Foundation.Data</name>
     </assembly>
     <members>
+        <member name="T:Omniscient.Foundation.Data.SystemProperty">
+            <summary>
+            Determines if an object Property is for proper system functions rather than true Domain Driven behavior
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Data.UniqueEntityBase">
             <summary>
             Base class for unique entities.
@@ -145,38 +150,6 @@
             Gets or sets the Id.
             </summary>
         </member>
-        <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
-            <summary>
-            Represents an adapter that manages a certain type of entities.  
-            Responsible for connecting to the database, and executing queries.
-            </summary>
-            <remarks>
-            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
-            </remarks>
-            <typeparam name="TEntity">The type of entities to manage.</typeparam>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Load">
-            <summary>
-            Loads a list of entities
-            </summary>
-            <returns>
-            Returns a list of entities
-            </returns>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
-            <summary>
-            Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
-            </summary>
-            <param name="entity">The entity to save.</param>
-        </member>
-        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Save a list of entities to a data store
-            </summary>
-            <param name="entities">
-            The list of entities to save to the data store
-            </param>
-        </member>
         <member name="T:Omniscient.Foundation.Data.FriendlyNameAttribute">
             <summary>
             Provides an attribute to give a friendly name to a property to help in UI setup
@@ -232,6 +205,38 @@
             The entity exists solely to maintain the values of another entity from which it has been cloned.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Data.IEntityAdapter`1">
+            <summary>
+            Represents an adapter that manages a certain type of entities.  
+            Responsible for connecting to the database, and executing queries.
+            </summary>
+            <remarks>
+            The interface registers for the ServiceModel aspect; in other words, it can be used as a contract for WCF.
+            </remarks>
+            <typeparam name="TEntity">The type of entities to manage.</typeparam>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Load">
+            <summary>
+            Loads a list of entities
+            </summary>
+            <returns>
+            Returns a list of entities
+            </returns>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(`0)">
+            <summary>
+            Saves the entity.  Executes different queries based on the <see cref="T:Omniscient.Foundation.Data.EntityStatus"/> of the entity.
+            </summary>
+            <param name="entity">The entity to save.</param>
+        </member>
+        <member name="M:Omniscient.Foundation.Data.IEntityAdapter`1.Save(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Save a list of entities to a data store
+            </summary>
+            <param name="entities">
+            The list of entities to save to the data store
+            </param>
+        </member>
         <member name="T:Omniscient.Foundation.Data.EntityBase`1">
             <summary>
             Provides a base class for entities which have an Id.  Adds a constructor to <see cref="T:Omniscient.Foundation.Data.EntityBase"/> that
@@ -266,11 +271,6 @@
             Gets an id that uniquely represents an entity in a given space.  For example, an <see cref="T:Omniscient.Foundation.Data.IEntity`1"/>
             will be unique in the universe, while an <see cref="!:IEntity&lt;long&gt;"/> will probably be unique amongst other
             entities of the same type.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Data.SystemProperty">
-            <summary>
-            Determines if an object Property is for proper system functions rather than true Domain Driven behavior
             </summary>
         </member>
     </members>
