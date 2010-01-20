@@ -26,5 +26,10 @@ namespace Omniscient.Foundation.Logging
         /// </summary>
         /// <param name="entry">The entry to log.</param>
         void Write(LogEntry entry);
+
+        /// <summary>
+        /// Gets or sets the name of this writer for convenience.  The name is optional.
+        /// </summary>
+        string Name { get; set; }
     }
 }

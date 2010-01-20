@@ -33,6 +33,7 @@ namespace Omniscient.Foundation.Contrib.Logging
         private void Initialize(ILog log4netLogger)
         {
             _logger = log4netLogger;
+            this.Name = "log4net";
             IsEnabled = false;
             Level = LogLevel.Fatal;
             if (log4netLogger.IsDebugEnabled) Level = LogLevel.Debug;
@@ -83,6 +84,15 @@ namespace Omniscient.Foundation.Contrib.Logging
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the name of this writer for convenience.  Defaults to "log4net".
+        /// </summary>
+        public string Name
+        {
+            get;
+            set;
         }
     }
 }
