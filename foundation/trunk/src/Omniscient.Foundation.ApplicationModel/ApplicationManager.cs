@@ -201,7 +201,8 @@ namespace Omniscient.Foundation.ApplicationModel
         }
 
         /// <summary>
-        /// Gets the deserialized configuration.  In the configuration file, the config section must
+        /// Gets the deserialized configuration.  
+        /// In the configuration file, the config section must
         /// be called "foundation.application", and must be in the namespace 
         /// "http://schemas.omniscient.ca/foundation/applicationConfiguration.xsd".  See the xsd schema file ApplicationConfiguration.xsd
         /// for the complete schema.
