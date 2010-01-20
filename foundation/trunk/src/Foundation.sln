@@ -41,7 +41,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.SLCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniscient.Foundation.SLClient.Web", "Omniscient.Foundation.SLClient.Web\Omniscient.Foundation.SLClient.Web.csproj", "{438F511E-013E-455F-93E4-4B2FE0DE489A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E5A51F2-46B1-44F1-A277-E773BE40B672}"
+	ProjectSection(SolutionItems) = preProject
+		VersionInfo.cs = VersionInfo.cs
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -128,9 +137,5 @@ Global
 		{880378CA-ED02-459E-9761-F2AA55CE4258} = {C968F7E7-94CA-4A0C-B547-5DF0201E281A}
 		{CF22BC22-9DB1-476C-AC43-9F0229A9D6F2} = {C968F7E7-94CA-4A0C-B547-5DF0201E281A}
 		{B3CC0F91-5B24-43EB-A4D0-81356E87C1F3} = {C968F7E7-94CA-4A0C-B547-5DF0201E281A}
-	EndGlobalSection
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

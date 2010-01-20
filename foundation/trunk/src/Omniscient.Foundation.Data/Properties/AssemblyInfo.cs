@@ -21,5 +21,4 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("904b774a-afaf-4855-afc3-123bf5e5d70e")]
-
 [assembly: InternalsVisibleTo("Omniscient.Foundation.Data.Test")]
