@@ -6,16 +6,15 @@ using System.IO;
 
 namespace Omniscient.Foundation.Logging
 {
-    [Obsolete("Use StreamLogWriter instead.  Same functionality, only the name has changed to be more intuitive.")]
-    public class TextLogWriter: ILogWriter
+    public class StreamLogWriter : ILogWriter
     {
-        public TextLogWriter(Stream stream)
+        public StreamLogWriter(Stream stream)
         {
             Writer = new StreamWriter(stream);
             Stream = stream;
             IsEnabled = true;
             this.DateFormat = "yyyy-MM-dd HH:mm:ss";
-            this.Name = "textLogWriter";
+            this.Name = "streamLogWriter";
         }
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace Omniscient.Foundation.Logging
         }
 
         /// <summary>
-        /// Gets or sets the name of this writer for convenience.  Defaults to "textLogWriter".
+        /// Gets or sets the name of this writer for convenience.  Defaults to "streamLogWriter".
         /// </summary>
         public string Name
         {
