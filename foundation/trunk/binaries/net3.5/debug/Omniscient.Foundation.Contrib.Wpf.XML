@@ -90,6 +90,19 @@
             Returns True.
             </summary>
         </member>
+        <member name="T:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu">
+            <summary>
+            Interaction logic for StandardCommandContextMenu.xaml
+            </summary>
+            <summary>
+            StandardCommandContextMenu
+            </summary>
+        </member>
+        <member name="M:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:Omniscient.Foundation.Contrib.Wpf.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -104,19 +117,6 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="T:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu">
-            <summary>
-            Interaction logic for StandardCommandContextMenu.xaml
-            </summary>
-            <summary>
-            StandardCommandContextMenu
-            </summary>
-        </member>
-        <member name="M:Omniscient.Foundation.Contrib.Wpf.StandardCommandContextMenu.InitializeComponent">
-            <summary>
-            InitializeComponent
             </summary>
         </member>
         <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
