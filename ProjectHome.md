@@ -1,0 +1,1 @@
+This project consist of a library of module that will forge a foundational framework that leverages some of the most powerful design patterns (like MVC and the Commands patterns) and ideologies like Dependency Injection and Inversion of Control (IoC) to build management related software like CRMs, ERPs, etc.
